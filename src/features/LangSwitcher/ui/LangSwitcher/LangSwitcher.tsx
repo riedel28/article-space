@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
 
-
 import { Button } from '@/shared/ui/redesigned/Button';
 
 interface LangSwitcherProps {
@@ -17,8 +16,8 @@ export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
     };
 
     return (
-        <Button variant="clear">
-                            {t(short ? 'Короткий язык' : 'Язык')}
-                        </Button>
+        <Button variant="clear" onClick={toggle} className={className}>
+            {t(short ? 'Короткий язык' : 'Язык')}
+        </Button>
     );
 });
