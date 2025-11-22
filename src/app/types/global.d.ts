@@ -28,6 +28,12 @@ declare module '*.svg?react' {
     export default SVG;
 }
 
+declare module '@tailwindcss/vite' {
+    import { Plugin } from 'vite';
+    function tailwindcss(): Plugin;
+    export default tailwindcss;
+}
+
 declare const __IS_DEV__: boolean;
 declare const __API__: string;
 declare const __PROJECT__: 'storybook' | 'frontend' | 'jest';
