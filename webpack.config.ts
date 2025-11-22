@@ -25,7 +25,7 @@ export default (env: BuildEnv) => {
     };
 
     const mode = env?.mode || 'development';
-    const PORT = env?.port || 3000;
+    const PORT = env?.port ? Number(env.port) : 3000;
     const apiUrl = getApiUrl(mode, env?.apiUrl);
 
     const isDev = mode === 'development';
