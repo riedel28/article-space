@@ -82,12 +82,30 @@ httpServer.listen(HTTP_PORT, () => {
     console.log(`HTTP server is running on port ${HTTP_PORT}`);
 });
 
+httpServer.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${HTTP_PORT} is already in use. Please stop the process using this port or use a different port.`);
+    } else {
+        console.error('Error starting HTTP server:', error.message);
+    }
+    process.exit(1);
+});
+
 // Запуск HTTPS сервера (только если доступны сертификаты)
 if (httpsOptions) {
     try {
         const httpsServer = https.createServer(httpsOptions, server);
         httpsServer.listen(PORT, () => {
             console.log(`HTTPS server is running on port ${PORT}`);
+        });
+        
+        httpsServer.on('error', (error) => {
+            if (error.code === 'EADDRINUSE') {
+                console.error(`Port ${PORT} is already in use. Please stop the process using this port or use a different port.`);
+            } else {
+                console.error('Error starting HTTPS server:', error.message);
+            }
+            process.exit(1);
         });
     } catch (error) {
         console.error('Error starting HTTPS server:', error.message);

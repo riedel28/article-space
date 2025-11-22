@@ -34,6 +34,17 @@ export function buildPlugins({
                     syntactic: true,
                 },
                 mode: 'write-references',
+                configFile: './tsconfig.json',
+            },
+            issue: {
+                exclude: [
+                    {
+                        file: '**/*.stories.tsx',
+                    },
+                    {
+                        file: '**/node_modules/**',
+                    },
+                ],
             },
         }),
     ];
