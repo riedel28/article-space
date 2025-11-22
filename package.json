@@ -143,6 +143,7 @@
         "i18next": "^21.10.0",
         "i18next-browser-languagedetector": "^6.1.8",
         "i18next-http-backend": "^1.4.5",
+        "lucide-react": "^0.554.0",
         "react": "^19.2.0",
         "react-device-detect": "^2.2.3",
         "react-dom": "^19.2.0",
