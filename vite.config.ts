@@ -7,7 +7,24 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-    plugins: [react(), svgr()],
+    plugins: [
+        react(),
+        svgr({
+            svgrOptions: {
+                icon: true,
+                svgoConfig: {
+                    plugins: [
+                        {
+                            name: 'convertColors',
+                            params: {
+                                currentColor: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+    ],
     resolve: {
         alias: [{ find: '@', replacement: path.resolve(__dirname, './src') }]
     },

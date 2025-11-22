@@ -9,7 +9,7 @@ import { VStack } from '@/shared/ui/redesigned/Stack';
 import { ArticleSortField, ArticleType } from '@/entities/Article';
 import { SortOrder } from '@/shared/types/sort';
 import { Input } from '@/shared/ui/redesigned/Input';
-import SearchIcon from '@/shared/assets/icons/search.svg';
+import SearchIcon from '@/shared/assets/icons/search.svg?react';
 import { Icon } from '@/shared/ui/redesigned/Icon';
 
 interface ArticlesFiltersProps {

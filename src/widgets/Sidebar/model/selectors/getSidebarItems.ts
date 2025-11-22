@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User';
 
-import MainIcon from '@/shared/assets/icons/home.svg';
-import ArticleIcon from '@/shared/assets/icons/article.svg';
-import AboutIcon from '@/shared/assets/icons/Info.svg';
-import ProfileIcon from '@/shared/assets/icons/avatar.svg';
+import MainIcon from '@/shared/assets/icons/home.svg?react';
+import ArticleIcon from '@/shared/assets/icons/article.svg?react';
+import AboutIcon from '@/shared/assets/icons/Info.svg?react';
+import ProfileIcon from '@/shared/assets/icons/avatar.svg?react';
 
 import { SidebarItemType } from '../types/sidebar';
 import {

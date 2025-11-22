@@ -10,7 +10,7 @@ import { useSidebarItems } from '../../model/selectors/getSidebarItems';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { AppLogo } from '@/shared/ui/redesigned/AppLogo';
 import { Icon } from '@/shared/ui/redesigned/Icon';
-import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg';
+import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg?react';
 
 interface SidebarProps {
     className?: string;

@@ -8,7 +8,7 @@ export const AppLoaderLayout = memo(() => {
     return (
         <MainLayout
             header={
-                <HStack className={cls.header}>
+                <HStack className={cls?.header}>
                     <Skeleton width={40} height={40} border="50%" />
                 </HStack>
             }

@@ -4,7 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from '../ArticleListItem.module.scss';
 import { Text } from '@/shared/ui/deprecated/Text';
 import { Icon } from '@/shared/ui/deprecated/Icon';
-import EyeIcon from '@/shared/assets/icons/eye-20-20.svg';
+import EyeIcon from '@/shared/assets/icons/eye-20-20.svg?react';
 import { ArticleTextBlock } from '../../../model/types/article';
 import {
     ArticleView,

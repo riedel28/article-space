@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import ListIconDeprecated from '@/shared/assets/icons/list-24-24.svg';
-import TiledIconDeprecated from '@/shared/assets/icons/tiled-24-24.svg';
+import ListIconDeprecated from '@/shared/assets/icons/list-24-24.svg?react';
+import TiledIconDeprecated from '@/shared/assets/icons/tiled-24-24.svg?react';
 
-import ListIcon from '@/shared/assets/icons/burger.svg';
-import TiledIcon from '@/shared/assets/icons/tile.svg';
+import ListIcon from '@/shared/assets/icons/burger.svg?react';
+import TiledIcon from '@/shared/assets/icons/tile.svg?react';
 
 import { Icon as IconDeprecated } from '@/shared/ui/deprecated/Icon';
 import {
