@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { StarRating } from './StarRating';
 
@@ -9,9 +9,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof StarRating>;
+} as Meta<typeof StarRating>;
 
-const Template: ComponentStory<typeof StarRating> = (args) => (
+const Template: StoryFn<typeof StarRating> = (args) => (
     <StarRating {...args} />
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { CommentCard } from './CommentCard';
 import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
@@ -10,9 +10,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' }
     }
-} as ComponentMeta<typeof CommentCard>;
+} as Meta<typeof CommentCard>;
 
-const Template: ComponentStory<typeof CommentCard> = (args) => (
+const Template: StoryFn<typeof CommentCard> = (args) => (
     <CommentCard {...args} />
 );
 const normalArgs = {

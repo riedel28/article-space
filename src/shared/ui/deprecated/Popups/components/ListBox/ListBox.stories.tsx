@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta, StoryObj } from '@storybook/react';
 
 import { ListBox } from './ListBox';
 
@@ -10,15 +10,15 @@ export default {
         backgroundColor: { control: 'color' }
     },
     decorators: [
-        (Story) => (
+        (Story: React.ComponentType) => (
             <div style={{ padding: 100 }}>
                 <Story />
             </div>
         )
     ]
-} as ComponentMeta<typeof ListBox>;
+} as Meta<typeof ListBox>;
 
-const Template: ComponentStory<typeof ListBox> = (args) => (
+const Template: StoryFn<typeof ListBox> = (args) => (
     <ListBox {...args} />
 );
 

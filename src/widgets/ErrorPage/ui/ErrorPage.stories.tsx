@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { ErrorPage } from './ErrorPage';
@@ -11,9 +11,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof ErrorPage>;
+} as Meta<typeof ErrorPage>;
 
-const Template: ComponentStory<typeof ErrorPage> = (args) => (
+const Template: StoryFn<typeof ErrorPage> = (args) => (
     <ErrorPage {...args} />
 );
 

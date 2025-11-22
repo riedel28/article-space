@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { NotificationButton } from './NotificationButton';
 
@@ -9,9 +9,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof NotificationButton>;
+} as Meta<typeof NotificationButton>;
 
-const Template: ComponentStory<typeof NotificationButton> = (args) => (
+const Template: StoryFn<typeof NotificationButton> = (args) => (
     <NotificationButton {...args} />
 );
 

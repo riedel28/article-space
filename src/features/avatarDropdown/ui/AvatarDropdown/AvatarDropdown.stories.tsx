@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { AvatarDropdown } from './AvatarDropdown';
 
@@ -9,9 +9,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof AvatarDropdown>;
+} as Meta<typeof AvatarDropdown>;
 
-const Template: ComponentStory<typeof AvatarDropdown> = (args) => (
+const Template: StoryFn<typeof AvatarDropdown> = (args) => (
     <AvatarDropdown {...args} />
 );
 

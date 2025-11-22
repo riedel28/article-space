@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { ArticleInfiniteList } from './ArticleInfiniteList';
 
@@ -9,9 +9,9 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof ArticleInfiniteList>;
+} as Meta<typeof ArticleInfiniteList>;
 
-const Template: ComponentStory<typeof ArticleInfiniteList> = (args) => (
+const Template: StoryFn<typeof ArticleInfiniteList> = (args) => (
     <ArticleInfiniteList {...args} />
 );
 
