@@ -1,10 +1,9 @@
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { VStack } from '@/shared/ui/redesigned/Stack';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useNotifications } from '../../api/notificationApi';
-import cls from './NotificationList.module.scss';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
+import { cn } from '@/lib/utils';
 
 interface NotificationListProps {
     className?: string;
@@ -16,31 +15,30 @@ export const NotificationList = memo((props: NotificationListProps) => {
         pollingInterval: 10000
     });
 
-    const Skeleton = SkeletonRedesigned;
+    // Default height for desktop, can be overridden via className for mobile
+    const scrollAreaClassName = className?.includes('max-h-')
+        ? className
+        : cn('h-[300px]', className);
 
     if (isLoading) {
         return (
-            <VStack
-                gap="16"
-                max
-                className={classNames(cls.NotificationList, {}, [className])}
-            >
-                <Skeleton width="100%" border="8px" height="80px" />
-                <Skeleton width="100%" border="8px" height="80px" />
-                <Skeleton width="100%" border="8px" height="80px" />
-            </VStack>
+            <ScrollArea className={scrollAreaClassName}>
+                <div className="flex flex-col gap-1">
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                </div>
+            </ScrollArea>
         );
     }
 
     return (
-        <VStack
-            gap="16"
-            max
-            className={classNames(cls.NotificationList, {}, [className])}
-        >
-            {data?.map((item) => (
-                <NotificationItem key={item.id} item={item} />
-            ))}
-        </VStack>
+        <ScrollArea className={scrollAreaClassName}>
+            <div className="flex flex-col gap-1 w-full">
+                {data?.map((item) => (
+                    <NotificationItem key={item.id} item={item} />
+                ))}
+            </div>
+        </ScrollArea>
     );
 });

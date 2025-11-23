@@ -6,7 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
 import { HStack } from '@/shared/ui/redesigned/Stack';
-import { NotificationButton } from '@/features/notificationButton';
+import { Notifications } from '@/features/notificationButton';
 import { AvatarDropdown } from '@/features/avatarDropdown';
 import cls from './Navbar.module.scss';
 import { Button } from '@/shared/ui/redesigned/Button';
@@ -34,7 +34,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         return (
             <header className={classNames(mainClass, {}, [className])}>
                 <HStack gap="16" className={cls.actions}>
-                    <NotificationButton />
+                    <Notifications />
                     <AvatarDropdown />
                 </HStack>
             </header>

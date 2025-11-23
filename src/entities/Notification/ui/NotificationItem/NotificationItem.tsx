@@ -1,40 +1,44 @@
-import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text } from '@/shared/ui/redesigned/Text';
-import cls from './NotificationItem.module.scss';
 import { Notification } from '../../model/types/notification';
-import { Card } from '@/shared/ui/redesigned/Card';
+import { cn } from '@/lib/utils';
 
 interface NotificationItemProps {
     className?: string;
     item: Notification;
 }
 
-export const NotificationItem = memo((props: NotificationItemProps) => {
+export const NotificationItem = (props: NotificationItemProps) => {
     const { className, item } = props;
 
     const content = (
-        <Card
-                            className={classNames(cls.NotificationItem, {}, [
-                                className
-                            ])}
-                        >
-                            <Text title={item.title} text={item.description} />
-                        </Card>
+        <div
+            className={cn(
+                'w-full py-2 px-3 rounded-lg hover:bg-accent',
+                className
+            )}
+        >
+            {item.title && (
+                <h3 className="text-base font-medium mb-1">{item.title}</h3>
+            )}
+            {item.description && (
+                <p className="text-sm text-muted-foreground">
+                    {item.description}
+                </p>
+            )}
+        </div>
     );
 
     if (item.href) {
         return (
             <a
-                className={cls.link}
+                className="w-full block transition-all hover:opacity-90"
                 target="_blank"
                 href={item.href}
                 rel="noreferrer"
             >
-                {content}
+                <div className="transition-colors rounded-xl">{content}</div>
             </a>
         );
     }
 
     return content;
-});
+};
