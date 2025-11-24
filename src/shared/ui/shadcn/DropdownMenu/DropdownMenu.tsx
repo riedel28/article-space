@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { UserCircleIcon } from 'lucide-react';
 import {
     DropdownMenu as ShadcnDropdownMenu,
     DropdownMenuTrigger,
@@ -6,6 +7,7 @@ import {
     DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
 import { AppLink } from '../../redesigned/AppLink/AppLink';
+import { Button } from '@/components/ui/button';
 
 export interface DropdownItem {
     disabled?: boolean;
@@ -16,22 +18,22 @@ export interface DropdownItem {
 
 interface DropdownMenuProps {
     items: DropdownItem[];
-    trigger: ReactNode;
 }
 
 export function DropdownMenu(props: DropdownMenuProps) {
-    const { trigger, items } = props;
+    const { items } = props;
 
     return (
         <ShadcnDropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button
-                    type="button"
-                    className="outline-none focus:outline-none cursor-pointer"
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="data-[state=open]:bg-accent rounded-md"
                     aria-label="Open menu"
                 >
-                    {trigger}
-                </button>
+                    <UserCircleIcon />
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="bottom" align="end">
                 {items.map((item, index) => {

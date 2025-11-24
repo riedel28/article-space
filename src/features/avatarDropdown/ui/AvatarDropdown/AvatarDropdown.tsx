@@ -13,7 +13,6 @@ import {
     getRouteSettings
 } from '@/shared/const/router';
 import { DropdownMenu } from '@/shared/ui/shadcn/DropdownMenu';
-import { Avatar } from '@/shared/ui/shadcn/Avatar';
 
 export const AvatarDropdown = () => {
     const { t } = useTranslation();
@@ -55,10 +54,5 @@ export const AvatarDropdown = () => {
         }
     ];
 
-    return (
-        <DropdownMenu
-            items={items}
-            trigger={<Avatar size={40} src={authData.avatar} />}
-        />
-    );
+    return <DropdownMenu items={items} />;
 };

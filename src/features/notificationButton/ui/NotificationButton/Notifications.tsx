@@ -11,19 +11,18 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { NotificationList } from '@/entities/Notification';
 import { useMediaQuery } from '@/lib/hooks/use-media-query';
 
-interface NotificationsProps {
-    className?: string;
-}
-
-export const Notifications = (props: NotificationsProps) => {
-    const { className } = props;
+export const Notifications = () => {
     const [open, setOpen] = useState(false);
     const isDesktop = useMediaQuery('(min-width: 768px)');
     const { t } = useTranslation();
 
     const trigger = (
-        <Button variant="ghost" size="icon" className={className}>
-            <Bell className="h-5 w-5" />
+        <Button
+            variant="ghost"
+            size="icon"
+            className="data-[state=open]:bg-accent"
+        >
+            <Bell />
             <span className="sr-only">{t('Уведомления')}</span>
         </Button>
     );
