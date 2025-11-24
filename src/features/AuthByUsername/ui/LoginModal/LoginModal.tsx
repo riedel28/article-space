@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
-import { Modal } from '@/shared/ui/redesigned/Modal';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Loader } from '@/shared/ui/deprecated/Loader';
+import { Dialog, DialogContent } from '@/shared/ui/shadcn/Dialog';
+import { Skeleton } from '@/shared/ui/shadcn/Skeleton';
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
 
 interface LoginModalProps {
@@ -10,15 +9,27 @@ interface LoginModalProps {
     onClose: () => void;
 }
 
+const LoginFormSkeleton = () => (
+    <div className="flex flex-col space-y-4">
+        <Skeleton className="h-7 w-48" />
+        <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-10 w-full" />
+        </div>
+        <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-10 w-full" />
+        </div>
+        <Skeleton className="h-10 w-full" />
+    </div>
+);
+
 export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => (
-    <Modal
-        className={classNames('', {}, [className])}
-        isOpen={isOpen}
-        onClose={onClose}
-        lazy
-    >
-        <Suspense fallback={<Loader />}>
-            <LoginFormAsync onSuccess={onClose} />
-        </Suspense>
-    </Modal>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+        <DialogContent className={className}>
+            <Suspense fallback={<LoginFormSkeleton />}>
+                <LoginFormAsync onSuccess={onClose} />
+            </Suspense>
+        </DialogContent>
+    </Dialog>
 );

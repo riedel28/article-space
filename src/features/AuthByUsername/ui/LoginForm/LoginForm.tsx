@@ -1,10 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { memo, useCallback } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-
-
-import { Text } from '@/shared/ui/redesigned/Text';
+import { useForm } from '@tanstack/react-form';
+import { Loader2 } from 'lucide-react';
 import {
     DynamicModuleLoader,
     ReducersList
@@ -16,10 +13,9 @@ import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLo
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import cls from './LoginForm.module.scss';
-import { Button } from '@/shared/ui/redesigned/Button';
-import { Input } from '@/shared/ui/redesigned/Input';
-import { VStack } from '@/shared/ui/redesigned/Stack';
+import { Button } from '@/shared/ui/shadcn/Button';
+import { Input } from '@/shared/ui/shadcn/Input';
+import { Field, FieldLabel, FieldError } from '@/shared/ui/shadcn/Field';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
 export interface LoginFormProps {
@@ -31,7 +27,7 @@ const initialReducers: ReducersList = {
     loginForm: loginReducer
 };
 
-const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
+const LoginForm = ({ className, onSuccess }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const username = useSelector(getLoginUsername);
@@ -40,66 +36,166 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     const error = useSelector(getLoginError);
     const forceUpdate = useForceUpdate();
 
-    const onChangeUsername = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setUsername(value));
+    const form = useForm({
+        defaultValues: {
+            username: username || '',
+            password: password || ''
         },
-        [dispatch]
-    );
-
-    const onChangePassword = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setPassword(value));
-        },
-        [dispatch]
-    );
-
-    const onLoginClick = useCallback(async () => {
-        const result = await dispatch(loginByUsername({ username, password }));
-        if (result.meta.requestStatus === 'fulfilled') {
-            onSuccess();
-            forceUpdate();
+        onSubmit: async ({ value }) => {
+            const result = await dispatch(
+                loginByUsername({
+                    username: value.username || '',
+                    password: value.password || ''
+                })
+            );
+            if (result.meta.requestStatus === 'fulfilled') {
+                onSuccess();
+                forceUpdate();
+            }
         }
-    }, [dispatch, username, password, onSuccess, forceUpdate]);
+    });
 
     return (
         <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-            <VStack
-                                    gap="16"
-                                    className={classNames(cls.LoginForm, {}, [className])}
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    form.handleSubmit();
+                }}
+                className={className}
+            >
+                <div className="flex flex-col space-y-6">
+                    <h2 className="text-lg font-semibold">
+                        {t('Форма авторизации')}
+                    </h2>
+                    {error && (
+                        <p className="text-sm font-medium text-destructive">
+                            {t('Вы ввели неверный логин или пароль')}
+                        </p>
+                    )}
+                    <form.Field name="username">
+                        {(field) => {
+                            const isInvalid =
+                                field.state.meta.isTouched &&
+                                !field.state.meta.isValid;
+                            return (
+                                <Field
+                                    data-invalid={isInvalid}
+                                    className="flex flex-col space-y-2"
                                 >
-                                    <Text title={t('Форма авторизации')} />
-                                    {error && (
-                                        <Text
-                                            text={t('Вы ввели неверный логин или пароль')}
-                                            variant="error"
+                                    <FieldLabel htmlFor={field.name}>
+                                        {t('Username')}
+                                    </FieldLabel>
+                                    <Input
+                                        id={field.name}
+                                        name={field.name}
+                                        type="text"
+                                        placeholder={t('Введите username')}
+                                        value={field.state.value}
+                                        onBlur={field.handleBlur}
+                                        onChange={(e) => {
+                                            field.handleChange(e.target.value);
+                                            dispatch(
+                                                loginActions.setUsername(
+                                                    e.target.value
+                                                )
+                                            );
+                                        }}
+                                        aria-invalid={isInvalid}
+                                        autoFocus
+                                        autoComplete="username"
+                                    />
+                                    {isInvalid && (
+                                        <FieldError
+                                            errors={field.state.meta.errors
+                                                ?.map((e) =>
+                                                    typeof e === 'string'
+                                                        ? e
+                                                        : String(e)
+                                                )
+                                                .filter((e): e is string =>
+                                                    Boolean(e)
+                                                )}
                                         />
                                     )}
+                                </Field>
+                            );
+                        }}
+                    </form.Field>
+                    <form.Field name="password">
+                        {(field) => {
+                            const isInvalid =
+                                field.state.meta.isTouched &&
+                                !field.state.meta.isValid;
+                            return (
+                                <Field
+                                    data-invalid={isInvalid}
+                                    className="flex flex-col space-y-2"
+                                >
+                                    <FieldLabel htmlFor={field.name}>
+                                        {t('Password')}
+                                    </FieldLabel>
                                     <Input
-                                        autofocus
-                                        type="text"
-                                        className={cls.input}
-                                        placeholder={t('Введите username')}
-                                        onChange={onChangeUsername}
-                                        value={username}
-                                    />
-                                    <Input
-                                        type="text"
-                                        className={cls.input}
+                                        id={field.name}
+                                        name={field.name}
+                                        type="password"
                                         placeholder={t('Введите пароль')}
-                                        onChange={onChangePassword}
-                                        value={password}
+                                        value={field.state.value}
+                                        onBlur={field.handleBlur}
+                                        onChange={(e) => {
+                                            field.handleChange(e.target.value);
+                                            dispatch(
+                                                loginActions.setPassword(
+                                                    e.target.value
+                                                )
+                                            );
+                                        }}
+                                        aria-invalid={isInvalid}
+                                        autoComplete="current-password"
                                     />
-                                    <Button
-                                        className={cls.loginBtn}
-                                        onClick={onLoginClick}
-                                        disabled={isLoading}
-                                    >
-                                        {t('Войти')}
-                                    </Button>
-                                </VStack>
+                                    {isInvalid && (
+                                        <FieldError
+                                            errors={field.state.meta.errors
+                                                ?.map((e) =>
+                                                    typeof e === 'string'
+                                                        ? e
+                                                        : String(e)
+                                                )
+                                                .filter((e): e is string =>
+                                                    Boolean(e)
+                                                )}
+                                        />
+                                    )}
+                                </Field>
+                            );
+                        }}
+                    </form.Field>
+                    <form.Subscribe
+                        selector={(state) => [
+                            state.canSubmit,
+                            state.isSubmitting
+                        ]}
+                    >
+                        {([canSubmit, isSubmitting]) => (
+                            <Button
+                                type="submit"
+                                disabled={
+                                    !canSubmit || isLoading || isSubmitting
+                                }
+                                className="w-full"
+                            >
+                                {(isLoading || isSubmitting) && (
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                )}
+                                {t('Войти')}
+                            </Button>
+                        )}
+                    </form.Subscribe>
+                </div>
+            </form>
         </DynamicModuleLoader>
     );
-});
+};
 
 export default LoginForm;
