@@ -21,7 +21,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
     const sidebarItemsList = useSidebarItems();
 
     const onToggle = () => {
-        console.log(collapsed);
         setCollapsed((prev) => !prev);
     };
 
@@ -63,9 +62,9 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                         Svg={ArrowIcon}
                         clickable
                     />
-                    <div className={cls.switchers}>
+                    <div className="absolute bottom-4 left-4 w-full flex justify-center space-x-2">
                         <ThemeSwitcher />
-                        <LangSwitcher short={collapsed} className={cls.lang} />
+                        <LangSwitcher short={collapsed} />
                     </div>
                 </aside>
             }
@@ -91,9 +90,9 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                     <VStack role="navigation" gap="8" className={cls.items}>
                         {itemsList}
                     </VStack>
-                    <div className={cls.switchers}>
+                    <div className="absolute bottom-4 left-4 w-full flex justify-center space-x-2">
                         <ThemeSwitcher />
-                        <LangSwitcher short={collapsed} className={cls.lang} />
+                        <LangSwitcher short={collapsed} />
                     </div>
                 </aside>
             }

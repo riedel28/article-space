@@ -1,23 +1,29 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo } from 'react';
-
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Globe } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface LangSwitcherProps {
-    className?: string;
     short?: boolean;
 }
 
-export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
-    const { t, i18n } = useTranslation();
+export const LangSwitcher = ({ short }: LangSwitcherProps) => {
+    const { i18n } = useTranslation();
 
     const toggle = async () => {
         i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
     };
 
+    const currentLang = i18n.language === 'ru' ? 'Russian' : 'English';
+
     return (
-        <Button variant="clear" onClick={toggle} className={className}>
-            {t(short ? 'Короткий язык' : 'Язык')}
+        <Button
+            variant="ghost"
+            size={short ? 'icon' : 'default'}
+            onClick={toggle}
+            aria-label={`Switch language to ${i18n.language === 'ru' ? 'English' : 'Russian'}`}
+        >
+            <Globe />
+            {!short && <span>{currentLang}</span>}
         </Button>
     );
-});
+};
