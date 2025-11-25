@@ -1,15 +1,12 @@
-import React, { memo, useCallback } from 'react';
-import ThemeIcon from '@/shared/assets/icons/theme.svg?react';
+import { useCallback } from 'react';
+import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { saveJsonSettings } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Button } from '@/components/ui/button';
+import { Theme } from '@/shared/const/theme';
 
-interface ThemeSwitcherProps {
-    className?: string;
-}
-
-export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
+export const ThemeSwitcher = () => {
     const { theme, toggleTheme } = useTheme();
     const dispatch = useAppDispatch();
 
@@ -19,7 +16,16 @@ export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
         });
     }, [dispatch, toggleTheme]);
 
+    const isDark = theme === Theme.DARK;
+
     return (
-        <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />
+        <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleHandler}
+            aria-label="Toggle theme"
+        >
+            {isDark ? <Sun /> : <Moon />}
+        </Button>
     );
-});
+};
