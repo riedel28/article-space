@@ -32,8 +32,8 @@ export const useAnimationLibs = () => {
 };
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
-    const SpringRef = useRef<SpringType>();
-    const GestureRef = useRef<GestureType>();
+    const SpringRef = useRef<SpringType | undefined>(undefined);
+    const GestureRef = useRef<GestureType | undefined>(undefined);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {

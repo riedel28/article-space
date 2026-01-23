@@ -78,6 +78,8 @@ export const DrawerContent = memo((props: DrawerProps) => {
 
     const display = y.to((py) => (py < height ? 'block' : 'none'));
 
+    const AnimatedDiv = Spring.animated.div;
+
     return (
         <Portal element={document.getElementById('app') ?? document.body}>
             <div
@@ -89,7 +91,8 @@ export const DrawerContent = memo((props: DrawerProps) => {
                 ])}
             >
                 <Overlay onClick={close} />
-                <Spring.a.div
+                {/* @ts-ignore */}
+                <AnimatedDiv
                     className={cls.sheet}
                     style={{
                         display,
@@ -99,7 +102,7 @@ export const DrawerContent = memo((props: DrawerProps) => {
                     {...bind()}
                 >
                     {children}
-                </Spring.a.div>
+                </AnimatedDiv>
             </div>
         </Portal>
     );
