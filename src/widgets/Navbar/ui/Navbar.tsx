@@ -32,17 +32,17 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
   if (authData) {
     return (
-      <header className={classNames(mainClass, {}, [className])}>
+      <div className={classNames(mainClass, {}, [className])}>
         <HStack gap="16" className={cls.actions}>
           <NotificationButton />
           <AvatarDropdown />
         </HStack>
-      </header>
+      </div>
     );
   }
 
   return (
-    <header className={classNames(mainClass, {}, [className])}>
+    <div className={classNames(mainClass, {}, [className])}>
       <Button variant="clear" className={cls.links} onClick={onShowModal}>
         {t('Войти')}
       </Button>
@@ -50,6 +50,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
       {isAuthModal && (
         <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
       )}
-    </header>
+    </div>
   );
 });

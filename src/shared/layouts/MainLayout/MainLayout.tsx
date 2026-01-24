@@ -10,6 +10,14 @@ interface MainLayoutProps {
   toolbar?: ReactElement;
 }
 
+/**
+ * @deprecated Use AppShellLayout from @/shared/layouts/AppShellLayout instead.
+ * MainLayout is kept for backward compatibility only.
+ *
+ * Note: This layout renders the header prop in the right column, which differs
+ * from the new AppShellLayout that renders the header at the top of the page
+ * following standard application shell patterns.
+ */
 export const MainLayout = memo((props: MainLayoutProps) => {
   const { className, content, toolbar, header, sidebar } = props;
 

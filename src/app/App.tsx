@@ -1,22 +1,18 @@
-import React, { memo, Suspense, useEffect } from 'react';
+import { memo, Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserInited, initAuthData } from '@/entities/User';
 import { AppRouter } from './providers/router';
-import { Navbar } from '@/widgets/Navbar';
-import { Sidebar } from '@/widgets/Sidebar';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { MainLayout } from '@/shared/layouts/MainLayout';
+import { AppShellLayout } from '@/shared/layouts/AppShellLayout';
 import { AppLoaderLayout } from '@/shared/layouts/AppLoaderLayout';
 import { useAppToolbar } from './lib/useAppToolbar';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
 
 const App = memo(() => {
-  const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const inited = useSelector(getUserInited);
   const toolbar = useAppToolbar();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     if (!inited) {
@@ -26,21 +22,22 @@ const App = memo(() => {
 
   if (!inited) {
     return (
-      <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-        <AppLoaderLayout />{' '}
+      <div id="app">
+        <AppLoaderLayout />
       </div>
     );
   }
 
   return (
-    <div id="app" className={classNames('app_redesigned', {}, [theme])}>
+    <div id="app">
       <Suspense fallback="">
-        <MainLayout
-          header={<Navbar />}
-          content={<AppRouter />}
-          sidebar={<Sidebar />}
+        <AppShellLayout
           toolbar={toolbar}
-        />
+          sidebarCollapsed={sidebarCollapsed}
+          onSidebarToggle={() => setSidebarCollapsed((prev) => !prev)}
+        >
+          <AppRouter />
+        </AppShellLayout>
       </Suspense>
     </div>
   );

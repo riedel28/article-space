@@ -12,14 +12,23 @@ import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg?react';
 
 interface SidebarProps {
   className?: string;
+  collapsed?: boolean;
+  onToggle?: () => void;
 }
 
-export const Sidebar = memo(({ className }: SidebarProps) => {
-  const [collapsed, setCollapsed] = useState(false);
+export const Sidebar = memo(({ className, collapsed: controlledCollapsed, onToggle: controlledOnToggle }: SidebarProps) => {
+  const [internalCollapsed, setInternalCollapsed] = useState(false);
   const sidebarItemsList = useSidebarItems();
 
+  // Use controlled state if provided, otherwise use internal state
+  const collapsed = controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
+
   const onToggle = () => {
-    setCollapsed((prev) => !prev);
+    if (controlledOnToggle) {
+      controlledOnToggle();
+    } else {
+      setInternalCollapsed((prev) => !prev);
+    }
   };
 
   const itemsList = useMemo(
@@ -31,7 +40,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   );
 
   return (
-    <aside
+    <div
       data-testid="sidebar"
       className={classNames(
         cls.SidebarRedesigned,
@@ -54,6 +63,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         <ThemeSwitcher />
         <LangSwitcher short={collapsed} className={cls.lang} />
       </div>
-    </aside>
+    </div>
   );
 });
