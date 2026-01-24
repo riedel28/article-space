@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Menu, ActionIcon } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import {
   getUserAuthData,
   isUserAdmin,
@@ -13,17 +14,12 @@ import {
   getRouteProfile,
   getRouteSettings
 } from '@/shared/const/router';
-import { Dropdown } from '@/shared/ui/redesigned/Popups';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 
-interface AvatarDropdownProps {
-  className?: string;
-}
-
-export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
-  const { className } = props;
+export const AvatarDropdown = memo(() => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAdmin = useSelector(isUserAdmin);
   const isManager = useSelector(isUserManager);
   const authData = useSelector(getUserAuthData);
@@ -38,35 +34,29 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
     return null;
   }
 
-  const items = [
-    ...(isAdminPanelAvailable
-      ? [
-          {
-            content: t('Админка'),
-            href: getRouteAdmin()
-          }
-        ]
-      : []),
-    {
-      content: t('Профиль'),
-      href: getRouteProfile(authData.id)
-    },
-    {
-      content: t('Настройки'),
-      href: getRouteSettings()
-    },
-    {
-      content: t('Выйти'),
-      onClick: onLogout
-    }
-  ];
-
   return (
-    <Dropdown
-      direction="bottom left"
-      className={classNames('', {}, [className])}
-      items={items}
-      trigger={<Avatar size={40} src={authData.avatar} />}
-    />
+    <Menu position="bottom-end">
+      <Menu.Target>
+        <ActionIcon variant="subtle" size="lg" radius="lg">
+          <Avatar size={40} src={authData.avatar} />
+        </ActionIcon>
+      </Menu.Target>
+
+      <Menu.Dropdown>
+        {isAdminPanelAvailable && (
+          <Menu.Item onClick={() => navigate(getRouteAdmin())}>
+            {t('Админка')}
+          </Menu.Item>
+        )}
+        <Menu.Item onClick={() => navigate(getRouteProfile(authData.id))}>
+          {t('Профиль')}
+        </Menu.Item>
+        <Menu.Item onClick={() => navigate(getRouteSettings())}>
+          {t('Настройки')}
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item onClick={onLogout}>{t('Выйти')}</Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
   );
 });
