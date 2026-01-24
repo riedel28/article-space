@@ -1,9 +1,6 @@
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { VStack } from '@/shared/ui/redesigned/Stack';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
+import { Stack, Skeleton, ScrollArea } from '@mantine/core';
 import { useNotifications } from '../../api/notificationApi';
-import cls from './NotificationList.module.css';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 
 interface NotificationListProps {
@@ -16,31 +13,32 @@ export const NotificationList = memo((props: NotificationListProps) => {
     pollingInterval: 10000
   });
 
-  const Skeleton = SkeletonRedesigned;
-
   if (isLoading) {
     return (
-      <VStack
-        gap="16"
-        max
-        className={classNames(cls.NotificationList, {}, [className])}
-      >
-        <Skeleton width="100%" border="8px" height="80px" />
-        <Skeleton width="100%" border="8px" height="80px" />
-        <Skeleton width="100%" border="8px" height="80px" />
-      </VStack>
+      <Stack gap={16} w="100%" className={className}>
+        <Skeleton width="100%" radius="md" height={80} />
+        <Skeleton width="100%" radius="md" height={80} />
+        <Skeleton width="100%" radius="md" height={80} />
+      </Stack>
     );
   }
 
   return (
-    <VStack
-      gap="16"
-      max
-      className={classNames(cls.NotificationList, {}, [className])}
+    <ScrollArea.Autosize
+      mah={400}
+      maw={500}
+      type="auto"
+      styles={{
+        viewport: {
+          '& > div': {
+            display: 'block !important'
+          }
+        }
+      }}
     >
       {data?.map((item) => (
         <NotificationItem key={item.id} item={item} />
       ))}
-    </VStack>
+    </ScrollArea.Autosize>
   );
 });

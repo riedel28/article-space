@@ -1,29 +1,31 @@
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text } from '@/shared/ui/redesigned/Text';
-import cls from './NotificationItem.module.css';
+import { Text, Anchor, Box } from '@mantine/core';
 import { Notification } from '../../model/types/notification';
-import { Card } from '@/shared/ui/redesigned/Card';
+import classes from './NotificationItem.module.css';
 
 interface NotificationItemProps {
-  className?: string;
   item: Notification;
 }
 
 export const NotificationItem = memo((props: NotificationItemProps) => {
-  const { className, item } = props;
+  const { item } = props;
 
   const content = (
-    <Card className={classNames(cls.NotificationItem, {}, [className])}>
-      <Text title={item.title} text={item.description} />
-    </Card>
+    <Box className={classes.NotificationItem}>
+      <Text fw={500} size="sm" mb={4}>
+        {item.title}
+      </Text>
+      <Text size="xs" c="dimmed">
+        {item.description}
+      </Text>
+    </Box>
   );
 
   if (item.href) {
     return (
-      <a className={cls.link} target="_blank" href={item.href} rel="noreferrer">
+      <Anchor href={item.href} target="_blank" underline="never" w="100%">
         {content}
-      </a>
+      </Anchor>
     );
   }
 

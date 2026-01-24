@@ -3,13 +3,15 @@ import { StoryFn, Meta } from '@storybook/react';
 
 import { NotificationList } from './NotificationList';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { MantineDecorator } from '@/shared/config/storybook/MantineDecorator/MantineDecorator';
 
 export default {
   title: 'entities/Notification/NotificationList',
   component: NotificationList,
   argTypes: {
     backgroundColor: { control: 'color' }
-  }
+  },
+  decorators: [MantineDecorator, StoreDecorator({})]
 } as Meta<typeof NotificationList>;
 
 const Template: StoryFn<typeof NotificationList> = (args) => (
@@ -18,7 +20,6 @@ const Template: StoryFn<typeof NotificationList> = (args) => (
 
 export const Normal = Template.bind({});
 Normal.args = {};
-Normal.decorators = [StoreDecorator({})];
 Normal.parameters = {
   mockData: [
     {

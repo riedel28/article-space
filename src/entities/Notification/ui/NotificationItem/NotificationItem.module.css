@@ -1,4 +1,8 @@
-.NotificationItem,
-.link {
-  width: 100%;
+.NotificationItem {
+  padding: var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-lg);
+
+  &:hover {
+    background-color: var(--mantine-color-gray-0);
+  }
 }
