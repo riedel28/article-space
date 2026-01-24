@@ -1,4 +1,4 @@
-declare module '*.module.scss' {
+declare module '*.module.css' {
     interface IClassNames {
         [className: string]: string;
     }
@@ -6,7 +6,7 @@ declare module '*.module.scss' {
     export default classNames;
 }
 
-declare module '*.scss' {
+declare module '*.css' {
     const content: { [className: string]: string };
     export default content;
 }
