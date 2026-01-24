@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
-import { ListBox } from '@/shared/ui/redesigned/Popups';
+import { memo } from 'react';
+import { Select } from '@mantine/core';
 import { Country } from '../../model/types/country';
 
 interface CountrySelectProps {
@@ -11,35 +11,31 @@ interface CountrySelectProps {
 }
 
 const options = [
-  { value: Country.Armenia, content: Country.Armenia },
-  { value: Country.Russia, content: Country.Russia },
-  { value: Country.Belarus, content: Country.Belarus },
-  { value: Country.Kazakhstan, content: Country.Kazakhstan },
-  { value: Country.Ukraine, content: Country.Ukraine }
+  Country.Armenia,
+  Country.Russia,
+  Country.Belarus,
+  Country.Kazakhstan,
+  Country.Ukraine
 ];
 
 export const CountrySelect = memo(
   ({ className, value, onChange, readonly }: CountrySelectProps) => {
     const { t } = useTranslation();
 
-    const onChangeHandler = useCallback(
-      (value: string) => {
-        onChange?.(value as Country);
-      },
-      [onChange]
+    return (
+      <Select
+        className={className}
+        value={value}
+        label={t('Укажите страну')}
+        placeholder={t('Укажите страну')}
+        data={options}
+        onChange={(selectedValue) =>
+          onChange?.(selectedValue as Country)
+        }
+        readOnly={readonly}
+        w="100%"
+        size="md"
+      />
     );
-
-    const props = {
-      className,
-      value,
-      defaultValue: t('Укажите страну'),
-      label: t('Укажите страну'),
-      items: options,
-      onChange: onChangeHandler,
-      readonly,
-      direction: 'top right' as const
-    };
-
-    return <ListBox {...props} />;
   }
 );

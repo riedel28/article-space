@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
+import { Select } from '@mantine/core';
 import { Currency } from '../../model/types/currency';
-import { ListBox } from '@/shared/ui/redesigned/Popups';
 
 interface CurrencySelectProps {
   className?: string;
@@ -10,34 +10,26 @@ interface CurrencySelectProps {
   readonly?: boolean;
 }
 
-const options = [
-  { value: Currency.RUB, content: Currency.RUB },
-  { value: Currency.EUR, content: Currency.EUR },
-  { value: Currency.USD, content: Currency.USD }
-];
+const options = [Currency.RUB, Currency.EUR, Currency.USD];
 
 export const CurrencySelect = memo(
   ({ className, value, onChange, readonly }: CurrencySelectProps) => {
     const { t } = useTranslation();
 
-    const onChangeHandler = useCallback(
-      (value: string) => {
-        onChange?.(value as Currency);
-      },
-      [onChange]
+    return (
+      <Select
+        className={className}
+        value={value}
+        label={t('Укажите валюту')}
+        placeholder={t('Укажите валюту')}
+        data={options}
+        onChange={(selectedValue) =>
+          onChange?.(selectedValue as Currency)
+        }
+        readOnly={readonly}
+        w="100%"
+        size="md"
+      />
     );
-
-    const props = {
-      className,
-      value,
-      defaultValue: t('Укажите валюту'),
-      label: t('Укажите валюту'),
-      items: options,
-      onChange: onChangeHandler,
-      readonly,
-      direction: 'top right' as const
-    };
-
-    return <ListBox {...props} />;
   }
 );

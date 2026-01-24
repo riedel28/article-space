@@ -1,18 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { Stack, Alert } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons-react';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { Currency } from '@/entities/Currency';
 import { Country } from '@/entities/Country';
-import { Text } from '@/shared/ui/redesigned/Text';
 import { ProfileCard } from '@/entities/Profile';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { ValidateProfileError } from '../../model/consts/consts';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
@@ -115,17 +114,24 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <VStack gap="8" max className={classNames('', {}, [className])}>
+      <Stack gap={16} w="100%" className={className}>
         <EditableProfileCardHeader />
-        {validateErrors?.length &&
-          validateErrors.map((err) => (
-            <Text
-              key={err}
-              variant="error"
-              text={validateErrorTranslates[err]}
-              data-testid="EditableProfileCard.Error"
-            />
-          ))}
+        {validateErrors?.length ? (
+          <Alert
+            icon={<IconAlertCircle size={20} />}
+            title={t('Ошибки валидации')}
+            color="red"
+            variant="light"
+          >
+            <Stack gap={4}>
+              {validateErrors.map((err) => (
+                <div key={err} data-testid="EditableProfileCard.Error.Paragraph">
+                  {validateErrorTranslates[err]}
+                </div>
+              ))}
+            </Stack>
+          </Alert>
+        ) : null}
         <ProfileCard
           data={formData}
           isLoading={isLoading}
@@ -140,7 +146,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
           onChangeCurrency={onChangeCurrency}
           onChangeCountry={onChangeCountry}
         />
-      </VStack>
+      </Stack>
     </DynamicModuleLoader>
   );
 });
