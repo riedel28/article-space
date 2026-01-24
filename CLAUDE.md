@@ -11,36 +11,17 @@ This is a production-level React application built with TypeScript following Fea
 ### Running the application
 
 - `npm run start:dev` - Start frontend (Webpack) + backend server
-- `npm run start:dev:vite` - Start frontend (Vite) + backend server
-- `npm start` - Start frontend only (Webpack dev server on port 3000)
-- `npm run start:vite` - Start frontend only (Vite)
-- `npm run start:dev:server` - Start backend server only
+- `npm run start:dev:vite` - Start frontend (Vite) + backend server (prefer this way)
 
-### Building
+**Do not run:** `npm run dev` or `npm run start:dev`(assume dev server is already running)
 
-- `npm run build:prod` - Production build (minified)
-- `npm run build:dev` - Development build (not minified)
+### Typecheck and Linting
 
-### Testing
+- `npx prettier --write \"**/*.{ts,tsx,json,css,md,html}\"` - Run Prettier,
+- `lint:ts:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix` - Run ESLint,
+- `tsc --noEmit && npm run lint:ts:fix` - Run typecheck and linting
 
-- `npm run test:unit` - Run Jest unit and component tests
-- `npm run test:e2e` - Open Cypress for e2e tests
-- `npm run test:ui` - Run Loki screenshot tests
-- `npm run test:ui:ok` - Approve new screenshots
-- `npm run test:ui:report` - Generate visual test report
-
-### Linting
-
-- `npm run lint:ts` - Check TypeScript files
-- `npm run lint:ts:fix` - Fix TypeScript files
-- `npm run lint:scss` - Check SCSS files
-- `npm run lint:scss:fix` - Fix SCSS files
-- `npm run prettier` - Format all files
-
-### Storybook
-
-- `npm run storybook` - Start Storybook on port 6006
-- `npm run storybook:build` - Build static Storybook
+**Run:** `tsc --noEmit && npm run lint:ts:fix` after making set of changes
 
 ### Code Generation
 
@@ -185,7 +166,10 @@ The project is migrating to Mantine v8. When working with Mantine components:
    - Mantine components handle most styling needs through props
    - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
 
-4. **Animation and transitions**:
+4. **Use Mantine variables in css files**
+   - e.g. `border-radius: var(--mantine-radius-lg)`
+
+5. **Animation and transitions**:
    - Use Mantine's built-in `transitionProps` when available
    - For custom animations, define them in CSS modules but apply via Mantine's `style` prop
 
@@ -199,32 +183,6 @@ npm run generate:slice
 ```
 
 This generates the full slice structure with UI, model, and public API.
-
-## Testing Strategy
-
-### 1. Unit Tests (Jest)
-
-- Config: `config/jest/jest.config.ts`
-- Test files: `*.test.ts(x)` next to source files
-- Use React Testing Library for component tests
-- Setup file: `config/jest/setupTests.ts`
-
-### 2. Storybook Stories
-
-- Create `*.stories.tsx` files next to components
-- Mock API requests with `storybook-addon-mock`
-- Config: `config/storybook/`
-- Example format shown in README.md
-
-### 3. Visual Regression (Loki)
-
-- Uses Docker Chrome for screenshot consistency
-- Configurations for desktop (1366x768) and mobile (iPhone 7)
-- Generates HTML reports with `reg-cli`
-
-### 4. E2E Tests (Cypress)
-
-- Run `npm run test:e2e` to open Cypress interface
 
 ## Build Systems
 
