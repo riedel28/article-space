@@ -1,10 +1,18 @@
 .appLogoWrapper {
   position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .appLogo {
   position: relative;
   z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 8px rgb(94 211 243 / 10%));
+}
+
+.appLogo:hover {
+  filter: drop-shadow(0 4px 12px rgb(94 211 243 / 20%));
+  transform: scale(1.05);
 }
 
 .gradientBig {
@@ -23,6 +31,10 @@
   border-radius: 50%;
   opacity: 0.6;
   pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .gradientSmall {
@@ -40,4 +52,8 @@
   );
   border-radius: 50%;
   opacity: 0.6;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

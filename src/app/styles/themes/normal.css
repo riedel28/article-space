@@ -1,21 +1,22 @@
 :root {
+  /* Legacy colors - deprecated */
   --bg-color: #e8e8ea;
   --inverted-bg-color: #090949;
-  --primary-color: #0232c2;
-  --secondary-color: #0449e0;
-  --inverted-primary-color: #04ff04;
-  --inverted-secondary-color: #049604;
+  --primary-color: #00a3d1;
+  --secondary-color: #007ea3;
+  --inverted-primary-color: #74a2b2;
+  --inverted-secondary-color: #5a7c87;
 
-  /* redesigned */
+  /* Redesigned - Mantine aligned colors */
   --dark-bg-redesigned: #fff;
-  --bg-redesigned: #eff5f6;
-  --light-bg-redesigned: #e2eef1;
+  --bg-redesigned: #f5f7f8;
+  --light-bg-redesigned: #e8eced;
   --text-redesigned: #141c1f;
   --hint-redesigned: #adbcc0;
-  --cancel-redesigned: #f77;
+  --cancel-redesigned: #ff7777;
   --save-redesigned: #62de85;
-  --icon-redesigned: #5ed3f3;
-  --accent-redesigned: #00c8ff;
+  --icon-redesigned: #00c8ff;
+  --accent-redesigned: #00a3d1;
 
   /* skeleton */
   --skeleton-color: #fff;
@@ -25,8 +26,8 @@
   --code-bg: #fff;
 
   /* card */
-  --card-bg: #d5d5d7;
+  --card-bg: #e8eced;
 
   /* listbox */
-  --listbox-bg: #d5d5d7;
+  --listbox-bg: #e8eced;
 }

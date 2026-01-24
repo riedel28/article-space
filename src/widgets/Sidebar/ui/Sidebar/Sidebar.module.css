@@ -1,99 +1,135 @@
-.Sidebar {
-  height: calc(100vh - var(--navbar-height));
-  width: var(--sidebar-width);
-  background: var(--inverted-bg-color);
+/* Sidebar Container */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100%;
+  background: var(--light-bg-redesigned);
+  border-radius: var(--mantine-radius-xl);
+  padding: var(--mantine-spacing-lg) 0;
   position: relative;
-  transition: width 0.3s;
-
-  .switchers {
-    position: absolute;
-    bottom: 20px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .lang {
-    margin-left: 20px;
-  }
-
-  .collapseBtn {
-    position: absolute;
-    right: -32px;
-    bottom: 32px;
-    z-index: 10;
-  }
-
-  .items {
-    margin-top: 20px;
-    margin-left: 30px;
-  }
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .collapsed {
-  width: var(--sidebar-width-collapsed);
-
-  .switchers {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .lang {
-    margin-left: 0;
-  }
+  width: 72px;
+  padding: var(--mantine-spacing-md) 0;
 }
 
-.SidebarRedesigned {
+/* Logo Section */
+.logoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-lg);
+  min-height: 74px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collapsed .logoSection {
+  padding: 0 var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  min-height: 52px;
+}
+
+.appLogo {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Navigation Section - Takes all available space */
+.navigation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 var(--mantine-spacing-xs);
+  margin: var(--mantine-spacing-xs) 0;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0 0 0 / 10%) transparent;
+}
+
+.navigation::-webkit-scrollbar {
+  width: 4px;
+}
+
+.navigation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navigation::-webkit-scrollbar-thumb {
+  background: rgb(0 0 0 / 10%);
+  border-radius: var(--mantine-radius-xs);
+}
+
+.navigation::-webkit-scrollbar-thumb:hover {
+  background: rgb(0 0 0 / 15%);
+}
+
+.navItems {
+  width: 100%;
+}
+
+/* Footer Section */
+.footer {
+  padding: var(--mantine-spacing-md) 0 0;
+  margin-top: auto;
+}
+
+.switchers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--mantine-spacing-md);
+  padding: 0 var(--mantine-spacing-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collapsed .switchers {
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  padding: 0 var(--mantine-spacing-xs);
+}
+
+/* Collapse Button */
+.collapseBtn {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  z-index: 10;
+  width: 32px;
+  height: 32px;
   background: var(--light-bg-redesigned);
-  width: 220px;
-  height: 100%;
-  border-radius: 32px;
-  position: relative;
-
-  .appLogo {
-    padding-top: 20px;
-  }
-
-  .items {
-    margin-top: 40px;
-  }
-
-  .collapseBtn {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    z-index: 10;
-    transform: rotate(90deg);
-  }
-
-  .switchers {
-    position: absolute;
-    bottom: 40px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 16px;
-  }
+  border-radius: 50%;
+  box-shadow: var(--mantine-shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.collapsedRedesigned {
-  width: 50px;
+.collapsed .collapseBtn {
+  transform: translateY(-50%) rotate(-90deg);
+}
 
-  .switchers {
-    flex-direction: column;
-    align-items: center;
+.collapseBtn:hover {
+  background: var(--accent-redesigned);
+  box-shadow: var(--mantine-shadow-md);
+}
+
+/* Responsive adjustments */
+@media (max-height: 600px) {
+  .logoSection {
+    padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-md);
+    min-height: 60px;
   }
 
-  .items {
-    display: flex;
-    align-items: center;
+  .collapsed .logoSection {
+    padding: 0 var(--mantine-spacing-xs) var(--mantine-spacing-xs);
+    min-height: 44px;
   }
 
-  .lang {
-    margin-left: 0;
-  }
-
-  .collapseBtn {
-    transform: rotate(-90deg);
+  .footer {
+    padding: var(--mantine-spacing-xs) 0 0;
   }
 }

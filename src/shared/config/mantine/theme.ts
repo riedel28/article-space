@@ -1,22 +1,63 @@
 import { createTheme } from '@mantine/core';
 
 export const theme = createTheme({
-  primaryColor: 'cyan',
+  primaryColor: 'brand',
+  primaryShade: { light: 6, dark: 7 },
   fontFamily: '"Nunito Sans", sans-serif',
   headings: { fontFamily: '"Roboto", sans-serif' },
   defaultRadius: 'md',
   colors: {
-    accent: [
-      '#e0f7ff',
-      '#b3ecff',
-      '#80e0ff',
-      '#4dd4ff',
-      '#1ac8ff',
-      '#00c8ff',
-      '#00a3d1',
-      '#007ea3',
-      '#005975',
-      '#003447'
-    ]
-  }
+    // Primary brand color - cyan/blue palette
+    brand: [
+      '#e0f7ff', // 0 - lightest
+      '#b3ecff', // 1
+      '#80e0ff', // 2
+      '#4dd4ff', // 3
+      '#1ac8ff', // 4
+      '#00c8ff', // 5
+      '#00a3d1', // 6 - primary shade light
+      '#007ea3', // 7 - primary shade dark
+      '#005975', // 8
+      '#003447', // 9 - darkest
+    ],
+    // Success/save color - green palette
+    success: [
+      '#e6f9ed', // 0
+      '#c8f1d8', // 1
+      '#a3e9c0', // 2
+      '#7ee0a8', // 3
+      '#62de85', // 4
+      '#4ad96f', // 5
+      '#38c75e', // 6
+      '#2ba84c', // 7
+      '#1f8a3b', // 8
+      '#146b2a', // 9
+    ],
+    // Error/cancel color - red palette
+    error: [
+      '#ffe5e5', // 0
+      '#ffb3b3', // 1
+      '#ff8080', // 2
+      '#ff7777', // 3
+      '#ff4d4d', // 4
+      '#ff1a1a', // 5
+      '#e60000', // 6
+      '#d95757', // 7
+      '#b30000', // 8
+      '#800000', // 9
+    ],
+    // Neutral/hint color - gray palette
+    hint: [
+      '#f5f7f8', // 0
+      '#e8eced', // 1
+      '#d5dbdd', // 2
+      '#c1cacd', // 3
+      '#adbcc0', // 4
+      '#99aab0', // 5
+      '#8599a0', // 6
+      '#74a2b2', // 7
+      '#5a7c87', // 8
+      '#3d5459', // 9
+    ],
+  },
 });

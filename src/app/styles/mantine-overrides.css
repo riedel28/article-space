@@ -1,0 +1,11 @@
+/* Mantine AppShell overrides */
+.mantine-AppShell-header {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--light-bg-redesigned);
+}
+
+.mantine-AppShell-main {
+  overflow-x: hidden;
+}

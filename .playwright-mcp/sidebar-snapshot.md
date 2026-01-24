@@ -1,0 +1,28 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - button "Login" [ref=e7] [cursor=pointer]:
+      - generic [ref=e9]: Login
+  - navigation [ref=e10]:
+    - complementary [ref=e11]:
+      - img [ref=e14]
+      - navigation [ref=e17]:
+        - generic [ref=e18]:
+          - link "Main" [ref=e19] [cursor=pointer]:
+            - /url: /
+            - img [ref=e20]
+            - generic [ref=e22]: Main
+          - link "About us" [ref=e23] [cursor=pointer]:
+            - /url: /about
+            - img [ref=e24]
+            - generic [ref=e26]: About us
+      - generic [ref=e28]:
+        - button [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+        - button "English" [ref=e32] [cursor=pointer]:
+          - generic [ref=e34]: English
+      - button [ref=e35] [cursor=pointer]:
+        - img [ref=e36]
+  - main [ref=e38]:
+    - main [ref=e44]:
+      - generic [ref=e45]: "123123123123123123"
+      - text: Main page
