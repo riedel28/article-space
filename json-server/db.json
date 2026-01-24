@@ -707,8 +707,7 @@
             "roles": ["ADMIN"],
             "features": {
                 "isArticleRatingEnabled": true,
-                "isCounterEnabled": true,
-                "isAppRedesigned": true
+                "isCounterEnabled": true
             },
             "avatar": "https://mobimg.b-cdn.net/v3/fetch/22/2207633df03a819cd72889249c8361a8.jpeg?w=1470&r=0.5625",
             "jsonSettings": {

@@ -13,8 +13,7 @@ export default {
             }
         },
         '@storybook/addon-interactions',
-        'storybook-addon-mock',
-        'storybook-addon-themes'
+        'storybook-addon-mock'
     ],
     framework: '@storybook/react',
     core: {

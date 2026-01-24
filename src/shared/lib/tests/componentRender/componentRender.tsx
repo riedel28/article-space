@@ -32,6 +32,8 @@ export function TestProvider(props: TestProviderProps) {
         theme = Theme.LIGHT,
     } = options;
 
+    const colorScheme = theme === Theme.DARK ? 'dark' : 'light';
+
     return (
         <MemoryRouter initialEntries={[route]}>
             <StoreProvider
@@ -39,7 +41,7 @@ export function TestProvider(props: TestProviderProps) {
                 initialState={initialState}
             >
                 <I18nextProvider i18n={i18nForTests}>
-                    <ThemeProvider initialTheme={theme}>
+                    <ThemeProvider initialTheme={colorScheme}>
                         <div className={`app ${theme}`}>{children}</div>
                     </ThemeProvider>
                 </I18nextProvider>

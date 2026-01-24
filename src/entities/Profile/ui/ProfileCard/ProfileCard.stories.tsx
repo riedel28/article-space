@@ -4,7 +4,6 @@ import { Country } from '@/entities/Country';
 import { Currency } from '@/entities/Currency';
 import avatar from '@/shared/assets/tests/storybook.jpg';
 import { ProfileCard } from './ProfileCard';
-import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
 
 export default {
     title: 'entities/ProfileCard',
@@ -36,7 +35,6 @@ Primary.args = primaryArgs;
 
 export const PrimaryRedesigned = Template.bind({});
 PrimaryRedesigned.args = primaryArgs;
-PrimaryRedesigned.decorators = [NewDesignDecorator];
 
 export const WithError = Template.bind({});
 WithError.args = {

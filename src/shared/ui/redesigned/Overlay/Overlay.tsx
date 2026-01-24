@@ -1,19 +1,22 @@
 import { memo } from 'react';
+import { Overlay as MantineOverlay } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './Overlay.module.scss';
 
 interface OverlayProps {
     className?: string;
     onClick?: () => void;
+    'data-testid'?: string;
 }
 
 export const Overlay = memo((props: OverlayProps) => {
-    const { className, onClick } = props;
+    const { className, onClick, 'data-testid': dataTestId } = props;
 
     return (
-        <div
+        <MantineOverlay
+            className={classNames('', {}, [className])}
             onClick={onClick}
-            className={classNames(cls.Overlay, {}, [className])}
+            fixed
+            data-testid={dataTestId}
         />
     );
 });

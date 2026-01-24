@@ -2,40 +2,39 @@ import {
     ButtonHTMLAttributes,
     ForwardedRef,
     forwardRef,
-    ReactNode
+    ReactNode,
 } from 'react';
-import { classNames, Mods } from '@/shared/lib/classNames/classNames';
-import cls from './Button.module.scss';
+import { Button as MantineButton } from '@mantine/core';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 export type ButtonVariant = 'clear' | 'outline' | 'filled';
 export type ButtonColor = 'normal' | 'success' | 'error';
-
 export type ButtonSize = 'm' | 'l' | 'xl';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
     className?: string;
     /**
-     * Тема кнопки. Отвечает за визуал (в рамке, без стилей, противоположный теме приложения цвет и тд)
+     * Button visual variant
      */
     variant?: ButtonVariant;
     /**
-     * Флаг, делающий кнопку квадратной
+     * Makes the button square
      */
     square?: boolean;
     /**
-     * Размер кнопки в соответствии с дизайн системой
+     * Button size
      */
     size?: ButtonSize;
     /**
-     * Флаг, отвечающий за работу кнопки
+     * Disables the button
      */
     disabled?: boolean;
     /**
-     * Содержимое кнопки
+     * Button content
      */
     children?: ReactNode;
     /**
-     * Увеличивает кнопку на всю свободную ширину
+     * Makes the button full width
      */
     fullWidth?: boolean;
 
@@ -44,6 +43,24 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     addonLeft?: ReactNode;
     addonRight?: ReactNode;
 }
+
+const mapVariant: Record<ButtonVariant, string> = {
+    clear: 'subtle',
+    filled: 'filled',
+    outline: 'outline',
+};
+
+const mapColor: Record<ButtonColor, string | undefined> = {
+    normal: undefined,
+    success: 'green',
+    error: 'red',
+};
+
+const mapSize: Record<ButtonSize, string> = {
+    m: 'sm',
+    l: 'md',
+    xl: 'lg',
+};
 
 export const Button = forwardRef(
     (props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
@@ -61,30 +78,21 @@ export const Button = forwardRef(
             ...otherProps
         } = props;
 
-        const mods: Mods = {
-            [cls.square]: square,
-            [cls.disabled]: disabled,
-            [cls.fullWidth]: fullWidth,
-            [cls.withAddon]: Boolean(addonLeft) || Boolean(addonRight)
-        };
-
         return (
-            <button
-                type="button"
-                className={classNames(cls.Button, mods, [
-                    className,
-                    cls[variant],
-                    cls[size],
-                    cls[color]
-                ])}
+            <MantineButton
+                className={classNames('', {}, [className])}
+                variant={mapVariant[variant]}
+                color={mapColor[color]}
+                size={mapSize[size]}
                 disabled={disabled}
-                {...otherProps}
+                fullWidth={fullWidth}
+                leftSection={addonLeft}
+                rightSection={addonRight}
                 ref={ref}
+                {...otherProps}
             >
-                <div className={cls.addonLeft}>{addonLeft}</div>
                 {children}
-                <div className={cls.addonRight}>{addonRight}</div>
-            </button>
+            </MantineButton>
         );
-    }
+    },
 );

@@ -1,37 +1,23 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import { Theme } from '../../../const/theme';
+import { useMantineColorScheme } from '@mantine/core';
+
+type ColorScheme = 'light' | 'dark';
 
 interface UseThemeResult {
-    toggleTheme: (saveAction?: (theme: Theme) => void) => void;
-    theme: Theme;
+    toggleTheme: (saveAction?: (theme: ColorScheme) => void) => void;
+    theme: ColorScheme;
 }
 
 export function useTheme(): UseThemeResult {
-    const { theme, setTheme } = useContext(ThemeContext);
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
-    const toggleTheme = (saveAction?: (theme: Theme) => void) => {
-        let newTheme: Theme;
-        switch (theme) {
-            case Theme.DARK:
-                newTheme = Theme.LIGHT;
-                break;
-            case Theme.LIGHT:
-                newTheme = Theme.ORANGE;
-                break;
-            case Theme.ORANGE:
-                newTheme = Theme.DARK;
-                break;
-            default:
-                newTheme = Theme.LIGHT;
-        }
-        setTheme?.(newTheme);
-
+    const toggleTheme = (saveAction?: (theme: ColorScheme) => void) => {
+        toggleColorScheme();
+        const newTheme: ColorScheme = colorScheme === 'light' ? 'dark' : 'light';
         saveAction?.(newTheme);
     };
 
     return {
-        theme: theme || Theme.LIGHT,
+        theme: colorScheme as ColorScheme,
         toggleTheme,
     };
 }

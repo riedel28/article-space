@@ -1,40 +1,30 @@
-import { CSSProperties, useMemo } from 'react';
-import { classNames, Mods } from '@/shared/lib/classNames/classNames';
-import cls from './Avatar.module.scss';
-import { AppImage } from '../../redesigned/AppImage';
-import UserIcon from '../../../assets/icons/user-filled.svg?react';
-import { Icon } from '../Icon';
-import { Skeleton } from '../Skeleton';
+import { Avatar as MantineAvatar } from '@mantine/core';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface AvatarProps {
     className?: string;
     src?: string;
     size?: number;
     alt?: string;
+    'data-testid'?: string;
 }
 
-export const Avatar = ({ className, src, size = 100, alt }: AvatarProps) => {
-    const mods: Mods = {};
-
-    const styles = useMemo<CSSProperties>(
-        () => ({
-            width: size,
-            height: size,
-        }),
-        [size],
-    );
-
-    const fallback = <Skeleton width={size} height={size} border="50%" />;
-    const errorFallback = <Icon width={size} height={size} Svg={UserIcon} />;
+export const Avatar = (props: AvatarProps) => {
+    const {
+        className,
+        src,
+        size = 100,
+        alt,
+        'data-testid': dataTestId,
+    } = props;
 
     return (
-        <AppImage
-            fallback={fallback}
-            errorFallback={errorFallback}
+        <MantineAvatar
+            className={classNames('', {}, [className])}
             src={src}
             alt={alt}
-            style={styles}
-            className={classNames(cls.Avatar, mods, [className])}
+            size={size}
+            data-testid={dataTestId}
         />
     );
 };

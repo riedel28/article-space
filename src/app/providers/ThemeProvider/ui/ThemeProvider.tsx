@@ -1,47 +1,24 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
-import { ThemeContext } from '../../../../shared/lib/context/ThemeContext';
-import { Theme } from '@/shared/const/theme';
-import { LOCAL_STORAGE_THEME_KEY } from '@/shared/const/localStorage';
+import React, { ReactNode } from 'react';
+import { MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import { theme } from '@/shared/config/mantine/theme';
+import { ColorScheme } from '@/shared/const/theme';
 
 interface ThemeProviderProps {
-    initialTheme?: Theme;
+    initialTheme?: ColorScheme;
     children: ReactNode;
 }
 
-const fallbackTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme;
-
 const ThemeProvider = (props: ThemeProviderProps) => {
-    const { initialTheme, children } = props;
-    const [isThemeInited, setThemeInited] = useState(false);
-
-    const [theme, setTheme] = useState<Theme>(
-        initialTheme || fallbackTheme || Theme.LIGHT
-    );
-
-    useEffect(() => {
-        if (!isThemeInited && initialTheme) {
-            setTheme(initialTheme);
-            setThemeInited(true);
-        }
-    }, [initialTheme, isThemeInited]);
-
-    useEffect(() => {
-        document.body.className = theme;
-        localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
-    }, [theme]);
-
-    const defaultProps = useMemo(
-        () => ({
-            theme,
-            setTheme
-        }),
-        [theme]
-    );
+    const { children, initialTheme } = props;
 
     return (
-        <ThemeContext.Provider value={defaultProps}>
+        <MantineProvider
+            theme={theme}
+            defaultColorScheme={initialTheme || 'light'}
+        >
             {children}
-        </ThemeContext.Provider>
+        </MantineProvider>
     );
 };
 

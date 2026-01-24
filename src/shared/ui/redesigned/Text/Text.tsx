@@ -1,6 +1,6 @@
 import { memo } from 'react';
+import { Text as MantineText, Title } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './Text.module.scss';
 
 export type TextVariant = 'primary' | 'error' | 'accent';
 
@@ -19,18 +19,28 @@ interface TextProps {
     'data-testid'?: string;
 }
 
-type HeaderTagType = 'h1' | 'h2' | 'h3';
-
-const mapSizeToClass: Record<TextSize, string> = {
-    s: 'size_s',
-    m: 'size_m',
-    l: 'size_l'
+const mapSizeToMantine: Record<TextSize, string> = {
+    s: 'sm',
+    m: 'md',
+    l: 'lg',
 };
 
-const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
+const mapSizeToTitleOrder: Record<TextSize, 1 | 2 | 3> = {
+    s: 3,
+    m: 2,
+    l: 1,
+};
+
+const mapSizeToTitleSize: Record<TextSize, string> = {
     s: 'h3',
     m: 'h2',
-    l: 'h1'
+    l: 'h1',
+};
+
+const mapVariantToColor: Record<TextVariant, string | undefined> = {
+    primary: undefined,
+    error: 'red',
+    accent: 'cyan',
 };
 
 export const Text = memo((props: TextProps) => {
@@ -42,34 +52,33 @@ export const Text = memo((props: TextProps) => {
         align = 'left',
         size = 'm',
         bold,
-        'data-testid': dataTestId = 'Text'
+        'data-testid': dataTestId = 'Text',
     } = props;
 
-    const HeaderTag = mapSizeToHeaderTag[size];
-    const sizeClass = mapSizeToClass[size];
-
-    const additionalClasses = [className, cls[variant], cls[align], sizeClass];
-
     return (
-        <div
-            className={classNames(
-                cls.Text,
-                { [cls.bold]: bold },
-                additionalClasses
-            )}
-        >
+        <div className={classNames('', {}, [className])}>
             {title && (
-                <HeaderTag
-                    className={cls.title}
+                <Title
+                    order={mapSizeToTitleOrder[size]}
+                    c={mapVariantToColor[variant]}
+                    ta={align}
+                    fw={bold ? 700 : undefined}
+                    size={mapSizeToTitleSize[size]}
                     data-testid={`${dataTestId}.Header`}
                 >
                     {title}
-                </HeaderTag>
+                </Title>
             )}
             {text && (
-                <p className={cls.text} data-testid={`${dataTestId}.Paragraph`}>
+                <MantineText
+                    size={mapSizeToMantine[size]}
+                    c={mapVariantToColor[variant]}
+                    ta={align}
+                    fw={bold ? 700 : undefined}
+                    data-testid={`${dataTestId}.Paragraph`}
+                >
                     {text}
-                </p>
+                </MantineText>
             )}
         </div>
     );

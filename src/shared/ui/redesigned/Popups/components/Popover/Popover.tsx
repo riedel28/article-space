@@ -1,34 +1,44 @@
-import { Popover as HPopover } from '@headlessui/react';
 import { ReactNode } from 'react';
+import { Popover as MantinePopover } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { DropdownDirection } from '@/shared/types/ui';
-import { mapDirectionClass } from '../../styles/consts';
-import cls from './Popover.module.scss';
-import popupCls from '../../styles/popup.module.scss';
 
 interface PopoverProps {
     className?: string;
     direction?: DropdownDirection;
     trigger: ReactNode;
     children: ReactNode;
+    'data-testid'?: string;
 }
 
-export function Popover(props: PopoverProps) {
-    const { className, trigger, direction = 'bottom right', children } = props;
+const mapDirectionToPosition: Record<DropdownDirection, string> = {
+    'top left': 'top-start',
+    'top right': 'top-end',
+    'bottom left': 'bottom-start',
+    'bottom right': 'bottom-end',
+};
 
-    const menuClasses = [mapDirectionClass[direction], popupCls.menu];
+export function Popover(props: PopoverProps) {
+    const {
+        className,
+        trigger,
+        direction = 'bottom right',
+        children,
+        'data-testid': dataTestId,
+    } = props;
 
     return (
-        <HPopover
-            className={classNames(cls.Popover, {}, [className, popupCls.popup])}
+        <MantinePopover
+            position={mapDirectionToPosition[direction] as any}
+            data-testid={dataTestId}
         >
-            <HPopover.Button as="div" className={popupCls.trigger}>
-                {trigger}
-            </HPopover.Button>
+            <MantinePopover.Target>
+                <div className={classNames('', {}, [className])}>{trigger}</div>
+            </MantinePopover.Target>
 
-            <HPopover.Panel className={classNames(cls.panel, {}, menuClasses)}>
+            <MantinePopover.Dropdown>
                 {children}
-            </HPopover.Panel>
-        </HPopover>
+            </MantinePopover.Dropdown>
+        </MantinePopover>
     );
 }

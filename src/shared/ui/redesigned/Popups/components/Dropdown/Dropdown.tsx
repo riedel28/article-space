@@ -1,11 +1,8 @@
-import { Menu } from '@headlessui/react';
-import { Fragment, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { Menu } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { DropdownDirection } from '@/shared/types/ui';
 import { AppLink } from '../../../AppLink/AppLink';
-import cls from './Dropdown.module.scss';
-import { mapDirectionClass } from '../../styles/consts';
-import popupCls from '../../styles/popup.module.scss';
 
 export interface DropdownItem {
     disabled?: boolean;
@@ -19,46 +16,44 @@ interface DropdownProps {
     items: DropdownItem[];
     direction?: DropdownDirection;
     trigger: ReactNode;
+    'data-testid'?: string;
 }
 
-export function Dropdown(props: DropdownProps) {
-    const { className, trigger, items, direction = 'bottom right' } = props;
+const mapDirectionToPosition: Record<DropdownDirection, string> = {
+    'top left': 'top-start',
+    'top right': 'top-end',
+    'bottom left': 'bottom-start',
+    'bottom right': 'bottom-end',
+};
 
-    const menuClasses = [mapDirectionClass[direction], popupCls.menu];
+export function Dropdown(props: DropdownProps) {
+    const {
+        className,
+        trigger,
+        items,
+        direction = 'bottom right',
+        'data-testid': dataTestId,
+    } = props;
 
     return (
         <Menu
-            as="div"
-            className={classNames(cls.Dropdown, {}, [
-                className,
-                popupCls.popup,
-            ])}
+            position={mapDirectionToPosition[direction] as any}
+            data-testid={dataTestId}
         >
-            <Menu.Button className={popupCls.trigger}>{trigger}</Menu.Button>
-            <Menu.Items className={classNames(cls.menu, {}, menuClasses)}>
+            <Menu.Target>
+                <div className={classNames('', {}, [className])}>{trigger}</div>
+            </Menu.Target>
+            <Menu.Dropdown>
                 {items.map((item, index) => {
-                    const content = ({ active }: { active: boolean }) => (
-                        <button
-                            type="button"
-                            disabled={item.disabled}
-                            onClick={item.onClick}
-                            className={classNames(cls.item, {
-                                [popupCls.active]: active,
-                            })}
-                        >
-                            {item.content}
-                        </button>
-                    );
-
                     if (item.href) {
                         return (
                             <Menu.Item
-                                as={AppLink}
-                                to={item.href}
-                                disabled={item.disabled}
                                 key={`dropdown-key-${index}`}
+                                disabled={item.disabled}
                             >
-                                {content}
+                                <AppLink to={item.href}>
+                                    {item.content}
+                                </AppLink>
                             </Menu.Item>
                         );
                     }
@@ -66,14 +61,14 @@ export function Dropdown(props: DropdownProps) {
                     return (
                         <Menu.Item
                             key={`dropdown-key-${index}`}
-                            as={Fragment}
+                            onClick={item.onClick}
                             disabled={item.disabled}
                         >
-                            {content}
+                            {item.content}
                         </Menu.Item>
                     );
                 })}
-            </Menu.Items>
+            </Menu.Dropdown>
         </Menu>
     );
 }

@@ -1,8 +1,8 @@
 import { memo, ReactNode, useCallback } from 'react';
+import { Tabs as MantineTabs } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card } from '../Card/Card';
-import cls from './Tabs.module.scss';
-import { Flex, FlexDirection } from '../Stack/Flex/Flex';
+
+export type FlexDirection = 'row' | 'column';
 
 export interface TabItem {
     value: string;
@@ -15,41 +15,44 @@ interface TabsProps {
     value: string;
     onTabClick: (tab: TabItem) => void;
     direction?: FlexDirection;
+    'data-testid'?: string;
 }
 
 export const Tabs = memo((props: TabsProps) => {
-    const { className, tabs, onTabClick, value, direction = 'row' } = props;
+    const {
+        className,
+        tabs,
+        onTabClick,
+        value,
+        direction = 'row',
+        'data-testid': dataTestId,
+    } = props;
 
-    const clickHandle = useCallback(
-        (tab: TabItem) => () => {
-            onTabClick(tab);
+    const handleChange = useCallback(
+        (newValue: string | null) => {
+            const tab = tabs.find((t) => t.value === newValue);
+            if (tab) {
+                onTabClick(tab);
+            }
         },
-        [onTabClick],
+        [onTabClick, tabs],
     );
 
     return (
-        <Flex
-            direction={direction}
-            gap="8"
-            align="start"
-            className={classNames(cls.Tabs, {}, [className])}
+        <MantineTabs
+            className={classNames('', {}, [className])}
+            value={value}
+            onChange={handleChange}
+            orientation={direction === 'column' ? 'vertical' : 'horizontal'}
+            data-testid={dataTestId}
         >
-            {tabs.map((tab) => {
-                const isSelected = tab.value === value;
-                return (
-                    <Card
-                        variant={isSelected ? 'light' : 'normal'}
-                        className={classNames(cls.tab, {
-                            [cls.selected]: isSelected,
-                        })}
-                        key={tab.value}
-                        onClick={clickHandle(tab)}
-                        border="round"
-                    >
+            <MantineTabs.List>
+                {tabs.map((tab) => (
+                    <MantineTabs.Tab key={tab.value} value={tab.value}>
                         {tab.content}
-                    </Card>
-                );
-            })}
-        </Flex>
+                    </MantineTabs.Tab>
+                ))}
+            </MantineTabs.List>
+        </MantineTabs>
     );
 });

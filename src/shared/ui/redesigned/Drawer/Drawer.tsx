@@ -1,13 +1,6 @@
-import React, { memo, ReactNode, useCallback, useEffect } from 'react';
+import { memo, ReactNode } from 'react';
+import { Drawer as MantineDrawer } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-    AnimationProvider,
-    useAnimationLibs
-} from '@/shared/lib/components/AnimationProvider';
-import { Overlay } from '../Overlay/Overlay';
-import cls from './Drawer.module.scss';
-import { Portal } from '../Portal/Portal';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 
 interface DrawerProps {
     className?: string;
@@ -15,117 +8,33 @@ interface DrawerProps {
     isOpen?: boolean;
     onClose?: () => void;
     lazy?: boolean;
+    'data-testid'?: string;
 }
 
-const height = window.innerHeight - 100;
-
 export const DrawerContent = memo((props: DrawerProps) => {
-    const { Spring, Gesture } = useAnimationLibs();
-    const [{ y }, api] = Spring.useSpring(() => ({ y: height }));
-    const { theme } = useTheme();
-    const { className, children, onClose, isOpen, lazy } = props;
-
-    const openDrawer = useCallback(() => {
-        api.start({ y: 0, immediate: false });
-    }, [api]);
-
-    useEffect(() => {
-        if (isOpen) {
-            openDrawer();
-        }
-    }, [api, isOpen, openDrawer]);
-
-    const close = (velocity = 0) => {
-        api.start({
-            y: height,
-            immediate: false,
-            config: { ...Spring.config.stiff, velocity },
-            onResolve: onClose
-        });
-    };
-
-    const bind = Gesture.useDrag(
-        ({
-            last,
-            velocity: [, vy],
-            direction: [, dy],
-            movement: [, my],
-            cancel
-        }) => {
-            if (my < -70) cancel();
-
-            if (last) {
-                if (my > height * 0.5 || (vy > 0.5 && dy > 0)) {
-                    close();
-                } else {
-                    openDrawer();
-                }
-            } else {
-                api.start({ y: my, immediate: true });
-            }
-        },
-        {
-            from: () => [0, y.get()],
-            filterTaps: true,
-            bounds: { top: 0 },
-            rubberband: true
-        }
-    );
-
-    if (!isOpen) {
-        return null;
-    }
-
-    const display = y.to((py) => (py < height ? 'block' : 'none'));
-
-    const AnimatedDiv = Spring.animated.div;
+    const {
+        className,
+        children,
+        isOpen,
+        onClose,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        lazy,
+        'data-testid': dataTestId,
+    } = props;
 
     return (
-        <Portal element={document.getElementById('app') ?? document.body}>
-            <div
-                className={classNames(cls.Drawer, {}, [
-                    className,
-                    theme,
-                    'app_drawer',
-                    cls.drawerNew
-                ])}
-            >
-                <Overlay onClick={close} />
-                {/* @ts-ignore */}
-                <AnimatedDiv
-                    className={cls.sheet}
-                    style={{
-                        display,
-                        bottom: `calc(-100vh + ${height - 100}px)`,
-                        y
-                    }}
-                    {...bind()}
-                >
-                    {children}
-                </AnimatedDiv>
-            </div>
-        </Portal>
+        <MantineDrawer
+            className={classNames('', {}, [className])}
+            opened={!!isOpen}
+            onClose={onClose || (() => {})}
+            position="bottom"
+            data-testid={dataTestId}
+        >
+            {children}
+        </MantineDrawer>
     );
 });
 
-const DrawerAsync = (props: DrawerProps) => {
-    const { isLoaded } = useAnimationLibs();
-
-    if (!isLoaded) {
-        return null;
-    }
-
-    return <DrawerContent {...props} />;
-};
-
-/**
- * Устарел, используем новые компоненты из папки redesigned
- * @deprecated
- */
 export const Drawer = (props: DrawerProps) => {
-    return (
-        <AnimationProvider>
-            <DrawerAsync {...props} />
-        </AnimationProvider>
-    );
+    return <DrawerContent {...props} />;
 };
