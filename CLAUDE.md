@@ -9,6 +9,7 @@ This is a production-level React application built with TypeScript following Fea
 ## Development Commands
 
 ### Running the application
+
 - `npm run start:dev` - Start frontend (Webpack) + backend server
 - `npm run start:dev:vite` - Start frontend (Vite) + backend server
 - `npm start` - Start frontend only (Webpack dev server on port 3000)
@@ -16,10 +17,12 @@ This is a production-level React application built with TypeScript following Fea
 - `npm run start:dev:server` - Start backend server only
 
 ### Building
+
 - `npm run build:prod` - Production build (minified)
 - `npm run build:dev` - Development build (not minified)
 
 ### Testing
+
 - `npm run test:unit` - Run Jest unit and component tests
 - `npm run test:e2e` - Open Cypress for e2e tests
 - `npm run test:ui` - Run Loki screenshot tests
@@ -27,6 +30,7 @@ This is a production-level React application built with TypeScript following Fea
 - `npm run test:ui:report` - Generate visual test report
 
 ### Linting
+
 - `npm run lint:ts` - Check TypeScript files
 - `npm run lint:ts:fix` - Fix TypeScript files
 - `npm run lint:scss` - Check SCSS files
@@ -34,10 +38,12 @@ This is a production-level React application built with TypeScript following Fea
 - `npm run prettier` - Format all files
 
 ### Storybook
+
 - `npm run storybook` - Start Storybook on port 6006
 - `npm run storybook:build` - Build static Storybook
 
 ### Code Generation
+
 - `npm run generate:slice` - Generate FSD slice (see below)
 - `npm run remove-feature` - Remove feature flag (see below)
 
@@ -46,6 +52,7 @@ This is a production-level React application built with TypeScript following Fea
 The project strictly follows FSD methodology with the following layers:
 
 ### Layer Structure
+
 ```
 src/
 ├── app/          # Application initialization, providers, styles
@@ -57,13 +64,16 @@ src/
 ```
 
 ### Key Principles
+
 1. **Layers can only import from layers below them**: `app > pages > widgets > features > entities > shared`
 2. **Import only from public API**: Each module exports through `index.ts`
 3. **Absolute imports**: Use `@/*` alias for all imports from `src/`
 4. **No cross-imports within same layer**: Features cannot import other features
 
 ### Entities
+
 The app includes these business entities:
+
 - Article - Blog articles with WYSIWYG editing
 - Comment - User comments on articles
 - User - User authentication and profiles
@@ -73,7 +83,9 @@ The app includes these business entities:
 - Country/Currency - Reference data
 
 ### Custom ESLint Plugin
+
 The project uses `eslint-plugin-ulbi-tv-plugin` with three FSD-enforcing rules:
+
 - `path-checker` - Prevents absolute imports within same module
 - `layer-imports` - Enforces FSD layer hierarchy
 - `public-api-imports` - Ensures imports only from public API (has autofix)
@@ -81,21 +93,25 @@ The project uses `eslint-plugin-ulbi-tv-plugin` with three FSD-enforcing rules:
 ## State Management
 
 ### Redux Toolkit
+
 - Store configuration: `src/app/providers/StoreProvider`
 - Use RTK Query for API calls (see `src/shared/api/rtkApi.ts`)
 - Normalize reusable entities with EntityAdapter when possible
 
 ### Dynamic Reducer Loading
+
 To avoid bundling all reducers:
+
 ```tsx
 import { DynamicModuleLoader } from '@/shared/lib/components/DynamicModuleLoader';
 
 <DynamicModuleLoader reducers={{ articleDetails: articleDetailsReducer }}>
   {/* Component content */}
-</DynamicModuleLoader>
+</DynamicModuleLoader>;
 ```
 
 ### API Configuration
+
 - Base API: `src/shared/api/rtkApi.ts` using RTK Query
 - Backend runs on port 8000 (HTTP) or 8443 (HTTPS if SSL certs available)
 - All API requests require Authorization header (stored in localStorage)
@@ -111,7 +127,9 @@ import { DynamicModuleLoader } from '@/shared/lib/components/DynamicModuleLoader
 ## Feature Flags
 
 ### Usage
+
 Use only the `toggleFeatures` helper function:
+
 ```typescript
 import { toggleFeatures } from '@/shared/lib/features';
 
@@ -123,19 +141,24 @@ const component = toggleFeatures({
 ```
 
 ### Removing Feature Flags
+
 Use the automated script:
+
 ```bash
 npm run remove-feature featureName on|off
 ```
+
 This script uses `ts-morph` to automatically remove feature flag code and keep either the `on` or `off` branch.
 
 ## UI Components
 
 The project has two UI design systems:
+
 - `src/shared/ui/deprecated/` - Legacy UI components
 - `src/shared/ui/redesigned/` - New redesigned UI components
 
 The active design is controlled by feature flags. Common components include:
+
 - Button, Input, Card, Modal, Drawer
 - Dropdown, ListBox, Popover
 - Stack layouts (HStack, VStack, Flex)
@@ -145,6 +168,7 @@ The active design is controlled by feature flags. Common components include:
 ## Generating FSD Slices
 
 To create a new feature/entity/page with boilerplate:
+
 ```bash
 npm run generate:slice
 # Follow prompts to select layer and enter slice name
@@ -155,40 +179,48 @@ This generates the full slice structure with UI, model, and public API.
 ## Testing Strategy
 
 ### 1. Unit Tests (Jest)
+
 - Config: `config/jest/jest.config.ts`
 - Test files: `*.test.ts(x)` next to source files
 - Use React Testing Library for component tests
 - Setup file: `config/jest/setupTests.ts`
 
 ### 2. Storybook Stories
+
 - Create `*.stories.tsx` files next to components
 - Mock API requests with `storybook-addon-mock`
 - Config: `config/storybook/`
 - Example format shown in README.md
 
 ### 3. Visual Regression (Loki)
+
 - Uses Docker Chrome for screenshot consistency
 - Configurations for desktop (1366x768) and mobile (iPhone 7)
 - Generates HTML reports with `reg-cli`
 
 ### 4. E2E Tests (Cypress)
+
 - Run `npm run test:e2e` to open Cypress interface
 
 ## Build Systems
 
 ### Webpack (Primary)
+
 - Config: `config/build/`
 - Plugins: Fork TS Checker, HTML Plugin, Bundle Analyzer
 - Supports HMR with React Refresh
 - Custom loaders for SVG, SCSS
 
 ### Vite (Alternative)
+
 - Config: `vite.config.ts`
 - Faster development experience
 - Uses same environment variables as Webpack
 
 ### Global Variables
+
 Both build systems define:
+
 - `__IS_DEV__` - Development mode flag
 - `__API__` - API base URL
 - `__PROJECT__` - Project type (storybook/frontend/jest)
@@ -196,6 +228,7 @@ Both build systems define:
 ## Authentication
 
 Test credentials (all use password `123`):
+
 - **Admin**: `admin` / `123` - Full access
 - **User**: `user` / `123` - Basic access
 - **Manager**: `manager` / `123` - Manager access
@@ -206,6 +239,7 @@ User data stored in `json-server/db.json`
 ## Pre-commit Hooks
 
 Husky runs lint-staged on commit:
+
 - `prettier --list-different` on all TS/TSX files
 - `eslint` on all TS/TSX files
 
@@ -213,6 +247,7 @@ Husky runs lint-staged on commit:
 
 GitHub Actions config: `.github/workflows/`
 Pipeline runs:
+
 - All test types (unit, UI, e2e)
 - Project build
 - Storybook build

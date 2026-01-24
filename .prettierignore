@@ -2,6 +2,6 @@
 build
 coverage
 node_modules
-*.html
-*.css
-*.scss
+storybook-static
+.loki
+dist

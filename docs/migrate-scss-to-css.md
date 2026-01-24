@@ -11,29 +11,36 @@ Replace all SCSS files with plain CSS modules. The project already has `postcss-
 ## Phase 1: Config Updates
 
 ### 1.1 Webpack CSS loader (`config/build/loaders/buildCSSLoader.ts`)
+
 - Change regex: `/\.s[ac]ss$/i` → `/\.css$/i`
 - Remove `'sass-loader'` from the `use` array
 - Add `'postcss-loader'` (needed for PostCSS processing in webpack — nesting, Mantine preset)
 - Keep CSS modules `auto` function: update `.module.` check (stays the same — still matches `.module.css`)
 
 ### 1.2 Storybook config (`config/storybook/main.ts`)
+
 - Already uses `buildCSSLoader(true)` — will work after the loader update
 
 ### 1.3 Jest config (`config/jest/jest.config.ts`)
+
 - Change moduleNameMapper: `'\\.s?css$'` → `'\\.css$'`
 
 ### 1.4 Type declarations (`src/app/types/global.d.ts`)
+
 - Replace `declare module '*.module.scss'` → `declare module '*.module.css'`
 - Replace `declare module '*.scss'` → `declare module '*.css'`
 
 ### 1.5 Stylelint (`.stylelintrc.json`)
+
 - Change extends: `"stylelint-config-standard-scss"` → `"stylelint-config-standard"`
 - Remove/update any SCSS-specific rules
 
 ### 1.6 PostCSS config (`postcss.config.cjs`)
+
 - Already configured with `postcss-preset-mantine` (provides nesting) — no changes needed
 
 ### 1.7 Package scripts (`package.json`)
+
 - Update lint:scss script pattern: `"**/*.scss"` → `"**/*.css"` (and rename scripts to `lint:css`/`lint:css:fix`)
 
 ---
@@ -43,6 +50,7 @@ Replace all SCSS files with plain CSS modules. The project already has `postcss-
 ### 2.1 Convert global styles from SCSS to CSS
 
 Files to rename and update:
+
 - `src/app/styles/index.scss` → `index.css`
   - Replace `@use "..." as *;` → `@import "...";` (4 lines)
 - `src/app/styles/reset.scss` → `reset.css` (no syntax changes needed)
@@ -56,9 +64,11 @@ Files to rename and update:
 ### 2.2 Update global style import
 
 In `src/shared/config/storybook/StyleDecorator/StyleDecorator.ts`:
+
 - Change `import '@/app/styles/index.scss'` → `import '@/app/styles/index.css'`
 
 In `src/shared/lib/tests/componentRender/componentRender.tsx`:
+
 - Change `import '@/app/styles/index.scss'` → `import '@/app/styles/index.css'`
 
 ---
@@ -66,11 +76,13 @@ In `src/shared/lib/tests/componentRender/componentRender.tsx`:
 ## Phase 3: Rename Module Files (37 files)
 
 Rename all `.module.scss` → `.module.css`. No syntax changes needed in these files since:
+
 - Nesting is handled by `postcss-preset-mantine` (includes `postcss-nested`)
 - `&` parent selector is supported by `postcss-nested`
 - Only CSS custom properties are used (no SCSS variables)
 
 **Entities (10 files):**
+
 - `src/entities/Article/ui/ArticleCodeBlockComponent/ArticleCodeBlockComponent.module.scss`
 - `src/entities/Article/ui/ArticleDetails/ArticleDetails.module.scss`
 - `src/entities/Article/ui/ArticleImageBlockComponent/ArticleImageBlockComponent.module.scss`
@@ -83,6 +95,7 @@ Rename all `.module.scss` → `.module.css`. No syntax changes needed in these f
 - `src/entities/Notification/ui/NotificationList/NotificationList.module.scss`
 
 **Features (5 files):**
+
 - `src/features/ArticleSortSelector/ui/ArticleSortSelector/ArticleSortSelector.module.scss`
 - `src/features/ArticleViewSelector/ui/ArticleViewSelector/ArticleViewSelector.module.scss`
 - `src/features/addCommentForm/ui/AddCommentForm/AddCommentForm.module.scss`
@@ -90,6 +103,7 @@ Rename all `.module.scss` → `.module.css`. No syntax changes needed in these f
 - `src/features/notificationButton/ui/NotificationButton/NotificationButton.module.scss`
 
 **Pages (6 files):**
+
 - `src/pages/ArticleDetailsPage/ui/AdditionalInfoContainer/AdditionalInfoContainer.module.scss`
 - `src/pages/ArticleDetailsPage/ui/ArticleDetailsPage/ArticleDetailsPage.module.scss`
 - `src/pages/ArticleEditPage/ui/ArticleEditPage/ArticleEditPage.module.scss`
@@ -98,6 +112,7 @@ Rename all `.module.scss` → `.module.css`. No syntax changes needed in these f
 - `src/pages/NotFoundPage/ui/NotFoundPage.module.scss`
 
 **Shared (8 files):**
+
 - `src/shared/layouts/AppLoaderLayout/AppLoaderLayout.module.scss`
 - `src/shared/layouts/MainLayout/MainLayout.module.scss`
 - `src/shared/layouts/StickyContentLayout/StickyContentLayout.module.scss`
@@ -108,6 +123,7 @@ Rename all `.module.scss` → `.module.css`. No syntax changes needed in these f
 - `src/shared/ui/redesigned/StarRating/StarRating.module.scss`
 
 **Widgets (8 files):**
+
 - `src/widgets/ArticlesFilters/ui/ArticlesFilters/ArticlesFilters.module.scss`
 - `src/widgets/ErrorPage/ui/ErrorPage.module.scss`
 - `src/widgets/Navbar/ui/Navbar.module.scss`
@@ -130,11 +146,13 @@ These are in the same components that own the module files listed above.
 ## Phase 5: Dependency Cleanup
 
 ### Remove:
+
 ```bash
 npm uninstall sass sass-loader stylelint-config-standard-scss
 ```
 
 ### Install:
+
 ```bash
 npm install --save-dev postcss-loader stylelint-config-standard
 ```
@@ -165,11 +183,11 @@ npm run storybook             # Storybook renders correctly
 
 ## Summary
 
-| Metric | Count |
-|--------|-------|
-| Files renamed | 42 |
-| TypeScript imports updated | ~39 |
-| Config files modified | 6 |
-| Dependencies removed | 3 (sass, sass-loader, stylelint-config-standard-scss) |
-| Dependencies added | 2 (postcss-loader, stylelint-config-standard) |
-| SCSS features to replace | Only `//` comments and `@use` in 5 global files |
+| Metric                     | Count                                                 |
+| -------------------------- | ----------------------------------------------------- |
+| Files renamed              | 42                                                    |
+| TypeScript imports updated | ~39                                                   |
+| Config files modified      | 6                                                     |
+| Dependencies removed       | 3 (sass, sass-loader, stylelint-config-standard-scss) |
+| Dependencies added         | 2 (postcss-loader, stylelint-config-standard)         |
+| SCSS features to replace   | Only `//` comments and `@use` in 5 global files       |

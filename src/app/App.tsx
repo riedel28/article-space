@@ -13,37 +13,37 @@ import { useAppToolbar } from './lib/useAppToolbar';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
 
 const App = memo(() => {
-    const { theme } = useTheme();
-    const dispatch = useAppDispatch();
-    const inited = useSelector(getUserInited);
-    const toolbar = useAppToolbar();
+  const { theme } = useTheme();
+  const dispatch = useAppDispatch();
+  const inited = useSelector(getUserInited);
+  const toolbar = useAppToolbar();
 
-    useEffect(() => {
-        if (!inited) {
-            dispatch(initAuthData());
-        }
-    }, [dispatch, inited]);
-
+  useEffect(() => {
     if (!inited) {
-        return (
-            <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-                <AppLoaderLayout />{' '}
-            </div>
-        );
+      dispatch(initAuthData());
     }
+  }, [dispatch, inited]);
 
+  if (!inited) {
     return (
-        <div id="app" className={classNames('app_redesigned', {}, [theme])}>
-            <Suspense fallback="">
-                <MainLayout
-                    header={<Navbar />}
-                    content={<AppRouter />}
-                    sidebar={<Sidebar />}
-                    toolbar={toolbar}
-                />
-            </Suspense>
-        </div>
+      <div id="app" className={classNames('app_redesigned', {}, [theme])}>
+        <AppLoaderLayout />{' '}
+      </div>
     );
+  }
+
+  return (
+    <div id="app" className={classNames('app_redesigned', {}, [theme])}>
+      <Suspense fallback="">
+        <MainLayout
+          header={<Navbar />}
+          content={<AppRouter />}
+          sidebar={<Sidebar />}
+          toolbar={toolbar}
+        />
+      </Suspense>
+    </div>
+  );
 });
 
 export default withTheme(App);

@@ -4,17 +4,15 @@ import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { Icon } from '@/shared/ui/redesigned/Icon';
 
 interface ThemeSwitcherProps {
-    className?: string;
+  className?: string;
 }
 
 export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
-    const { toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
 
-    const onToggleHandler = useCallback(() => {
-        toggleTheme();
-    }, [toggleTheme]);
+  const onToggleHandler = useCallback(() => {
+    toggleTheme();
+  }, [toggleTheme]);
 
-    return (
-        <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />
-    );
+  return <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />;
 });

@@ -11,48 +11,48 @@ import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
 import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
 interface ArticlesPageFiltersProps {
-    className?: string;
+  className?: string;
 }
 
 export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
-    const { className } = props;
-    const { t } = useTranslation();
-    const {
-        onChangeSort,
-        onChangeType,
-        sort,
-        type,
-        onChangeSearch,
-        search,
-        onChangeView,
-        view,
-        onChangeOrder,
-        order
-    } = useArticleFilters();
+  const { className } = props;
+  const { t } = useTranslation();
+  const {
+    onChangeSort,
+    onChangeType,
+    sort,
+    type,
+    onChangeSearch,
+    search,
+    onChangeView,
+    view,
+    onChangeOrder,
+    order
+  } = useArticleFilters();
 
-    return (
-        <div className={classNames(cls.ArticlesPageFilters, {}, [className])}>
-            <div className={cls.sortWrapper}>
-                <ArticleSortSelector
-                    order={order}
-                    sort={sort}
-                    onChangeOrder={onChangeOrder}
-                    onChangeSort={onChangeSort}
-                />
-                <ArticleViewSelector view={view} onViewClick={onChangeView} />
-            </div>
-            <Card className={cls.search}>
-                <Input
-                    onChange={onChangeSearch}
-                    value={search}
-                    placeholder={t('Поиск')}
-                />
-            </Card>
-            <ArticleTypeTabs
-                value={type}
-                onChangeType={onChangeType}
-                className={cls.tabs}
-            />
-        </div>
-    );
+  return (
+    <div className={classNames(cls.ArticlesPageFilters, {}, [className])}>
+      <div className={cls.sortWrapper}>
+        <ArticleSortSelector
+          order={order}
+          sort={sort}
+          onChangeOrder={onChangeOrder}
+          onChangeSort={onChangeSort}
+        />
+        <ArticleViewSelector view={view} onViewClick={onChangeView} />
+      </div>
+      <Card className={cls.search}>
+        <Input
+          onChange={onChangeSearch}
+          value={search}
+          placeholder={t('Поиск')}
+        />
+      </Card>
+      <ArticleTypeTabs
+        value={type}
+        onChangeType={onChangeType}
+        className={cls.tabs}
+      />
+    </div>
+  );
 });

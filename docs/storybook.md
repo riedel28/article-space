@@ -7,7 +7,7 @@
 
 Запустить сторибук можно командой:
 
--   `npm run storybook`
+- `npm run storybook`
 
 Подробнее о [Storybook](/docs/storybook.md)
 

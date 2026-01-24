@@ -1,9 +1,9 @@
 .ArticleDetailsPage {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 .recommendations {
-    flex-wrap: nowrap;
-    overflow-y: hidden;
-    overflow-x: auto;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
