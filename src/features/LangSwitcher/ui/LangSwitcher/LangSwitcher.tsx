@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo } from 'react';
-
-import { Button } from '@/shared/ui/redesigned/Button';
+import { memo } from 'react';
+import { Button } from '@mantine/core';
 
 interface LangSwitcherProps {
   className?: string;
@@ -16,7 +15,7 @@ export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
   };
 
   return (
-    <Button variant="clear" onClick={toggle} className={className}>
+    <Button variant="subtle" onClick={toggle} className={className}>
       {t(short ? 'Короткий язык' : 'Язык')}
     </Button>
   );
