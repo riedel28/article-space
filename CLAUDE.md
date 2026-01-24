@@ -21,7 +21,7 @@ This is a production-level React application built with TypeScript following Fea
 - `lint:ts:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix` - Run ESLint,
 - `tsc --noEmit && npm run lint:ts:fix` - Run typecheck and linting
 
-**Run:** `tsc --noEmit && npm run lint:ts:fix` after making set of changes
+**Run:** `npm run check` after making set of changes
 
 ### Code Generation
 
@@ -150,26 +150,28 @@ The active design is controlled by feature flags. Common components include:
 
 The project is migrating to Mantine v8. When working with Mantine components:
 
-1. **Prefer Mantine style props over custom CSS**:
+1. **Use Native Mantine components wherever possible**
+
+2. **Prefer Mantine style props over custom CSS**:
    - Use Mantine's style props (e.g., `pos="relative"`, `display="inline-block"`, `p="md"`, `m="lg"`)
    - Use Mantine's `styles` prop for component-specific styling
    - Only create CSS modules for truly custom styles that cannot be achieved with Mantine props
 
-2. **Use Mantine design tokens**:
+3. **Use Mantine design tokens**:
    - Colors: `color="brand.6"`, `color="error.6"`, `color="success.6"`
    - Spacing: `p="md"`, `m="lg"`, `gap={16}`
    - Radius: `radius="md"`, `radius="lg"`
    - Shadow: `shadow="sm"`, `shadow="md"`, `shadow="xl"`
 
-3. **Minimize CSS module usage**:
+4. **Minimize CSS module usage**:
    - Keep CSS modules minimal - only for animations, pseudo-states, or complex selectors
    - Mantine components handle most styling needs through props
    - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
 
-4. **Use Mantine variables in css files**
+5. **Use Mantine variables in css files**
    - e.g. `border-radius: var(--mantine-radius-lg)`
 
-5. **Animation and transitions**:
+6. **Animation and transitions**:
    - Use Mantine's built-in `transitionProps` when available
    - For custom animations, define them in CSS modules but apply via Mantine's `style` prop
 
