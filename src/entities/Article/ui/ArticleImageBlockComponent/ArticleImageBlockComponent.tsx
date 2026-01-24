@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Box, Image } from '@mantine/core';
 import { Text } from '@/shared/ui/redesigned/Text';
-import cls from './ArticleImageBlockComponent.module.css';
 import { ArticleImageBlock } from '../../model/types/article';
 
 interface ArticleImageBlockComponentProps {
@@ -16,12 +15,10 @@ export const ArticleImageBlockComponent = memo(
     const { t } = useTranslation();
 
     return (
-      <div
-        className={classNames(cls.ArticleImageBlockComponent, {}, [className])}
-      >
-        <img src={block.src} alt={block.title} className={cls.img} />
+      <Box className={className}>
+        <Image src={block.src} alt={block.title} maw="100%" />
         {block.title && <Text text={block.title} align="center" />}
-      </div>
+      </Box>
     );
   }
 );

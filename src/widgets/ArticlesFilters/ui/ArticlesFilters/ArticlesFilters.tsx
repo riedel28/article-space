@@ -1,16 +1,11 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ArticlesFilters.module.css';
-import { Card } from '@/shared/ui/redesigned/Card';
+import { Stack, TextInput, Card } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';
 import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { ArticleSortField, ArticleType } from '@/entities/Article';
 import { SortOrder } from '@/shared/types/sort';
-import { Input } from '@/shared/ui/redesigned/Input';
-import SearchIcon from '@/shared/assets/icons/search.svg?react';
-import { Icon } from '@/shared/ui/redesigned/Icon';
 
 interface ArticlesFiltersProps {
   className?: string;
@@ -39,30 +34,27 @@ export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
   const { t } = useTranslation();
 
   return (
-    <Card
-      className={classNames(cls.ArticlesFilters, {}, [className])}
-      padding="24"
-    >
-      <VStack gap="32">
-        <Input
-          onChange={onChangeSearch}
+    <Stack gap="lg" className={className} style={{ width: 260 }}>
+      <Card shadow="sm" padding="md" radius="md" withBorder>
+        <TextInput
+          onChange={(e) => onChangeSearch(e.currentTarget.value)}
           value={search}
-          size="s"
           placeholder={t('Поиск')}
-          addonLeft={<Icon Svg={SearchIcon} />}
+          leftSection={<IconSearch size={18} />}
+          size="md"
         />
-        <ArticleTypeTabs
-          value={type}
-          onChangeType={onChangeType}
-          className={cls.tabs}
-        />
+      </Card>
+
+      <ArticleTypeTabs value={type} onChangeType={onChangeType} />
+
+      <Card shadow="sm" padding="md" radius="md" withBorder>
         <ArticleSortSelector
           order={order}
           sort={sort}
           onChangeOrder={onChangeOrder}
           onChangeSort={onChangeSort}
         />
-      </VStack>
-    </Card>
+      </Card>
+    </Stack>
   );
 });

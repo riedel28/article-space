@@ -1,9 +1,6 @@
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card as CardRedesigned } from '@/shared/ui/redesigned/Card';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
+import { Card, Skeleton, Group, Stack, Box } from '@mantine/core';
 import { ArticleView } from '../../model/consts/articleConsts';
-import cls from './ArticleListItem.module.css';
 
 interface ArticleListItemSkeletonProps {
   className?: string;
@@ -14,50 +11,68 @@ export const ArticleListItemSkeleton = memo(
   (props: ArticleListItemSkeletonProps) => {
     const { className, view } = props;
 
-    const mainClass = cls.ArticleListItemRedesigned;
-
-    const Skeleton = SkeletonRedesigned;
-
     if (view === ArticleView.BIG) {
-      const cardContent = (
-        <>
-          <div className={cls.header}>
-            <Skeleton border="50%" height={30} width={30} />
-            <Skeleton width={150} height={16} className={cls.username} />
-            <Skeleton width={150} height={16} className={cls.date} />
-          </div>
-          <Skeleton width={250} height={24} className={cls.title} />
-          <Skeleton height={200} className={cls.img} />
-          <div className={cls.footer}>
-            <Skeleton height={36} width={200} />
-          </div>
-        </>
-      );
       return (
-        <div className={classNames(mainClass, {}, [className, cls[view]])}>
-          <CardRedesigned border="round" className={cls.card}>
-            {cardContent}
-          </CardRedesigned>
-        </div>
+        <Card
+          padding="xl"
+          className={className}
+          w="100%"
+          shadow="sm"
+          radius="md"
+          withBorder
+        >
+          <Stack gap="lg">
+            <Group gap="sm">
+              <Skeleton circle height={40} width={40} />
+              <Stack gap={4}>
+                <Skeleton height={14} width={120} />
+                <Skeleton height={12} width={80} />
+              </Stack>
+            </Group>
+            <Stack gap="xs">
+              <Skeleton height={28} width="70%" />
+              <Skeleton height={20} width="90%" />
+            </Stack>
+            <Skeleton height={300} radius="md" />
+            <Skeleton height={16} width="100%" />
+            <Skeleton height={16} width="80%" />
+            <Group justify="space-between" mt="md">
+              <Skeleton height={36} width={150} radius="md" />
+              <Skeleton height={20} width={60} />
+            </Group>
+          </Stack>
+        </Card>
       );
     }
 
-    const cardContent = (
-      <>
-        <Skeleton width="100%" height={150} border="32px" className={cls.img} />
-        <div className={cls.infoWrapper}>
-          <Skeleton width={130} height={16} />
-        </div>
-        <Skeleton width={150} height={16} className={cls.title} />
-      </>
-    );
-
     return (
-      <div className={classNames(mainClass, {}, [className, cls[view]])}>
-        <CardRedesigned border="round" className={cls.card}>
-          {cardContent}
-        </CardRedesigned>
-      </div>
+      <Card
+        padding={0}
+        h="100%"
+        className={className}
+        shadow="sm"
+        radius="md"
+        withBorder
+        style={{ overflow: 'hidden' }}
+      >
+        <Skeleton height={180} />
+        <Box p="md">
+          <Stack gap="sm">
+            <Skeleton height={18} width="90%" />
+            <Skeleton height={18} width="70%" />
+            <Stack gap="sm" mt="auto">
+              <Group justify="space-between">
+                <Skeleton height={12} width={60} />
+                <Skeleton height={12} width={40} />
+              </Group>
+              <Group gap="xs">
+                <Skeleton circle height={24} width={24} />
+                <Skeleton height={14} width={80} />
+              </Group>
+            </Stack>
+          </Stack>
+        </Box>
+      </Card>
     );
   }
 );

@@ -1,13 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { HTMLAttributeAnchorTarget, memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { SimpleGrid, Stack, Title, Center } from '@mantine/core';
 import { ArticleView } from '../../model/consts/articleConsts';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
-import cls from './ArticleList.module.css';
 import { Article } from '../../model/types/article';
-import { HStack } from '@/shared/ui/redesigned/Stack';
 
 interface ArticleListProps {
   className?: string;
@@ -20,9 +17,7 @@ interface ArticleListProps {
 const getSkeletons = (view: ArticleView) =>
   new Array(view === ArticleView.SMALL ? 9 : 3)
     .fill(0)
-    .map((item, index) => (
-      <ArticleListItemSkeleton className={cls.card} key={index} view={view} />
-    ));
+    .map((item, index) => <ArticleListItemSkeleton key={index} view={view} />);
 
 export const ArticleList = memo((props: ArticleListProps) => {
   const {
@@ -36,29 +31,46 @@ export const ArticleList = memo((props: ArticleListProps) => {
 
   if (!isLoading && !articles.length) {
     return (
-      <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
-        <Text size="l" title={t('Статьи не найдены')} />
-      </div>
+      <Center className={className} py="xl">
+        <Title order={3} c="dimmed">
+          {t('Статьи не найдены')}
+        </Title>
+      </Center>
+    );
+  }
+
+  if (view === ArticleView.SMALL) {
+    return (
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        spacing="lg"
+        className={className}
+        data-testid="ArticleList"
+      >
+        {articles.map((item) => (
+          <ArticleListItem
+            article={item}
+            view={view}
+            target={target}
+            key={item.id}
+          />
+        ))}
+        {isLoading && getSkeletons(view)}
+      </SimpleGrid>
     );
   }
 
   return (
-    <HStack
-      wrap="wrap"
-      gap="16"
-      className={classNames(cls.ArticleListRedesigned, {}, [])}
-      data-testid="ArticleList"
-    >
+    <Stack gap="lg" className={className} data-testid="ArticleList">
       {articles.map((item) => (
         <ArticleListItem
           article={item}
           view={view}
           target={target}
           key={item.id}
-          className={cls.card}
         />
       ))}
       {isLoading && getSkeletons(view)}
-    </HStack>
+    </Stack>
   );
 });

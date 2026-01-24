@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useMemo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Stack, Text } from '@mantine/core';
 import { ListBox, SelectOption } from '@/shared/ui/redesigned/Popups';
 import { SortOrder } from '@/shared/types/sort';
-import cls from './ArticleSortSelector.module.css';
 import { ArticleSortField } from '@/entities/Article';
-import { VStack } from '@/shared/ui/redesigned/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
 
 interface ArticleSortSelectorProps {
   className?: string;
@@ -53,18 +50,16 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
   );
 
   return (
-    <div
-      className={classNames(cls.ArticleSortSelectorRedesigned, {}, [className])}
-    >
-      <VStack gap="8">
-        <Text text={t('Сортировать по:')} />
-        <ListBox
-          items={sortFieldOptions}
-          value={sort}
-          onChange={onChangeSort}
-        />
-        <ListBox items={orderOptions} value={order} onChange={onChangeOrder} />
-      </VStack>
-    </div>
+    <Stack gap="xs" className={className}>
+      <Text size="sm" fw={600} c="dimmed">
+        {t('Сортировать по:')}
+      </Text>
+      <ListBox
+        items={sortFieldOptions}
+        value={sort}
+        onChange={onChangeSort}
+      />
+      <ListBox items={orderOptions} value={order} onChange={onChangeOrder} />
+    </Stack>
   );
 });

@@ -1,18 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Stack, Skeleton, Center, Box } from '@mantine/core';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Text } from '@/shared/ui/redesigned/Text';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
-import cls from './ArticleDetails.module.css';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
@@ -38,11 +35,9 @@ const Redesigned = () => {
       <Text title={article?.title} size="l" bold />
       <Text title={article?.subtitle} />
       <AppImage
-        fallback={
-          <SkeletonRedesigned width="100%" height={420} border="16px" />
-        }
+        fallback={<Skeleton width="100%" height={420} radius="md" />}
         src={article?.img}
-        className={cls.img}
+        style={{ width: '100%', maxHeight: 420 }}
       />
       {article?.blocks.map(renderArticleBlock)}
     </>
@@ -50,15 +45,16 @@ const Redesigned = () => {
 };
 
 export const ArticleDetailsSkeleton = () => {
-  const Skeleton = SkeletonRedesigned;
   return (
-    <VStack gap="16" max>
-      <Skeleton className={cls.avatar} width={200} height={200} border="50%" />
-      <Skeleton className={cls.title} width={300} height={32} />
-      <Skeleton className={cls.skeleton} width={600} height={24} />
-      <Skeleton className={cls.skeleton} width="100%" height={200} />
-      <Skeleton className={cls.skeleton} width="100%" height={200} />
-    </VStack>
+    <Stack gap="md" w="100%">
+      <Center>
+        <Skeleton width={200} height={200} circle />
+      </Center>
+      <Skeleton width={300} height={32} />
+      <Skeleton width={600} height={24} />
+      <Skeleton width="100%" height={200} />
+      <Skeleton width="100%" height={200} />
+    </Stack>
   );
 };
 
@@ -89,13 +85,11 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <VStack
-        gap="16"
-        max
-        className={classNames(cls.ArticleDetails, {}, [className])}
-      >
-        {content}
-      </VStack>
+      <Box mih="100vh" className={className}>
+        <Stack gap="md" w="100%">
+          {content}
+        </Stack>
+      </Box>
     </DynamicModuleLoader>
   );
 });

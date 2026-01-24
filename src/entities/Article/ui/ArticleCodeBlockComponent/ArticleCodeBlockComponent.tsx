@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Box } from '@mantine/core';
 import { Code } from '@/shared/ui/redesigned/Code';
-import cls from './ArticleCodeBlockComponent.module.css';
 import { ArticleCodeBlock } from '../../model/types/article';
 
 interface ArticleCodeBlockComponentProps {
@@ -16,11 +15,9 @@ export const ArticleCodeBlockComponent = memo(
     const { t } = useTranslation();
 
     return (
-      <div
-        className={classNames(cls.ArticleCodeBlockComponent, {}, [className])}
-      >
+      <Box w="100%" className={className}>
         <Code text={block.code} />
-      </div>
+      </Box>
     );
   }
 );

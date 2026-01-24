@@ -1,7 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Box } from '@mantine/core';
 import {
   DynamicModuleLoader,
   ReducersList
@@ -13,7 +12,6 @@ import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList'
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageReducer } from '../../model/slices/articlesPageSlice';
-import cls from './ArticlesPage.module.css';
 import { ArticlePageGreeting } from '@/features/articlePageGreeting';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
@@ -29,7 +27,6 @@ const reducers: ReducersList = {
 
 const ArticlesPage = (props: ArticlesPageProps) => {
   const { className } = props;
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
 
@@ -49,9 +46,11 @@ const ArticlesPage = (props: ArticlesPageProps) => {
         <Page
           data-testid="ArticlesPage"
           onScrollEnd={onLoadNextPart}
-          className={classNames(cls.ArticlesPageRedesigned, {}, [className])}
+          className={className}
         >
-          <ArticleInfiniteList className={cls.list} />
+          <Box py="lg">
+            <ArticleInfiniteList />
+          </Box>
           <ArticlePageGreeting />
         </Page>
       }

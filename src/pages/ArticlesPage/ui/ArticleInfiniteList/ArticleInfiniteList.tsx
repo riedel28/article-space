@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
+import { Alert } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons-react';
 import { ArticleList } from '@/entities/Article';
-import { Text } from '@/shared/ui/redesigned/Text';
 import { getArticles } from '../../model/slices/articlesPageSlice';
 import {
   getArticlesPageError,
@@ -23,7 +24,16 @@ export const ArticleInfiniteList = memo((props: ArticleInfiniteListProps) => {
   const { t } = useTranslation();
 
   if (error) {
-    return <Text text={t('Ошибка при загрузке статей')} />;
+    return (
+      <Alert
+        icon={<IconAlertCircle size={20} />}
+        title={t('Ошибка')}
+        color="red"
+        radius="md"
+      >
+        {t('Ошибка при загрузке статей')}
+      </Alert>
+    );
   }
 
   return (
