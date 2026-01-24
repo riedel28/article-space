@@ -20,6 +20,7 @@
     "lint:ts:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "lint:css": "npx stylelint \"**/*.css\"",
     "lint:css:fix": "npx stylelint \"**/*.css\" --fix",
+    "check": "tsc --noEmit && npm run lint:ts:fix",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
     "test:e2e": "cypress open",
     "test:ui": "npx loki test",
