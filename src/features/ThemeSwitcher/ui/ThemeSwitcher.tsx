@@ -1,7 +1,7 @@
-import React, { memo, useCallback } from 'react';
+import { memo } from 'react';
+import { ActionIcon } from '@mantine/core';
 import ThemeIcon from '@/shared/assets/icons/theme.svg?react';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
-import { Icon } from '@/shared/ui/redesigned/Icon';
 
 interface ThemeSwitcherProps {
   className?: string;
@@ -10,9 +10,14 @@ interface ThemeSwitcherProps {
 export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
   const { toggleTheme } = useTheme();
 
-  const onToggleHandler = useCallback(() => {
-    toggleTheme();
-  }, [toggleTheme]);
-
-  return <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />;
+  return (
+    <ActionIcon
+      variant="subtle"
+      onClick={() => toggleTheme()}
+      className={className}
+      aria-label="Toggle theme"
+    >
+      <ThemeIcon />
+    </ActionIcon>
+  );
 });
