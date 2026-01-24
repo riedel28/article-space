@@ -4,7 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import ListIcon from '@/shared/assets/icons/burger.svg?react';
 import TiledIcon from '@/shared/assets/icons/tile.svg?react';
 
-import cls from './ArticleViewSelector.module.scss';
+import cls from './ArticleViewSelector.module.css';
 import { ArticleView } from '@/entities/Article';
 import { Icon } from '@/shared/ui/redesigned/Icon';
 import { Card } from '@/shared/ui/redesigned/Card';

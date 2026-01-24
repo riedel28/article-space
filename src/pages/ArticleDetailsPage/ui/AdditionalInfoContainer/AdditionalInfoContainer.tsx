@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/shared/ui/redesigned/Card';
 import { ArticleAdditionalInfo } from '@/widgets/ArticleAdditionalInfo';
 import { getArticleDetailsData } from '@/entities/Article';
-import cls from './AdditionalInfoContainer.module.scss';
+import cls from './AdditionalInfoContainer.module.css';
 import { getRouteArticleEdit } from '@/shared/const/router';
 
 export const AdditionalInfoContainer = memo(() => {

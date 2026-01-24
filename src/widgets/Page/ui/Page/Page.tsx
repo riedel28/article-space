@@ -8,7 +8,7 @@ import { getUIScrollByPath, uiActions } from '@/features/UI';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { useThrottle } from '@/shared/lib/hooks/useThrottle/useThrottle';
-import cls from './Page.module.scss';
+import cls from './Page.module.css';
 import { TestProps } from '@/shared/types/tests';
 
 interface PageProps extends TestProps {

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Text } from '@/shared/ui/redesigned/Text';
-import cls from './NotificationItem.module.scss';
+import cls from './NotificationItem.module.css';
 import { Notification } from '../../model/types/notification';
 import { Card } from '@/shared/ui/redesigned/Card';
 

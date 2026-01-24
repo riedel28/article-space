@@ -5,7 +5,7 @@ import { Text } from '@/shared/ui/redesigned/Text';
 import { ArticleView } from '../../model/consts/articleConsts';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
-import cls from './ArticleList.module.scss';
+import cls from './ArticleList.module.css';
 import { Article } from '../../model/types/article';
 import { HStack } from '@/shared/ui/redesigned/Stack';
 

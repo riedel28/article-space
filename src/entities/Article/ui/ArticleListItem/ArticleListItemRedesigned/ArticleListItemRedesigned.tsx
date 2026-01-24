@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ArticleListItemRedesigned.module.scss';
+import cls from './ArticleListItemRedesigned.module.css';
 import { ArticleListItemProps } from '../ArticleListItem';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { Icon } from '@/shared/ui/redesigned/Icon';

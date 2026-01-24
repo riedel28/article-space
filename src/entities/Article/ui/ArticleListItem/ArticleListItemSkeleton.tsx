@@ -3,7 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Card as CardRedesigned } from '@/shared/ui/redesigned/Card';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
 import { ArticleView } from '../../model/consts/articleConsts';
-import cls from './ArticleListItem.module.scss';
+import cls from './ArticleListItem.module.css';
 
 interface ArticleListItemSkeletonProps {
     className?: string;

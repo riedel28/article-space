@@ -3,7 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
 import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
-import cls from './CommentCard.module.scss';
+import cls from './CommentCard.module.css';
 import { Comment } from '../../model/types/comment';
 import { getRouteProfile } from '@/shared/const/router';
 import { Card } from '@/shared/ui/redesigned/Card';

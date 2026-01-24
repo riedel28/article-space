@@ -3,7 +3,7 @@ import { memo, useMemo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ListBox, SelectOption } from '@/shared/ui/redesigned/Popups';
 import { SortOrder } from '@/shared/types/sort';
-import cls from './ArticleSortSelector.module.scss';
+import cls from './ArticleSortSelector.module.css';
 import { ArticleSortField } from '@/entities/Article';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 import { Text } from '@/shared/ui/redesigned/Text';

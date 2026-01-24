@@ -9,7 +9,7 @@ import { Theme } from '@/shared/const/theme';
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import '@/app/styles/index.scss';
+import '@/app/styles/index.css';
 
 export interface componentRenderOptions {
     route?: string;

@@ -6,7 +6,7 @@
     --inverted-primary-color: #04ff04;
     --inverted-secondary-color: #049604;
 
-    // redesigned
+    /* redesigned */
     --dark-bg-redesigned: #fff;
     --bg-redesigned: #eff5f6;
     --light-bg-redesigned: #e2eef1;
@@ -17,16 +17,16 @@
     --icon-redesigned: #5ed3f3;
     --accent-redesigned: #00c8ff;
 
-    // skeleton
+    /* skeleton */
     --skeleton-color: #fff;
     --skeleton-shadow: rgba(0 0 0 / 20%);
 
-    // code
+    /* code */
     --code-bg: #fff;
 
-    // card
+    /* card */
     --card-bg: #d5d5d7;
 
-    // listbox
+    /* listbox */
     --listbox-bg: #d5d5d7;
 }

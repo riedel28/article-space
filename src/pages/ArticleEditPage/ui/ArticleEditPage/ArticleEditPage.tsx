@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Page } from '@/widgets/Page';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ArticleEditPage.module.scss';
+import cls from './ArticleEditPage.module.css';
 
 interface ArticleEditPageProps {
     className?: string;
