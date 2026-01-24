@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
-import { Modal } from '@/shared/ui/redesigned/Modal';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Loader } from '@/shared/ui/redesigned/Loader';
+import { useTranslation } from 'react-i18next';
+import { Modal, Loader, Text } from '@mantine/core';
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
 
 interface LoginModalProps {
@@ -10,15 +9,20 @@ interface LoginModalProps {
   onClose: () => void;
 }
 
-export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => (
-  <Modal
-    className={classNames('', {}, [className])}
-    isOpen={isOpen}
-    onClose={onClose}
-    lazy
-  >
-    <Suspense fallback={<Loader />}>
-      <LoginFormAsync onSuccess={onClose} />
-    </Suspense>
-  </Modal>
-);
+export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Modal
+      className={className}
+      opened={isOpen}
+      onClose={onClose}
+      title={<Text fw={700}>{t('Форма авторизации')}</Text>}
+      centered
+    >
+      <Suspense fallback={<Loader type="dots" />}>
+        <LoginFormAsync onSuccess={onClose} />
+      </Suspense>
+    </Modal>
+  );
+};
