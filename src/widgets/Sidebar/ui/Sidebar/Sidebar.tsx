@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { AppShell, Box, Group } from '@mantine/core';
+import { AppShell, Group, Stack } from '@mantine/core';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { LangSwitcher } from '@/features/LangSwitcher';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -17,11 +17,11 @@ export const Sidebar = memo(() => {
       </AppShell.Section>
 
       <AppShell.Section grow className={classes.nav}>
-        <Box px="md">
+        <Stack px="md" gap={4}>
           {sidebarItemsList.map((item) => (
             <SidebarItem item={item} key={item.path} />
           ))}
-        </Box>
+        </Stack>
       </AppShell.Section>
 
       <AppShell.Section className={classes.footer}>
