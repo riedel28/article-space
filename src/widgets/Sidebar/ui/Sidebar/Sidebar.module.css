@@ -1,135 +1,23 @@
-/* Sidebar Container */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  width: 240px;
-  height: 100%;
-  background: var(--light-bg-redesigned);
-  border-radius: var(--mantine-radius-xl);
-  padding: var(--mantine-spacing-lg) 0;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+.header {
+  padding: var(--mantine-spacing-md);
+  padding-bottom: var(--mantine-spacing-md);
+  margin-bottom: calc(var(--mantine-spacing-md) * 1.5);
+  border-bottom: 1px solid light-dark(
+    var(--mantine-color-gray-3),
+    var(--mantine-color-dark-4)
+  );
 }
 
-.collapsed {
-  width: 72px;
-  padding: var(--mantine-spacing-md) 0;
-}
-
-/* Logo Section */
-.logoSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-lg);
-  min-height: 74px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.collapsed .logoSection {
-  padding: 0 var(--mantine-spacing-xs) var(--mantine-spacing-md);
-  min-height: 52px;
-}
-
-.appLogo {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Navigation Section - Takes all available space */
-.navigation {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.nav {
   overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0 var(--mantine-spacing-xs);
-  margin: var(--mantine-spacing-xs) 0;
-
-  /* Custom scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: rgb(0 0 0 / 10%) transparent;
 }
 
-.navigation::-webkit-scrollbar {
-  width: 4px;
-}
-
-.navigation::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.navigation::-webkit-scrollbar-thumb {
-  background: rgb(0 0 0 / 10%);
-  border-radius: var(--mantine-radius-xs);
-}
-
-.navigation::-webkit-scrollbar-thumb:hover {
-  background: rgb(0 0 0 / 15%);
-}
-
-.navItems {
-  width: 100%;
-}
-
-/* Footer Section */
 .footer {
-  padding: var(--mantine-spacing-md) 0 0;
-  margin-top: auto;
-}
-
-.switchers {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--mantine-spacing-md);
-  padding: 0 var(--mantine-spacing-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.collapsed .switchers {
-  flex-direction: column;
-  gap: var(--mantine-spacing-xs);
-  padding: 0 var(--mantine-spacing-xs);
-}
-
-/* Collapse Button */
-.collapseBtn {
-  position: absolute;
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  z-index: 10;
-  width: 32px;
-  height: 32px;
-  background: var(--light-bg-redesigned);
-  border-radius: 50%;
-  box-shadow: var(--mantine-shadow-sm);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.collapsed .collapseBtn {
-  transform: translateY(-50%) rotate(-90deg);
-}
-
-.collapseBtn:hover {
-  background: var(--accent-redesigned);
-  box-shadow: var(--mantine-shadow-md);
-}
-
-/* Responsive adjustments */
-@media (max-height: 600px) {
-  .logoSection {
-    padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-md);
-    min-height: 60px;
-  }
-
-  .collapsed .logoSection {
-    padding: 0 var(--mantine-spacing-xs) var(--mantine-spacing-xs);
-    min-height: 44px;
-  }
-
-  .footer {
-    padding: var(--mantine-spacing-xs) 0 0;
-  }
+  padding: var(--mantine-spacing-md);
+  padding-top: var(--mantine-spacing-md);
+  margin-top: var(--mantine-spacing-md);
+  border-top: 1px solid light-dark(
+    var(--mantine-color-gray-3),
+    var(--mantine-color-dark-4)
+  );
 }

@@ -5,7 +5,7 @@ import { AppShellLayout } from '../AppShellLayout';
 
 export const AppLoaderLayout = memo(() => {
   return (
-    <AppShellLayout sidebarCollapsed={false}>
+    <AppShellLayout>
       <VStack gap="16" style={{ height: '100%' }}>
         <Skeleton width="70%" height={32} border="16px" />
         <Skeleton width="40%" height={20} border="16px" />

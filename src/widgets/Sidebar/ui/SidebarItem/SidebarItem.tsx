@@ -1,37 +1,35 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation, Link } from 'react-router-dom';
 
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserAuthData } from '@/entities/User';
 import { SidebarItemType } from '../../model/types/sidebar';
-import cls from './SidebarItem.module.css';
-import { AppLink } from '@/shared/ui/redesigned/AppLink';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import classes from './SidebarItem.module.css';
 
 interface SidebarItemProps {
   item: SidebarItemType;
-  collapsed: boolean;
 }
 
-export const SidebarItem = memo(({ item, collapsed }: SidebarItemProps) => {
+export const SidebarItem = memo(({ item }: SidebarItemProps) => {
   const { t } = useTranslation();
   const isAuth = useSelector(getUserAuthData);
+  const location = useLocation();
 
   if (item.authOnly && !isAuth) {
     return null;
   }
 
+  const isActive = location.pathname === item.path;
+
   return (
-    <AppLink
+    <Link
       to={item.path}
-      className={classNames(cls.itemRedesigned, {
-        [cls.collapsedRedesigned]: collapsed
-      })}
-      activeClassName={cls.active}
+      className={classes.link}
+      data-active={isActive || undefined}
     >
-      <Icon Svg={item.Icon} />
-      <span className={cls.link}>{t(item.text)}</span>
-    </AppLink>
+      <item.Icon className={classes.linkIcon} />
+      <span>{t(item.text)}</span>
+    </Link>
   );
 });

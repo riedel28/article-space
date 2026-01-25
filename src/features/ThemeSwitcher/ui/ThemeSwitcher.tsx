@@ -1,23 +1,24 @@
 import { memo } from 'react';
-import { ActionIcon } from '@mantine/core';
-import ThemeIcon from '@/shared/assets/icons/theme.svg?react';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
+import { ActionIcon, useMantineColorScheme } from '@mantine/core';
+import { IconSun, IconMoon } from '@tabler/icons-react';
 
 interface ThemeSwitcherProps {
   className?: string;
 }
 
 export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
-  const { toggleTheme } = useTheme();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
   return (
     <ActionIcon
       variant="subtle"
-      onClick={() => toggleTheme()}
+      size="lg"
+      onClick={() => toggleColorScheme()}
       className={className}
       aria-label="Toggle theme"
     >
-      <ThemeIcon />
+      {dark ? <IconSun size={20} /> : <IconMoon size={20} />}
     </ActionIcon>
   );
 });

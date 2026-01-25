@@ -1,4 +1,4 @@
-import { memo, Suspense, useEffect, useState } from 'react';
+import { memo, Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserInited, initAuthData } from '@/entities/User';
 import { AppRouter } from './providers/router';
@@ -12,7 +12,6 @@ const App = memo(() => {
   const dispatch = useAppDispatch();
   const inited = useSelector(getUserInited);
   const toolbar = useAppToolbar();
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     if (!inited) {
@@ -31,11 +30,7 @@ const App = memo(() => {
   return (
     <div id="app">
       <Suspense fallback="">
-        <AppShellLayout
-          toolbar={toolbar}
-          sidebarCollapsed={sidebarCollapsed}
-          onSidebarToggle={() => setSidebarCollapsed((prev) => !prev)}
-        >
+        <AppShellLayout toolbar={toolbar}>
           <AppRouter />
         </AppShellLayout>
       </Suspense>

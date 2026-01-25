@@ -1,47 +1,43 @@
 import { memo, ReactElement, ReactNode } from 'react';
 import { AppShell } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 
 interface AppShellLayoutProps {
-  className?: string;
   children: ReactNode;
   toolbar?: ReactElement;
-  sidebarCollapsed?: boolean;
-  onSidebarToggle?: () => void;
 }
 
 export const AppShellLayout = memo((props: AppShellLayoutProps) => {
-  const { children, toolbar, sidebarCollapsed = false, onSidebarToggle } = props;
+  const { children, toolbar } = props;
+  const [opened, { toggle }] = useDisclosure();
 
   return (
     <AppShell
       padding="md"
-      layout="alt"
-      withBorder={false}
-      transitionDuration={300}
-      transitionTimingFunction="ease"
       header={{ height: 60 }}
+      layout="alt"
       navbar={{
-        width: sidebarCollapsed ? 50 : 220,
-        breakpoint: 0,
-        collapsed: { desktop: false, mobile: false }
+        width: 280,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened }
       }}
       aside={
         toolbar
           ? {
               width: 100,
-              breakpoint: 0,
-              collapsed: { desktop: false, mobile: false }
+              breakpoint: 'md',
+              collapsed: { desktop: false, mobile: true }
             }
           : undefined
       }
     >
       <AppShell.Header>
-        <Navbar />
+        <Navbar opened={opened} toggle={toggle} />
       </AppShell.Header>
-      <AppShell.Navbar p={0}>
-        <Sidebar collapsed={sidebarCollapsed} onToggle={onSidebarToggle} />
+      <AppShell.Navbar>
+        <Sidebar />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
       {toolbar && <AppShell.Aside>{toolbar}</AppShell.Aside>}

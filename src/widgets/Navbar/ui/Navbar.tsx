@@ -1,21 +1,19 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Burger, Button, Group } from '@mantine/core';
 
 import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
-import { HStack } from '@/shared/ui/redesigned/Stack';
 import { NotificationButton } from '@/features/notificationButton';
 import { AvatarDropdown } from '@/features/avatarDropdown';
-import cls from './Navbar.module.css';
-import { Button } from '@/shared/ui/redesigned/Button';
 
 interface NavbarProps {
-  className?: string;
+  opened?: boolean;
+  toggle?: () => void;
 }
 
-export const Navbar = memo(({ className }: NavbarProps) => {
+export const Navbar = memo(({ opened, toggle }: NavbarProps) => {
   const { t } = useTranslation();
   const [isAuthModal, setIsAuthModal] = useState(false);
   const authData = useSelector(getUserAuthData);
@@ -28,28 +26,26 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     setIsAuthModal(true);
   }, []);
 
-  const mainClass = cls.NavbarRedesigned;
-
-  if (authData) {
-    return (
-      <div className={classNames(mainClass, {}, [className])}>
-        <HStack gap="16" className={cls.actions}>
-          <NotificationButton />
-          <AvatarDropdown />
-        </HStack>
-      </div>
-    );
-  }
-
   return (
-    <div className={classNames(mainClass, {}, [className])}>
-      <Button variant="clear" className={cls.links} onClick={onShowModal}>
-        {t('Войти')}
-      </Button>
-
-      {isAuthModal && (
-        <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
-      )}
-    </div>
+    <Group h="100%" px="md" justify="space-between">
+      <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+      <Group ml="auto">
+        {authData ? (
+          <>
+            <NotificationButton />
+            <AvatarDropdown />
+          </>
+        ) : (
+          <>
+            <Button variant="subtle" onClick={onShowModal}>
+              {t('Войти')}
+            </Button>
+            {isAuthModal && (
+              <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
+            )}
+          </>
+        )}
+      </Group>
+    </Group>
   );
 });
