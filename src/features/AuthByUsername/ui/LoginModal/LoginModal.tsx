@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Dialog, DialogContent } from '@/shared/ui/shadcn/Dialog';
-import { Skeleton } from '@/shared/ui/shadcn/Skeleton';
+import { Skeleton } from '@/shared/ui/shadcn/skeleton';
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
 
 interface LoginModalProps {

@@ -1,6 +1,11 @@
 import { memo, ReactElement } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './MainLayout.module.scss';
+import { cn } from '@/shared/lib/utils/index';
+import {
+    SidebarInset,
+    SidebarProvider,
+    SidebarTrigger,
+} from '@/shared/ui/shadcn/sidebar';
+import { Separator } from '@/shared/ui/shadcn/separator';
 
 interface MainLayoutProps {
     className?: string;
@@ -14,13 +19,23 @@ export const MainLayout = memo((props: MainLayoutProps) => {
     const { className, content, toolbar, header, sidebar } = props;
 
     return (
-        <div className={classNames(cls?.MainLayout, {}, [className])}>
-            <div className={cls?.content}>{content}</div>
-            <div className={cls?.sidebar}>{sidebar}</div>
-            <div className={cls?.rightbar}>
-                <div className={cls?.header}>{header}</div>
-                <div className={cls?.toolbar}>{toolbar}</div>
-            </div>
-        </div>
+        <SidebarProvider>
+            {sidebar}
+            <SidebarInset className={cn(className)}>
+                <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                    <SidebarTrigger className="-ml-1" />
+                    <Separator orientation="vertical" className="mr-2 h-4" />
+                    {header}
+                </header>
+                <main className="flex flex-1 flex-col gap-4 p-4">
+                    {content}
+                </main>
+                {toolbar && (
+                    <div className="fixed bottom-4 right-4">
+                        {toolbar}
+                    </div>
+                )}
+            </SidebarInset>
+        </SidebarProvider>
     );
 });

@@ -1,0 +1,1 @@
+import{r as i,u as r,i as o,j as l,P as n,e as d}from"./index-B5sKGF0T.js";const m="_ArticleEditPage_1u6pc_1",E={ArticleEditPage:m},u=i.memo(a=>{const{className:e}=a,{t:s}=r(),{id:t}=o(),c=!!t;return l.jsx(n,{className:d(E.ArticleEditPage,{},[e]),children:c?s("Редактирование статьи с ID = ")+t:s("Создание новой статьи")})});export{u as default};

@@ -4,7 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserInited, initAuthData } from '@/entities/User';
 import { AppRouter } from './providers/router';
 import { Navbar } from '@/widgets/Navbar';
-import { Sidebar } from '@/widgets/Sidebar';
+import { AppSidebar } from '@/widgets/Sidebar';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { MainLayout } from '@/shared/layouts/MainLayout';
@@ -38,7 +38,7 @@ const App = memo(() => {
                 <MainLayout
                     header={<Navbar />}
                     content={<AppRouter />}
-                    sidebar={<Sidebar />}
+                    sidebar={<AppSidebar />}
                     toolbar={toolbar}
                 />
             </Suspense>

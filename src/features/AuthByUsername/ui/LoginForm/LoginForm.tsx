@@ -13,8 +13,8 @@ import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLo
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { Button } from '@/shared/ui/shadcn/Button';
-import { Input } from '@/shared/ui/shadcn/Input';
+import { Button } from '@/shared/ui/shadcn/button';
+import { Input } from '@/shared/ui/shadcn/input';
 import { Field, FieldLabel, FieldError } from '@/shared/ui/shadcn/Field';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
