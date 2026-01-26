@@ -19,8 +19,7 @@ export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
       const response = await dispatch(getUserDataByIdQuery(userId)).unwrap();
 
       return response;
-    } catch (e) {
-      console.log(e);
+    } catch {
       return rejectWithValue('');
     }
   }
