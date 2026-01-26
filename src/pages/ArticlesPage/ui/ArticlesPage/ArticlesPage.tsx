@@ -16,6 +16,7 @@ import { ArticlePageGreeting } from '@/features/articlePageGreeting';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
+import { ScrollToTopButton } from '@/features/scrollToTopButton';
 
 interface ArticlesPageProps {
   className?: string;
@@ -39,22 +40,27 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   });
 
   const content = (
-    <StickyContentLayout
-      left={<ViewSelectorContainer />}
-      right={<FiltersContainer />}
-      content={
-        <Page
-          data-testid="ArticlesPage"
-          onScrollEnd={onLoadNextPart}
-          className={className}
-        >
-          <Box py="lg">
-            <ArticleInfiniteList />
-          </Box>
-          <ArticlePageGreeting />
-        </Page>
-      }
-    />
+    <Box pos="relative">
+      <StickyContentLayout
+        left={<ViewSelectorContainer />}
+        right={<FiltersContainer />}
+        content={
+          <Page
+            data-testid="ArticlesPage"
+            onScrollEnd={onLoadNextPart}
+            className={className}
+          >
+            <Box py="lg">
+              <ArticleInfiniteList />
+            </Box>
+            <ArticlePageGreeting />
+          </Page>
+        }
+      />
+      <Box pos="fixed" bottom={24} right={24} style={{ zIndex: 100 }}>
+        <ScrollToTopButton />
+      </Box>
+    </Box>
   );
 
   return (
