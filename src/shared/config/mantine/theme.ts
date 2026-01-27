@@ -8,16 +8,16 @@ export const theme = createTheme({
   colors: {
     // Primary brand color - cyan/blue palette
     brand: [
-      '#e0f7ff', // 0 - lightest
-      '#b3ecff', // 1
-      '#80e0ff', // 2
-      '#4dd4ff', // 3
-      '#1ac8ff', // 4
-      '#00c8ff', // 5
-      '#00a3d1', // 6 - primary shade light
-      '#007ea3', // 7 - primary shade dark
-      '#005975', // 8
-      '#003447' // 9 - darkest
+      '#e5f3ff',
+      '#cde2ff',
+      '#9ac2ff',
+      '#64a0ff',
+      '#3884fe',
+      '#1d72fe',
+      '#0063ff',
+      '#0058e4',
+      '#004ecd',
+      '#0043b5'
     ],
     // Success/save color - green palette
     success: [
