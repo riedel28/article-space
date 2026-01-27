@@ -1,10 +1,9 @@
-import { createTheme } from '@mantine/core';
+import { createTheme, DEFAULT_THEME } from '@mantine/core';
 
 export const theme = createTheme({
   primaryColor: 'brand',
   primaryShade: { light: 6, dark: 7 },
-  fontFamily: '"Nunito Sans", sans-serif',
-  headings: { fontFamily: '"Roboto", sans-serif' },
+  fontFamily: `IBM Plex Sans, ${DEFAULT_THEME.fontFamily}`,
   defaultRadius: 'md',
   colors: {
     // Primary brand color - cyan/blue palette
@@ -18,7 +17,7 @@ export const theme = createTheme({
       '#00a3d1', // 6 - primary shade light
       '#007ea3', // 7 - primary shade dark
       '#005975', // 8
-      '#003447', // 9 - darkest
+      '#003447' // 9 - darkest
     ],
     // Success/save color - green palette
     success: [
@@ -31,7 +30,7 @@ export const theme = createTheme({
       '#38c75e', // 6
       '#2ba84c', // 7
       '#1f8a3b', // 8
-      '#146b2a', // 9
+      '#146b2a' // 9
     ],
     // Error/cancel color - red palette
     error: [
@@ -44,7 +43,7 @@ export const theme = createTheme({
       '#e60000', // 6
       '#d95757', // 7
       '#b30000', // 8
-      '#800000', // 9
+      '#800000' // 9
     ],
     // Neutral/hint color - gray palette
     hint: [
@@ -57,7 +56,7 @@ export const theme = createTheme({
       '#8599a0', // 6
       '#74a2b2', // 7
       '#5a7c87', // 8
-      '#3d5459', // 9
-    ],
-  },
+      '#3d5459' // 9
+    ]
+  }
 });
