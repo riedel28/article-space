@@ -28,7 +28,7 @@ export const AppShellLayout = memo((props: AppShellLayoutProps) => {
         <Navbar opened={opened} toggle={toggle} />
       </AppShell.Header>
       <AppShell.Navbar>
-        <Sidebar />
+        <Sidebar onClose={toggle} />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
       {toolbar && <AppShell.Aside>{toolbar}</AppShell.Aside>}

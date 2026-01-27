@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
 import { Button } from '@mantine/core';
+import classes from './LangSwitcher.module.css';
 
 interface LangSwitcherProps {
-  className?: string;
   short?: boolean;
 }
 
-export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
+export const LangSwitcher = ({ short }: LangSwitcherProps) => {
   const { t, i18n } = useTranslation();
 
   const toggle = async () => {
@@ -15,8 +14,8 @@ export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
   };
 
   return (
-    <Button variant="subtle" onClick={toggle} className={className}>
+    <Button variant="subtle" onClick={toggle} className={classes.button}>
       {t(short ? 'Короткий язык' : 'Язык')}
     </Button>
   );
-});
+};

@@ -1,0 +1,4 @@
+.button {
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-3));
+  font-weight: 500;
+}
