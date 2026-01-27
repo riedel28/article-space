@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { ActionIcon, Popover, Drawer, Text, Indicator } from '@mantine/core';
 import { NotificationList } from '@/entities/Notification';
+import classes from './NotificationButton.module.css';
 
 export const NotificationButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,14 +21,13 @@ export const NotificationButton = () => {
   return (
     <>
       <BrowserView>
-        <Popover width={300} position="bottom-end" shadow="sm" radius="lg">
+        <Popover width={300} position="bottom-end" shadow="sm" radius="md">
           <Popover.Target>
             <Indicator color="red" size={8} offset={4}>
               <ActionIcon
-                variant="transparent"
-                color="gray"
+                variant="subtle"
                 size="lg"
-                radius="lg"
+                className={classes.icon}
                 aria-label={t('Notifications')}
               >
                 <IconBell size={24} stroke={1.8} />
@@ -42,10 +42,9 @@ export const NotificationButton = () => {
       <MobileView>
         <Indicator color="red" size={8} offset={4}>
           <ActionIcon
-            variant="transparent"
-            color="gray"
+            variant="subtle"
             size="lg"
-            radius="lg"
+            className={classes.icon}
             onClick={onOpenDrawer}
             aria-label={t('Notifications')}
           >

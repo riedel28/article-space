@@ -1,0 +1,10 @@
+.placeholder {
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-3));
+  transition: color 150ms ease;
+}
+
+/* Change color when parent button/ActionIcon is hovered */
+button:hover .placeholder,
+[data-variant]:hover .placeholder {
+  color: light-dark(var(--mantine-color-brand-6), var(--mantine-color-gray-3));
+}

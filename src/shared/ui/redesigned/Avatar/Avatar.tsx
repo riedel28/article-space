@@ -1,25 +1,35 @@
-import { Avatar as MantineAvatar } from '@mantine/core';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { Avatar as MantineAvatar, MantineColor } from '@mantine/core';
+
+import classes from './Avatar.module.css';
 
 interface AvatarProps {
-  className?: string;
   src?: string;
   size?: number;
   alt?: string;
+  color?: MantineColor;
   'data-testid'?: string;
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { className, src, size = 100, alt, 'data-testid': dataTestId } = props;
+  const { src, size = 100, alt, color, 'data-testid': dataTestId } = props;
 
   return (
     <MantineAvatar
-      className={classNames('', {}, [className])}
-      variant="transparent"
+      variant={color ? 'filled' : 'transparent'}
+      color={color}
       src={src}
       alt={alt}
       size={size}
       data-testid={dataTestId}
+      classNames={{
+        placeholder: classes.placeholder
+      }}
+      // styles={{
+      //   placeholder: {
+      //     color: 'var(--mantine-color-gray-7)'
+      //     &
+      //   }
+      // }}
     />
   );
 };

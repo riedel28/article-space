@@ -37,13 +37,8 @@ export const AvatarDropdown = memo(() => {
   return (
     <Menu position="bottom-end" shadow="sm">
       <Menu.Target>
-        <ActionIcon
-          variant="transparent"
-          size="lg"
-          radius="lg"
-          aria-label={t('User menu')}
-        >
-          <Avatar size={40} src={authData.avatar} />
+        <ActionIcon variant="subtle" size="lg" aria-label={t('User menu')}>
+          <Avatar size={36} src={authData.avatar} />
         </ActionIcon>
       </Menu.Target>
 

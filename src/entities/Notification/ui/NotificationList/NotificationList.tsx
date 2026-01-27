@@ -17,9 +17,9 @@ export const NotificationList = memo((props: NotificationListProps) => {
   if (isLoading) {
     return (
       <Stack gap={4} w="100%" className={className}>
-        <Skeleton width="100%" radius="lg" height={80} />
-        <Skeleton width="100%" radius="lg" height={80} />
-        <Skeleton width="100%" radius="lg" height={80} />
+        <Skeleton width="100%" radius="md" height={80} />
+        <Skeleton width="100%" radius="md" height={80} />
+        <Skeleton width="100%" radius="md" height={80} />
       </Stack>
     );
   }
@@ -27,7 +27,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
   return (
     <ScrollArea.Autosize
       mah={400}
-      maw={fullWidth ? undefined : 300}
+      maw={fullWidth ? undefined : 500}
       w={fullWidth ? '100%' : undefined}
       type="auto"
       offsetScrollbars
