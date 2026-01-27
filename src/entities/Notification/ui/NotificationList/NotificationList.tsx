@@ -5,20 +5,21 @@ import { NotificationItem } from '../NotificationItem/NotificationItem';
 
 interface NotificationListProps {
   className?: string;
+  fullWidth?: boolean;
 }
 
 export const NotificationList = memo((props: NotificationListProps) => {
-  const { className } = props;
+  const { className, fullWidth } = props;
   const { data, isLoading } = useNotifications(null, {
     pollingInterval: 10000
   });
 
   if (isLoading) {
     return (
-      <Stack gap={16} w="100%" className={className}>
-        <Skeleton width="100%" radius="md" height={80} />
-        <Skeleton width="100%" radius="md" height={80} />
-        <Skeleton width="100%" radius="md" height={80} />
+      <Stack gap={4} w="100%" className={className}>
+        <Skeleton width="100%" radius="lg" height={80} />
+        <Skeleton width="100%" radius="lg" height={80} />
+        <Skeleton width="100%" radius="lg" height={80} />
       </Stack>
     );
   }
@@ -26,15 +27,10 @@ export const NotificationList = memo((props: NotificationListProps) => {
   return (
     <ScrollArea.Autosize
       mah={400}
-      maw={500}
+      maw={fullWidth ? undefined : 300}
+      w={fullWidth ? '100%' : undefined}
       type="auto"
-      styles={{
-        viewport: {
-          '& > div': {
-            display: 'block !important'
-          }
-        }
-      }}
+      offsetScrollbars
     >
       {data?.map((item) => (
         <NotificationItem key={item.id} item={item} />

@@ -1,8 +1,12 @@
 .NotificationItem {
+  display: block;
   padding: var(--mantine-spacing-sm);
   border-radius: var(--mantine-radius-lg);
 
   &:hover {
-    background-color: var(--mantine-color-gray-0);
+    background-color: light-dark(
+      var(--mantine-color-gray-1),
+      var(--mantine-color-dark-7)
+    );
   }
 }

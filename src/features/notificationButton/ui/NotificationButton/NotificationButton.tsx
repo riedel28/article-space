@@ -1,21 +1,13 @@
-import { memo, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { IconBell } from '@tabler/icons-react';
+import { useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
-import { ActionIcon, Popover, Box, Badge } from '@mantine/core';
-import NotificationIcon from '@/shared/assets/icons/notification.svg?react';
+import { ActionIcon, Popover, Drawer, Text, Indicator } from '@mantine/core';
 import { NotificationList } from '@/entities/Notification';
-import { Drawer } from '@/shared/ui/redesigned/Drawer';
-import cls from './NotificationButton.module.css';
 
-interface NotificationButtonProps {
-  className?: string;
-}
-
-export const NotificationButton = memo((props: NotificationButtonProps) => {
-  const { className } = props;
+export const NotificationButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // TODO: Replace with actual unread count from notifications API
-  const unreadCount = 2;
+  const { t } = useTranslation();
 
   const onOpenDrawer = useCallback(() => {
     setIsOpen(true);
@@ -26,97 +18,49 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
   }, []);
 
   return (
-    <div className={className}>
+    <>
       <BrowserView>
-        <Box pos="relative" display="inline-block">
-          <Popover
-            position="bottom-end"
-            offset={12}
-            shadow="xl"
-            radius="lg"
-            transitionProps={{
-              transition: 'scale-y',
-              duration: 200
-            }}
-          >
-            <Popover.Target>
+        <Popover width={300} position="bottom-end" shadow="sm" radius="lg">
+          <Popover.Target>
+            <Indicator color="red" size={8} offset={4}>
               <ActionIcon
-                variant="subtle"
+                variant="transparent"
+                color="gray"
                 size="lg"
                 radius="lg"
-                aria-label="Notifications"
-                className={cls.actionIcon}
+                aria-label={t('Notifications')}
               >
-                <NotificationIcon width={40} height={40} />
+                <IconBell size={24} stroke={1.8} />
               </ActionIcon>
-            </Popover.Target>
-
-            <Popover.Dropdown p="xs">
-              <NotificationList />
-            </Popover.Dropdown>
-          </Popover>
-
-          {unreadCount > 0 && (
-            <Badge
-              size="sm"
-              variant="filled"
-              color="error.6"
-              circle
-              pos="absolute"
-              top={-2}
-              right={-2}
-              style={{
-                pointerEvents: 'none',
-                minWidth: 18,
-                height: 18,
-                padding: '0 4px',
-                border: '2px solid var(--mantine-color-body)',
-                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-              }}
-            >
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </Badge>
-          )}
-        </Box>
+            </Indicator>
+          </Popover.Target>
+          <Popover.Dropdown p={4}>
+            <NotificationList />
+          </Popover.Dropdown>
+        </Popover>
       </BrowserView>
       <MobileView>
-        <Box pos="relative" display="inline-block">
+        <Indicator color="red" size={8} offset={4}>
           <ActionIcon
-            variant="subtle"
+            variant="transparent"
+            color="gray"
             size="lg"
             radius="lg"
             onClick={onOpenDrawer}
-            aria-label="Notifications"
+            aria-label={t('Notifications')}
           >
-            <NotificationIcon width={22} height={22} />
+            <IconBell size={24} stroke={1.8} />
           </ActionIcon>
-
-          {unreadCount > 0 && (
-            <Badge
-              size="sm"
-              variant="filled"
-              color="error.6"
-              circle
-              pos="absolute"
-              top={-2}
-              right={-2}
-              style={{
-                pointerEvents: 'none',
-                minWidth: 18,
-                height: 18,
-                padding: '0 4px',
-                border: '2px solid var(--mantine-color-body)',
-                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-              }}
-            >
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </Badge>
-          )}
-        </Box>
-        <Drawer isOpen={isOpen} onClose={onCloseDrawer}>
-          <NotificationList />
+        </Indicator>
+        <Drawer
+          opened={isOpen}
+          onClose={onCloseDrawer}
+          position="bottom"
+          title={<Text fw={600}>{t('Уведомления')}</Text>}
+        >
+          <NotificationList fullWidth />
         </Drawer>
       </MobileView>
-    </div>
+    </>
   );
-});
+};

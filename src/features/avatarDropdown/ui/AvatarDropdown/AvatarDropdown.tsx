@@ -35,14 +35,19 @@ export const AvatarDropdown = memo(() => {
   }
 
   return (
-    <Menu position="bottom-end">
+    <Menu position="bottom-end" shadow="sm">
       <Menu.Target>
-        <ActionIcon variant="subtle" size="lg" radius="lg">
+        <ActionIcon
+          variant="transparent"
+          size="lg"
+          radius="lg"
+          aria-label={t('User menu')}
+        >
           <Avatar size={40} src={authData.avatar} />
         </ActionIcon>
       </Menu.Target>
 
-      <Menu.Dropdown>
+      <Menu.Dropdown w={120}>
         {isAdminPanelAvailable && (
           <Menu.Item onClick={() => navigate(getRouteAdmin())}>
             {t('Админка')}

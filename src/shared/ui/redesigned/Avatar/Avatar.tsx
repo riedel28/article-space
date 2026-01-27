@@ -15,6 +15,7 @@ export const Avatar = (props: AvatarProps) => {
   return (
     <MantineAvatar
       className={classNames('', {}, [className])}
+      variant="transparent"
       src={src}
       alt={alt}
       size={size}
