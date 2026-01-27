@@ -8,6 +8,8 @@ import { getUserAuthData } from '@/entities/User';
 import { NotificationButton } from '@/features/notificationButton';
 import { AvatarDropdown } from '@/features/avatarDropdown';
 
+import classes from './Navbar.module.css';
+
 interface NavbarProps {
   opened?: boolean;
   toggle?: () => void;
@@ -27,7 +29,7 @@ export const Navbar = memo(({ opened, toggle }: NavbarProps) => {
   }, []);
 
   return (
-    <Group h="100%" px="md" justify="space-between">
+    <Group h="100%" px="md" justify="flex-end" className={classes.header}>
       <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
       <Group ml="auto">
         {authData ? (

@@ -1,1 +1,3 @@
-/* Minimal custom styles - most styling handled by Mantine components */
+.header {
+  width: 100%;
+}

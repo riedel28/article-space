@@ -23,15 +23,6 @@ export const AppShellLayout = memo((props: AppShellLayoutProps) => {
         breakpoint: 'sm',
         collapsed: { mobile: !opened }
       }}
-      aside={
-        toolbar
-          ? {
-              width: 100,
-              breakpoint: 'md',
-              collapsed: { desktop: false, mobile: true }
-            }
-          : undefined
-      }
     >
       <AppShell.Header>
         <Navbar opened={opened} toggle={toggle} />
