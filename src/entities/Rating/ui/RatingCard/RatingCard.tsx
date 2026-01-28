@@ -10,7 +10,9 @@ import {
   Modal,
   Drawer,
   Stack,
-  Group
+  Group,
+  Title,
+  Textarea
 } from '@mantine/core';
 
 interface RatingCardProps {
@@ -88,14 +90,21 @@ export const RatingCard = memo((props: RatingCardProps) => {
         <Modal
           opened={isModalOpen}
           onClose={cancelHandle}
-          title={t('Оставить отзыв')}
+          title={
+            <Title fz="md" order={2}>
+              {t('Оставить отзыв')}
+            </Title>
+          }
           centered
         >
           <form onSubmit={handleSubmit}>
             <Stack gap="lg">
               <Stack gap="md">
-                <Text fw={500}>{feedbackTitle}</Text>
-                <TextInput
+                <Text>{feedbackTitle}</Text>
+                <Textarea
+                  autosize
+                  minRows={4}
+                  maxRows={10}
                   data-testid="RatingCard.Input"
                   value={feedback}
                   onChange={(event) => setFeedback(event.currentTarget.value)}

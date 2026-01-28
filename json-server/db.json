@@ -1208,6 +1208,31 @@
       "rate": 5,
       "feedback": "ппн",
       "id": "_8pg-hb"
+    },
+    {
+      "userId": "1",
+      "articleId": "6",
+      "rate": 5,
+      "id": "lelZHUQ"
+    },
+    {
+      "userId": "1",
+      "articleId": "6",
+      "rate": 4,
+      "id": "VA3jUq9"
+    },
+    {
+      "userId": "1",
+      "articleId": "6",
+      "rate": 5,
+      "feedback": "",
+      "id": "vaUzgcy"
+    },
+    {
+      "userId": "1",
+      "articleId": "6",
+      "rate": 5,
+      "id": "LMg_dpS"
     }
   ],
   "profile-ratings": [
