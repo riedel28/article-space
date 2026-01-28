@@ -1,7 +1,15 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Stack, Group, Text, Avatar, Button, Skeleton } from '@mantine/core';
-import { IconEye } from '@tabler/icons-react';
+import {
+  Card,
+  Group,
+  Text,
+  Skeleton,
+  Image,
+  AspectRatio,
+  Title
+} from '@mantine/core';
+import { IconCalendar, IconEye, IconUser } from '@tabler/icons-react';
 import { ArticleListItemProps } from '../ArticleListItem';
 import { ArticleTextBlock } from '../../../model/types/article';
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
@@ -11,24 +19,11 @@ import {
   ArticleBlockType,
   ArticleView
 } from '../../../model/consts/articleConsts';
+import classes from './ArticleListItemRedesigned.module.css';
 
 export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
   const { className, article, view, target } = props;
   const { t } = useTranslation();
-
-  const userInfo = (
-    <>
-      <Avatar size={32} src={article.user.avatar} ml={8} />
-      <Text fw={700}>{article.user.username}</Text>
-    </>
-  );
-
-  const views = (
-    <Group gap="xs">
-      <IconEye size={20} />
-      <Text>{String(article.views)}</Text>
-    </Group>
-  );
 
   if (view === ArticleView.BIG) {
     const textBlock = article.blocks.find(
@@ -37,63 +32,67 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
 
     return (
       <Card
-        padding="xl"
         data-testid="ArticleListItem"
-        className={className}
+        className={`${className} ${classes.cardBig}`}
         w="100%"
-        shadow="sm"
         radius="md"
         withBorder
       >
-        <Stack gap="lg">
-          <Group gap="sm" wrap="nowrap">
-            <Avatar size={40} src={article.user.avatar} />
-            <Stack gap={2}>
-              <Text fw={600} size="sm">
-                {article.user.username}
+        <div className={classes.cardBigContainer}>
+          <div className={classes.imageContainer}>
+            <AppImage
+              fallback={<Skeleton w="100%" h="100%" />}
+              src={article.img}
+              alt={article.title}
+              className={classes.articleImage}
+            />
+          </div>
+
+          <div className={classes.contentStack}>
+            <div>
+              <Text fz="md" fw={600} lineClamp={2} className={classes.articleTitle}>
+                {article.title}
               </Text>
-              <Text size="xs" c="dimmed">
-                {article.createdAt}
-              </Text>
-            </Stack>
-          </Group>
 
-          <Stack gap="xs">
-            <Text size="xl" fw={700}>
-              {article.title}
-            </Text>
-            <Text size="md" c="dimmed">
-              {article.subtitle}
-            </Text>
-          </Stack>
+              {textBlock?.paragraphs && (
+                <Text fz="sm" lineClamp={2} c="dimmed" mt="xs">
+                  {textBlock.paragraphs.slice(0, 2).join(' ')}
+                </Text>
+              )}
 
-          <AppImage
-            fallback={<Skeleton width="100%" height={300} radius="md" />}
-            src={article.img}
-            alt={article.title}
-            style={{
-              width: '100%',
-              maxHeight: 400,
-              objectFit: 'cover',
-              borderRadius: 'var(--mantine-radius-md)'
-            }}
-          />
+              <AppLink
+                target={target}
+                to={getRouteArticleDetails(article.id)}
+                className={classes.readMoreLink}
+              >
+                <Text fz="sm" fw={500} mt="xs">
+                  {t('Читать далее')}
+                </Text>
+              </AppLink>
+            </div>
 
-          {textBlock?.paragraphs && (
-            <Text size="sm" lineClamp={3} c="dimmed">
-              {textBlock.paragraphs.slice(0, 2).join(' ')}
-            </Text>
-          )}
-
-          <Group justify="space-between" mt="md">
-            <AppLink target={target} to={getRouteArticleDetails(article.id)}>
-              <Button variant="light" size="md">
-                {t('Читать далее...')}
-              </Button>
-            </AppLink>
-            {views}
-          </Group>
-        </Stack>
+            <Group gap="md" mt="md" wrap="wrap">
+              <Group gap={6}>
+                <IconEye size={14} className={classes.metaIcon} />
+                <Text fz="xs" c="dimmed">
+                  {String(article.views)} {t('views')}
+                </Text>
+              </Group>
+              <Group gap={6}>
+                <IconCalendar size={14} className={classes.metaIcon} />
+                <Text fz="xs" c="dimmed">
+                  {article.createdAt}
+                </Text>
+              </Group>
+              <Group gap={6}>
+                <IconUser size={14} className={classes.metaIcon} />
+                <Text fz="xs" c="dimmed">
+                  {article.user.username}
+                </Text>
+              </Group>
+            </Group>
+          </div>
+        </div>
       </Card>
     );
   }
@@ -103,64 +102,46 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
       data-testid="ArticleListItem"
       target={target}
       to={getRouteArticleDetails(article.id)}
-      className={className}
-      style={{ display: 'block', height: '100%' }}
+      className={`${className} ${classes.linkWrapper}`}
     >
-      <Card
-        padding={0}
-        h="100%"
-        shadow="sm"
-        radius="md"
-        withBorder
-        style={{
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-          cursor: 'pointer'
-        }}
-        styles={{
-          root: {
-            '&:hover': {
-              transform: 'translateY(-4px)',
-              boxShadow: 'var(--mantine-shadow-md)'
-            }
-          }
-        }}
-      >
-        <AppImage
-          fallback={<Skeleton width="100%" height={180} />}
-          alt={article.title}
-          src={article.img}
-          style={{ width: '100%', height: 180, objectFit: 'cover' }}
-        />
-        <Stack gap="xs" p="md" style={{ flexGrow: 1, display: 'flex' }}>
-          <Text fw={600} lineClamp={2} size="md">
-            {article.title}
-          </Text>
-          <Stack
-            gap="sm"
-            style={{ marginTop: 'auto' }}
-          >
-            <Group justify="space-between" wrap="nowrap">
-              <Text size="xs" c="dimmed">
+      <Card radius="md" withBorder className={classes.card} h="100%">
+        <Card.Section>
+          <AspectRatio ratio={16 / 10}>
+            <Image
+              alt={article.title}
+              src={article.img}
+              h={180}
+              fallbackSrc="https://placehold.co/600x400?text=Изображение+не+найдено"
+            />
+          </AspectRatio>
+        </Card.Section>
+
+        <Title order={2} fz="md" mt="md" lineClamp={2}>
+          {article.title}
+        </Title>
+
+        <Card.Section p="md" mt="auto">
+          <Group>
+            <Group gap={4}>
+              <IconEye size={12} className={classes.metaIcon} />
+              <Text fz="xs" c="dimmed">
+                {String(article.views)}
+              </Text>
+            </Group>
+            <Group gap={4}>
+              <IconCalendar size={12} className={classes.metaIcon} />
+              <Text fz="xs" c="dimmed">
                 {article.createdAt}
               </Text>
-              <Group gap={4}>
-                <IconEye size={16} opacity={0.6} />
-                <Text size="xs" c="dimmed">
-                  {String(article.views)}
-                </Text>
-              </Group>
             </Group>
-            <Group gap="xs" wrap="nowrap">
-              <Avatar size={24} src={article.user.avatar} />
-              <Text size="sm" fw={500} lineClamp={1}>
+            <Group gap={4}>
+              <IconUser size={12} className={classes.metaIcon} />
+              <Text fz="xs" c="dimmed">
                 {article.user.username}
               </Text>
             </Group>
-          </Stack>
-        </Stack>
+          </Group>
+        </Card.Section>
       </Card>
     </AppLink>
   );

@@ -1,13 +1,7 @@
-import { memo } from 'react';
 import { ArticlesFilters } from '@/widgets/ArticlesFilters';
 import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
-interface FiltersContainerProps {
-  className?: string;
-}
-
-export const FiltersContainer = memo((props: FiltersContainerProps) => {
-  const { className } = props;
+export const FiltersContainer = () => {
   const {
     onChangeSort,
     onChangeType,
@@ -29,7 +23,6 @@ export const FiltersContainer = memo((props: FiltersContainerProps) => {
       sort={sort}
       onChangeSort={onChangeSort}
       onChangeType={onChangeType}
-      className={className}
     />
   );
-});
+};

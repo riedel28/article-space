@@ -1,6 +1,7 @@
 import { memo } from 'react';
-import { Card, Skeleton, Group, Stack, Box } from '@mantine/core';
+import { Card, Skeleton, Group, AspectRatio } from '@mantine/core';
 import { ArticleView } from '../../model/consts/articleConsts';
+import classes from './ArticleListItemRedesigned/ArticleListItemRedesigned.module.css';
 
 interface ArticleListItemSkeletonProps {
   className?: string;
@@ -14,65 +15,79 @@ export const ArticleListItemSkeleton = memo(
     if (view === ArticleView.BIG) {
       return (
         <Card
-          padding="xl"
-          className={className}
+          data-testid="ArticleListItemSkeleton"
+          className={`${className} ${classes.cardBig}`}
           w="100%"
-          shadow="sm"
           radius="md"
           withBorder
         >
-          <Stack gap="lg">
-            <Group gap="sm">
-              <Skeleton circle height={40} width={40} />
-              <Stack gap={4}>
-                <Skeleton height={14} width={120} />
-                <Skeleton height={12} width={80} />
-              </Stack>
-            </Group>
-            <Stack gap="xs">
-              <Skeleton height={28} width="70%" />
-              <Skeleton height={20} width="90%" />
-            </Stack>
-            <Skeleton height={300} radius="md" />
-            <Skeleton height={16} width="100%" />
-            <Skeleton height={16} width="80%" />
-            <Group justify="space-between" mt="md">
-              <Skeleton height={36} width={150} radius="md" />
-              <Skeleton height={20} width={60} />
-            </Group>
-          </Stack>
+          <div className={classes.cardBigContainer}>
+            <div className={classes.imageContainer}>
+              <Skeleton w="100%" h="100%" radius={0} />
+            </div>
+
+            <div className={classes.contentStack}>
+              <div>
+                <Skeleton h={18} w="80%" mb="xs" />
+                <Skeleton h={14} w="100%" mb={4} />
+                <Skeleton h={14} w="90%" mb="xs" />
+                <Skeleton h={14} w={80} mt="xs" />
+              </div>
+
+              <Group gap="md" mt="md" wrap="wrap">
+                <Group gap={6}>
+                  <Skeleton circle h={14} w={14} />
+                  <Skeleton h={12} w={60} />
+                </Group>
+                <Group gap={6}>
+                  <Skeleton circle h={14} w={14} />
+                  <Skeleton h={12} w={80} />
+                </Group>
+                <Group gap={6}>
+                  <Skeleton circle h={14} w={14} />
+                  <Skeleton h={12} w={70} />
+                </Group>
+              </Group>
+            </div>
+          </div>
         </Card>
       );
     }
 
     return (
       <Card
-        padding={0}
-        h="100%"
-        className={className}
-        shadow="sm"
         radius="md"
         withBorder
-        style={{ overflow: 'hidden' }}
+        h="100%"
+        className={`${className} ${classes.card}`}
       >
-        <Skeleton height={180} />
-        <Box p="md">
-          <Stack gap="sm">
-            <Skeleton height={18} width="90%" />
-            <Skeleton height={18} width="70%" />
-            <Stack gap="sm" mt="auto">
-              <Group justify="space-between">
-                <Skeleton height={12} width={60} />
-                <Skeleton height={12} width={40} />
-              </Group>
-              <Group gap="xs">
-                <Skeleton circle height={24} width={24} />
-                <Skeleton height={14} width={80} />
-              </Group>
-            </Stack>
-          </Stack>
-        </Box>
+        <Card.Section>
+          <AspectRatio ratio={16 / 10}>
+            <Skeleton h={180} />
+          </AspectRatio>
+        </Card.Section>
+
+        <Skeleton h={20} mb={8} w="90%" mt="md" />
+        <Skeleton h={20} w="70%" />
+
+        <Card.Section p="md" mt="auto">
+          <Group>
+            <Group gap={4}>
+              <Skeleton h={12} w={12} />
+              <Skeleton h={12} w={30} />
+            </Group>
+            <Group gap={4}>
+              <Skeleton h={12} w={12} />
+              <Skeleton h={12} w={60} />
+            </Group>
+            <Group gap={4}>
+              <Skeleton h={12} w={12} />
+              <Skeleton h={12} w={80} />
+            </Group>
+          </Group>
+        </Card.Section>
       </Card>
     );
   }
 );
+

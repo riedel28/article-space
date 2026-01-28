@@ -1,0 +1,101 @@
+.card {
+  & img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    box-shadow: var(--mantine-shadow-sm);
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+/* BIG view styles */
+.cardBig {
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--mantine-shadow-sm);
+  }
+}
+
+.cardBigContainer {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  @media (min-width: 640px) {
+    aspect-ratio: 1 / 1;
+    width: 192px;
+  }
+}
+
+.articleImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cardBig:hover .articleImage {
+  transform: scale(1.05);
+}
+
+.contentStack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--mantine-spacing-md);
+  min-width: 0;
+
+  @media (min-width: 640px) {
+    padding: var(--mantine-spacing-lg);
+  }
+}
+
+.articleTitle {
+  transition: color 0.2s ease;
+}
+
+.cardBig:hover .articleTitle {
+  color: var(--mantine-color-gray-7);
+}
+
+.readMoreLink {
+  text-decoration: none;
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--mantine-color-brand-6);
+  }
+}
+
+.metaIcon {
+  opacity: 0.6;
+}
+
+/* SMALL view link wrapper */
+.linkWrapper {
+  display: block;
+  height: 100%;
+}

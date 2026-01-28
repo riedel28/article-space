@@ -1,6 +1,7 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Box } from '@mantine/core';
+import { Affix, Box, Grid } from '@mantine/core';
+
 import {
   DynamicModuleLoader,
   ReducersList
@@ -12,11 +13,10 @@ import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList'
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageReducer } from '../../model/slices/articlesPageSlice';
-import { ArticlePageGreeting } from '@/features/articlePageGreeting';
-import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
 import { ScrollToTopButton } from '@/features/scrollToTopButton';
+import { ArticleViewSelector } from '@/features/ArticleViewSelector';
+import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
 interface ArticlesPageProps {
   className?: string;
@@ -30,6 +30,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
+  const { view, onChangeView } = useArticleFilters();
 
   const onLoadNextPart = useCallback(() => {
     dispatch(fetchNextArticlesPage());
@@ -39,35 +40,36 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     dispatch(initArticlesPage(searchParams));
   });
 
-  const content = (
-    <Box pos="relative">
-      <StickyContentLayout
-        left={<ViewSelectorContainer />}
-        right={<FiltersContainer />}
-        content={
+  return (
+    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+      <Grid gutter="xl">
+        <Grid.Col span={{ base: 12, lg: 'content' }} pos="relative">
+          <Box pos="relative" miw={40}>
+            <Affix position={{ top: 76 }} withinPortal={false} visibleFrom="lg">
+              <ArticleViewSelector view={view} onViewChange={onChangeView} />
+            </Affix>
+          </Box>
+        </Grid.Col>
+        <Grid.Col span="auto">
           <Page
             data-testid="ArticlesPage"
             onScrollEnd={onLoadNextPart}
             className={className}
           >
-            <Box py="lg">
-              <ArticleInfiniteList />
-            </Box>
-            <ArticlePageGreeting />
+            <ArticleInfiniteList />
           </Page>
-        }
-      />
-      <Box pos="fixed" bottom={24} right={24} style={{ zIndex: 100 }}>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, lg: 3 }} pos="relative">
+          <Affix position={{ top: 76 }} withinPortal={false} visibleFrom="lg">
+            <FiltersContainer />
+          </Affix>
+        </Grid.Col>
+      </Grid>
+      <Affix position={{ bottom: 20, right: 20 }}>
         <ScrollToTopButton />
-      </Box>
-    </Box>
-  );
-
-  return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
-      {content}
+      </Affix>
     </DynamicModuleLoader>
   );
 };
 
-export default memo(ArticlesPage);
+export default ArticlesPage;

@@ -609,6 +609,195 @@
           ]
         }
       ]
+    },
+    {
+      "id": "19",
+      "title": "The Future of AI in Web Development: What Developers Need to Know",
+      "subtitle": "Explore how artificial intelligence is reshaping the landscape of web development",
+      "img": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+      "views": 15420,
+      "createdAt": "20.01.2026",
+      "userId": "1",
+      "type": ["IT"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "AI Transforming Development",
+          "paragraphs": [
+            "Explore how artificial intelligence is reshaping the landscape of web development. From automated code generation to intelligent debugging tools, AI is transforming how developers build modern applications.",
+            "The integration of AI tools into development workflows has accelerated significantly, with features like code completion, bug detection, and automated testing becoming standard in modern IDEs."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "title": "Minimalist Design Principles for Modern User Interfaces",
+      "subtitle": "Learn the essential principles of minimalist design for clean, user-friendly interfaces",
+      "img": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
+      "views": 8730,
+      "createdAt": "18.01.2026",
+      "userId": "2",
+      "type": ["IT"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "The Power of Minimalism",
+          "paragraphs": [
+            "Learn the essential principles of minimalist design and how to apply them to create clean, user-friendly interfaces that enhance user experience and drive engagement.",
+            "Minimalist design focuses on removing unnecessary elements while preserving functionality, creating interfaces that are both beautiful and highly usable."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "title": "Building Scalable Startups: Lessons from Successful Founders",
+      "subtitle": "Key strategies and insights from successful startup founders on building scalable companies",
+      "img": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop",
+      "views": 23100,
+      "createdAt": "15.01.2026",
+      "userId": "1",
+      "type": ["ECONOMICS"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Scaling Your Business",
+          "paragraphs": [
+            "Discover key strategies and insights from successful startup founders on building companies that can scale efficiently while maintaining quality and culture.",
+            "From hiring the right team to implementing scalable systems, learn the proven approaches that have helped startups grow from small teams to global enterprises."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "title": "Breakthrough in Quantum Computing: A New Era Begins",
+      "subtitle": "A major milestone in quantum computing that could revolutionize technology",
+      "img": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=600&fit=crop",
+      "views": 45200,
+      "createdAt": "22.01.2026",
+      "userId": "1",
+      "type": ["SCIENCE"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Quantum Revolution",
+          "paragraphs": [
+            "Scientists have achieved a major milestone in quantum computing that could revolutionize everything from drug discovery to climate modeling. Here's what it means for the future.",
+            "This breakthrough demonstrates practical quantum advantage for the first time, solving problems that would take classical computers millions of years in mere hours."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "title": "The Complete Guide to Mental Wellness in the Digital Age",
+      "subtitle": "Practical strategies for maintaining mental health in an increasingly connected world",
+      "img": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=600&fit=crop",
+      "views": 31500,
+      "createdAt": "10.01.2026",
+      "userId": "2",
+      "type": ["SCIENCE"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Digital Wellness Strategies",
+          "paragraphs": [
+            "In an increasingly connected world, maintaining mental health has become more challenging. This comprehensive guide offers practical strategies for digital wellness.",
+            "Learn how to set healthy boundaries with technology, practice mindful usage, and create digital habits that support rather than hinder your mental wellbeing."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "title": "Hidden Gems: 10 Underrated Destinations for 2026",
+      "subtitle": "Discover breathtaking destinations that offer authentic experiences and adventures",
+      "img": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=600&fit=crop",
+      "views": 19800,
+      "createdAt": "08.01.2026",
+      "userId": "1",
+      "type": ["ECONOMICS"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Off the Beaten Path",
+          "paragraphs": [
+            "Skip the crowded tourist spots and discover these breathtaking destinations that offer authentic experiences, stunning landscapes, and unforgettable adventures.",
+            "From remote islands to hidden mountain villages, these destinations provide the perfect escape from overtourism while offering rich cultural experiences."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "25",
+      "title": "Next.js 16: Everything You Need to Know About the Latest Release",
+      "subtitle": "A deep dive into the newest features of Next.js 16 and React 19.2 integration",
+      "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop",
+      "views": 28900,
+      "createdAt": "25.01.2026",
+      "userId": "2",
+      "type": ["IT"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "Next.js 16 Features",
+          "paragraphs": [
+            "A deep dive into the newest features of Next.js 16, including cache components, improved performance, and the new React 19.2 integration that's changing how we build apps.",
+            "The latest release brings significant improvements to server components, streaming, and edge rendering, making it easier than ever to build fast, scalable applications."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "26",
+      "title": "Color Theory in UI Design: Creating Harmonious Palettes",
+      "subtitle": "Master the art of color selection for digital interfaces",
+      "img": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop",
+      "views": 12400,
+      "createdAt": "12.01.2026",
+      "userId": "1",
+      "type": ["IT"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "The Science of Color",
+          "paragraphs": [
+            "Master the art of color selection for digital interfaces. Learn how to create color palettes that evoke the right emotions and improve usability.",
+            "Understanding color psychology and accessibility requirements is essential for creating interfaces that not only look beautiful but also work for all users."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27",
+      "title": "The Economics of Remote Work: A 2026 Perspective",
+      "subtitle": "How remote work is reshaping global economies and business operations",
+      "img": "https://images.unsplash.com/photo-1521898284481-a5ec348cb555?w=800&h=600&fit=crop",
+      "views": 17600,
+      "createdAt": "05.01.2026",
+      "userId": "2",
+      "type": ["ECONOMICS"],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "title": "The Remote Revolution",
+          "paragraphs": [
+            "How remote work is reshaping global economies, real estate markets, and the way businesses operate. A comprehensive analysis of the distributed workforce revolution.",
+            "From changing urban landscapes to new approaches to collaboration, the shift to remote work has fundamentally altered how we think about work and productivity."
+          ]
+        }
+      ]
     }
   ],
   "comments": [

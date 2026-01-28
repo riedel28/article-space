@@ -1,59 +1,54 @@
 import { memo } from 'react';
-import { Group, ActionIcon, Card } from '@mantine/core';
-import ListIcon from '@/shared/assets/icons/burger.svg?react';
-import TiledIcon from '@/shared/assets/icons/tile.svg?react';
+import { Center, SegmentedControl } from '@mantine/core';
+
+import { IconGridDots, IconMenu4 } from '@tabler/icons-react';
+
 import { ArticleView } from '@/entities/Article';
 
 interface ArticleViewSelectorProps {
   className?: string;
   view: ArticleView;
-  onViewClick?: (view: ArticleView) => void;
+  onViewChange?: (view: ArticleView) => void;
 }
 
-const viewTypes = [
-  {
-    view: ArticleView.SMALL,
-    icon: TiledIcon
-  },
-  {
-    view: ArticleView.BIG,
-    icon: ListIcon
-  }
-];
-
 export const ArticleViewSelector = memo((props: ArticleViewSelectorProps) => {
-  const { className, view, onViewClick } = props;
-
-  const onClick = (newView: ArticleView) => () => {
-    onViewClick?.(newView);
-  };
+  const { className, view, onViewChange } = props;
 
   return (
-    <Card
-      padding="sm"
+    <SegmentedControl
+      orientation="vertical"
+      withItemsBorders={false}
+      value={view}
+      onChange={(value) => onViewChange?.(value as ArticleView)}
+      size="lg"
       radius="md"
-      shadow="sm"
-      withBorder
       className={className}
-    >
-      <Group gap="xs">
-        {viewTypes.map((viewType) => {
-          const IconComponent = viewType.icon;
-          const isSelected = viewType.view === view;
-
-          return (
-            <ActionIcon
-              key={viewType.view}
-              onClick={onClick(viewType.view)}
-              variant={isSelected ? 'filled' : 'subtle'}
-              size="lg"
-              color={isSelected ? 'brand' : 'gray'}
-            >
-              <IconComponent width={20} height={20} />
-            </ActionIcon>
-          );
-        })}
-      </Group>
-    </Card>
+      data={[
+        {
+          value: ArticleView.SMALL,
+          label: (
+            <Center>
+              <IconGridDots size={16} />
+            </Center>
+          )
+        },
+        {
+          value: ArticleView.BIG,
+          label: (
+            <Center>
+              <IconMenu4 size={16} />
+            </Center>
+          )
+        }
+      ]}
+      styles={{
+        label: {
+          padding: 'var(--mantine-spacing-sm)'
+        },
+        innerLabel: {
+          fontSize: 24
+        }
+      }}
+    />
   );
 });

@@ -17,7 +17,7 @@ interface ArticleListProps {
 const getSkeletons = (view: ArticleView) =>
   new Array(view === ArticleView.SMALL ? 9 : 3)
     .fill(0)
-    .map((item, index) => <ArticleListItemSkeleton key={index} view={view} />);
+    .map((_item, index) => <ArticleListItemSkeleton key={index} view={view} />);
 
 export const ArticleList = memo((props: ArticleListProps) => {
   const {
@@ -42,7 +42,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
   if (view === ArticleView.SMALL) {
     return (
       <SimpleGrid
-        cols={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        cols={{ base: 1, md: 2, xl: 3 }}
         spacing="lg"
         className={className}
         data-testid="ArticleList"

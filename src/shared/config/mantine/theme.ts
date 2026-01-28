@@ -1,4 +1,10 @@
-import { createTheme, DEFAULT_THEME } from '@mantine/core';
+import {
+  createTheme,
+  DEFAULT_THEME,
+  Select,
+  TextInput,
+  Chip
+} from '@mantine/core';
 
 export const theme = createTheme({
   primaryColor: 'brand',
@@ -58,5 +64,34 @@ export const theme = createTheme({
       '#5a7c87', // 8
       '#3d5459' // 9
     ]
+  },
+  components: {
+    TextInput: TextInput.extend({
+      defaultProps: {
+        styles: {
+          label: {
+            marginBottom: 4
+          }
+        }
+      }
+    }),
+    Select: Select.extend({
+      defaultProps: {
+        styles: {
+          label: {
+            marginBottom: 4
+          }
+        }
+      }
+    }),
+    Chip: Chip.extend({
+      defaultProps: {
+        styles: {
+          checkIcon: {
+            stroke: 1.8
+          } as any
+        }
+      }
+    })
   }
 });
