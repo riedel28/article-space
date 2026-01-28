@@ -27,54 +27,65 @@ import { AppRoutesProps } from '@/shared/types/router';
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: getRouteMain(),
-    element: <MainPage />
+    element: <MainPage />,
+    titleKey: 'Главная'
   },
   [AppRoutes.SETTINGS]: {
     path: getRouteSettings(),
-    element: <SettingsPage />
+    element: <SettingsPage />,
+    titleKey: 'Настройки'
   },
   [AppRoutes.ABOUT]: {
     path: getRouteAbout(),
-    element: <AboutPage />
+    element: <AboutPage />,
+    titleKey: 'О сайте'
   },
   [AppRoutes.PROFILE]: {
     path: getRouteProfile(':id'),
     element: <ProfilePage />,
-    authOnly: true
+    authOnly: true,
+    titleKey: 'Профиль'
   },
   [AppRoutes.ARTICLES]: {
     path: getRouteArticles(),
     element: <ArticlesPage />,
-    authOnly: true
+    authOnly: true,
+    titleKey: 'Статьи'
   },
   [AppRoutes.ARTICLE_DETAILS]: {
     path: getRouteArticleDetails(':id'),
     element: <ArticleDetailsPage />,
-    authOnly: true
+    authOnly: true,
+    titleKey: 'Статья'
   },
   [AppRoutes.ARTICLE_CREATE]: {
     path: getRouteArticleCreate(),
     element: <ArticleEditPage />,
-    authOnly: true
+    authOnly: true,
+    titleKey: 'Создание новой статьи'
   },
   [AppRoutes.ARTICLE_EDIT]: {
     path: getRouteArticleEdit(':id'),
     element: <ArticleEditPage />,
-    authOnly: true
+    authOnly: true,
+    titleKey: 'Редактирование статьи'
   },
   [AppRoutes.ADMIN_PANEL]: {
     path: getRouteAdmin(),
     element: <AdminPanelPage />,
     authOnly: true,
-    roles: [UserRole.MANAGER, UserRole.ADMIN]
+    roles: [UserRole.MANAGER, UserRole.ADMIN],
+    titleKey: 'Админ панель'
   },
   [AppRoutes.FORBIDDEN]: {
     path: getRouteForbidden(),
-    element: <ForbiddenPage />
+    element: <ForbiddenPage />,
+    titleKey: 'Доступ запрещён'
   },
   // last
   [AppRoutes.NOT_FOUND]: {
     path: '*',
-    element: <NotFoundPage />
+    element: <NotFoundPage />,
+    titleKey: 'Страница не найдена'
   }
 };

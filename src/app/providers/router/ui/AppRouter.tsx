@@ -2,6 +2,7 @@ import React, { memo, Suspense, useCallback } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PageLoader } from '@/widgets/PageLoader';
 import { RequireAuth } from './RequireAuth';
+import { DocumentTitle } from './DocumentTitle';
 import { routeConfig } from '../config/routeConfig';
 import { AppRoutesProps } from '@/shared/types/router';
 
@@ -26,7 +27,12 @@ const AppRouter = () => {
     );
   }, []);
 
-  return <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>;
+  return (
+    <>
+      <DocumentTitle />
+      <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>
+    </>
+  );
 };
 
 export default memo(AppRouter);
