@@ -71,8 +71,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
   );
 
   return (
-    <Card className={className} p="xl" radius="md" withBorder
-w="100%">
+    <Card className={className} p="xl" radius="md" w="100%">
       <Stack align="center" gap="sm">
         <Text size="lg" fw={500} ta="center">
           {displayTitle}

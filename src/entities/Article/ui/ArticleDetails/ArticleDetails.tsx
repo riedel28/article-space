@@ -1,13 +1,20 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Stack, Skeleton, Box } from '@mantine/core';
+import {
+  Stack,
+  Skeleton,
+  Box,
+  Title,
+  Text,
+  Image,
+  Alert
+} from '@mantine/core';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { Text } from '@/shared/ui/redesigned/Text';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import {
@@ -16,7 +23,6 @@ import {
   getArticleDetailsIsLoading
 } from '../../model/selectors/articleDetails';
 import { renderArticleBlock } from './renderBlock';
-import { AppImage } from '@/shared/ui/redesigned/AppImage';
 
 interface ArticleDetailsProps {
   className?: string;
@@ -27,18 +33,56 @@ const reducers: ReducersList = {
   articleDetails: articleDetailsReducer
 };
 
-const Redesigned = () => {
+const ArticleImage = ({ src }: { src?: string }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (!src) {
+      setIsLoading(false);
+      return;
+    }
+
+    const img = new window.Image();
+    img.src = src;
+    img.onload = () => setIsLoading(false);
+    img.onerror = () => {
+      setIsLoading(false);
+      setHasError(true);
+    };
+  }, [src]);
+
+  if (isLoading) {
+    return <Skeleton height={420} radius="md" />;
+  }
+
+  if (hasError || !src) {
+    return null;
+  }
+
+  return (
+    <Image
+      src={src}
+      alt="Article image"
+      radius="md"
+      mah={420}
+      fit="cover"
+    />
+  );
+};
+
+const ArticleContent = () => {
   const article = useSelector(getArticleDetailsData);
 
   return (
     <>
-      <Text title={article?.title} size="l" bold />
-      <Text title={article?.subtitle} />
-      <AppImage
-        fallback={<Skeleton width="100%" height={420} radius="md" />}
-        src={article?.img}
-        style={{ width: '100%', maxHeight: 420 }}
-      />
+      <Title order={1} size="h1" fw={700}>
+        {article?.title}
+      </Title>
+      <Text size="lg" c="dimmed">
+        {article?.subtitle}
+      </Text>
+      <ArticleImage src={article?.img} />
       {article?.blocks.map(renderArticleBlock)}
     </>
   );
@@ -80,10 +124,12 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     content = <ArticleDetailsSkeleton />;
   } else if (error) {
     content = (
-      <Text align="center" title={t('Произошла ошибка при загрузке статьи.')} />
+      <Alert color="red" title={t('Ошибка')}>
+        {t('Произошла ошибка при загрузке статьи.')}
+      </Alert>
     );
   } else {
-    content = <Redesigned />;
+    content = <ArticleContent />;
   }
 
   return (
