@@ -31,7 +31,7 @@ export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
   const { t } = useTranslation();
 
   return (
-    <Card w={350} maw={350} withBorder>
+    <Card w="100%" withBorder>
       <Stack gap="md">
         <TextInput
           label={t('Search')}

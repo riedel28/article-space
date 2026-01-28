@@ -1,0 +1,7 @@
+.filterColumn {
+  flex-shrink: 0;
+}
+
+.filterContainer {
+  overflow-y: auto;
+}

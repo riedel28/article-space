@@ -126,22 +126,18 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
         </Title>
 
         <Card.Section p="md" mt="auto">
-          <Group>
-            <Group gap={4}>
-              <IconEye size={12} className={classes.metaIcon} />
-              <Text fz="xs" c="dimmed">
-                {String(article.views)}
-              </Text>
+          <Group gap="xs" wrap="nowrap">
+            <Group gap={4} wrap="nowrap" c="dimmed">
+              <IconEye size={14} />
+              <Text fz="xs">{String(article.views)}</Text>
             </Group>
-            <Group gap={4}>
-              <IconCalendar size={12} className={classes.metaIcon} />
-              <Text fz="xs" c="dimmed">
-                {article.createdAt}
-              </Text>
+            <Group gap={4} wrap="nowrap" c="dimmed">
+              <IconCalendar size={14} />
+              <Text fz="xs">{article.createdAt}</Text>
             </Group>
-            <Group gap={4}>
-              <IconUser size={12} className={classes.metaIcon} />
-              <Text fz="xs" c="dimmed">
+            <Group gap={4} wrap="nowrap" c="dimmed">
+              <IconUser size={14} />
+              <Text fz="xs" truncate>
                 {article.user.username}
               </Text>
             </Group>
