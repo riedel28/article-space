@@ -1,14 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
-import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { StarRating } from '@/shared/ui/redesigned/StarRating';
-import { Modal } from '@/shared/ui/redesigned/Modal';
-import { Drawer } from '@/shared/ui/redesigned/Drawer';
-import { Input } from '@/shared/ui/redesigned/Input';
-import { Button } from '@/shared/ui/redesigned/Button';
-import { Card } from '@/shared/ui/redesigned/Card';
+import {
+  Card,
+  Rating,
+  Text,
+  TextInput,
+  Button,
+  Modal,
+  Drawer,
+  Stack,
+  Group
+} from '@mantine/core';
 
 interface RatingCardProps {
   className?: string;
@@ -27,7 +30,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
     feedbackTitle,
     hasFeedback,
     onCancel,
-    title,
+    title = 'Оцените статью',
     rate = 0
   } = props;
   const { t } = useTranslation();
@@ -57,59 +60,92 @@ export const RatingCard = memo((props: RatingCardProps) => {
     onCancel?.(starsCount);
   }, [onCancel, starsCount]);
 
-  const modalContent = (
-    <>
-      <Text title={feedbackTitle} />
-      <Input
-        data-testid="RatingCard.Input"
-        value={feedback}
-        onChange={setFeedback}
-        placeholder={t('Ваш отзыв')}
-      />
-    </>
-  );
+  const displayTitle = starsCount ? t('Спасибо за оценку!') : t(title);
 
-  const content = (
-    <>
-      <VStack align="center" gap="8" max>
-        <Text title={starsCount ? t('Спасибо за оценку!') : title} />
-        <StarRating
-          selectedStars={starsCount}
-          size={40}
-          onSelect={onSelectStars}
-        />
-      </VStack>
-      <BrowserView>
-        <Modal isOpen={isModalOpen} lazy>
-          <VStack max gap="32">
-            {modalContent}
-            <HStack max gap="16" justify="end">
-              <Button data-testid="RatingCard.Close" onClick={cancelHandle}>
-                {t('Закрыть')}
-              </Button>
-              <Button data-testid="RatingCard.Send" onClick={acceptHandle}>
-                {t('Отправить')}
-              </Button>
-            </HStack>
-          </VStack>
-        </Modal>
-      </BrowserView>
-      <MobileView>
-        <Drawer isOpen={isModalOpen} lazy onClose={cancelHandle}>
-          <VStack gap="32">
-            {modalContent}
-            <Button fullWidth onClick={acceptHandle} size="l">
-              {t('Отправить')}
-            </Button>
-          </VStack>
-        </Drawer>
-      </MobileView>
-    </>
+  const handleSubmit = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
+      acceptHandle();
+    },
+    [acceptHandle]
   );
 
   return (
-    <Card className={className} fullWidth border="partial" padding="24">
-      {content}
+    <Card className={className} p="xl" radius="md" withBorder
+w="100%">
+      <Stack align="center" gap="sm">
+        <Text size="lg" fw={500} ta="center">
+          {displayTitle}
+        </Text>
+        <Rating
+          value={starsCount}
+          onChange={onSelectStars}
+          size="xl"
+          highlightSelectedOnly={false}
+        />
+      </Stack>
+
+      <BrowserView>
+        <Modal
+          opened={isModalOpen}
+          onClose={cancelHandle}
+          title={t('Оставить отзыв')}
+          centered
+        >
+          <form onSubmit={handleSubmit}>
+            <Stack gap="lg">
+              <Stack gap="md">
+                <Text fw={500}>{feedbackTitle}</Text>
+                <TextInput
+                  data-testid="RatingCard.Input"
+                  value={feedback}
+                  onChange={(event) => setFeedback(event.currentTarget.value)}
+                  placeholder={t('Ваш отзыв')}
+                />
+              </Stack>
+              <Group justify="flex-end" gap="md">
+                <Button
+                  variant="default"
+                  data-testid="RatingCard.Close"
+                  onClick={cancelHandle}
+                  type="button"
+                >
+                  {t('Закрыть')}
+                </Button>
+                <Button data-testid="RatingCard.Send" type="submit">
+                  {t('Отправить')}
+                </Button>
+              </Group>
+            </Stack>
+          </form>
+        </Modal>
+      </BrowserView>
+
+      <MobileView>
+        <Drawer
+          opened={isModalOpen}
+          onClose={cancelHandle}
+          position="bottom"
+          title={t('Оставить отзыв')}
+        >
+          <form onSubmit={handleSubmit}>
+            <Stack gap="lg">
+              <Stack gap="md">
+                <Text fw={500}>{feedbackTitle}</Text>
+                <TextInput
+                  data-testid="RatingCard.Input"
+                  value={feedback}
+                  onChange={(event) => setFeedback(event.currentTarget.value)}
+                  placeholder={t('Ваш отзыв')}
+                />
+              </Stack>
+              <Button fullWidth data-testid="RatingCard.Send" type="submit">
+                {t('Отправить')}
+              </Button>
+            </Stack>
+          </form>
+        </Drawer>
+      </MobileView>
     </Card>
   );
 });
