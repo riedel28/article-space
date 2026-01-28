@@ -1,0 +1,18 @@
+.topicBadge {
+  display: inline-block;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: 9999px;
+  background-color: light-dark(
+    var(--mantine-color-hint-1),
+    var(--mantine-color-dark-6)
+  );
+  color: light-dark(var(--mantine-color-hint-7), var(--mantine-color-hint-4));
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 500;
+  width: fit-content;
+}
+
+/* Hide ArticleDetails internal title/subtitle/image (first 3 elements) */
+.articleDetailsWrapper > div > div > *:nth-child(-n + 3) {
+  display: none;
+}

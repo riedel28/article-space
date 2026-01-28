@@ -50,7 +50,12 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
 
           <div className={classes.contentStack}>
             <div>
-              <Text fz="md" fw={600} lineClamp={2} className={classes.articleTitle}>
+              <Text
+                fz="md"
+                fw={600}
+                lineClamp={2}
+                className={classes.articleTitle}
+              >
                 {article.title}
               </Text>
 

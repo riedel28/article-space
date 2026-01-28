@@ -29,7 +29,7 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
 
   return (
     <Stack gap="lg" className={className}>
-      <ArticleViewSelector view={view} onViewClick={onChangeView} />
+      <ArticleViewSelector view={view} onViewChange={onChangeView} />
 
       <Card shadow="sm" padding="md" radius="md" withBorder>
         <TextInput

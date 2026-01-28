@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { Box, Title, SimpleGrid } from '@mantine/core';
 import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { ArticleList } from '@/entities/Article';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { useArticleRecommendationsList } from '../../api/aritcleRecommendationsApi';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { ArticleRecommendationCard } from './ArticleRecommendationCard/ArticleRecommendationCard';
 
 interface ArticleRecommendationsListProps {
   className?: string;
@@ -25,14 +24,24 @@ export const ArticleRecommendationsList = memo(
     }
 
     return (
-      <VStack
-        data-testid="ArticleRecommendationsList"
-        gap="8"
+      <Box
         className={classNames('', {}, [className])}
+        data-testid="ArticleRecommendationsList"
       >
-        <Text size="l" title={t('Рекомендуем')} />
-        <ArticleList articles={articles} target="_blank" />
-      </VStack>
+        <Title order={4} fz="xl" mb="md">
+          {t('Рекомендуем')}
+        </Title>
+
+        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
+          {articles.map((article) => (
+            <ArticleRecommendationCard
+              key={article.id}
+              article={article}
+              target="_blank"
+            />
+          ))}
+        </SimpleGrid>
+      </Box>
     );
   }
 );

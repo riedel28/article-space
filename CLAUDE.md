@@ -152,26 +152,28 @@ The project is migrating to Mantine v8. When working with Mantine components:
 
 1. **Use Native Mantine components wherever possible**
 
-2. **Prefer Mantine style props over custom CSS**:
+2. **Don't use style attribute**
+    - Create *.module.css component instead
+
+3. **Prefer Mantine style props over custom CSS**:
    - Use Mantine's style props (e.g., `pos="relative"`, `display="inline-block"`, `p="md"`, `m="lg"`)
    - Use Mantine's `styles` prop for component-specific styling
    - Only create CSS modules for truly custom styles that cannot be achieved with Mantine props
 
-3. **Use Mantine design tokens**:
+4. **Use Mantine design tokens**:
    - Colors: `color="brand.6"`, `color="error.6"`, `color="success.6"`
    - Spacing: `p="md"`, `m="lg"`, `gap={16}`
    - Radius: `radius="md"`, `radius="lg"`
    - Shadow: `shadow="sm"`, `shadow="md"`, `shadow="xl"`
 
-4. **Minimize CSS module usage**:
-   - Keep CSS modules minimal - only for animations, pseudo-states, or complex selectors
-   - Mantine components handle most styling needs through props
-   - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
-
-5. **Use Mantine variables in css files**
+5. **Minimize CSS module usage**:
+    - Keep CSS modules minimal - only for animations, pseudo-states, or complex selectors
+    - Mantine components handle most styling needs through props
+    - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
+6. **Use Mantine variables in css files**
    - e.g. `border-radius: var(--mantine-radius-lg)`
 
-6. **Animation and transitions**:
+7. **Animation and transitions**:
    - Use Mantine's built-in `transitionProps` when available
    - For custom animations, define them in CSS modules but apply via Mantine's `style` prop
 

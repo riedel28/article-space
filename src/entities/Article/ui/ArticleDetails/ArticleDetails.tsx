@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Stack, Skeleton, Center, Box } from '@mantine/core';
+import { Stack, Skeleton, Box } from '@mantine/core';
 import {
   DynamicModuleLoader,
   ReducersList
@@ -47,13 +47,16 @@ const Redesigned = () => {
 export const ArticleDetailsSkeleton = () => {
   return (
     <Stack gap="md" w="100%">
-      <Center>
-        <Skeleton width={200} height={200} circle />
-      </Center>
-      <Skeleton width={300} height={32} />
-      <Skeleton width={600} height={24} />
-      <Skeleton width="100%" height={200} />
-      <Skeleton width="100%" height={200} />
+      <Skeleton height={16} width="90%" />
+      <Skeleton height={16} width="100%" />
+      <Skeleton height={16} width="95%" />
+      <Skeleton height={16} width="85%" />
+      <Skeleton height={16} width="100%" />
+      <Skeleton height={200} width="100%" radius="md" mt="md" />
+      <Skeleton height={16} width="100%" />
+      <Skeleton height={16} width="90%" />
+      <Skeleton height={16} width="95%" />
+      <Skeleton height={16} width="80%" />
     </Stack>
   );
 };
@@ -71,7 +74,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     }
   }, [dispatch, id]);
 
-  let content;
+  let content: React.ReactNode;
 
   if (isLoading) {
     content = <ArticleDetailsSkeleton />;
@@ -85,8 +88,8 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <Box mih="100vh" className={className}>
-        <Stack gap="md" w="100%">
+      <Box className={className}>
+        <Stack gap="lg" w="100%">
           {content}
         </Stack>
       </Box>

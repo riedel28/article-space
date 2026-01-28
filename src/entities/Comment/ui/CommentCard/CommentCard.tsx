@@ -1,14 +1,8 @@
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
-import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
-import cls from './CommentCard.module.css';
+import { Link } from 'react-router-dom';
+import { Group, Stack, Avatar, Text, Skeleton, Box } from '@mantine/core';
 import { Comment } from '../../model/types/comment';
 import { getRouteProfile } from '@/shared/const/router';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { AppLink } from '@/shared/ui/redesigned/AppLink';
-import { Avatar } from '@/shared/ui/redesigned/Avatar';
 
 interface CommentCardProps {
   className?: string;
@@ -16,25 +10,37 @@ interface CommentCardProps {
   isLoading?: boolean;
 }
 
+const formatDate = (dateString?: string) => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+
 export const CommentCard = memo((props: CommentCardProps) => {
   const { className, comment, isLoading } = props;
 
-  const Skeleton = SkeletonRedesigned;
-
   if (isLoading) {
     return (
-      <VStack
+      <Group
         data-testid="CommentCard.Loading"
-        gap="8"
-        max
-        className={classNames(cls.CommentCard, {}, [className, cls.loading])}
+        gap="md"
+        wrap="nowrap"
+        align="flex-start"
+        className={className}
       >
-        <div className={cls.header}>
-          <Skeleton width={30} height={30} border="50%" />
-          <Skeleton height={16} width={100} className={cls.username} />
-        </div>
-        <Skeleton className={cls.text} width="100%" height={50} />
-      </VStack>
+        <Skeleton circle w={48} h={48} />
+        <Stack gap="xs" flex={1}>
+          <Group gap="sm">
+            <Skeleton h={16} w={120} />
+            <Skeleton h={14} w={100} />
+          </Group>
+          <Skeleton h={40} w="100%" />
+        </Stack>
+      </Group>
     );
   }
 
@@ -42,24 +48,44 @@ export const CommentCard = memo((props: CommentCardProps) => {
     return null;
   }
 
+  const userInitial = comment.user.username?.charAt(0).toUpperCase() || '?';
+
   return (
-    <Card padding="24" border="partial" fullWidth>
-      <VStack
-        data-testid="CommentCard.Content"
-        gap="8"
-        max
-        className={classNames(cls.CommentCardRedesigned, {}, [className])}
+    <Group
+      data-testid="CommentCard.Content"
+      gap="md"
+      wrap="nowrap"
+      align="flex-start"
+      className={className}
+    >
+      <Box
+        component={Link}
+        to={getRouteProfile(comment.user.id)}
+        td="none"
       >
-        <AppLink to={getRouteProfile(comment.user.id)}>
-          <HStack gap="8">
-            {comment.user.avatar ? (
-              <Avatar size={30} src={comment.user.avatar} />
-            ) : null}
-            <Text text={comment.user.username} bold />
-          </HStack>
-        </AppLink>
-        <Text text={comment.text} />
-      </VStack>
-    </Card>
+        <Avatar src={comment.user.avatar} alt={comment.user.username} size={48} radius="xl">
+          {userInitial}
+        </Avatar>
+      </Box>
+      <Stack gap={4} flex={1}>
+        <Group gap="sm" align="baseline">
+          <Text
+            component={Link}
+            to={getRouteProfile(comment.user.id)}
+            fw={600}
+            td="none"
+            c="dark"
+          >
+            {comment.user.username}
+          </Text>
+          {comment.createdAt && (
+            <Text size="sm" c="dimmed">
+              {formatDate(comment.createdAt)}
+            </Text>
+          )}
+        </Group>
+        <Text>{comment.text}</Text>
+      </Stack>
+    </Group>
   );
 });

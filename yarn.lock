@@ -1819,6 +1819,13 @@
     fs-extra "^9.1.0"
     tempy "^1.0.0"
 
+"@mantine/code-highlight@^8.3.13":
+  version "8.3.13"
+  resolved "https://registry.npmjs.org/@mantine/code-highlight/-/code-highlight-8.3.13.tgz"
+  integrity sha512-AEFZ8TVu9A2yjllDz+Yodz5r6o5KX1p1B+9xDa97UXbYGxojJQI0V5Obh8Hyi8o1MAAZ/z1YaE7XznpYwQJjQg==
+  dependencies:
+    clsx "^2.1.1"
+
 "@mantine/core@^8.3.13":
   version "8.3.13"
   resolved "https://registry.npmjs.org/@mantine/core/-/core-8.3.13.tgz"

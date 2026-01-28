@@ -1,34 +1,44 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { useSelector } from 'react-redux';
+import {
+  Container,
+  Grid,
+  Stack,
+  Box,
+  Skeleton,
+  Affix,
+  Divider
+} from '@mantine/core';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { Page } from '@/widgets/Page';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
 import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
-import cls from './ArticleDetailsPage.module.css';
+import classes from './ArticleDetailsPage.module.css';
 import { articleDetailsPageReducer } from '../../model/slices';
 import { ArticleRating } from '@/features/articleRating';
-import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
+import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
+import {
+  getArticleDetailsData,
+  getArticleDetailsIsLoading
+} from '@/entities/Article';
+import { AppImage } from '@/shared/ui/redesigned/AppImage';
+import { ScrollToTopButton } from '@/features/scrollToTopButton';
 
-interface ArticleDetailsPageProps {
-  className?: string;
-}
+type ArticleDetailsPageProps = object;
 
 const reducers: ReducersList = {
   articleDetailsPage: articleDetailsPageReducer
 };
 
-const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
-  const { className } = props;
-  const { t } = useTranslation('article-details');
+const ArticleDetailsPage = (_props: ArticleDetailsPageProps) => {
   const { id } = useParams<{ id: string }>();
+  const article = useSelector(getArticleDetailsData);
+  const isLoading = useSelector(getArticleDetailsIsLoading);
 
   if (!id) {
     return null;
@@ -36,19 +46,46 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <StickyContentLayout
-        content={
-          <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-            <VStack gap="16" max>
-              <DetailsContainer />
-              <ArticleRating articleId={id} />
-              <ArticleRecommendationsList />
-              <ArticleDetailsComments id={id} />
-            </VStack>
-          </Page>
-        }
-        right={<AdditionalInfoContainer />}
-      />
+      <Box className={classes.page}>
+        <Container size="lg">
+          <ArticleDetailsPageHeader />
+
+          <Box className={classes.heroImageWrapper} my="md">
+            {isLoading || !article?.img ? (
+              <Skeleton h="100%" w="100%" />
+            ) : (
+              <AppImage
+                src={article.img}
+                alt={article.title}
+                className={classes.heroImage}
+                fallback={<Skeleton h="100%" w="100%" />}
+              />
+            )}
+          </Box>
+
+          <Grid gutter="xl">
+            <Grid.Col span={{ base: 12, lg: 8 }}>
+              <Stack gap="lg" mb="xl">
+                <DetailsContainer />
+                <Divider />
+                <ArticleRating articleId={id} />
+                <Divider />
+                <ArticleRecommendationsList />
+                <ArticleDetailsComments id={id} />
+              </Stack>
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, lg: 4 }} visibleFrom="lg">
+              <Box className={classes.sidebarSticky}>
+                <AdditionalInfoContainer />
+              </Box>
+            </Grid.Col>
+          </Grid>
+        </Container>
+      </Box>
+      <Affix position={{ bottom: 20, right: 20 }}>
+        <ScrollToTopButton />
+      </Affix>
     </DynamicModuleLoader>
   );
 };

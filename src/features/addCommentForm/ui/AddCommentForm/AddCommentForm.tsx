@@ -1,26 +1,19 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, KeyboardEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
-
+import { Box, Group, Textarea, Button, Avatar, Stack } from '@mantine/core';
+import { IconSend } from '@tabler/icons-react';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { HStack } from '@/shared/ui/redesigned/Stack';
 import {
   addCommentFormActions,
   addCommentFormReducer
 } from '../../model/slices/addCommentFormSlice';
-import {
-  getAddCommentFormError,
-  getAddCommentFormText
-} from '../../model/selectors/addCommentFormSelectors';
-import cls from './AddCommentForm.module.css';
-import { Input } from '@/shared/ui/redesigned/Input';
-import { Button } from '@/shared/ui/redesigned/Button';
-import { Card } from '@/shared/ui/redesigned/Card';
+import { getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
+import { getUserAuthData } from '@/entities/User';
 
 export interface AddCommentFormProps {
   className?: string;
@@ -35,7 +28,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
   const { className, onSendComment } = props;
   const { t } = useTranslation();
   const text = useSelector(getAddCommentFormText);
-  const error = useSelector(getAddCommentFormError);
+  const authData = useSelector(getUserAuthData);
   const dispatch = useAppDispatch();
 
   const onCommentTextChange = useCallback(
@@ -50,28 +43,52 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
     onCommentTextChange('');
   }, [onCommentTextChange, onSendComment, text]);
 
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        onSendHandler();
+      }
+    },
+    [onSendHandler]
+  );
+
+  const userInitial = authData?.username?.charAt(0).toUpperCase() || '?';
+
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <Card padding="24" border="partial" fullWidth>
-        <HStack
-          data-testid="AddCommentForm"
-          justify="between"
-          max
-          gap="16"
-          className={classNames(cls.AddCommentFormRedesigned, {}, [className])}
-        >
-          <Input
-            className={cls.input}
-            placeholder={t('Введите текст комментария')}
-            value={text}
-            data-testid="AddCommentForm.Input"
-            onChange={onCommentTextChange}
-          />
-          <Button data-testid="AddCommentForm.Button" onClick={onSendHandler}>
-            {t('Отправить')}
-          </Button>
-        </HStack>
-      </Card>
+      <Box className={className} data-testid="AddCommentForm">
+        <Group gap="md" wrap="nowrap" align="flex-start">
+          <Avatar src={authData?.avatar} alt={authData?.username} radius="xl">
+            {userInitial}
+          </Avatar>
+          <Stack gap="sm" flex={1}>
+            <Textarea
+              placeholder={t('Напишите комментарий...')}
+              value={text}
+              data-testid="AddCommentForm.Input"
+              onChange={(event) =>
+                onCommentTextChange(event.currentTarget.value)
+              }
+              onKeyDown={onKeyDown}
+              autosize
+              minRows={4}
+              maxRows={10}
+              radius="lg"
+            />
+            <Group justify="flex-end">
+              <Button
+                data-testid="AddCommentForm.Button"
+                onClick={onSendHandler}
+                leftSection={<IconSend size={16} />}
+                radius="md"
+              >
+                {t('Отправить')}
+              </Button>
+            </Group>
+          </Stack>
+        </Group>
+      </Box>
     </DynamicModuleLoader>
   );
 });

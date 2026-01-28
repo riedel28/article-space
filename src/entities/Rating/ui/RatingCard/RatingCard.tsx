@@ -5,7 +5,6 @@ import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { StarRating } from '@/shared/ui/redesigned/StarRating';
 import { Modal } from '@/shared/ui/redesigned/Modal';
-
 import { Drawer } from '@/shared/ui/redesigned/Drawer';
 import { Input } from '@/shared/ui/redesigned/Input';
 import { Button } from '@/shared/ui/redesigned/Button';
@@ -109,7 +108,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
   );
 
   return (
-    <Card fullWidth border="partial" padding="24">
+    <Card className={className} fullWidth border="partial" padding="24">
       {content}
     </Card>
   );
