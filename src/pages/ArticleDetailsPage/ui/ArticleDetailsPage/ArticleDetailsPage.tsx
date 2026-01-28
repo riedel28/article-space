@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   Container,
   Grid,
@@ -8,8 +9,12 @@ import {
   Box,
   Skeleton,
   Affix,
-  Divider
+  Divider,
+  Group,
+  Avatar,
+  Text
 } from '@mantine/core';
+import { IconEye, IconCalendar } from '@tabler/icons-react';
 import {
   DynamicModuleLoader,
   ReducersList
@@ -37,6 +42,7 @@ const reducers: ReducersList = {
 
 const ArticleDetailsPage = (_props: ArticleDetailsPageProps) => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   const article = useSelector(getArticleDetailsData);
   const isLoading = useSelector(getArticleDetailsIsLoading);
 
@@ -60,6 +66,41 @@ const ArticleDetailsPage = (_props: ArticleDetailsPageProps) => {
                 className={classes.heroImage}
                 fallback={<Skeleton h="100%" w="100%" />}
               />
+            )}
+          </Box>
+
+          {/* Mobile article info bar - hidden on lg screens */}
+          <Box hiddenFrom="lg" mb="md">
+            {isLoading && (
+              <Group gap="md">
+                <Skeleton h={20} w={80} />
+                <Skeleton h={20} w={100} />
+                <Skeleton h={24} w={24} circle />
+                <Skeleton h={20} w={80} />
+              </Group>
+            )}
+            {!isLoading && article && (
+              <Group gap="md" className={classes.mobileInfoBar}>
+                <Group gap={4}>
+                  <IconEye size={16} color="var(--mantine-color-dimmed)" />
+                  <Text size="sm" c="dimmed">
+                    {article.views}
+                  </Text>
+                </Group>
+                <Group gap={4}>
+                  <IconCalendar size={16} color="var(--mantine-color-dimmed)" />
+                  <Text size="sm" c="dimmed">
+                    {article.createdAt}
+                  </Text>
+                </Group>
+                <Divider orientation="vertical" />
+                <Group gap="xs">
+                  <Avatar src={article.user.avatar} size="sm" radius="xl" />
+                  <Text size="sm" fw={500}>
+                    {article.user.username}
+                  </Text>
+                </Group>
+              </Group>
             )}
           </Box>
 

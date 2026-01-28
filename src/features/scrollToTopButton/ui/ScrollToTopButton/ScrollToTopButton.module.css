@@ -1,0 +1,6 @@
+.button {
+  background-color: light-dark(
+    var(--mantine-color-brand-1),
+    var(--mantine-color-brand-9)
+  );
+}

@@ -22,23 +22,28 @@ export const ArticleRecommendationCard = memo(
         to={getRouteArticleDetails(article.id)}
         className={classes.linkWrapper}
       >
-        <Card radius="md" withBorder className={classes.card} h="100%">
+        <Card
+          radius="md"
+          withBorder
+          className={classes.card}
+          h="100%"
+          p={{ base: 'xs', sm: 'md' }}
+        >
           <Card.Section>
             <AspectRatio ratio={16 / 10}>
               <Image
                 alt={article.title}
                 src={article.img}
-                h={180}
                 fallbackSrc="https://placehold.co/600x400?text=Изображение+не+найдено"
               />
             </AspectRatio>
           </Card.Section>
 
-          <Text fz="xs" c="dimmed" mt="md">
+          <Text fz="xs" c="dimmed" mt={{ base: 'xs', sm: 'md' }}>
             {topicText}
           </Text>
 
-          <Title order={2} fz="md" mt={4} lineClamp={2}>
+          <Title order={2} fz={{ base: 'sm', sm: 'md' }} mt={4} lineClamp={2}>
             {article.title}
           </Title>
         </Card>

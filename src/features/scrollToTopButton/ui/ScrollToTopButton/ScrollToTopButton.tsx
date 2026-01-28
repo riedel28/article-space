@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { IconArrowUp } from '@tabler/icons-react';
+import classes from './ScrollToTopButton.module.css';
 
 interface ScrollToTopButtonProps {
   className?: string;
@@ -20,7 +21,7 @@ export const ScrollToTopButton = memo((props: ScrollToTopButtonProps) => {
       size="xl"
       radius="xl"
       color="brand"
-      className={className}
+      className={`${classes.button} ${className ?? ''}`}
     >
       <IconArrowUp size={24} />
     </ActionIcon>

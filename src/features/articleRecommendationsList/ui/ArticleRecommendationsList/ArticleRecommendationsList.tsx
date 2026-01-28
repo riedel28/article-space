@@ -32,7 +32,7 @@ export const ArticleRecommendationsList = memo(
           {t('Рекомендуем')}
         </Title>
 
-        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
+        <SimpleGrid cols={{ base: 2, md: 3 }} spacing={{ base: 'sm', sm: 'md' }}>
           {articles.map((article) => (
             <ArticleRecommendationCard
               key={article.id}
