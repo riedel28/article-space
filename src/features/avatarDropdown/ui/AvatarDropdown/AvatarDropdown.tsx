@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Menu, ActionIcon } from '@mantine/core';
+import { IconUser, IconLogout } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { getUserAuthData, userActions } from '@/entities/User';
 import { getRouteProfile } from '@/shared/const/router';
@@ -35,12 +36,17 @@ export const AvatarDropdown = memo(() => {
         </ActionIcon>
       </Menu.Target>
 
-      <Menu.Dropdown w={120}>
-        <Menu.Item onClick={() => navigate(getRouteProfile(authData.id))}>
+      <Menu.Dropdown w={140}>
+        <Menu.Item
+          leftSection={<IconUser size={16} />}
+          onClick={() => navigate(getRouteProfile(authData.id))}
+        >
           {t('Профиль')}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item onClick={onLogout}>{t('Выйти')}</Menu.Item>
+        <Menu.Item leftSection={<IconLogout size={16} />} onClick={onLogout}>
+          {t('Выйти')}
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );
