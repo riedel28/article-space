@@ -14,7 +14,10 @@ export const ArticleRecommendationCard = memo(
   (props: ArticleRecommendationCardProps) => {
     const { article, target } = props;
 
-    const topicText = article.type.filter((t) => t !== 'ALL').join(', ');
+    const typeArray = Array.isArray(article.type)
+      ? article.type
+      : [article.type];
+    const topicText = typeArray.filter((t) => t !== 'ALL').join(', ');
 
     return (
       <AppLink

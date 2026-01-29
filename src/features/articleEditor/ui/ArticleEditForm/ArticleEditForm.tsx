@@ -1,17 +1,15 @@
 import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {
-  Stack,
-  TextInput,
-  MultiSelect,
-  Button,
-  Group,
-  Text
-} from '@mantine/core';
+import { Stack, TextInput, Button, Group, Text, Select } from '@mantine/core';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Link, RichTextEditor } from '@mantine/tiptap';
+import {
+  IconCheck,
+  IconChevronDown,
+  IconDeviceFloppy
+} from '@tabler/icons-react';
 import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
 import { getRouteArticleDetails } from '@/shared/const/router';
 import {
@@ -19,7 +17,6 @@ import {
   ArticleFormValues
 } from '../../model/lib/useArticleForm';
 import { useUpdateArticle } from '../../api/articleEditorApi';
-import { IconDeviceFloppy } from '@tabler/icons-react';
 
 interface ArticleEditFormProps {
   article: Article;
@@ -31,7 +28,12 @@ const ARTICLE_TYPE_OPTIONS = [
   { value: ArticleType.ECONOMICS, label: 'Economics' }
 ];
 
-function blocksToHtml(blocks: Article['blocks']): string {
+/**
+ * Converts legacy blocks format to HTML string for backwards compatibility
+ */
+function blocksToHtml(blocks?: Article['blocks']): string {
+  if (!blocks || blocks.length === 0) return '';
+
   return blocks
     .map((block) => {
       switch (block.type) {
@@ -53,91 +55,14 @@ function blocksToHtml(blocks: Article['blocks']): string {
     .join('');
 }
 
-function htmlToBlocks(html: string): Article['blocks'] {
-  const blocks: Article['blocks'] = [];
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const children = Array.from(doc.body.children);
-
-  let currentTextBlock: {
-    id: string;
-    type: typeof ArticleBlockType.TEXT;
-    title?: string;
-    paragraphs: string[];
-  } | null = null;
-  let blockId = 1;
-
-  const getNextBlockId = () => {
-    const id = blockId;
-    blockId += 1;
-    return String(id);
-  };
-
-  const flushTextBlock = () => {
-    if (currentTextBlock && currentTextBlock.paragraphs.length > 0) {
-      blocks.push(currentTextBlock);
-      currentTextBlock = null;
-    }
-  };
-
-  children.forEach((element) => {
-    const tagName = element.tagName.toLowerCase();
-
-    if (tagName === 'pre') {
-      flushTextBlock();
-      const code =
-        element.querySelector('code')?.textContent || element.textContent || '';
-      blocks.push({
-        id: getNextBlockId(),
-        type: ArticleBlockType.CODE,
-        code
-      });
-    } else if (tagName === 'figure') {
-      flushTextBlock();
-      const img = element.querySelector('img');
-      const caption = element.querySelector('figcaption');
-      if (img) {
-        blocks.push({
-          id: getNextBlockId(),
-          type: ArticleBlockType.IMAGE,
-          src: img.getAttribute('src') || '',
-          title: caption?.textContent || img.getAttribute('alt') || ''
-        });
-      }
-    } else if (tagName.match(/^h[1-6]$/)) {
-      flushTextBlock();
-      currentTextBlock = {
-        id: getNextBlockId(),
-        type: ArticleBlockType.TEXT,
-        title: element.textContent || '',
-        paragraphs: []
-      };
-    } else if (tagName === 'p') {
-      if (!currentTextBlock) {
-        currentTextBlock = {
-          id: getNextBlockId(),
-          type: ArticleBlockType.TEXT,
-          paragraphs: []
-        };
-      }
-      const text = element.textContent?.trim();
-      if (text) {
-        currentTextBlock.paragraphs.push(text);
-      }
-    }
-  });
-
-  flushTextBlock();
-
-  if (blocks.length === 0 && html.trim()) {
-    blocks.push({
-      id: '1',
-      type: ArticleBlockType.TEXT,
-      paragraphs: [html.replace(/<[^>]*>/g, '')]
-    });
+/**
+ * Gets content from article - prefers `content` field, falls back to converting blocks
+ */
+function getArticleContent(article: Article): string {
+  if (article.content) {
+    return article.content;
   }
-
-  return blocks;
+  return blocksToHtml(article.blocks);
 }
 
 export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
@@ -146,14 +71,18 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
   const navigate = useNavigate();
   const [updateArticle, { isLoading: isUpdating }] = useUpdateArticle();
 
-  const initialContent = blocksToHtml(article.blocks);
+  const initialContent = getArticleContent(article);
+
+  const initialType = Array.isArray(article.type)
+    ? article.type[0]
+    : article.type;
 
   const form = useArticleForm({
     initialValues: {
       title: article.title,
       subtitle: article.subtitle,
       img: article.img,
-      type: article.type,
+      type: initialType || null,
       content: initialContent
     }
   });
@@ -178,7 +107,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
 
   const handleSubmit = useCallback(
     async (values: ArticleFormValues) => {
-      const blocks = htmlToBlocks(values.content);
+      if (!values.type) return;
 
       try {
         await updateArticle({
@@ -186,8 +115,8 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
           title: values.title,
           subtitle: values.subtitle,
           img: values.img,
-          type: values.type,
-          blocks,
+          type: [values.type],
+          content: values.content,
           userId: article.user.id,
           views: article.views,
           createdAt: article.createdAt
@@ -234,13 +163,30 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
           {...form.getInputProps('img')}
         />
 
-        <MultiSelect
-          label={t('Topics')}
-          placeholder={t('Select topics')}
+        <Select
+          label={t('Topic')}
+          placeholder={t('Select a topic')}
           data={ARTICLE_TYPE_OPTIONS}
           withAsterisk
-          data-testid="ArticleEditForm.Topics"
+          data-testid="ArticleEditForm.Topic"
           {...form.getInputProps('type')}
+          rightSectionPointerEvents="none"
+          rightSection={<IconChevronDown size={16} />}
+          renderOption={({ option, checked }) => (
+            <Group flex="1" gap="xs">
+              {option.label}
+              {checked && (
+                <IconCheck
+                  style={{
+                    marginInlineStart: 'auto',
+                    color: 'var(--mantine-color-brand-6)'
+                  }}
+                  stroke={1.8}
+                  size={18}
+                />
+              )}
+            </Group>
+          )}
         />
 
         <div>

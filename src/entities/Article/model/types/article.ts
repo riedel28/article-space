@@ -37,5 +37,7 @@ export interface Article {
   views: number;
   createdAt: string;
   type: ArticleType[];
-  blocks: ArticleBlock[];
+  content?: string;
+  /** @deprecated Use content field instead */
+  blocks?: ArticleBlock[];
 }

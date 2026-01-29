@@ -21,14 +21,36 @@ import {
 } from '../../../model/consts/articleConsts';
 import classes from './ArticleListItemRedesigned.module.css';
 
+/**
+ * Extracts plain text preview from article content or blocks
+ */
+function getArticlePreview(article: ArticleListItemProps['article']): string {
+  // Try to get preview from content (HTML)
+  if (article.content) {
+    // Strip HTML tags and get first 200 characters
+    const text = article.content.replace(/<[^>]*>/g, ' ').trim();
+    return text.slice(0, 200);
+  }
+
+  // Fallback to blocks for backwards compatibility
+  if (article.blocks) {
+    const textBlock = article.blocks.find(
+      (block) => block.type === ArticleBlockType.TEXT
+    ) as ArticleTextBlock | undefined;
+    if (textBlock?.paragraphs) {
+      return textBlock.paragraphs.slice(0, 2).join(' ');
+    }
+  }
+
+  return '';
+}
+
 export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
   const { className, article, view, target } = props;
   const { t } = useTranslation();
 
   if (view === ArticleView.BIG) {
-    const textBlock = article.blocks.find(
-      (block) => block.type === ArticleBlockType.TEXT
-    ) as ArticleTextBlock;
+    const preview = getArticlePreview(article);
 
     return (
       <Card
@@ -59,9 +81,9 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                 {article.title}
               </Text>
 
-              {textBlock?.paragraphs && (
+              {preview && (
                 <Text fz="sm" lineClamp={2} c="dimmed" mt="xs">
-                  {textBlock.paragraphs.slice(0, 2).join(' ')}
+                  {preview}
                 </Text>
               )}
 

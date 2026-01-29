@@ -34,9 +34,9 @@ export const DetailsContainer = memo((props: DetailsContainerProps) => {
           <DetailsContainerSkeleton />
         ) : (
           <>
-            {article?.type?.[0] && (
+            {article?.type && (
               <Badge variant="light" size="lg">
-                {article.type[0]}
+                {Array.isArray(article.type) ? article.type[0] : article.type}
               </Badge>
             )}
 

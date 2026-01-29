@@ -5,7 +5,7 @@ export interface ArticleFormValues {
   title: string;
   subtitle: string;
   img: string;
-  type: ArticleType[];
+  type: ArticleType | null;
   content: string;
 }
 
@@ -22,7 +22,7 @@ export function useArticleForm(options: UseArticleFormOptions = {}) {
       title: initialValues?.title ?? '',
       subtitle: initialValues?.subtitle ?? '',
       img: initialValues?.img ?? '',
-      type: initialValues?.type ?? [],
+      type: initialValues?.type ?? null,
       content: initialValues?.content ?? ''
     },
     validate: {
@@ -30,8 +30,7 @@ export function useArticleForm(options: UseArticleFormOptions = {}) {
         value.length < 3 ? 'Title must be at least 3 characters' : null,
       subtitle: (value) =>
         value.length < 3 ? 'Subtitle must be at least 3 characters' : null,
-      type: (value) =>
-        value.length === 0 ? 'Select at least one topic' : null
+      type: (value) => (!value ? 'Select a topic' : null)
     }
   });
 

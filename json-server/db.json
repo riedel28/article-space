@@ -144,34 +144,8 @@
       "title": "Kotlin Multiplatform: один код для всех платформ",
       "subtitle": "Как разрабатывать кроссплатформенные приложения на Kotlin",
       "img": "https://miro.medium.com/max/1200/1*FNakkrty3kjOvNU8m5iQfw.png",
-      "type": [
-        "IT"
-      ],
-      "blocks": [
-        {
-          "id": "1",
-          "type": "TEXT",
-          "title": "Что такое Kotlin Multiplatform?",
-          "paragraphs": [
-            "Kotlin Multiplatform (KMP) — технология от JetBrains, позволяющая использовать общий код на Kotlin для разных платформ: Android, iOS, Desktop и Web. В отличие от Flutter или React Native, KMP не навязывает общий UI, а фокусируется на бизнес-логике.",
-            "Это даёт разработчикам свободу использовать нативные UI-компоненты каждой платформы, сохраняя при этом единую кодовую базу для логики приложения."
-          ]
-        },
-        {
-          "id": "2",
-          "type": "CODE",
-          "code": "// Общий код в модуле shared\nexpect class Platform() {\n    val name: String\n}\n\nfun greeting(): String {\n    return \"Hello, ${Platform().name}!\"\n}\n\n// Android реализация\nactual class Platform actual constructor() {\n    actual val name: String = \"Android ${Build.VERSION.SDK_INT}\"\n}\n\n// iOS реализация\nactual class Platform actual constructor() {\n    actual val name: String = UIDevice.currentDevice.systemName()\n}"
-        },
-        {
-          "id": "3",
-          "type": "TEXT",
-          "title": "Преимущества подхода",
-          "paragraphs": [
-            "Главное преимущество KMP — возможность постепенной миграции. Вы можете начать с выноса небольшой части логики в общий модуль и постепенно расширять его.",
-            "Компании вроде Netflix, VMware и Philips уже используют Kotlin Multiplatform в продакшене."
-          ]
-        }
-      ],
+      "type": "SCIENCE",
+      "content": "<h3>Что такое Kotlin Multiplatform?</h3><p>Kotlin Multiplatform (KMP) — технология от JetBrains, позволяющая использовать общий код на Kotlin для разных платформ: Android, iOS, Desktop и Web. В отличие от Flutter или React Native, KMP не навязывает общий UI, а фокусируется на бизнес-логике.</p><p>Это даёт разработчикам свободу использовать нативные UI-компоненты каждой платформы, сохраняя при этом единую кодовую базу для логики приложения.</p><pre><code>// Общий код в модуле shared\nexpect class Platform() {\n    val name: String\n}\n\nfun greeting(): String {\n    return \"Hello, ${Platform().name}!\"\n}\n\n// Android реализация\nactual class Platform actual constructor() {\n    actual val name: String = \"Android ${Build.VERSION.SDK_INT}\"\n}\n\n// iOS реализация\nactual class Platform actual constructor() {\n    actual val name: String = UIDevice.currentDevice.systemName()\n}</code></pre><h3>Преимущества подхода</h3><p>Главное преимущество KMP — возможность постепенной миграции. Вы можете начать с выноса небольшой части логики в общий модуль и постепенно расширять его.</p><p>Компании вроде Netflix, VMware и Philips уже используют Kotlin Multiplatform в продакшене.</p>",
       "userId": "1",
       "views": 12450,
       "createdAt": "05.11.2023"
@@ -237,28 +211,13 @@
       "title": "Spring Boot 3: Новая эра Java-разработки",
       "subtitle": "Миграция на Java 17+ и нативная компиляция с GraalVM",
       "img": "https://andreyex.ru/wp-content/uploads/2018/05/Kak-ustanovit-Java-s-apt-na-Ubuntu-18.04.jpg",
-      "views": 7820,
-      "createdAt": "01.08.2023",
-      "userId": "1",
       "type": [
-        "IT"
+        "SCIENCE"
       ],
-      "blocks": [
-        {
-          "id": "1",
-          "type": "TEXT",
-          "title": "Что нового в Spring Boot 3",
-          "paragraphs": [
-            "Spring Boot 3 требует минимум Java 17 и приносит полную поддержку Jakarta EE 10. Одно из главных нововведений — нативная компиляция с GraalVM, позволяющая создавать исполняемые файлы с мгновенным запуском.",
-            "Micrometer Observation API унифицирует работу с метриками и трассировкой, а новый HTTP-клиент на базе Java HttpClient заменяет устаревший RestTemplate."
-          ]
-        },
-        {
-          "id": "2",
-          "type": "CODE",
-          "code": "@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n    \n    private final RestClient restClient;\n    \n    public UserController(RestClient.Builder builder) {\n        this.restClient = builder\n            .baseUrl(\"https://api.example.com\")\n            .build();\n    }\n    \n    @GetMapping(\"/{id}\")\n    public User getUser(@PathVariable Long id) {\n        return restClient.get()\n            .uri(\"/users/{id}\", id)\n            .retrieve()\n            .body(User.class);\n    }\n}"
-        }
-      ]
+      "content": "<h3>Что нового в Spring Boot 3</h3><p>Spring Boot 3 требует минимум Java 17 и приносит полную поддержку Jakarta EE 10. Одно из главных нововведений — нативная компиляция с GraalVM, позволяющая создавать исполняемые файлы с мгновенным запуском.</p><p>Micrometer Observation API унифицирует работу с метриками и трассировкой, а новый HTTP-клиент на базе Java HttpClient заменяет устаревший RestTemplate.</p><pre><code>@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n    \n    private final RestClient restClient;\n    \n    public UserController(RestClient.Builder builder) {\n        this.restClient = builder\n            .baseUrl(\"https://api.example.com\")\n            .build();\n    }\n    \n    @GetMapping(\"/{id}\")\n    public User getUser(@PathVariable Long id) {\n        return restClient.get()\n            .uri(\"/users/{id}\", id)\n            .retrieve()\n            .body(User.class);\n    }\n}</code></pre>",
+      "userId": "1",
+      "views": 7820,
+      "createdAt": "01.08.2023"
     },
     {
       "id": "7",
@@ -550,33 +509,14 @@
       "id": "16",
       "title": "Глобальные цепочки поставок",
       "subtitle": "Уроки пандемии и новая география производства",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Container_ship_Yorktown_Express.jpg/1200px-Container_ship_Yorktown_Express.jpg",
-      "views": 4230,
-      "createdAt": "01.11.2023",
-      "userId": "1",
+      "img": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "type": [
         "ECONOMICS"
       ],
-      "blocks": [
-        {
-          "id": "1",
-          "type": "TEXT",
-          "title": "Уязвимость глобализации",
-          "paragraphs": [
-            "Пандемия COVID-19 обнажила хрупкость глобальных цепочек поставок. Зависимость от единственных поставщиков, just-in-time логистика и концентрация производства в нескольких регионах создали системные риски.",
-            "Компании переосмысливают стратегии: friend-shoring (перенос производства в дружественные страны), near-shoring (приближение к рынкам сбыта) и увеличение запасов. Устойчивость становится важнее эффективности."
-          ]
-        },
-        {
-          "id": "2",
-          "type": "TEXT",
-          "title": "Новая индустриализация",
-          "paragraphs": [
-            "США и Европа инвестируют в возвращение стратегических производств: полупроводников, аккумуляторов, фармацевтики. CHIPS Act и Inflation Reduction Act в США, European Chips Act в ЕС — примеры новой промышленной политики.",
-            "Однако полная автаркия невозможна и неэффективна. Оптимальная стратегия — диверсификация поставщиков и создание резервов для критических компонентов."
-          ]
-        }
-      ]
+      "content": "<h3>Уязвимость глобализации</h3><p>Пандемия COVID-19 обнажила хрупкость глобальных цепочек поставок. Зависимость от единственных поставщиков, just-in-time логистика и концентрация производства в нескольких регионах создали системные риски.</p><p>Компании переосмысливают стратегии: friend-shoring (перенос производства в дружественные страны), near-shoring (приближение к рынкам сбыта) и увеличение запасов. Устойчивость становится важнее эффективности.</p><h3>Новая индустриализация</h3><p>США и Европа инвестируют в возвращение стратегических производств: полупроводников, аккумуляторов, фармацевтики. CHIPS Act и Inflation Reduction Act в США, European Chips Act в ЕС — примеры новой промышленной политики.</p><p>Однако полная автаркия невозможна и неэффективна. Оптимальная стратегия — диверсификация поставщиков и создание резервов для критических компонентов.</p>",
+      "userId": "1",
+      "views": 4230,
+      "createdAt": "01.11.2023"
     },
     {
       "id": "17",

@@ -57,7 +57,10 @@ export const ErrorPage = ({ className }: ErrorPageProps) => {
             >
               {t('На главную')}
             </Button>
-            <Button leftSection={<IconRefresh size={18} />} onClick={reloadPage}>
+            <Button
+              leftSection={<IconRefresh size={18} />}
+              onClick={reloadPage}
+            >
               {t('Обновить страницу')}
             </Button>
           </Group>

@@ -23,7 +23,10 @@ export const SidebarItem = memo(({ item, onClick }: SidebarItemProps) => {
     return null;
   }
 
-  const isActive = location.pathname === item.path;
+  const isActive =
+    item.path === '/'
+      ? location.pathname === item.path
+      : location.pathname.startsWith(item.path);
 
   return (
     <NavLink

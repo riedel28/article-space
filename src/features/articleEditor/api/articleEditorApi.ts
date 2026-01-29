@@ -6,7 +6,7 @@ interface UpdateArticleArg {
   title: string;
   subtitle: string;
   type: string[];
-  blocks: Article['blocks'];
+  content: string;
   img?: string;
   userId: string;
   views: number;
