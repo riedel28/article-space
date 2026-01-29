@@ -1,15 +1,9 @@
-import {
-  IconHome,
-  IconInfoCircle,
-  IconUser,
-  IconArticle
-} from '@tabler/icons-react';
+import { IconHome, IconUser, IconArticle } from '@tabler/icons-react';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User';
 
 import { SidebarItemType } from '../types/sidebar';
 import {
-  getRouteAbout,
   getRouteArticles,
   getRouteMain,
   getRouteProfile
@@ -22,26 +16,21 @@ export const useSidebarItems = () => {
       path: getRouteMain(),
       Icon: IconHome,
       text: 'Главная'
-    },
-    {
-      path: getRouteAbout(),
-      Icon: IconInfoCircle,
-      text: 'О сайте'
     }
   ];
 
   if (userData) {
     sidebarItemsList.push(
       {
-        path: getRouteProfile(userData.id),
-        Icon: IconUser,
-        text: 'Профиль',
-        authOnly: true
-      },
-      {
         path: getRouteArticles(),
         Icon: IconArticle,
         text: 'Статьи',
+        authOnly: true
+      },
+      {
+        path: getRouteProfile(userData.id),
+        Icon: IconUser,
+        text: 'Профиль',
         authOnly: true
       }
     );

@@ -9,11 +9,7 @@ import {
   isUserManager,
   userActions
 } from '@/entities/User';
-import {
-  getRouteAdmin,
-  getRouteProfile,
-  getRouteSettings
-} from '@/shared/const/router';
+import { getRouteProfile } from '@/shared/const/router';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 
 export const AvatarDropdown = memo(() => {
@@ -48,16 +44,8 @@ export const AvatarDropdown = memo(() => {
       </Menu.Target>
 
       <Menu.Dropdown w={120}>
-        {isAdminPanelAvailable && (
-          <Menu.Item onClick={() => navigate(getRouteAdmin())}>
-            {t('Админка')}
-          </Menu.Item>
-        )}
         <Menu.Item onClick={() => navigate(getRouteProfile(authData.id))}>
           {t('Профиль')}
-        </Menu.Item>
-        <Menu.Item onClick={() => navigate(getRouteSettings())}>
-          {t('Настройки')}
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item onClick={onLogout}>{t('Выйти')}</Menu.Item>
