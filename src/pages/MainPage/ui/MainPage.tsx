@@ -60,25 +60,48 @@ const MainPage = () => {
 
   return (
     <Page data-testid="MainPage">
-      <Container size="lg" py="xl">
+      <Container
+        size="lg"
+        py={{ base: 'md', sm: 'xl' }}
+        px={{ base: 'sm', sm: 'md' }}
+      >
         {/* Hero Section */}
-        <Stack align="center" gap="lg" mb={60}>
+        <Stack align="center" gap="md" mb="xl">
           <Title
             order={1}
             ta="center"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
+            style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
           >
             {t('hero.title')}
           </Title>
-          <Text
-            size="xl"
-            c="dimmed"
-            ta="center"
-            maw={600}
-          >
+          <Text size="lg" c="dimmed" ta="center" maw={600}
+px="xs">
             {t('hero.subtitle')}
           </Text>
-          <Group>
+          <Stack gap="sm" align="center" w="100%" mb="xl"
+hiddenFrom="xs">
+            <Button
+              size="md"
+              fullWidth
+              maw={280}
+              onClick={handleExploreClick}
+              rightSection={<IconArrowRight size={18} />}
+            >
+              {t('hero.cta')}
+            </Button>
+            <Button
+              size="md"
+              fullWidth
+              maw={280}
+              variant="light"
+              component="a"
+              href="https://github.com"
+              target="_blank"
+            >
+              {t('hero.github')}
+            </Button>
+          </Stack>
+          <Group visibleFrom="xs">
             <Button
               size="lg"
               onClick={handleExploreClick}
@@ -88,9 +111,9 @@ const MainPage = () => {
             </Button>
             <Button
               size="lg"
-              variant="outline"
+              variant="light"
               component="a"
-              href="https://github.com"
+              href="https://github.com/riedel28/production-project"
               target="_blank"
             >
               {t('hero.github')}
@@ -99,29 +122,26 @@ const MainPage = () => {
         </Stack>
 
         {/* Features Section */}
-        <Box mb={60}>
-          <Title order={2} ta="center" mb="xl">
+        <Box mb="xl">
+          <Title order={2} ta="center" mb="lg">
             {t('features.title')}
           </Title>
-          <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="lg">
+          <SimpleGrid
+            cols={{ base: 1, xs: 2, md: 4 }}
+            spacing={{ base: 'md', sm: 'lg' }}
+          >
             {features.map((feature) => (
-              <Card
-                key={feature.titleKey}
-                shadow="sm"
-                padding="lg"
-                radius="md"
-                withBorder
-              >
+              <Card key={feature.titleKey} padding="md" radius="md" withBorder>
                 <ThemeIcon
-                  size={50}
+                  size={44}
                   radius="md"
                   variant="light"
                   color="brand"
                   mb="md"
                 >
-                  <feature.icon size={26} />
+                  <feature.icon size={24} />
                 </ThemeIcon>
-                <Text fw={500} size="lg" mb="xs">
+                <Text fw={500} size="md" mb="xs">
                   {t(feature.titleKey)}
                 </Text>
                 <Text size="sm" c="dimmed">
@@ -134,7 +154,21 @@ const MainPage = () => {
 
         {/* Latest Articles Section */}
         <Box>
-          <Group justify="space-between" mb="xl">
+          <Stack gap="xs" mb="md" hiddenFrom="xs">
+            <Title order={2} size="h3">
+              {t('latestArticles.title')}
+            </Title>
+            <Button
+              variant="subtle"
+              size="sm"
+              p={0}
+              onClick={handleExploreClick}
+              rightSection={<IconArrowRight size={14} />}
+            >
+              {t('latestArticles.viewAll')}
+            </Button>
+          </Stack>
+          <Group justify="space-between" mb="xl" visibleFrom="xs">
             <Title order={2}>{t('latestArticles.title')}</Title>
             <Button
               variant="subtle"
@@ -145,9 +179,12 @@ const MainPage = () => {
             </Button>
           </Group>
           {isLoading ? (
-            <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="lg">
+            <SimpleGrid
+              cols={{ base: 1, md: 2, xl: 3 }}
+              spacing={{ base: 'md', sm: 'lg' }}
+            >
               {[1, 2, 3, 4].map((i) => (
-                <Skeleton key={i} height={250} radius="md" />
+                <Skeleton key={i} height={220} radius="md" />
               ))}
             </SimpleGrid>
           ) : (
