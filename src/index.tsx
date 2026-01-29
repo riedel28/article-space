@@ -21,13 +21,13 @@ const root = createRoot(container);
 root.render(
   <BrowserRouter>
     <StoreProvider>
-      <ErrorBoundary>
-        <ForceUpdateProvider>
-          <ThemeProvider>
+      <ThemeProvider>
+        <ErrorBoundary>
+          <ForceUpdateProvider>
             <App />
-          </ThemeProvider>
-        </ForceUpdateProvider>
-      </ErrorBoundary>
+          </ForceUpdateProvider>
+        </ErrorBoundary>
+      </ThemeProvider>
     </StoreProvider>
   </BrowserRouter>
 );

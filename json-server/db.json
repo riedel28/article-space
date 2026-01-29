@@ -57,12 +57,9 @@
   "articles": [
     {
       "id": "1",
-      "title": "ES2024: Новые возможности JavaScript",
+      "title": "ES2024: Новые возможности JavaScript - Updated",
       "subtitle": "Обзор ключевых нововведений стандарта ECMAScript 2024",
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png",
-      "views": 15420,
-      "createdAt": "15.01.2024",
-      "userId": "1",
       "type": [
         "IT"
       ],
@@ -101,7 +98,10 @@
           "src": "https://hsto.org/r/w1560/getpro/habr/post_images/d56/a02/ffc/d56a02ffc62949b42904ca00c63d8cc1.png",
           "title": "Пример работы с новыми методами в браузере"
         }
-      ]
+      ],
+      "userId": "1",
+      "views": 15420,
+      "createdAt": "15.01.2024"
     },
     {
       "id": "2",
@@ -144,9 +144,6 @@
       "title": "Kotlin Multiplatform: один код для всех платформ",
       "subtitle": "Как разрабатывать кроссплатформенные приложения на Kotlin",
       "img": "https://miro.medium.com/max/1200/1*FNakkrty3kjOvNU8m5iQfw.png",
-      "views": 12450,
-      "createdAt": "05.11.2023",
-      "userId": "1",
       "type": [
         "IT"
       ],
@@ -174,7 +171,10 @@
             "Компании вроде Netflix, VMware и Philips уже используют Kotlin Multiplatform в продакшене."
           ]
         }
-      ]
+      ],
+      "userId": "1",
+      "views": 12450,
+      "createdAt": "05.11.2023"
     },
     {
       "id": "4",
@@ -265,9 +265,9 @@
       "title": "Ruby on Rails 7: Hotwire и современный фронтенд",
       "subtitle": "Как создавать интерактивные приложения без JavaScript-фреймворков",
       "img": "https://res.cloudinary.com/practicaldev/image/fetch/s--oqV3akcU--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/pgnw91fs7tpxn0wyeqh2.jpg",
-      "views": 4560,
-      "createdAt": "10.07.2023",
-      "userId": "1",
+      "views": 9500,
+      "createdAt": "10.09.2023",
+      "userId": "2",
       "type": [
         "IT"
       ],
@@ -275,7 +275,7 @@
         {
           "id": "1",
           "type": "TEXT",
-          "title": "Hotwire: HTML Over The Wire",
+          "title": "Hotwire: HTML Over The Wire!!!",
           "paragraphs": [
             "Rails 7 представил Hotwire — подход к созданию интерактивных веб-приложений, отправляющий HTML вместо JSON. Turbo и Stimulus позволяют добавить динамичность без написания сложного JavaScript-кода.",
             "Turbo Drive ускоряет навигацию, Turbo Frames обновляют части страницы, а Turbo Streams позволяют обновлять DOM через WebSocket."
@@ -1233,6 +1233,12 @@
       "articleId": "6",
       "rate": 5,
       "id": "LMg_dpS"
+    },
+    {
+      "userId": "1",
+      "articleId": "23",
+      "rate": 5,
+      "id": "txycxMT"
     }
   ],
   "profile-ratings": [

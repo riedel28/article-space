@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/code-highlight/styles.css';
+import '@mantine/tiptap/styles.css';
 import { theme } from '@/shared/config/mantine/theme';
 import { ColorScheme } from '@/shared/const/theme';
 
