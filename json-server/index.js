@@ -60,9 +60,21 @@ server.post('/login', (req, res) => {
     }
 });
 
+// Public endpoints that don't require authorization
+const publicEndpoints = ['/articles', '/article-ratings'];
+
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 server.use((req, res, next) => {
+    // Allow public GET requests for certain endpoints
+    const isPublicEndpoint = publicEndpoints.some(
+        (endpoint) => req.path.startsWith(endpoint) && req.method === 'GET'
+    );
+
+    if (isPublicEndpoint) {
+        return next();
+    }
+
     if (!req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });
     }

@@ -16,24 +16,21 @@ export const useSidebarItems = () => {
       path: getRouteMain(),
       Icon: IconHome,
       text: 'Главная'
+    },
+    {
+      path: getRouteArticles(),
+      Icon: IconArticle,
+      text: 'Статьи'
     }
   ];
 
   if (userData) {
-    sidebarItemsList.push(
-      {
-        path: getRouteArticles(),
-        Icon: IconArticle,
-        text: 'Статьи',
-        authOnly: true
-      },
-      {
-        path: getRouteProfile(userData.id),
-        Icon: IconUser,
-        text: 'Профиль',
-        authOnly: true
-      }
-    );
+    sidebarItemsList.push({
+      path: getRouteProfile(userData.id),
+      Icon: IconUser,
+      text: 'Профиль',
+      authOnly: true
+    });
   }
 
   return sidebarItemsList;
