@@ -57,7 +57,7 @@ export const NotificationButton = () => {
           position="bottom"
           title={<Text fw={600}>{t('Уведомления')}</Text>}
         >
-          <NotificationList fullWidth />
+          <NotificationList fullWidth showHeader={false} />
         </Drawer>
       </MobileView>
     </>
