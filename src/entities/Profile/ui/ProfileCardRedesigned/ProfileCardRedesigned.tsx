@@ -55,7 +55,7 @@ export const ProfileCardRedesignedSkeleton = () => {
   return (
     <Card padding="lg" radius="lg" withBorder>
       <Stack gap="md">
-        <Group justify="space-between" align="flex-start">
+        <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
           <Group gap="md" align="center">
             <Skeleton circle height={64} width={64} />
             <Stack gap={4}>
@@ -65,7 +65,7 @@ export const ProfileCardRedesignedSkeleton = () => {
           </Group>
           <Skeleton height={36} width={80} />
         </Group>
-        <SimpleGrid cols={2} spacing="md">
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <Stack gap={4}>
             <Skeleton height={14} width={80} />
             <Skeleton height={20} width={120} />
@@ -136,7 +136,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
 
   const renderViewMode = () => (
     <Stack gap="lg">
-      <Group justify="space-between" align="flex-start">
+      <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
         <Group gap="md" align="center">
           <Box className={data?.avatar ? classes.avatarBorder : undefined}>
             <Avatar size={64} src={data?.avatar} radius="50%" />
@@ -162,7 +162,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
         )}
       </Group>
 
-      <SimpleGrid cols={2} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
         <InfoField label={t('First Name')} value={data?.first} />
         <InfoField label={t('Last Name')} value={data?.lastname} />
         <InfoField label={t('Username')} value={data?.username} />
@@ -174,21 +174,19 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
   const renderEditMode = () => (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="lg">
-        <Group justify="space-between" align="flex-start">
-          <Group gap="md" align="center">
-            <Box className={data?.avatar ? classes.avatarBorder : undefined}>
-              <Avatar size={64} src={data?.avatar} radius="50%" />
-            </Box>
-            <Box>
-              <Title order={2}>{t('Edit Profile')}</Title>
-              <Text c="dimmed" size="sm">
-                {t('Update your personal information')}
-              </Text>
-            </Box>
-          </Group>
+        <Group gap="md" align="center">
+          <Box className={data?.avatar ? classes.avatarBorder : undefined}>
+            <Avatar size={64} src={data?.avatar} radius="50%" />
+          </Box>
+          <Box>
+            <Title order={2}>{t('Edit Profile')}</Title>
+            <Text c="dimmed" size="sm">
+              {t('Update your personal information')}
+            </Text>
+          </Box>
         </Group>
 
-        <SimpleGrid cols={2} spacing="md">
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <TextInput
             label={t('First Name')}
             placeholder={t('Enter your first name')}
@@ -221,7 +219,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
           />
         </SimpleGrid>
 
-        <Group justify="flex-end" mt="md">
+        <Group justify="flex-end" mt="md" wrap="wrap" gap="sm">
           <Button
             variant="default"
             onClick={onCancel}
