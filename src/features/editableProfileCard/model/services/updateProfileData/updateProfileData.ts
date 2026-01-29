@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '@/entities/Profile';
+import { userActions, getUserAuthData } from '@/entities/User';
 import { ValidateProfileError } from '../../consts/consts';
 import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 import { validateProfileData } from '../validateProfileData/validateProfileData';
@@ -10,7 +11,7 @@ export const updateProfileData = createAsyncThunk<
   void,
   ThunkConfig<ValidateProfileError[]>
 >('profile/updateProfileData', async (_, thunkApi) => {
-  const { extra, rejectWithValue, getState } = thunkApi;
+  const { extra, rejectWithValue, getState, dispatch } = thunkApi;
 
   const formData = getProfileForm(getState());
 
@@ -28,6 +29,16 @@ export const updateProfileData = createAsyncThunk<
 
     if (!response.data) {
       throw new Error();
+    }
+
+    const authData = getUserAuthData(getState());
+
+    // Sync avatar to global user state if user is editing their own profile
+    if (authData && authData.id === formData?.id) {
+      dispatch(userActions.setAuthData({
+        ...authData,
+        avatar: response.data.avatar
+      }));
     }
 
     return response.data;

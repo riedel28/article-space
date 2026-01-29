@@ -24,12 +24,6 @@ export const Avatar = (props: AvatarProps) => {
       classNames={{
         placeholder: classes.placeholder
       }}
-      // styles={{
-      //   placeholder: {
-      //     color: 'var(--mantine-color-gray-7)'
-      //     &
-      //   }
-      // }}
     />
   );
 };

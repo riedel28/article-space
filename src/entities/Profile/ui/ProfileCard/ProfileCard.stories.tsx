@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { Country } from '@/entities/Country';
-import { Currency } from '@/entities/Currency';
+import { action } from '@storybook/addon-actions';
 import avatar from '@/shared/assets/tests/storybook.jpg';
 import { ProfileCard } from './ProfileCard';
 
@@ -17,24 +16,36 @@ const Template: StoryFn<typeof ProfileCard> = (args) => (
   <ProfileCard {...args} />
 );
 
-const primaryArgs = {
-  data: {
-    username: 'admin',
-    age: 22,
-    country: Country.Ukraine,
-    lastname: 'ulbi tv',
-    first: 'asd',
-    city: 'asf',
-    currency: Currency.USD,
-    avatar
-  }
+const profileData = {
+  username: 'johndoe',
+  lastname: 'Doe',
+  first: 'John',
+  avatar
 };
 
-export const Primary = Template.bind({});
-Primary.args = primaryArgs;
+export const ViewMode = Template.bind({});
+ViewMode.args = {
+  data: profileData,
+  readonly: true,
+  canEdit: true,
+  onEdit: action('onEdit')
+};
 
-export const PrimaryRedesigned = Template.bind({});
-PrimaryRedesigned.args = primaryArgs;
+export const ViewModeWithoutEditPermission = Template.bind({});
+ViewModeWithoutEditPermission.args = {
+  data: profileData,
+  readonly: true,
+  canEdit: false
+};
+
+export const EditMode = Template.bind({});
+EditMode.args = {
+  data: profileData,
+  readonly: false,
+  canEdit: true,
+  onSubmit: action('onSubmit'),
+  onCancel: action('onCancel')
+};
 
 export const WithError = Template.bind({});
 WithError.args = {

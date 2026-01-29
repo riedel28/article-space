@@ -1,8 +1,8 @@
 export const updateProfile = (firstname: string, lastname: string) => {
-  cy.getByTestId('EditableProfileCardHeader.EditButton').click();
+  cy.getByTestId('ProfileCard.EditButton').click();
   cy.getByTestId('ProfileCard.firstname').clear().type(firstname);
   cy.getByTestId('ProfileCard.lastname').clear().type(lastname);
-  cy.getByTestId('EditableProfileCardHeader.SaveButton').click();
+  cy.getByTestId('ProfileCard.SaveButton').click();
 };
 
 export const resetProfile = (profileId: string) => {

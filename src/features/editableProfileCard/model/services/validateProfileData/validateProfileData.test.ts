@@ -1,16 +1,11 @@
-import { Country } from '@/entities/Country';
-import { Currency } from '@/entities/Currency';
 import { ValidateProfileError } from '../../consts/consts';
 import { validateProfileData } from './validateProfileData';
 
 const data = {
   username: 'admin',
-  age: 22,
-  country: Country.Ukraine,
-  lastname: 'ulbi tv',
-  first: 'asd',
-  city: 'asf',
-  currency: Currency.USD
+  lastname: 'Doe',
+  first: 'John',
+  avatar: 'https://example.com/avatar.jpg'
 };
 
 describe('validateProfileData.test', () => {
@@ -30,25 +25,33 @@ describe('validateProfileData.test', () => {
     expect(result).toEqual([ValidateProfileError.INCORRECT_USER_DATA]);
   });
 
-  test('incorrect age', async () => {
-    const result = validateProfileData({ ...data, age: undefined });
+  test('without first name only', async () => {
+    const result = validateProfileData({
+      ...data,
+      first: ''
+    });
 
-    expect(result).toEqual([ValidateProfileError.INCORRECT_AGE]);
+    expect(result).toEqual([ValidateProfileError.INCORRECT_USER_DATA]);
   });
 
-  test('incorrect country', async () => {
-    const result = validateProfileData({ ...data, country: undefined });
+  test('without last name only', async () => {
+    const result = validateProfileData({
+      ...data,
+      lastname: ''
+    });
 
-    expect(result).toEqual([ValidateProfileError.INCORRECT_COUNTRY]);
+    expect(result).toEqual([ValidateProfileError.INCORRECT_USER_DATA]);
   });
 
-  test('incorrect all', async () => {
+  test('no data', async () => {
+    const result = validateProfileData(undefined);
+
+    expect(result).toEqual([ValidateProfileError.NO_DATA]);
+  });
+
+  test('empty object', async () => {
     const result = validateProfileData({});
 
-    expect(result).toEqual([
-      ValidateProfileError.INCORRECT_USER_DATA,
-      ValidateProfileError.INCORRECT_AGE,
-      ValidateProfileError.INCORRECT_COUNTRY
-    ]);
+    expect(result).toEqual([ValidateProfileError.INCORRECT_USER_DATA]);
   });
 });

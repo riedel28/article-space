@@ -1,4 +1,25 @@
 {
+  "Profile": "Profile",
+  "Edit": "Edit",
+  "Edit Profile": "Edit Profile",
+  "Update your personal information": "Update your personal information",
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+  "Username": "Username",
+  "Avatar URL": "Avatar URL",
+  "Enter your first name": "Enter your first name",
+  "Enter your last name": "Enter your last name",
+  "Enter your username": "Enter your username",
+  "Cancel": "Cancel",
+  "Save changes": "Save changes",
+  "An error occurred while loading the profile": "An error occurred while loading the profile",
+  "Please try refreshing the page": "Please try refreshing the page",
+  "Validation errors": "Validation errors",
+  "Server error while saving": "Server error while saving",
+  "Invalid region": "Invalid region",
+  "Data not specified": "Data not specified",
+  "First and last name are required": "First and last name are required",
+  "Invalid age": "Invalid age",
   "Профиль": "Profile",
   "Редактировать": "Edit",
   "Ваша фамилия": "Your lastname",
@@ -17,5 +38,5 @@
   "Имя и фамилия обязательны": "First and last name are required",
   "Данные не указаны": "Data is not specified",
   "Некорректный возраст": "Incorrect age",
-  "Профиль не найден": "Профиль не найден"
+  "Профиль не найден": "Profile not found"
 }

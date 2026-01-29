@@ -12,7 +12,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
 
   return (
     <Page data-testid="ProfilePage" className={className}>
-      <Container size="lg" px={{ base: 'md', sm: 'lg' }} py="xl">
+      <Container size="md" px={{ base: 'md', sm: 'lg' }} py="xl">
         <Stack gap={24} w="100%">
           <EditableProfileCard id={id} />
         </Stack>
