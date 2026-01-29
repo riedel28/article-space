@@ -34,7 +34,7 @@ export const NotificationButton = () => {
               </ActionIcon>
             </Indicator>
           </Popover.Target>
-          <Popover.Dropdown p={4}>
+          <Popover.Dropdown p={0}>
             <NotificationList />
           </Popover.Dropdown>
         </Popover>

@@ -17,21 +17,32 @@ const Template: StoryFn<typeof NotificationItem> = (args) => (
   <NotificationItem {...args} />
 );
 
-export const Normal = Template.bind({});
-Normal.args = {
+export const Unread = Template.bind({});
+Unread.args = {
   item: {
     id: '1',
-    title: 'Notification Title',
-    description: 'This is a notification description'
+    title: 'New comment on your article',
+    description: 'Someone left a comment on your article',
+    unread: true
+  }
+};
+
+export const Read = Template.bind({});
+Read.args = {
+  item: {
+    id: '2',
+    title: 'New follower: Sarah K.',
+    description: 'You have a new follower'
   }
 };
 
 export const WithLink = Template.bind({});
 WithLink.args = {
   item: {
-    id: '2',
-    title: 'Notification with Link',
-    description: 'Click to view more details',
-    href: 'https://example.com'
+    id: '3',
+    title: 'Your article was featured',
+    description: 'Click to view your featured article',
+    href: 'https://example.com/articles/1',
+    unread: true
   }
 };

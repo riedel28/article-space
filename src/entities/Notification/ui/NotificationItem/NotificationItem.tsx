@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Box, Text } from '@mantine/core';
+import { Box, Text, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { Notification } from '../../model/types/notification';
 import classes from './NotificationItem.module.css';
@@ -17,14 +17,21 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
   const { item } = props;
 
   const content = (
-    <>
-      <Text fw={500} size="sm" mb={4}>
-        {item.title}
-      </Text>
-      <Text size="xs" c="dimmed">
-        {item.description}
-      </Text>
-    </>
+    <Group gap="sm" wrap="nowrap" align="flex-start">
+      <Box
+        className={classes.indicator}
+        data-unread={item.unread || undefined}
+      />
+
+      <Box>
+        <Text fw={600} size="sm" c="dark">
+          {item.title}
+        </Text>
+        <Text size="xs" c="dimmed">
+          {item.description}
+        </Text>
+      </Box>
+    </Group>
   );
 
   if (item.href) {
@@ -35,9 +42,5 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
     );
   }
 
-  return (
-    <Box className={classes.NotificationItem}>
-      {content}
-    </Box>
-  );
+  return <Box className={classes.NotificationItem}>{content}</Box>;
 });

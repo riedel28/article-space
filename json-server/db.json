@@ -5,14 +5,16 @@
       "title": "Новый комментарий к вашей статье",
       "description": "Пользователь user оставил комментарий к статье «Javascript news»",
       "userId": "1",
-      "href": "http://localhost:3000/articles/1"
+      "href": "http://localhost:3000/articles/1",
+      "unread": true
     },
     {
       "id": "2",
       "title": "Ваша статья получила высокую оценку",
       "description": "Статья «TypeScript news» получила 5 звёзд от читателя",
       "userId": "1",
-      "href": "http://localhost:3000/articles/8"
+      "href": "http://localhost:3000/articles/8",
+      "unread": true
     },
     {
       "id": "3",
