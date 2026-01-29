@@ -39,6 +39,11 @@ export const updateProfileData = createAsyncThunk<
         ...authData,
         avatar: response.data.avatar
       }));
+
+      // Persist avatar to users table so it loads correctly on page refresh
+      await extra.api.patch(`/users/${authData.id}`, {
+        avatar: response.data.avatar
+      });
     }
 
     return response.data;
