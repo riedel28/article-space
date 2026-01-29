@@ -1,23 +1,28 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { Stack, TextInput, Button, Alert } from '@mantine/core';
+import { Stack, TextInput, PasswordInput, Button, Alert } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { IconUser, IconLock, IconAlertCircle } from '@tabler/icons-react';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
-import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
-import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { loginReducer } from '../../model/slice/loginSlice';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
 export interface LoginFormProps {
   className?: string;
   onSuccess: () => void;
+}
+
+interface LoginFormValues {
+  username: string;
+  password: string;
 }
 
 const initialReducers: ReducersList = {
@@ -27,50 +32,46 @@ const initialReducers: ReducersList = {
 const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const username = useSelector(getLoginUsername);
-  const password = useSelector(getLoginPassword);
   const isLoading = useSelector(getLoginIsLoading);
   const error = useSelector(getLoginError);
   const forceUpdate = useForceUpdate();
 
-  const onChangeUsername = useCallback(
-    (value: string) => {
-      dispatch(loginActions.setUsername(value));
+  const form = useForm<LoginFormValues>({
+    initialValues: {
+      username: '',
+      password: ''
     },
-    [dispatch]
-  );
-
-  const onChangePassword = useCallback(
-    (value: string) => {
-      dispatch(loginActions.setPassword(value));
+    validate: {
+      username: (value) =>
+        value.trim().length < 1 ? t('Username is required') : null,
+      password: (value) =>
+        value.length < 1 ? t('Password is required') : null
     },
-    [dispatch]
-  );
+    validateInputOnBlur: true
+  });
 
-  const onLoginClick = useCallback(async () => {
-    const result = await dispatch(loginByUsername({ username, password }));
-    if (result.meta.requestStatus === 'fulfilled') {
-      onSuccess();
-      forceUpdate();
-    }
-  }, [dispatch, username, password, onSuccess, forceUpdate]);
-
-  const onSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      onLoginClick();
+  const handleSubmit = useCallback(
+    async (values: LoginFormValues) => {
+      const result = await dispatch(
+        loginByUsername({ username: values.username, password: values.password })
+      );
+      if (result.meta.requestStatus === 'fulfilled') {
+        onSuccess();
+        forceUpdate();
+      }
     },
-    [onLoginClick]
+    [dispatch, onSuccess, forceUpdate]
   );
 
   return (
     <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-      <form onSubmit={onSubmit}>
-        <Stack gap="md" w={400} className={className}>
+      <form onSubmit={form.onSubmit(handleSubmit)} className={className}>
+        <Stack gap="lg">
           {error && (
             <Alert
               variant="light"
               color="red"
+              icon={<IconAlertCircle size={16} />}
               title={t('Ошибка при авторизации')}
             >
               {t('Вы ввели неверный логин или пароль')}
@@ -78,27 +79,24 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
           )}
 
           <TextInput
-            autoFocus
-            type="text"
+            data-autofocus
             label={t('Username')}
             placeholder={t('Введите username')}
-            onChange={(e) => onChangeUsername(e.currentTarget.value)}
-            value={username}
+            leftSection={<IconUser size={16} />}
+            {...form.getInputProps('username')}
           />
-          <TextInput
-            type="password"
+
+          <PasswordInput
             label={t('Password')}
             placeholder={t('Введите пароль')}
-            onChange={(e) => onChangePassword(e.currentTarget.value)}
-            value={password}
+            leftSection={<IconLock size={16} />}
+            visibilityToggleButtonProps={{
+              'aria-label': t('Toggle password visibility')
+            }}
+            {...form.getInputProps('password')}
           />
-          <Button
-            type="submit"
-            mt="xs"
-            ml="auto"
-            fullWidth
-            disabled={isLoading}
-          >
+
+          <Button type="submit" fullWidth loading={isLoading} mt="xs">
             {t('Войти')}
           </Button>
         </Stack>

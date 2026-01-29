@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, Loader, Text } from '@mantine/core';
+import { Modal, Loader, Text, Title, Stack } from '@mantine/core';
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
 
 interface LoginModalProps {
@@ -17,7 +17,16 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
       className={className}
       opened={isOpen}
       onClose={onClose}
-      title={<Text fw={700}>{t('Форма авторизации')}</Text>}
+      title={
+        <Stack gap={4}>
+          <Title fw={600} order={2} fz="lg">
+            {t('Добро пожаловать')}
+          </Title>
+          <Text size="sm" c="dimmed">
+            {t('Введите свои данные для входа')}
+          </Text>
+        </Stack>
+      }
       centered
     >
       <Suspense fallback={<Loader type="dots" />}>

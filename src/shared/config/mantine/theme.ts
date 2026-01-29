@@ -3,7 +3,8 @@ import {
   DEFAULT_THEME,
   Select,
   TextInput,
-  Chip
+  Chip,
+  Modal
 } from '@mantine/core';
 
 export const theme = createTheme({
@@ -90,6 +91,15 @@ export const theme = createTheme({
           checkIcon: {
             stroke: 1.8
           } as any
+        }
+      }
+    }),
+    Modal: Modal.extend({
+      defaultProps: {
+        styles: {
+          header: {
+            alignItems: 'flex-start'
+          }
         }
       }
     })
