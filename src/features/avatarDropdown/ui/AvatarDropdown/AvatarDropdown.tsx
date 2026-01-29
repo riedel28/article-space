@@ -3,12 +3,7 @@ import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Menu, ActionIcon } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import {
-  getUserAuthData,
-  isUserAdmin,
-  isUserManager,
-  userActions
-} from '@/entities/User';
+import { getUserAuthData, userActions } from '@/entities/User';
 import { getRouteProfile } from '@/shared/const/router';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 
@@ -16,15 +11,12 @@ export const AvatarDropdown = memo(() => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAdmin = useSelector(isUserAdmin);
-  const isManager = useSelector(isUserManager);
+
   const authData = useSelector(getUserAuthData);
 
   const onLogout = useCallback(() => {
     dispatch(userActions.logout());
   }, [dispatch]);
-
-  const isAdminPanelAvailable = isAdmin || isManager;
 
   if (!authData) {
     return null;
