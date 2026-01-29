@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Stack,
@@ -24,6 +24,7 @@ import {
   getArticleDetailsIsLoading
 } from '../../model/selectors/articleDetails';
 import { ArticleBlockType } from '../../model/consts/articleConsts';
+import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
 
 interface ArticleDetailsProps {
   className?: string;
@@ -34,38 +35,16 @@ const reducers: ReducersList = {
   articleDetails: articleDetailsReducer
 };
 
-const ArticleImage = ({ src }: { src?: string }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    if (!src) {
-      setIsLoading(false);
-      return;
-    }
-
-    const img = new window.Image();
-    img.src = src;
-    img.onload = () => setIsLoading(false);
-    img.onerror = () => {
-      setIsLoading(false);
-      setHasError(true);
-    };
-  }, [src]);
-
-  if (isLoading) {
-    return <Skeleton height={420} radius="md" />;
-  }
-
-  if (hasError || !src) {
-    return null;
-  }
-
-  return (
-    <Image src={src} alt="Article image" radius="md" mah={420}
-fit="cover" />
-  );
-};
+const ArticleImage = ({ src }: { src?: string }) => (
+  <Image
+    src={src}
+    alt="Article image"
+    radius="md"
+    mah={420}
+    fit="cover"
+    fallbackSrc={IMAGE_FALLBACK_URL}
+  />
+);
 
 /**
  * Converts legacy blocks format to HTML string for backwards compatibility

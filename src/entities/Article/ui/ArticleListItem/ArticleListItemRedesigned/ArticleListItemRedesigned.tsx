@@ -1,24 +1,16 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Card,
-  Group,
-  Text,
-  Skeleton,
-  Image,
-  AspectRatio,
-  Title
-} from '@mantine/core';
+import { Card, Group, Text, Image, AspectRatio, Title } from '@mantine/core';
 import { IconCalendar, IconEye, IconUser } from '@tabler/icons-react';
 import { ArticleListItemProps } from '../ArticleListItem';
 import { ArticleTextBlock } from '../../../model/types/article';
-import { AppImage } from '@/shared/ui/redesigned/AppImage';
 import { AppLink } from '@/shared/ui/redesigned/AppLink';
 import { getRouteArticleDetails } from '@/shared/const/router';
 import {
   ArticleBlockType,
   ArticleView
 } from '../../../model/consts/articleConsts';
+import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
 import classes from './ArticleListItemRedesigned.module.css';
 
 /**
@@ -62,11 +54,11 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
       >
         <div className={classes.cardBigContainer}>
           <div className={classes.imageContainer}>
-            <AppImage
-              fallback={<Skeleton w="100%" h="100%" />}
+            <Image
               src={article.img}
               alt={article.title}
               className={classes.articleImage}
+              fallbackSrc={IMAGE_FALLBACK_URL}
             />
           </div>
 
@@ -138,7 +130,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
               alt={article.title}
               src={article.img}
               h={180}
-              fallbackSrc="https://placehold.co/600x400?text=Изображение+не+найдено"
+              fallbackSrc={IMAGE_FALLBACK_URL}
             />
           </AspectRatio>
         </Card.Section>
