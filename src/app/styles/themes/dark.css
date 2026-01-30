@@ -1,13 +1,5 @@
-.app_dark_theme {
-  /* Legacy colors - deprecated */
-  --bg-color: #090949;
-  --inverted-bg-color: #e8e8ea;
-  --primary-color: #007ea3;
-  --secondary-color: #005975;
-  --inverted-primary-color: #00a3d1;
-  --inverted-secondary-color: #00c8ff;
-
-  /* Redesigned - Mantine aligned colors */
+[data-mantine-color-scheme='dark'] {
+  /* Mantine aligned colors */
   --dark-bg-redesigned: #090f11;
   --bg-redesigned: #0c1214;
   --light-bg-redesigned: #151c1f;
