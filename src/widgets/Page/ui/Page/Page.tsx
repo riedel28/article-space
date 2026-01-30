@@ -17,7 +17,7 @@ interface PageProps extends TestProps {
   onScrollEnd?: () => void;
 }
 
-export const PAGE_ID = 'PAGE_ID';
+const PAGE_ID = 'PAGE_ID';
 
 export const Page = memo((props: PageProps) => {
   const { className, children, onScrollEnd } = props;

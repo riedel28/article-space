@@ -1,17 +1,17 @@
 import { User } from '@/entities/User';
 import { ArticleBlockType, ArticleType } from '../consts/articleConsts';
 
-export interface ArticleBlockBase {
+interface ArticleBlockBase {
   id: string;
   type: ArticleBlockType;
 }
 
-export interface ArticleCodeBlock extends ArticleBlockBase {
+interface ArticleCodeBlock extends ArticleBlockBase {
   type: ArticleBlockType.CODE;
   code: string;
 }
 
-export interface ArticleImageBlock extends ArticleBlockBase {
+interface ArticleImageBlock extends ArticleBlockBase {
   type: ArticleBlockType.IMAGE;
   src: string;
   title: string;

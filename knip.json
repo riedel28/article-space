@@ -1,0 +1,67 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/index.tsx",
+    "json-server/index.js",
+    "config/build/**/*.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "scripts/**/*.{js,ts}", "e2e/**/*.ts", "config/**/*.ts"],
+  "ignore": [
+    "**/*.test.{ts,tsx}",
+    "**/*.stories.{ts,tsx}",
+    "**/testing.ts",
+    "**/testing.tsx",
+    "src/shared/config/storybook/**",
+    "src/shared/config/i18n/**",
+    "src/shared/lib/tests/**",
+    "config/storybook/**"
+  ],
+  "ignoreDependencies": [
+    "@storybook/*",
+    "storybook",
+    "@testing-library/*",
+    "identity-obj-proxy",
+    "regenerator-runtime",
+    "@babel/*",
+    "babel-*",
+    "@pmmmwh/react-refresh-webpack-plugin",
+    "@svgr/webpack",
+    "@types/*",
+    "circular-dependency-plugin",
+    "copy-webpack-plugin",
+    "css-loader",
+    "file-loader",
+    "fork-ts-checker-webpack-plugin",
+    "html-webpack-plugin",
+    "mini-css-extract-plugin",
+    "postcss-loader",
+    "react-refresh",
+    "style-loader",
+    "ts-loader",
+    "webpack-bundle-analyzer",
+    "eslint-plugin-import",
+    "json-server",
+    "lint-staged"
+  ],
+  "jest": {
+    "config": "config/jest/jest.config.ts",
+    "entry": ["**/*.test.{ts,tsx}"]
+  },
+  "storybook": {
+    "config": "config/storybook",
+    "entry": ["**/*.stories.{ts,tsx}"]
+  },
+  "playwright": {
+    "config": "playwright.config.ts",
+    "entry": ["e2e/**/*.ts"]
+  },
+  "webpack": {
+    "config": ["config/build/buildWebpackConfig.ts", "config/build/**/*.ts"]
+  },
+  "eslint": {
+    "config": ".eslintrc.js"
+  },
+  "typescript": {
+    "config": "tsconfig.json"
+  }
+}
