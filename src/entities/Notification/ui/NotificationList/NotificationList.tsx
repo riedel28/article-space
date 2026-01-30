@@ -1,6 +1,7 @@
+import { Box,ScrollArea, Skeleton, Stack, Text } from '@mantine/core';
 import { memo } from 'react';
-import { Stack, Skeleton, ScrollArea, Text, Box } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
+
 import { useNotifications } from '../../api/notificationApi';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 import classes from './NotificationList.module.css';

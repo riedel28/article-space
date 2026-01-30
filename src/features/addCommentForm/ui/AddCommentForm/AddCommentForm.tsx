@@ -1,19 +1,21 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback, KeyboardEvent } from 'react';
-import { useSelector } from 'react-redux';
-import { Box, Group, Textarea, Button, Avatar, Stack } from '@mantine/core';
+import { Avatar, Box, Button, Group, Stack,Textarea } from '@mantine/core';
 import { IconSend } from '@tabler/icons-react';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { KeyboardEvent,memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
+import { getUserAuthData } from '@/entities/User';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+
+import { getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
 import {
   addCommentFormActions,
   addCommentFormReducer
 } from '../../model/slices/addCommentFormSlice';
-import { getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
-import { getUserAuthData } from '@/entities/User';
 
 export interface AddCommentFormProps {
   className?: string;

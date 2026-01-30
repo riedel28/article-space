@@ -1,7 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import { Box, Title, SimpleGrid } from '@mantine/core';
+import { Box, SimpleGrid,Title } from '@mantine/core';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
+
 import { useArticleRecommendationsList } from '../../api/aritcleRecommendationsApi';
 import { ArticleRecommendationCard } from './ArticleRecommendationCard/ArticleRecommendationCard';
 

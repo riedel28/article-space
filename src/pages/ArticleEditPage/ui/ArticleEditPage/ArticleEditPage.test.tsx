@@ -1,10 +1,11 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
-import { Article, ArticleType, ArticleBlockType } from '@/entities/Article';
-import ArticleEditPage from './ArticleEditPage';
 
+import { Article, ArticleBlockType,ArticleType } from '@/entities/Article';
 import { useGetArticleForEdit } from '@/features/articleEditor';
+import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
+import ArticleEditPage from './ArticleEditPage';
 
 const mockArticle: Article = {
   id: '1',

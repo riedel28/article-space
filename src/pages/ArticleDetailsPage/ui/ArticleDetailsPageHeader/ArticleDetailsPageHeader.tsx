@@ -1,11 +1,13 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { ActionIcon, Button, Group, Tooltip } from '@mantine/core';
 import { IconArrowLeft, IconPencil } from '@tabler/icons-react';
-import { getRouteArticleEdit, getRouteArticles } from '@/shared/const/router';
+import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { getArticleDetailsData } from '@/entities/Article';
+import { getRouteArticleEdit, getRouteArticles } from '@/shared/const/router';
+
 import { getCanEditArticle } from '../../model/selectors/article';
 import classes from './ArticleDetailsPageHeader.module.css';
 

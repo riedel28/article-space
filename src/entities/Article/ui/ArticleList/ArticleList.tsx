@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
+import { Center,SimpleGrid, Stack, Title } from '@mantine/core';
 import { HTMLAttributeAnchorTarget, memo } from 'react';
-import { SimpleGrid, Stack, Title, Center } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
+
 import { ArticleView } from '../../model/consts/articleConsts';
-import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
-import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { Article } from '../../model/types/article';
+import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
+import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 
 interface ArticleListProps {
   className?: string;

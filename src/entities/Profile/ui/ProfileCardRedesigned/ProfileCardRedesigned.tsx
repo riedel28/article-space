@@ -1,22 +1,22 @@
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Group,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text,
+  TextInput,
+  Title} from '@mantine/core';
+import { IconDeviceFloppy, IconPencil } from '@tabler/icons-react';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Card,
-  Stack,
-  Group,
-  Avatar,
-  TextInput,
-  Skeleton,
-  Text,
-  Title,
-  Button,
-  SimpleGrid,
-  Box
-} from '@mantine/core';
-import { IconDeviceFloppy, IconPencil } from '@tabler/icons-react';
+
+import { ProfileFormValues,useProfileForm } from '../../model/lib/useProfileForm';
 import { Profile } from '../../model/types/profile';
 import classes from './ProfileCardRedesigned.module.css';
-import { useProfileForm, ProfileFormValues } from '../../model/lib/useProfileForm';
 
 export interface ProfileCardProps {
   className?: string;

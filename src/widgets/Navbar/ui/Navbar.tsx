@@ -1,12 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Burger, Button, Group } from '@mantine/core';
+import { memo, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
-import { NotificationButton } from '@/features/notificationButton';
+import { LoginModal } from '@/features/AuthByUsername';
 import { AvatarDropdown } from '@/features/avatarDropdown';
+import { NotificationButton } from '@/features/notificationButton';
 
 import classes from './Navbar.module.css';
 

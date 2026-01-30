@@ -1,19 +1,18 @@
-import { useTranslation } from 'react-i18next';
+import {
+  Button,
+  Card,
+  Drawer,
+  Group,
+  Modal,
+  Rating,
+  Stack,
+  Text,
+  Textarea,
+  TextInput,
+  Title} from '@mantine/core';
 import { memo, useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
-import {
-  Card,
-  Rating,
-  Text,
-  TextInput,
-  Button,
-  Modal,
-  Drawer,
-  Stack,
-  Group,
-  Title,
-  Textarea
-} from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 interface RatingCardProps {
   className?: string;

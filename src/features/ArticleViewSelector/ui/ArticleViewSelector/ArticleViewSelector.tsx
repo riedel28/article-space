@@ -1,7 +1,6 @@
-import { memo } from 'react';
 import { Center, SegmentedControl } from '@mantine/core';
-
 import { IconGridDots, IconMenu4 } from '@tabler/icons-react';
+import { memo } from 'react';
 
 import { ArticleView } from '@/entities/Article';
 

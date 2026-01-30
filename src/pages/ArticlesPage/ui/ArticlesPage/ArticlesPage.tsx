@@ -1,24 +1,25 @@
-import { useCallback, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Affix, Box, Button, Collapse, Flex, Stack, Text, Title } from '@mantine/core';
 import { IconAdjustments } from '@tabler/icons-react';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
+import { ArticleViewSelector } from '@/features/ArticleViewSelector';
+import { ScrollToTopButton } from '@/features/scrollToTopButton';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { Page } from '@/widgets/Page';
-import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList';
+
+import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageReducer } from '../../model/slices/articlesPageSlice';
+import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList';
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
-import { ScrollToTopButton } from '@/features/scrollToTopButton';
-import { ArticleViewSelector } from '@/features/ArticleViewSelector';
-import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 import classes from './ArticlesPage.module.css';
 
 interface ArticlesPageProps {

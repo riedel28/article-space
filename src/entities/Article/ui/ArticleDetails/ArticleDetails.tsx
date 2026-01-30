@@ -1,30 +1,32 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import {
-  Stack,
-  Skeleton,
-  Box,
-  Title,
-  Text,
-  Image,
   Alert,
+  Box,
+  Image,
+  Skeleton,
+  Stack,
+  Text,
+  Title,
   TypographyStylesProvider
 } from '@mantine/core';
+import { memo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
+import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
-import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
+
+import { ArticleBlockType } from '../../model/consts/articleConsts';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
   getArticleDetailsIsLoading
 } from '../../model/selectors/articleDetails';
-import { ArticleBlockType } from '../../model/consts/articleConsts';
-import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
+import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
+import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 
 interface ArticleDetailsProps {
   className?: string;

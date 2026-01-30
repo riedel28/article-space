@@ -33,11 +33,16 @@ module.exports = {
     'i18next',
     'react-hooks',
     'ulbi-tv-plugin',
-    'unused-imports'
+    'unused-imports',
+    'simple-import-sort'
   ],
   rules: {
     // Unused imports - keep code clean
     'unused-imports/no-unused-imports': 'error',
+
+    // Import sorting
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
 
     // TypeScript rules
     '@typescript-eslint/no-unused-vars': 'warn',

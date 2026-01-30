@@ -1,8 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
 import { Profile } from '@/entities/Profile';
 import { $api } from '@/shared/api/api';
+import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
 import { profileReducer } from '../../model/slice/profileSlice';
 import { EditableProfileCard } from './EditableProfileCard';
 

@@ -1,8 +1,10 @@
+import { Avatar, Box,Group, Skeleton, Stack, Text } from '@mantine/core';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Group, Stack, Avatar, Text, Skeleton, Box } from '@mantine/core';
-import { Comment } from '../../model/types/comment';
+
 import { getRouteProfile } from '@/shared/const/router';
+
+import { Comment } from '../../model/types/comment';
 
 interface CommentCardProps {
   className?: string;

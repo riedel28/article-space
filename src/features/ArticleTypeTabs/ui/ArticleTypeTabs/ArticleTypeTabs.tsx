@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
 import { Box, Chip, Group, Text } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
+import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { ArticleType } from '@/entities/Article';
 
 interface ArticleTypeTabsProps {

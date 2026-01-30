@@ -1,9 +1,11 @@
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, Drawer, Indicator,Popover, Text } from '@mantine/core';
 import { IconBell } from '@tabler/icons-react';
 import { useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
-import { ActionIcon, Popover, Drawer, Text, Indicator } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
+
 import { NotificationList } from '@/entities/Notification';
+
 import classes from './NotificationButton.module.css';
 
 export const NotificationButton = () => {

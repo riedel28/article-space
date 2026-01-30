@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { NotificationItem } from './NotificationItem';
 import { MantineDecorator } from '@/shared/config/storybook/MantineDecorator/MantineDecorator';
+
+import { NotificationItem } from './NotificationItem';
 
 const meta: Meta<typeof NotificationItem> = {
   title: 'entities/Notification/NotificationItem',

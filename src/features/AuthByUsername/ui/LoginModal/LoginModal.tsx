@@ -1,6 +1,7 @@
+import { Loader, Modal, Stack,Text, Title } from '@mantine/core';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, Loader, Text, Title, Stack } from '@mantine/core';
+
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
 
 interface LoginModalProps {

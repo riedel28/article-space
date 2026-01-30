@@ -1,34 +1,36 @@
-import { memo } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import {
-  Container,
-  Grid,
-  Stack,
-  Box,
-  Skeleton,
   Affix,
-  Divider,
-  Group,
   Avatar,
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Group,
+  Skeleton,
+  Stack,
   Text
 } from '@mantine/core';
-import { IconEye, IconCalendar } from '@tabler/icons-react';
+import { IconCalendar,IconEye } from '@tabler/icons-react';
+import { memo } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Article';
+import { ArticleRating } from '@/features/articleRating';
+import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
+import { ScrollToTopButton } from '@/features/scrollToTopButton';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
-import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
-import classes from './ArticleDetailsPage.module.css';
-import { articleDetailsPageReducer } from '../../model/slices';
-import { ArticleRating } from '@/features/articleRating';
-import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
-import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
-import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
-import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Article';
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
-import { ScrollToTopButton } from '@/features/scrollToTopButton';
+
+import { articleDetailsPageReducer } from '../../model/slices';
+import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
+import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
+import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
+import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
+import classes from './ArticleDetailsPage.module.css';
 
 const reducers: ReducersList = {
   articleDetailsPage: articleDetailsPageReducer

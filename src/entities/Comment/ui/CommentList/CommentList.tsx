@@ -1,8 +1,9 @@
+import { Stack, Text } from '@mantine/core';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Stack, Text } from '@mantine/core';
-import { CommentCard } from '../CommentCard/CommentCard';
+
 import { Comment } from '../../model/types/comment';
+import { CommentCard } from '../CommentCard/CommentCard';
 
 interface CommentListProps {
   className?: string;

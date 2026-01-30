@@ -1,10 +1,12 @@
-import { memo } from 'react';
 import { AppShell, Box, CloseButton, Group, Stack } from '@mantine/core';
-import { ThemeSwitcher } from '@/features/ThemeSwitcher';
+import { memo } from 'react';
+
 import { LangSwitcher } from '@/features/LangSwitcher';
-import { SidebarItem } from '../SidebarItem/SidebarItem';
-import { useSidebarItems } from '../../model/selectors/getSidebarItems';
+import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { AppLogo } from '@/shared/ui/redesigned/AppLogo';
+
+import { useSidebarItems } from '../../model/selectors/getSidebarItems';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
 import classes from './Sidebar.module.css';
 
 interface SidebarProps {

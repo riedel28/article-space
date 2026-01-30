@@ -1,5 +1,6 @@
-import { ReactNode, useMemo } from 'react';
 import { Select } from '@mantine/core';
+import { ReactNode, useMemo } from 'react';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 export interface ListBoxItem {

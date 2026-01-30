@@ -82,6 +82,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^0.12.0",
     "eslint-plugin-ulbi-tv-plugin": "^0.0.10",
     "eslint-plugin-unused-imports": "^4.3.0",

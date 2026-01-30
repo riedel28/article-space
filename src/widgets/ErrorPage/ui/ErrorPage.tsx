@@ -1,7 +1,8 @@
+import { Box,Button, Container, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import { IconAlertTriangle, IconHome,IconRefresh } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
-import { Container, Title, Text, Button, Group, Stack, ThemeIcon, Box } from '@mantine/core';
-import { IconAlertTriangle, IconRefresh, IconHome } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+
 import cls from './ErrorPage.module.css';
 
 export const ErrorPage = () => {

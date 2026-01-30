@@ -1,26 +1,28 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Stack, Alert } from '@mantine/core';
+import { Alert,Stack } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
 import { ProfileCard, ProfileFormValues } from '@/entities/Profile';
 import { getUserAuthData } from '@/entities/User';
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
+
 import { ValidateProfileError } from '../../model/consts/consts';
+import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
+import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import { getProfileValidateErrors } from '../../model/selectors/getProfileValidateErrors/getProfileValidateErrors';
-import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
-import { profileActions, profileReducer } from '../../model/slice/profileSlice';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import { profileActions, profileReducer } from '../../model/slice/profileSlice';
 
 interface EditableProfileCardProps {
   className?: string;

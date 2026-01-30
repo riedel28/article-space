@@ -1,29 +1,29 @@
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Group,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title} from '@mantine/core';
+import {
+  IconArrowRight,
+  IconArticle,
+  IconLanguage,
+  IconStar,
+  IconUsers} from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Title,
-  Text,
-  Button,
-  SimpleGrid,
-  Card,
-  Group,
-  Stack,
-  ThemeIcon,
-  Box,
-  Skeleton
-} from '@mantine/core';
-import {
-  IconArticle,
-  IconUsers,
-  IconStar,
-  IconLanguage,
-  IconArrowRight
-} from '@tabler/icons-react';
-import { Page } from '@/widgets/Page';
-import { getRouteArticles } from '@/shared/const/router';
+
 import { ArticleList, ArticleView } from '@/entities/Article';
+import { getRouteArticles } from '@/shared/const/router';
+import { Page } from '@/widgets/Page';
+
 import { useLatestArticles } from '../api/latestArticlesApi';
 
 const features = [

@@ -1,7 +1,8 @@
-import { useParams } from 'react-router-dom';
 import { Container, Stack } from '@mantine/core';
-import { Page } from '@/widgets/Page';
+import { useParams } from 'react-router-dom';
+
 import { EditableProfileCard } from '@/features/editableProfileCard';
+import { Page } from '@/widgets/Page';
 
 interface ProfilePageProps {
   className?: string;

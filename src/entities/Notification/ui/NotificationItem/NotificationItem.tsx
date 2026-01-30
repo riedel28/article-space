@@ -1,6 +1,7 @@
+import { Box, Group,Text } from '@mantine/core';
 import { memo } from 'react';
-import { Box, Text, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
+
 import { Notification } from '../../model/types/notification';
 import classes from './NotificationItem.module.css';
 

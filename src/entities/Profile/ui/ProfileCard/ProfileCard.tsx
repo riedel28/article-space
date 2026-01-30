@@ -1,9 +1,8 @@
 import {
+  ProfileCardProps,
   ProfileCardRedesigned,
   ProfileCardRedesignedError,
-  ProfileCardRedesignedSkeleton,
-  ProfileCardProps
-} from '../ProfileCardRedesigned/ProfileCardRedesigned';
+  ProfileCardRedesignedSkeleton} from '../ProfileCardRedesigned/ProfileCardRedesigned';
 
 export type { ProfileCardProps };
 

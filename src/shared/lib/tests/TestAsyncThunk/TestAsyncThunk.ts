@@ -1,4 +1,5 @@
 import axios, { AxiosStatic } from 'axios';
+
 import { StateSchema } from '@/app/providers/StoreProvider';
 
 jest.mock('axios');

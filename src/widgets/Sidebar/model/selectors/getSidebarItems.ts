@@ -1,9 +1,10 @@
-import { IconHome, IconUser, IconArticle } from '@tabler/icons-react';
+import { IconArticle,IconHome, IconUser } from '@tabler/icons-react';
 import { useSelector } from 'react-redux';
+
 import { getUserAuthData } from '@/entities/User';
+import { getRouteArticles, getRouteMain, getRouteProfile } from '@/shared/const/router';
 
 import { SidebarItemType } from '../types/sidebar';
-import { getRouteArticles, getRouteMain, getRouteProfile } from '@/shared/const/router';
 
 export const useSidebarItems = () => {
   const userData = useSelector(getUserAuthData);

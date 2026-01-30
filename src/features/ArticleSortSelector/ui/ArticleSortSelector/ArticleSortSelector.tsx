@@ -1,9 +1,10 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useMemo } from 'react';
 import { Stack, Text } from '@mantine/core';
-import { ListBox, SelectOption } from '@/shared/ui/redesigned/Popups';
-import { SortOrder } from '@/shared/types/sort';
+import { memo, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { ArticleSortField } from '@/entities/Article';
+import { SortOrder } from '@/shared/types/sort';
+import { ListBox, SelectOption } from '@/shared/ui/redesigned/Popups';
 
 interface ArticleSortSelectorProps {
   className?: string;

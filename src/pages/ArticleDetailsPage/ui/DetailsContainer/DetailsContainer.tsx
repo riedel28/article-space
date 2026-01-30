@@ -1,12 +1,14 @@
+import { Badge, Box, Card,Skeleton, Stack, Text, Title } from '@mantine/core';
 import { memo } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Stack, Title, Text, Box, Skeleton, Badge, Card } from '@mantine/core';
+import { useParams } from 'react-router-dom';
+
 import {
   ArticleDetails,
   getArticleDetailsData,
   getArticleDetailsIsLoading
 } from '@/entities/Article';
+
 import cls from './DetailsContainer.module.css';
 
 interface DetailsContainerProps {

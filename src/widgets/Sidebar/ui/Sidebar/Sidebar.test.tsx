@@ -1,5 +1,7 @@
 import { AppShell } from '@mantine/core';
+
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
 import { Sidebar } from '../Sidebar/Sidebar';
 
 // Wrapper to provide AppShell context required by Sidebar

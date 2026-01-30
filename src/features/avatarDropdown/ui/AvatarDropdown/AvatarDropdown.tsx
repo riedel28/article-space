@@ -1,9 +1,10 @@
-import { useTranslation } from 'react-i18next';
+import { ActionIcon,Menu } from '@mantine/core';
+import { IconLogout,IconUser } from '@tabler/icons-react';
 import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Menu, ActionIcon } from '@mantine/core';
-import { IconUser, IconLogout } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+
 import { getUserAuthData, userActions } from '@/entities/User';
 import { getRouteProfile } from '@/shared/const/router';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';

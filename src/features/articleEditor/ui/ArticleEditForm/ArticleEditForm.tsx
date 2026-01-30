@@ -1,15 +1,17 @@
+import { Button, Group, Select,Stack, Text, TextInput } from '@mantine/core';
+import { Link, RichTextEditor } from '@mantine/tiptap';
+import { IconCheck, IconChevronDown, IconDeviceFloppy } from '@tabler/icons-react';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Stack, TextInput, Button, Group, Text, Select } from '@mantine/core';
-import { useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { Link, RichTextEditor } from '@mantine/tiptap';
-import { IconCheck, IconChevronDown, IconDeviceFloppy } from '@tabler/icons-react';
+
 import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
 import { getRouteArticleDetails } from '@/shared/const/router';
-import { useArticleForm, ArticleFormValues } from '../../model/lib/useArticleForm';
+
 import { useUpdateArticle } from '../../api/articleEditorApi';
+import { ArticleFormValues,useArticleForm } from '../../model/lib/useArticleForm';
 
 interface ArticleEditFormProps {
   article: Article;

@@ -1,5 +1,5 @@
+import { Chip, createTheme, DEFAULT_THEME, Modal,Select, TextInput } from '@mantine/core';
 import { CSSProperties } from 'react';
-import { createTheme, DEFAULT_THEME, Select, TextInput, Chip, Modal } from '@mantine/core';
 
 export const theme = createTheme({
   primaryColor: 'brand',

@@ -1,11 +1,13 @@
 import { memo, Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
 import { getUserInited, initAuthData } from '@/entities/User';
-import { AppRouter } from './providers/router';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { AppShellLayout } from '@/shared/layouts/AppShellLayout';
 import { AppLoaderLayout } from '@/shared/layouts/AppLoaderLayout';
+import { AppShellLayout } from '@/shared/layouts/AppShellLayout';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+
 import { useAppToolbar } from './lib/useAppToolbar';
+import { AppRouter } from './providers/router';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
 
 const App = memo(() => {

@@ -1,6 +1,7 @@
-import { memo, ReactElement, ReactNode } from 'react';
 import { AppShell } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { memo, ReactElement, ReactNode } from 'react';
+
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 

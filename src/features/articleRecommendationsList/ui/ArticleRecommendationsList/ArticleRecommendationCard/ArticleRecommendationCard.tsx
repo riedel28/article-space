@@ -1,8 +1,10 @@
+import { AspectRatio, Card, Image, Text, Title } from '@mantine/core';
 import { memo } from 'react';
-import { Card, Text, Image, AspectRatio, Title } from '@mantine/core';
+
 import { Article } from '@/entities/Article';
-import { AppLink } from '@/shared/ui/redesigned/AppLink';
 import { getRouteArticleDetails } from '@/shared/const/router';
+import { AppLink } from '@/shared/ui/redesigned/AppLink';
+
 import classes from './ArticleRecommendationCard.module.css';
 
 interface ArticleRecommendationCardProps {

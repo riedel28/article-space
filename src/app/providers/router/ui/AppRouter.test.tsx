@@ -1,8 +1,10 @@
 import { screen } from '@testing-library/react';
-import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
-import AppRouter from './AppRouter';
-import { getRouteAbout, getRouteAdmin, getRouteProfile } from '@/shared/const/router';
+
 import { UserRole } from '@/entities/User';
+import { getRouteAbout, getRouteAdmin, getRouteProfile } from '@/shared/const/router';
+import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
+import AppRouter from './AppRouter';
 
 describe('app/router/AppRouter', () => {
   test('Страница должна отрендериться', async () => {

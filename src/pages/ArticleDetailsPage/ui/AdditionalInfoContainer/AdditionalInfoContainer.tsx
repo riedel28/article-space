@@ -1,21 +1,22 @@
-import { memo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import {
-  Card,
-  Stack,
-  Group,
-  Text,
-  Divider,
   Avatar,
   Button,
-  ThemeIcon,
-  Skeleton
-} from '@mantine/core';
-import { IconEye, IconCalendar, IconPencil } from '@tabler/icons-react';
+  Card,
+  Divider,
+  Group,
+  Skeleton,
+  Stack,
+  Text,
+  ThemeIcon} from '@mantine/core';
+import { IconCalendar, IconEye, IconPencil } from '@tabler/icons-react';
+import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Article';
 import { getRouteArticleEdit } from '@/shared/const/router';
+
 import { getCanEditArticle } from '../../model/selectors/article';
 import classes from './AdditionalInfoContainer.module.css';
 

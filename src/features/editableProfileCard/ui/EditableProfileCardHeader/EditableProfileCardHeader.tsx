@@ -1,14 +1,16 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Group, Title, Button as MantineButton } from '@mantine/core';
+import { Button as MantineButton,Group, Title } from '@mantine/core';
 import { IconEdit } from '@tabler/icons-react';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
 import { getUserAuthData } from '@/entities/User';
-import { profileActions } from '../../model/slice/profileSlice';
-import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
-import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Card } from '@/shared/ui/redesigned/Card';
+
+import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
+import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
+import { profileActions } from '../../model/slice/profileSlice';
 
 interface EditableProfileCardHeaderProps {
   className?: string;

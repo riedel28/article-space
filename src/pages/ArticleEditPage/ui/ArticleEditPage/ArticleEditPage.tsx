@@ -1,11 +1,13 @@
-import { useTranslation } from 'react-i18next';
+import { Alert, Button, Card, Container, Skeleton, Stack,Text, Title } from '@mantine/core';
+import { IconAlertCircle,IconArrowLeft } from '@tabler/icons-react';
 import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Card, Title, Text, Skeleton, Alert, Button, Stack } from '@mantine/core';
-import { IconArrowLeft, IconAlertCircle } from '@tabler/icons-react';
-import { Page } from '@/widgets/Page';
+
 import { ArticleEditForm, useGetArticleForEdit } from '@/features/articleEditor';
 import { getRouteArticleDetails } from '@/shared/const/router';
+import { Page } from '@/widgets/Page';
+
 import classes from './ArticleEditPage.module.css';
 
 const ArticleEditPage = memo(() => {

@@ -1,13 +1,15 @@
+import { AspectRatio, Card, Group, Image, Text, Title } from '@mantine/core';
+import { IconCalendar, IconEye, IconUser } from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Group, Text, Image, AspectRatio, Title } from '@mantine/core';
-import { IconCalendar, IconEye, IconUser } from '@tabler/icons-react';
-import { ArticleListItemProps } from '../ArticleListItem';
-import { ArticleTextBlock } from '../../../model/types/article';
-import { AppLink } from '@/shared/ui/redesigned/AppLink';
-import { getRouteArticleDetails } from '@/shared/const/router';
-import { ArticleBlockType, ArticleView } from '../../../model/consts/articleConsts';
+
 import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
+import { getRouteArticleDetails } from '@/shared/const/router';
+import { AppLink } from '@/shared/ui/redesigned/AppLink';
+
+import { ArticleBlockType, ArticleView } from '../../../model/consts/articleConsts';
+import { ArticleTextBlock } from '../../../model/types/article';
+import { ArticleListItemProps } from '../ArticleListItem';
 import classes from './ArticleListItemRedesigned.module.css';
 
 /**

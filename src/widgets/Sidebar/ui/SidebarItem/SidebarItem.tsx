@@ -1,12 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, Link } from 'react-router-dom';
 import { NavLink } from '@mantine/core';
+import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { Link,useLocation } from 'react-router-dom';
 
 import { getUserAuthData } from '@/entities/User';
-import { SidebarItemType } from '../../model/types/sidebar';
 
+import { SidebarItemType } from '../../model/types/sidebar';
 import classes from './SidebarItem.module.css';
 
 interface SidebarItemProps {

@@ -1,5 +1,6 @@
+import { AspectRatio,Card, Group, Skeleton } from '@mantine/core';
 import { memo } from 'react';
-import { Card, Skeleton, Group, AspectRatio } from '@mantine/core';
+
 import { ArticleView } from '../../model/consts/articleConsts';
 import classes from './ArticleListItemRedesigned/ArticleListItemRedesigned.module.css';
 

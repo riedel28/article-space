@@ -1,9 +1,10 @@
+import { Card, Group, Select,Stack, TextInput } from '@mantine/core';
+import { IconCheck, IconChevronDown, IconSearch } from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Stack, TextInput, Card, Group, Select } from '@mantine/core';
-import { IconCheck, IconChevronDown, IconSearch } from '@tabler/icons-react';
-import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
+
 import { ArticleSortField, ArticleType } from '@/entities/Article';
+import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
 import { SortOrder } from '@/shared/types/sort';
 
 interface ArticlesFiltersProps {

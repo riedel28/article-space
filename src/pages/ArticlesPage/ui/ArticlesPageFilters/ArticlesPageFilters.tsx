@@ -1,10 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
-import { Stack, TextInput, Card } from '@mantine/core';
+import { Card,Stack, TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
+import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';
-import { ArticleViewSelector } from '@/features/ArticleViewSelector';
 import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
+import { ArticleViewSelector } from '@/features/ArticleViewSelector';
+
 import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
 interface ArticlesPageFiltersProps {

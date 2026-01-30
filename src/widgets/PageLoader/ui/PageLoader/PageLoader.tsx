@@ -1,5 +1,7 @@
-import { Container, Skeleton, Stack, Group, Card } from '@mantine/core';
+import { Card,Container, Group, Skeleton, Stack } from '@mantine/core';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
+
 import cls from './PageLoader.module.css';
 
 interface PageLoaderProps {

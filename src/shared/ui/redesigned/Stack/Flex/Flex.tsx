@@ -1,5 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import { Flex as MantineFlex } from '@mantine/core';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 export type FlexJustify = 'start' | 'center' | 'end' | 'between';

@@ -1,5 +1,6 @@
-import { HTMLAttributes, memo, ReactNode } from 'react';
 import { Card as MantineCard } from '@mantine/core';
+import { HTMLAttributes, memo, ReactNode } from 'react';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 export type CardVariant = 'normal' | 'outlined' | 'light';

@@ -1,5 +1,6 @@
-import { memo } from 'react';
 import { Text as MantineText, Title } from '@mantine/core';
+import { memo } from 'react';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 export type TextVariant = 'primary' | 'error' | 'accent';

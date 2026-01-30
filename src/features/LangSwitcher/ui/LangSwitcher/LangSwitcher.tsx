@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Button } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
+
 import classes from './LangSwitcher.module.css';
 
 interface LangSwitcherProps {

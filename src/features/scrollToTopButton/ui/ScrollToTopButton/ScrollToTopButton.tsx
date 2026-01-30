@@ -1,6 +1,7 @@
-import { memo } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { IconArrowUp } from '@tabler/icons-react';
+import { memo } from 'react';
+
 import classes from './ScrollToTopButton.module.css';
 
 interface ScrollToTopButtonProps {

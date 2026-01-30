@@ -1,5 +1,6 @@
-import { memo } from 'react';
 import { Skeleton as MantineSkeleton } from '@mantine/core';
+import { memo } from 'react';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface SkeletonProps {

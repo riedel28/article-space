@@ -1,19 +1,21 @@
+import { Alert,Button, PasswordInput, Stack, TextInput } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { IconAlertCircle,IconLock, IconUser } from '@tabler/icons-react';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { memo, useCallback } from 'react';
-import { Stack, TextInput, PasswordInput, Button, Alert } from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { IconUser, IconLock, IconAlertCircle } from '@tabler/icons-react';
+
 import {
   DynamicModuleLoader,
   ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
+
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { loginReducer } from '../../model/slice/loginSlice';
-import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
 export interface LoginFormProps {
   className?: string;
