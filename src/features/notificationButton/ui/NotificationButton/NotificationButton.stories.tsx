@@ -5,9 +5,6 @@ import { NotificationButton } from './NotificationButton';
 const meta: Meta<typeof NotificationButton> = {
   title: 'features/NotificationButton',
   component: NotificationButton,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

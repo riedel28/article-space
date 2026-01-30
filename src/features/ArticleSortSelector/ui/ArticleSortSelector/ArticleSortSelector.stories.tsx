@@ -5,9 +5,6 @@ import { ArticleSortSelector } from './ArticleSortSelector';
 const meta: Meta<typeof ArticleSortSelector> = {
   title: 'features/ArticleSortSelector',
   component: ArticleSortSelector,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

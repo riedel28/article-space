@@ -5,9 +5,6 @@ import { CommentList } from './CommentList';
 const meta: Meta<typeof CommentList> = {
   title: 'entities/Comment/CommentList',
   component: CommentList,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

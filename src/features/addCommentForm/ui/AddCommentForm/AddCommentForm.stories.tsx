@@ -6,9 +6,6 @@ import AddCommentForm from './AddCommentForm';
 const meta: Meta<typeof AddCommentForm> = {
   title: 'features/AddCommentForm',
   component: AddCommentForm,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  },
   args: {
     onSendComment: fn()
   }

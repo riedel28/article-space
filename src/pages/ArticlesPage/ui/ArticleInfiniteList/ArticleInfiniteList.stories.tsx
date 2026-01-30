@@ -5,9 +5,6 @@ import { ArticleInfiniteList } from './ArticleInfiniteList';
 const meta: Meta<typeof ArticleInfiniteList> = {
   title: 'pages/ArticlesPage/ArticleInfiniteList',
   component: ArticleInfiniteList,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

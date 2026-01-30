@@ -7,9 +7,6 @@ import { Article } from '../../model/types/article';
 const meta: Meta<typeof ArticleList> = {
   title: 'entities/Article/ArticleList',
   component: ArticleList,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

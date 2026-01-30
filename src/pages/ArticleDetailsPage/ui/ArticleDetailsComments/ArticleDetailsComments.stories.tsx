@@ -6,9 +6,6 @@ import { ArticleDetailsComments } from './ArticleDetailsComments';
 const meta: Meta<typeof ArticleDetailsComments> = {
   title: 'pages/ArticleDetailsPage/ArticleDetailsComments',
   component: ArticleDetailsComments,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

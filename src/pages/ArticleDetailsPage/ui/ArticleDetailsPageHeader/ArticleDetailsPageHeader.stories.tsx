@@ -6,9 +6,6 @@ import { ArticleDetailsPageHeader } from './ArticleDetailsPageHeader';
 const meta: Meta<typeof ArticleDetailsPageHeader> = {
   title: 'pages/ArticleDetailsPage/ArticleDetailsPageHeader',
   component: ArticleDetailsPageHeader,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

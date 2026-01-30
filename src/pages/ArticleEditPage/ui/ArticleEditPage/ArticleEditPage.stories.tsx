@@ -6,9 +6,6 @@ import ArticleEditPage from './ArticleEditPage';
 const meta: Meta<typeof ArticleEditPage> = {
   title: 'pages/ArticleEditPage/ArticleEditPage',
   component: ArticleEditPage,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

@@ -7,9 +7,6 @@ import { ArticleRecommendationsList } from './ArticleRecommendationsList';
 const meta: Meta<typeof ArticleRecommendationsList> = {
   title: 'features/ArticleRecommendationsList',
   component: ArticleRecommendationsList,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

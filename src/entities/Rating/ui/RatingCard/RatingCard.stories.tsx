@@ -5,9 +5,6 @@ import { RatingCard } from './RatingCard';
 const meta: Meta<typeof RatingCard> = {
   title: 'entities/Rating/RatingCard',
   component: RatingCard,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

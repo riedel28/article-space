@@ -5,9 +5,6 @@ import { CommentCard } from './CommentCard';
 const meta: Meta<typeof CommentCard> = {
   title: 'entities/Comment/CommentCard',
   component: CommentCard,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

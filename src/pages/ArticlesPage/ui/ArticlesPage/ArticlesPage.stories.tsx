@@ -5,9 +5,6 @@ import ArticlesPage from './ArticlesPage';
 const meta: Meta<typeof ArticlesPage> = {
   title: 'pages/ArticlesPage/ArticlesPage',
   component: ArticlesPage,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

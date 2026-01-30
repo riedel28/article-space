@@ -7,9 +7,6 @@ import { Theme } from '@/shared/const/theme';
 const meta: Meta<typeof ErrorPage> = {
   title: 'widgets/ErrorPage',
   component: ErrorPage,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

@@ -6,9 +6,6 @@ import { ProfileCard } from './ProfileCard';
 const meta: Meta<typeof ProfileCard> = {
   title: 'entities/ProfileCard',
   component: ProfileCard,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  },
   args: {
     onEdit: fn(),
     onSubmit: fn(),

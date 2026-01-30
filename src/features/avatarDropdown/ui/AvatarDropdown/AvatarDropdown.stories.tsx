@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AvatarDropdown } from './AvatarDropdown';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { UserRole } from '@/entities/User';
 
 const meta: Meta<typeof AvatarDropdown> = {
   title: 'features/AvatarDropdown',
   component: AvatarDropdown,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;
@@ -37,7 +35,7 @@ export const AdminUser: Story = {
           id: '1',
           username: 'admin',
           avatar: 'https://i.pravatar.cc/150?img=3',
-          roles: ['ADMIN']
+          roles: [UserRole.ADMIN]
         }
       }
     })

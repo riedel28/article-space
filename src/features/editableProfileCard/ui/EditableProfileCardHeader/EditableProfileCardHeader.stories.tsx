@@ -6,9 +6,6 @@ import { EditableProfileCardHeader } from './EditableProfileCardHeader';
 const meta: Meta<typeof EditableProfileCardHeader> = {
   title: 'features/editableProfileCard/EditableProfileCardHeader',
   component: EditableProfileCardHeader,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

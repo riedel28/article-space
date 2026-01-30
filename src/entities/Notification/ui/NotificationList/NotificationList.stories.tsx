@@ -7,9 +7,6 @@ import { MantineDecorator } from '@/shared/config/storybook/MantineDecorator/Man
 const meta: Meta<typeof NotificationList> = {
   title: 'entities/Notification/NotificationList',
   component: NotificationList,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  },
   decorators: [MantineDecorator, StoreDecorator({})]
 };
 

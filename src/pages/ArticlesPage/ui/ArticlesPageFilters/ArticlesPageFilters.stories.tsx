@@ -5,9 +5,6 @@ import { ArticlesPageFilters } from './ArticlesPageFilters';
 const meta: Meta<typeof ArticlesPageFilters> = {
   title: 'pages/ArticlesPage/ArticlesPageFilters',
   component: ArticlesPageFilters,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

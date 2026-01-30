@@ -8,9 +8,6 @@ import { Theme } from '@/shared/const/theme';
 const meta: Meta<typeof Navbar> = {
   title: 'widgets/Navbar',
   component: Navbar,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

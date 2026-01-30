@@ -6,9 +6,6 @@ import { EditableProfileCard } from './EditableProfileCard';
 const meta: Meta<typeof EditableProfileCard> = {
   title: 'features/editableProfileCard/EditableProfileCard',
   component: EditableProfileCard,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

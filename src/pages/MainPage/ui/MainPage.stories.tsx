@@ -7,9 +7,6 @@ import { Theme } from '@/shared/const/theme';
 const meta: Meta<typeof MainPage> = {
   title: 'pages/MainPage',
   component: MainPage,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  },
   decorators: [StoreDecorator({})]
 };
 

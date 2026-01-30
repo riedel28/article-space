@@ -5,9 +5,6 @@ import { AppImage } from './AppImage';
 const meta: Meta<typeof AppImage> = {
   title: 'shared/AppImage',
   component: AppImage,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;

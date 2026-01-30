@@ -8,9 +8,6 @@ import { ArticleDetails } from './ArticleDetails';
 const meta: Meta<typeof ArticleDetails> = {
   title: 'entities/Article/ArticleDetails',
   component: ArticleDetails,
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
 };
 
 export default meta;
