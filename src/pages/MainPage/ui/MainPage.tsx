@@ -93,7 +93,7 @@ hiddenFrom="xs">
               {t('hero.github')}
             </Button>
           </Stack>
-          <Group visibleFrom="xs">
+          <Group visibleFrom="xs" my="md">
             <Button
               size="lg"
               onClick={handleExploreClick}
