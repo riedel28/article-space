@@ -44,7 +44,7 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
   return (
     <Box className={className}>
       <Text component="label" fz="sm" fw={500} mb={4}>
-        {t('Topics')}
+        {t('Темы')}
       </Text>
       <Chip.Group value={value} onChange={onTabClick}>
         <Group gap="xs">

@@ -28,21 +28,21 @@ export const ErrorPage = () => {
 
           <Stack align="center" gap="xs">
             <Title order={1} ta="center">
-              {t('Something went wrong')}
+              {t('Произошла непредвиденная ошибка')}
             </Title>
             <Text c="dimmed" size="lg" ta="center" maw={500}>
               {t(
-                'An unexpected error occurred. Please try refreshing the page or go back to the homepage.'
+                'Произошла ошибка. Попробуйте обновить страницу или вернуться на главную.'
               )}
             </Text>
           </Stack>
 
           <Group>
             <Button variant="light" leftSection={<IconHome size={18} />} onClick={goHome}>
-              {t('Go to homepage')}
+              {t('На главную')}
             </Button>
             <Button leftSection={<IconRefresh size={18} />} onClick={reloadPage}>
-              {t('Refresh page')}
+              {t('Обновить страницу')}
             </Button>
           </Group>
         </Stack>

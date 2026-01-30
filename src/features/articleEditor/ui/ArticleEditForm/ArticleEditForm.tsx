@@ -90,31 +90,31 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md">
         <TextInput
-          label={t('Title')}
-          placeholder={t('Enter article title')}
+          label={t('Заголовок')}
+          placeholder={t('Введите заголовок статьи')}
           withAsterisk
           data-testid="ArticleEditForm.Title"
           {...form.getInputProps('title')}
         />
 
         <TextInput
-          label={t('Subtitle')}
-          placeholder={t('Enter article subtitle')}
+          label={t('Подзаголовок')}
+          placeholder={t('Введите подзаголовок статьи')}
           withAsterisk
           data-testid="ArticleEditForm.Subtitle"
           {...form.getInputProps('subtitle')}
         />
 
         <TextInput
-          label={t('Image URL')}
-          placeholder={t('Enter image URL')}
+          label={t('Ссылка на изображение')}
+          placeholder={t('Введите ссылку на изображение')}
           data-testid="ArticleEditForm.Image"
           {...form.getInputProps('img')}
         />
 
         <Select
-          label={t('Topic')}
-          placeholder={t('Select a topic')}
+          label={t('Тема')}
+          placeholder={t('Выберите тему')}
           data={ARTICLE_TYPE_OPTIONS}
           withAsterisk
           data-testid="ArticleEditForm.Topic"
@@ -140,7 +140,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
 
         <div>
           <Text size="sm" fw={500} mb={4}>
-            {t('Content')}
+            {t('Содержание')}
           </Text>
           <RichTextEditor editor={editor} data-testid="ArticleEditForm.Content">
             <RichTextEditor.Toolbar sticky stickyOffset={60}>
@@ -190,7 +190,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
             onClick={handleCancel}
             data-testid="ArticleEditForm.CancelButton"
           >
-            {t('Cancel')}
+            {t('Отменить')}
           </Button>
           <Button
             type="submit"
@@ -198,7 +198,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
             data-testid="ArticleEditForm.SaveButton"
             leftSection={<IconDeviceFloppy size={18} />}
           >
-            {t('Save changes')}
+            {t('Сохранить изменения')}
           </Button>
         </Group>
       </Stack>

@@ -58,9 +58,9 @@ const ArticlesPage = (props: ArticlesPageProps) => {
           <Page data-testid="ArticlesPage" onScrollEnd={onLoadNextPart} className={className}>
             <Stack gap="md" hiddenFrom="lg" mb="lg">
               <Box>
-                <Title order={2}>{t('Discover Articles')}</Title>
+                <Title order={2}>{t('Статьи')}</Title>
                 <Text c="dimmed">
-                  {t('Browse our collection of articles across various topics')}
+                  {t('Просматривайте нашу коллекцию статей на различные темы')}
                 </Text>
               </Box>
               <Button
@@ -69,7 +69,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
                 onClick={() => setFiltersOpen((o) => !o)}
                 fullWidth
               >
-                {filtersOpen ? t('Hide Filters') : t('Show Filters')}
+                {filtersOpen ? t('Скрыть фильтры') : t('Показать фильтры')}
               </Button>
               <Collapse in={filtersOpen}>
                 <FiltersContainer />

@@ -1,4 +1,4 @@
-import { Card, Group, Select,Stack, TextInput } from '@mantine/core';
+import { Card, Group, Select, Stack, TextInput } from '@mantine/core';
 import { IconCheck, IconChevronDown, IconSearch } from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,8 +27,8 @@ export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
     <Card w="100%" withBorder>
       <Stack gap="md">
         <TextInput
-          label={t('Search')}
-          placeholder={t('Search articles')}
+          label={t('Поиск')}
+          placeholder={t('Поиск статей')}
           leftSectionPointerEvents="none"
           leftSection={<IconSearch size={16} />}
           value={search}
@@ -38,12 +38,12 @@ export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
         <ArticleTypeTabs value={type} onChangeType={onChangeType} />
 
         <Select
-          label={t('Sort by')}
-          placeholder={t('Select sort')}
+          label={t('Сортировать по')}
+          placeholder={t('Выберите сортировку')}
           data={[
-            { value: 'createdAt', label: t('Date') },
-            { value: 'title', label: t('Title') },
-            { value: 'views', label: t('Views') }
+            { value: 'createdAt', label: t('Дата') },
+            { value: 'title', label: t('Название') },
+            { value: 'views', label: t('Просмотры') }
           ]}
           rightSectionPointerEvents="none"
           rightSection={<IconChevronDown size={16} />}
@@ -67,11 +67,11 @@ export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
         />
 
         <Select
-          label={t('Order')}
-          placeholder={t('Select order')}
+          label={t('Порядок')}
+          placeholder={t('Выберите порядок')}
           data={[
-            { value: 'asc', label: t('Ascending') },
-            { value: 'desc', label: t('Descending') }
+            { value: 'asc', label: t('По возрастанию') },
+            { value: 'desc', label: t('По убыванию') }
           ]}
           rightSectionPointerEvents="none"
           rightSection={<IconChevronDown size={16} />}

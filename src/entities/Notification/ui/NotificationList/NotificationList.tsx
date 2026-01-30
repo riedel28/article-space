@@ -24,7 +24,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
       {showHeader && (
         <Box component="header" className={classes.header}>
           <Text fw={500} fz="sm">
-            {t('Notifications')}
+            {t('Уведомления')}
           </Text>
         </Box>
       )}

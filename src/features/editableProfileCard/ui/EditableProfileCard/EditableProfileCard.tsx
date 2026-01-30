@@ -49,11 +49,11 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
   const canEdit = authData?.id === profileData?.id;
 
   const validateErrorTranslates = {
-    [ValidateProfileError.SERVER_ERROR]: t('Server error while saving'),
-    [ValidateProfileError.INCORRECT_COUNTRY]: t('Invalid region'),
-    [ValidateProfileError.NO_DATA]: t('Data not specified'),
-    [ValidateProfileError.INCORRECT_USER_DATA]: t('First and last name are required'),
-    [ValidateProfileError.INCORRECT_AGE]: t('Invalid age')
+    [ValidateProfileError.SERVER_ERROR]: t('Серверная ошибка при сохранении'),
+    [ValidateProfileError.INCORRECT_COUNTRY]: t('Некорректный регион'),
+    [ValidateProfileError.NO_DATA]: t('Данные не указаны'),
+    [ValidateProfileError.INCORRECT_USER_DATA]: t('Имя и фамилия обязательны'),
+    [ValidateProfileError.INCORRECT_AGE]: t('Некорректный возраст')
   };
 
   useInitialEffect(() => {
@@ -91,7 +91,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
         {validateErrors?.length ? (
           <Alert
             icon={<IconAlertCircle size={20} />}
-            title={t('Validation errors')}
+            title={t('Ошибки валидации')}
             color="red"
             variant="light"
           >

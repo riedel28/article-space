@@ -44,8 +44,8 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
       password: ''
     },
     validate: {
-      username: (value) => (value.trim().length < 1 ? t('Username is required') : null),
-      password: (value) => (value.length < 1 ? t('Password is required') : null)
+      username: (value) => (value.trim().length < 1 ? t('Имя пользователя обязательно') : null),
+      password: (value) => (value.length < 1 ? t('Пароль обязателен') : null)
     },
     validateInputOnBlur: true
   });
@@ -83,18 +83,18 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
           <TextInput
             data-autofocus
-            label={t('Username')}
+            label={t('Имя пользователя')}
             placeholder={t('Введите username')}
             leftSection={<IconUser size={16} />}
             {...form.getInputProps('username')}
           />
 
           <PasswordInput
-            label={t('Password')}
+            label={t('Пароль')}
             placeholder={t('Введите пароль')}
             leftSection={<IconLock size={16} />}
             visibilityToggleButtonProps={{
-              'aria-label': t('Toggle password visibility')
+              'aria-label': t('Переключить видимость пароля')
             }}
             {...form.getInputProps('password')}
           />

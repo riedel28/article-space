@@ -30,7 +30,7 @@ export const NotificationButton = () => {
                 variant="subtle"
                 size="lg"
                 className={classes.icon}
-                aria-label={t('Notifications')}
+                aria-label={t('Уведомления')}
               >
                 <IconBell size={24} stroke={1.8} />
               </ActionIcon>
@@ -48,7 +48,7 @@ export const NotificationButton = () => {
             size="lg"
             className={classes.icon}
             onClick={onOpenDrawer}
-            aria-label={t('Notifications')}
+            aria-label={t('Уведомления')}
           >
             <IconBell size={24} stroke={1.8} />
           </ActionIcon>

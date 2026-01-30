@@ -32,16 +32,16 @@ export interface ProfileCardProps {
 }
 
 export const ProfileCardRedesignedError = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
 
   return (
     <Group justify="center" w="100%">
       <Stack align="center" gap="xs">
         <Title order={3} c="red.6" ta="center">
-          {t('An error occurred while loading the profile')}
+          {t('Произошла ошибка при загрузке профиля')}
         </Title>
         <Text c="red.5" ta="center">
-          {t('Please try refreshing the page')}
+          {t('Попробуйте обновить страницу')}
         </Text>
       </Stack>
     </Group>
@@ -145,16 +145,16 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
             onClick={onEdit}
             data-testid="ProfileCard.EditButton"
           >
-            {t('Edit')}
+            {t('Редактировать')}
           </Button>
         )}
       </Group>
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-        <InfoField label={t('First Name')} value={data?.first} />
-        <InfoField label={t('Last Name')} value={data?.lastname} />
-        <InfoField label={t('Username')} value={data?.username} />
-        <InfoField label={t('Avatar URL')} value={data?.avatar} truncate />
+        <InfoField label={t('Ваше имя')} value={data?.first} />
+        <InfoField label={t('Ваша фамилия')} value={data?.lastname} />
+        <InfoField label={t('Имя пользователя')} value={data?.username} />
+        <InfoField label={t('Введите ссылку на аватар')} value={data?.avatar} truncate />
       </SimpleGrid>
     </Stack>
   );
@@ -167,40 +167,40 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
             <Avatar size={64} src={data?.avatar} radius="50%" />
           </Box>
           <Box>
-            <Title order={2}>{t('Edit Profile')}</Title>
+            <Title order={2}>{t('Редактировать профиль')}</Title>
             <Text c="dimmed" size="sm">
-              {t('Update your personal information')}
+              {t('Обновите свою личную информацию')}
             </Text>
           </Box>
         </Group>
 
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
           <TextInput
-            label={t('First Name')}
-            placeholder={t('Enter your first name')}
+            label={t('Ваше имя')}
+            placeholder={t('Введите имя')}
             withAsterisk
             data-testid="ProfileCard.firstname"
             {...form.getInputProps('first')}
           />
 
           <TextInput
-            label={t('Last Name')}
-            placeholder={t('Enter your last name')}
+            label={t('Ваша фамилия')}
+            placeholder={t('Введите фамилию')}
             withAsterisk
             data-testid="ProfileCard.lastname"
             {...form.getInputProps('lastname')}
           />
 
           <TextInput
-            label={t('Username')}
-            placeholder={t('Enter your username')}
+            label={t('Имя пользователя')}
+            placeholder={t('Введите имя пользователя')}
             withAsterisk
             data-testid="ProfileCard.username"
             {...form.getInputProps('username')}
           />
 
           <TextInput
-            label={t('Avatar URL')}
+            label={t('Ссылка на аватар')}
             placeholder="https://..."
             data-testid="ProfileCard.avatar"
             {...form.getInputProps('avatar')}
@@ -209,7 +209,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
 
         <Group justify="flex-end" mt="md" wrap="wrap" gap="sm">
           <Button variant="default" onClick={onCancel} data-testid="ProfileCard.CancelButton">
-            {t('Cancel')}
+            {t('Отменить')}
           </Button>
           <Button
             type="submit"
@@ -217,7 +217,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
             data-testid="ProfileCard.SaveButton"
             leftSection={<IconDeviceFloppy size={18} />}
           >
-            {t('Save changes')}
+            {t('Сохранить')}
           </Button>
         </Group>
       </Stack>

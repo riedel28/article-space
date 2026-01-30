@@ -35,7 +35,7 @@ export const EditableProfileCardHeader = memo((props: EditableProfileCardHeaderP
       <Group justify="space-between" w="100%" className={className} wrap="wrap"
 gap="md">
         <Title order={2} size="h3" fw={600}>
-          {t('Profile')}
+          {t('Профиль')}
         </Title>
         {canEdit && readonly && (
           <MantineButton
@@ -45,7 +45,7 @@ gap="md">
             variant="filled"
             size="md"
           >
-            {t('Edit')}
+            {t('Редактировать')}
           </MantineButton>
         )}
       </Group>

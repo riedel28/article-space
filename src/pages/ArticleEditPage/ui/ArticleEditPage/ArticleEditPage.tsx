@@ -33,8 +33,8 @@ const ArticleEditPage = memo(() => {
     return (
       <Page>
         <Container size="md">
-          <Alert icon={<IconAlertCircle size={16} />} title={t('Error')} color="red">
-            {t('Article ID is required')}
+          <Alert icon={<IconAlertCircle size={16} />} title={t('Ошибка')} color="red">
+            {t('Требуется ID статьи')}
           </Alert>
         </Container>
       </Page>
@@ -59,9 +59,9 @@ const ArticleEditPage = memo(() => {
         <Card padding="lg" radius="lg" withBorder>
           <Stack gap="md">
             <div>
-              <Title order={2}>{t('Edit Article')}</Title>
+              <Title order={2}>{t('Редактирование статьи')}</Title>
               <Text c="dimmed" size="sm">
-                {t('Make changes to your article')}
+                {t('Внесите изменения в вашу статью')}
               </Text>
             </div>
 
@@ -78,11 +78,11 @@ const ArticleEditPage = memo(() => {
             {error && (
               <Alert
                 icon={<IconAlertCircle size={16} />}
-                title={t('Error')}
+                title={t('Ошибка')}
                 color="red"
                 data-testid="ArticleEditPage.Error"
               >
-                {t('Failed to load article. Please try again.')}
+                {t('Не удалось загрузить статью. Попробуйте снова.')}
               </Alert>
             )}
 
