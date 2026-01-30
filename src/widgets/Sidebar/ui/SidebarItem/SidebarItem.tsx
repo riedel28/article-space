@@ -24,9 +24,7 @@ export const SidebarItem = memo(({ item, onClick }: SidebarItemProps) => {
   }
 
   const isActive =
-    item.path === '/'
-      ? location.pathname === item.path
-      : location.pathname.startsWith(item.path);
+    item.path === '/' ? location.pathname === item.path : location.pathname.startsWith(item.path);
 
   return (
     <NavLink

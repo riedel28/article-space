@@ -25,9 +25,7 @@ export const Page = memo((props: PageProps) => {
   const triggerRef = useRef<HTMLDivElement>(null!);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-  const scrollPosition = useSelector((state: StateSchema) =>
-    getUIScrollByPath(state, pathname)
-  );
+  const scrollPosition = useSelector((state: StateSchema) => getUIScrollByPath(state, pathname));
 
   useInfiniteScroll({
     triggerRef,

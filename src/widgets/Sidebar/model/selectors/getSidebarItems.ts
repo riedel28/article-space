@@ -3,11 +3,7 @@ import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User';
 
 import { SidebarItemType } from '../types/sidebar';
-import {
-  getRouteArticles,
-  getRouteMain,
-  getRouteProfile
-} from '@/shared/const/router';
+import { getRouteArticles, getRouteMain, getRouteProfile } from '@/shared/const/router';
 
 export const useSidebarItems = () => {
   const userData = useSelector(getUserAuthData);

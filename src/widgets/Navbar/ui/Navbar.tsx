@@ -42,9 +42,7 @@ export const Navbar = memo(({ opened, toggle }: NavbarProps) => {
             <Button variant="subtle" onClick={onShowModal}>
               {t('Войти')}
             </Button>
-            {isAuthModal && (
-              <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
-            )}
+            {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />}
           </>
         )}
       </Group>

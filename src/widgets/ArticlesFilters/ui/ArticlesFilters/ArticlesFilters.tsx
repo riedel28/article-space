@@ -18,16 +18,8 @@ interface ArticlesFiltersProps {
 }
 
 export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
-  const {
-    onChangeType,
-    onChangeSearch,
-    search,
-    onChangeSort,
-    sort,
-    onChangeOrder,
-    order,
-    type
-  } = props;
+  const { onChangeType, onChangeSearch, search, onChangeSort, sort, onChangeOrder, order, type } =
+    props;
   const { t } = useTranslation();
 
   return (

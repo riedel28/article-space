@@ -1,14 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import {
-  Container,
-  Title,
-  Text,
-  Button,
-  Group,
-  Stack,
-  ThemeIcon,
-  Box
-} from '@mantine/core';
+import { Container, Title, Text, Button, Group, Stack, ThemeIcon, Box } from '@mantine/core';
 import { IconAlertTriangle, IconRefresh, IconHome } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import cls from './ErrorPage.module.css';
@@ -50,17 +41,10 @@ export const ErrorPage = ({ className }: ErrorPageProps) => {
           </Stack>
 
           <Group>
-            <Button
-              variant="light"
-              leftSection={<IconHome size={18} />}
-              onClick={goHome}
-            >
+            <Button variant="light" leftSection={<IconHome size={18} />} onClick={goHome}>
               {t('Go to homepage')}
             </Button>
-            <Button
-              leftSection={<IconRefresh size={18} />}
-              onClick={reloadPage}
-            >
+            <Button leftSection={<IconRefresh size={18} />} onClick={reloadPage}>
               {t('Refresh page')}
             </Button>
           </Group>
