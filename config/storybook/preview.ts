@@ -11,10 +11,10 @@ const preview: Preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+        date: /Date$/i
+      }
     },
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
 
   decorators: [
@@ -22,8 +22,8 @@ const preview: Preview = {
     ThemeDecorator(Theme.LIGHT),
     RouterDecorator,
     SuspenseDecorator,
-    FeaturesFlagsDecorator({}),
-  ],
+    FeaturesFlagsDecorator({})
+  ]
 };
 
 export default preview;

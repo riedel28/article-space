@@ -10,30 +10,26 @@ const __dirname = path.dirname(__filename);
 const config: StorybookConfig = {
   stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
 
-  addons: [
-    '@storybook/addon-webpack5-compiler-babel',
-    '@storybook/addon-docs',
-  ],
+  addons: ['@storybook/addon-webpack5-compiler-babel', '@storybook/addon-docs'],
 
   framework: {
     name: '@storybook/react-webpack5',
-    options: {},
+    options: {}
   },
 
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    },
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true)
+    }
   },
 
   docs: {},
 
   webpackFinal: async (config: Configuration) => {
     const paths = {
-      src: path.resolve(__dirname, '..', '..', 'src'),
+      src: path.resolve(__dirname, '..', '..', 'src')
     };
 
     config.resolve = config.resolve || {};
@@ -45,7 +41,7 @@ const config: StorybookConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': paths.src,
+      '@': paths.src
     };
 
     config.module = config.module || {};
@@ -63,7 +59,7 @@ const config: StorybookConfig = {
     // Add SVGR loader
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: ['@svgr/webpack']
     });
 
     config.plugins = config.plugins || [];
@@ -71,12 +67,12 @@ const config: StorybookConfig = {
       new webpack.DefinePlugin({
         __IS_DEV__: JSON.stringify(true),
         __API__: JSON.stringify('https://testapi.ru'),
-        __PROJECT__: JSON.stringify('storybook'),
-      }),
+        __PROJECT__: JSON.stringify('storybook')
+      })
     );
 
     return config;
-  },
+  }
 };
 
 export default config;
