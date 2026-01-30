@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const APP_NAME = 'Ulbi TV App';
+const APP_NAME = 'ArticleSpace';
 
 export function useDocumentTitle(title?: string) {
   useEffect(() => {

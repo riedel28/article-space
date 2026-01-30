@@ -26,17 +26,17 @@ export const Normal: Story = {
           {
             id: '1',
             title: 'Уведомление',
-            description: 'Поставь лайк и оставь комментарий под Ulbi TV'
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
           },
           {
             id: '2',
             title: 'Уведомление 2',
-            description: 'Поставь лайк и оставь комментарий под Ulbi TV'
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
           },
           {
             id: '3',
             title: 'Уведомление 3',
-            description: 'Поставь лайк и оставь комментарий под Ulbi TV'
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
           }
         ]
       }
