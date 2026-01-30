@@ -4,8 +4,6 @@ A modern, production-ready blogging platform built with React and TypeScript. Ar
 
 ![ArticleSpace Screenshot](./docs/screenshot.png)
 
-> **Note:** Add a screenshot of the Articles page to `./docs/screenshot.png` to display it here.
-
 ---
 
 ## Features
