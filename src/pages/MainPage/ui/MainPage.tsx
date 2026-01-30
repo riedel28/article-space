@@ -60,18 +60,10 @@ const MainPage = () => {
 
   return (
     <Page data-testid="MainPage">
-      <Container
-        size="lg"
-        py={{ base: 'md', sm: 'xl' }}
-        px={{ base: 'sm', sm: 'md' }}
-      >
+      <Container size="lg" py={{ base: 'md', sm: 'xl' }} px={{ base: 'sm', sm: 'md' }}>
         {/* Hero Section */}
         <Stack align="center" gap="md" mb="xl">
-          <Title
-            order={1}
-            ta="center"
-            style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
-          >
+          <Title order={1} ta="center" style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}>
             {t('hero.title')}
           </Title>
           <Text size="lg" c="dimmed" ta="center" maw={600}
@@ -126,19 +118,11 @@ hiddenFrom="xs">
           <Title order={2} ta="center" mb="lg">
             {t('features.title')}
           </Title>
-          <SimpleGrid
-            cols={{ base: 1, xs: 2, md: 4 }}
-            spacing={{ base: 'md', sm: 'lg' }}
-          >
+          <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
             {features.map((feature) => (
               <Card key={feature.titleKey} padding="md" radius="md" withBorder>
-                <ThemeIcon
-                  size={44}
-                  radius="md"
-                  variant="light"
-                  color="brand"
-                  mb="md"
-                >
+                <ThemeIcon size={44} radius="md" variant="light" color="brand"
+mb="md">
                   <feature.icon size={24} />
                 </ThemeIcon>
                 <Text fw={500} size="md" mb="xs">
@@ -179,20 +163,13 @@ hiddenFrom="xs">
             </Button>
           </Group>
           {isLoading ? (
-            <SimpleGrid
-              cols={{ base: 1, md: 2, xl: 3 }}
-              spacing={{ base: 'md', sm: 'lg' }}
-            >
+            <SimpleGrid cols={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 'md', sm: 'lg' }}>
               {[1, 2, 3, 4].map((i) => (
                 <Skeleton key={i} height={220} radius="md" />
               ))}
             </SimpleGrid>
           ) : (
-            <ArticleList
-              articles={articles || []}
-              view={ArticleView.SMALL}
-              target="_blank"
-            />
+            <ArticleList articles={articles || []} view={ArticleView.SMALL} target="_blank" />
           )}
         </Box>
       </Container>

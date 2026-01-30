@@ -1,22 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  Container,
-  Card,
-  Title,
-  Text,
-  Skeleton,
-  Alert,
-  Button,
-  Stack
-} from '@mantine/core';
+import { Container, Card, Title, Text, Skeleton, Alert, Button, Stack } from '@mantine/core';
 import { IconArrowLeft, IconAlertCircle } from '@tabler/icons-react';
 import { Page } from '@/widgets/Page';
-import {
-  ArticleEditForm,
-  useGetArticleForEdit
-} from '@/features/articleEditor';
+import { ArticleEditForm, useGetArticleForEdit } from '@/features/articleEditor';
 import { getRouteArticleDetails } from '@/shared/const/router';
 import classes from './ArticleEditPage.module.css';
 
@@ -45,11 +33,7 @@ const ArticleEditPage = memo((_props: ArticleEditPageProps) => {
     return (
       <Page>
         <Container size="md">
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            title={t('Error')}
-            color="red"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} title={t('Error')} color="red">
             {t('Article ID is required')}
           </Alert>
         </Container>

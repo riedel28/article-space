@@ -27,10 +27,7 @@ import { ArticleRating } from '@/features/articleRating';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
-import {
-  getArticleDetailsData,
-  getArticleDetailsIsLoading
-} from '@/entities/Article';
+import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Article';
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
 import { ScrollToTopButton } from '@/features/scrollToTopButton';
 

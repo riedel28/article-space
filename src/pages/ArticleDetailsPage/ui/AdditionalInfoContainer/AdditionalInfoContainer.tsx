@@ -14,10 +14,7 @@ import {
   Skeleton
 } from '@mantine/core';
 import { IconEye, IconCalendar, IconPencil } from '@tabler/icons-react';
-import {
-  getArticleDetailsData,
-  getArticleDetailsIsLoading
-} from '@/entities/Article';
+import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Article';
 import { getRouteArticleEdit } from '@/shared/const/router';
 import { getCanEditArticle } from '../../model/selectors/article';
 import classes from './AdditionalInfoContainer.module.css';

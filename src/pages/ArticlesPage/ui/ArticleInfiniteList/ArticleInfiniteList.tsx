@@ -25,23 +25,13 @@ export const ArticleInfiniteList = memo((props: ArticleInfiniteListProps) => {
 
   if (error) {
     return (
-      <Alert
-        icon={<IconAlertCircle size={20} />}
-        title={t('Ошибка')}
-        color="red"
-        radius="md"
-      >
+      <Alert icon={<IconAlertCircle size={20} />} title={t('Ошибка')} color="red" radius="md">
         {t('Ошибка при загрузке статей')}
       </Alert>
     );
   }
 
   return (
-    <ArticleList
-      isLoading={isLoading}
-      view={view}
-      articles={articles}
-      className={className}
-    />
+    <ArticleList isLoading={isLoading} view={view} articles={articles} className={className} />
   );
 });

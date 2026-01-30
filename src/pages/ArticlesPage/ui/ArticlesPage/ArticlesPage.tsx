@@ -1,16 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  Affix,
-  Box,
-  Button,
-  Collapse,
-  Flex,
-  Stack,
-  Text,
-  Title
-} from '@mantine/core';
+import { Affix, Box, Button, Collapse, Flex, Stack, Text, Title } from '@mantine/core';
 import { IconAdjustments } from '@tabler/icons-react';
 
 import {
@@ -63,11 +54,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
           </Box>
         </Box>
         <Box flex={1} miw={0}>
-          <Page
-            data-testid="ArticlesPage"
-            onScrollEnd={onLoadNextPart}
-            className={className}
-          >
+          <Page data-testid="ArticlesPage" onScrollEnd={onLoadNextPart} className={className}>
             <Stack gap="md" hiddenFrom="lg" mb="lg">
               <Box>
                 <Title order={2}>{t('Discover Articles')}</Title>
@@ -91,12 +78,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
           </Page>
         </Box>
         <Box w={300} className={classes.filterColumn} visibleFrom="lg" pr="md">
-          <Box
-            pos="sticky"
-            top={76}
-            mah="calc(100vh - 96px)"
-            className={classes.filterContainer}
-          >
+          <Box pos="sticky" top={76} mah="calc(100vh - 96px)" className={classes.filterContainer}>
             <FiltersContainer />
           </Box>
         </Box>

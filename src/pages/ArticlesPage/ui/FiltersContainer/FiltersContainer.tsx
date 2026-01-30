@@ -2,16 +2,8 @@ import { ArticlesFilters } from '@/widgets/ArticlesFilters';
 import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
 export const FiltersContainer = () => {
-  const {
-    onChangeSort,
-    onChangeType,
-    sort,
-    type,
-    onChangeSearch,
-    search,
-    onChangeOrder,
-    order
-  } = useArticleFilters();
+  const { onChangeSort, onChangeType, sort, type, onChangeSearch, search, onChangeOrder, order } =
+    useArticleFilters();
 
   return (
     <ArticlesFilters

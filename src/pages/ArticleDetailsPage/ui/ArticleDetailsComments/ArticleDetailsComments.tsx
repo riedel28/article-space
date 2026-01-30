@@ -17,44 +17,42 @@ interface ArticleDetailsCommentsProps {
   id?: string;
 }
 
-export const ArticleDetailsComments = memo(
-  (props: ArticleDetailsCommentsProps) => {
-    const { className, id } = props;
-    const { t } = useTranslation();
-    const comments = useSelector(getArticleComments.selectAll);
-    const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
-    const dispatch = useAppDispatch();
+export const ArticleDetailsComments = memo((props: ArticleDetailsCommentsProps) => {
+  const { className, id } = props;
+  const { t } = useTranslation();
+  const comments = useSelector(getArticleComments.selectAll);
+  const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
+  const dispatch = useAppDispatch();
 
-    const onSendComment = useCallback(
-      (text: string) => {
-        dispatch(addCommentForArticle(text));
-      },
-      [dispatch]
-    );
+  const onSendComment = useCallback(
+    (text: string) => {
+      dispatch(addCommentForArticle(text));
+    },
+    [dispatch]
+  );
 
-    useInitialEffect(() => {
-      dispatch(fetchCommentsByArticleId(id));
-    });
+  useInitialEffect(() => {
+    dispatch(fetchCommentsByArticleId(id));
+  });
 
-    return (
-      <Box className={className}>
-        <Stack gap="md" className={classes.commentsSection}>
-          <Group gap={4} align="center">
-            <Title order={4} fz="xl">
-              {t('Комментарии')}
-            </Title>
-            <Text fz="lg" c="dimmed">
-              ({comments.length})
-            </Text>
-          </Group>
+  return (
+    <Box className={className}>
+      <Stack gap="md" className={classes.commentsSection}>
+        <Group gap={4} align="center">
+          <Title order={4} fz="xl">
+            {t('Комментарии')}
+          </Title>
+          <Text fz="lg" c="dimmed">
+            ({comments.length})
+          </Text>
+        </Group>
 
-          <Suspense fallback={<Loader />}>
-            <AddCommentForm onSendComment={onSendComment} />
-          </Suspense>
+        <Suspense fallback={<Loader />}>
+          <AddCommentForm onSendComment={onSendComment} />
+        </Suspense>
 
-          <CommentList isLoading={commentsIsLoading} comments={comments} />
-        </Stack>
-      </Box>
-    );
-  }
-);
+        <CommentList isLoading={commentsIsLoading} comments={comments} />
+      </Stack>
+    </Box>
+  );
+});

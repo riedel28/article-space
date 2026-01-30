@@ -23,10 +23,7 @@ const mockArticle: Article = {
       id: '1',
       type: ArticleBlockType.TEXT,
       title: 'Introduction',
-      paragraphs: [
-        'This is the first paragraph.',
-        'This is the second paragraph.'
-      ]
+      paragraphs: ['This is the first paragraph.', 'This is the second paragraph.']
     }
   ]
 };
@@ -107,14 +104,10 @@ describe('ArticleEditPage', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId('ArticleEditForm.Title')).toHaveValue(
-        'Test Article Title'
-      );
+      expect(screen.getByTestId('ArticleEditForm.Title')).toHaveValue('Test Article Title');
     });
 
-    expect(screen.getByTestId('ArticleEditForm.Subtitle')).toHaveValue(
-      'Test Article Subtitle'
-    );
+    expect(screen.getByTestId('ArticleEditForm.Subtitle')).toHaveValue('Test Article Subtitle');
   });
 
   test('shows validation error for empty title', async () => {
@@ -135,9 +128,7 @@ describe('ArticleEditPage', () => {
     await userEvent.click(saveButton);
 
     await waitFor(() => {
-      expect(
-        screen.getByText('Title must be at least 3 characters')
-      ).toBeInTheDocument();
+      expect(screen.getByText('Title must be at least 3 characters')).toBeInTheDocument();
     });
   });
 
@@ -152,8 +143,6 @@ describe('ArticleEditPage', () => {
       route: '/articles/1/edit'
     });
 
-    expect(
-      screen.getByTestId('ArticleEditForm.CancelButton')
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('ArticleEditForm.CancelButton')).toBeInTheDocument();
   });
 });
