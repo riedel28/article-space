@@ -3,7 +3,7 @@ name: fsd-check
 description: Validate Feature-Sliced Design architecture compliance. Checks layer imports, public API usage, and cross-slice violations. Use when asked to "check FSD", "validate architecture", "check imports", or "FSD audit".
 metadata:
   author: sergio
-  version: "1.0.0"
+  version: '1.0.0'
   argument-hint: <layer-or-path> (optional)
 ---
 

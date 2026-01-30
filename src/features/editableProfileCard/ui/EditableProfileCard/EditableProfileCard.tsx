@@ -50,7 +50,9 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     [ValidateProfileError.SERVER_ERROR]: t('Server error while saving'),
     [ValidateProfileError.INCORRECT_COUNTRY]: t('Invalid region'),
     [ValidateProfileError.NO_DATA]: t('Data not specified'),
-    [ValidateProfileError.INCORRECT_USER_DATA]: t('First and last name are required'),
+    [ValidateProfileError.INCORRECT_USER_DATA]: t(
+      'First and last name are required'
+    ),
     [ValidateProfileError.INCORRECT_AGE]: t('Invalid age')
   };
 
@@ -95,7 +97,10 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
           >
             <Stack gap={4}>
               {validateErrors.map((err) => (
-                <div key={err} data-testid="EditableProfileCard.Error.Paragraph">
+                <div
+                  key={err}
+                  data-testid="EditableProfileCard.Error.Paragraph"
+                >
                   {validateErrorTranslates[err]}
                 </div>
               ))}

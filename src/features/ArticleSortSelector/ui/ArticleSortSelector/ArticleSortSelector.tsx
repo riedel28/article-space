@@ -54,11 +54,7 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
       <Text size="sm" fw={600} c="dimmed">
         {t('Сортировать по:')}
       </Text>
-      <ListBox
-        items={sortFieldOptions}
-        value={sort}
-        onChange={onChangeSort}
-      />
+      <ListBox items={sortFieldOptions} value={sort} onChange={onChangeSort} />
       <ListBox items={orderOptions} value={order} onChange={onChangeOrder} />
     </Stack>
   );

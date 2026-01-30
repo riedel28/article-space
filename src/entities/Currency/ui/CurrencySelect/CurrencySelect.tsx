@@ -23,9 +23,7 @@ export const CurrencySelect = memo(
         label={t('Укажите валюту')}
         placeholder={t('Укажите валюту')}
         data={options}
-        onChange={(selectedValue) =>
-          onChange?.(selectedValue as Currency)
-        }
+        onChange={(selectedValue) => onChange?.(selectedValue as Currency)}
         readOnly={readonly}
         w="100%"
         size="md"

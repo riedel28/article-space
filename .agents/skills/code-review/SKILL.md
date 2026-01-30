@@ -3,7 +3,7 @@ name: code-review
 description: Comprehensive code review for best practices, security, patterns, and PR changes. Use when asked to "review code", "check my code", "review PR", "security audit", or "code quality check".
 metadata:
   author: sergio
-  version: "1.0.0"
+  version: '1.0.0'
   argument-hint: <file-path|directory|--staged|--pr> (optional)
 ---
 
@@ -17,12 +17,12 @@ You are a comprehensive code reviewer specializing in quality, security, pattern
 
 Parse the argument to determine review mode:
 
-| Argument | Mode | Action |
-|----------|------|--------|
-| `--staged` | Staged changes | Run `git diff --cached --name-only` to get staged files |
-| `--pr` | PR review | Run `git diff $(git merge-base HEAD develop)...HEAD --name-only` to get changed files |
-| File/directory path | Targeted review | Review the specified path |
-| Empty/none | Interactive | Ask user what they want reviewed |
+| Argument            | Mode            | Action                                                                                |
+| ------------------- | --------------- | ------------------------------------------------------------------------------------- |
+| `--staged`          | Staged changes  | Run `git diff --cached --name-only` to get staged files                               |
+| `--pr`              | PR review       | Run `git diff $(git merge-base HEAD develop)...HEAD --name-only` to get changed files |
+| File/directory path | Targeted review | Review the specified path                                                             |
+| Empty/none          | Interactive     | Ask user what they want reviewed                                                      |
 
 ## Review Process
 
@@ -32,7 +32,7 @@ Based on the invocation mode:
 
 1. **If `--staged`**: Get staged files with `git diff --cached --name-only`
 2. **If `--pr`**: Get PR changes with `git diff $(git merge-base HEAD develop)...HEAD --name-only`
-3. **If path provided**: Use Glob to find files in the path (*.ts, *.tsx, *.js, *.jsx)
+3. **If path provided**: Use Glob to find files in the path (_.ts, _.tsx, _.js, _.jsx)
 4. **If no argument**: Ask user using AskUserQuestion:
    - "Review staged changes"
    - "Review PR changes"
@@ -45,6 +45,7 @@ For each file, analyze against these categories:
 #### Critical Issues (Security & Bugs)
 
 **Security (OWASP-aligned):**
+
 - Injection vulnerabilities (SQL, command, XSS, eval usage)
 - Hardcoded secrets, API keys, passwords
 - Sensitive data in console.log or error messages
@@ -56,6 +57,7 @@ For each file, analyze against these categories:
 - Insecure randomness (Math.random for security)
 
 **Bugs:**
+
 - Null/undefined access without checks
 - Race conditions in async code
 - Memory leaks (missing cleanup in useEffect)
@@ -67,6 +69,7 @@ For each file, analyze against these categories:
 #### Warnings (Patterns & Performance)
 
 **Code Patterns:**
+
 - SOLID principles violations
 - DRY violations (duplicated logic >3 lines)
 - Functions exceeding 50 lines
@@ -78,6 +81,7 @@ For each file, analyze against these categories:
 - console.log statements (non-security)
 
 **Performance:**
+
 - Missing React.memo on frequently re-rendered components
 - Inline object/array/function creation in JSX props
 - Large imports that could be tree-shaken
@@ -86,6 +90,7 @@ For each file, analyze against these categories:
 - Synchronous operations that could be async
 
 **TypeScript:**
+
 - Usage of `any` type
 - Missing return types on public functions
 - Implicit any in parameters
@@ -95,6 +100,7 @@ For each file, analyze against these categories:
 #### Suggestions (Quality & Best Practices)
 
 **React Patterns:**
+
 - Missing key props in lists
 - Incorrect hook dependencies
 - State that could be derived
@@ -103,6 +109,7 @@ For each file, analyze against these categories:
 - Uncontrolled to controlled component switches
 
 **Code Quality:**
+
 - Unclear variable/function names
 - Missing JSDoc on complex functions
 - Long parameter lists (>4 params)
@@ -111,6 +118,7 @@ For each file, analyze against these categories:
 - Complex conditionals that could be extracted
 
 **Project-Specific (FSD):**
+
 - Cross-layer imports (features importing features)
 - Direct imports bypassing public API
 - Incorrect absolute import paths (@/)
@@ -120,16 +128,20 @@ For each file, analyze against these categories:
 
 Format your findings as:
 
-```markdown
+````markdown
 ## Code Review: [scope description]
 
 ### Critical Issues (X)
+
 <!-- Security and bug issues that must be fixed -->
+
 - `file:line` - [SECURITY] Description of the security issue
   ```typescript
   // Problematic code snippet
   ```
-  **Fix:** Recommendation
+````
+
+**Fix:** Recommendation
 
 - `file:line` - [BUG] Description of the bug
   ```typescript
@@ -138,30 +150,37 @@ Format your findings as:
   **Fix:** Recommendation
 
 ### Warnings (X)
+
 <!-- Pattern and performance issues that should be addressed -->
+
 - `file:line` - [PATTERN] Description
 - `file:line` - [PERFORMANCE] Description
 - `file:line` - [TYPESCRIPT] Description
 
 ### Suggestions (X)
+
 <!-- Quality improvements to consider -->
+
 - `file:line` - [QUALITY] Description
 - `file:line` - [REACT] Description
 - `file:line` - [FSD] Description
 
 ### Summary
-| Metric | Count |
-|--------|-------|
-| Files reviewed | X |
-| Critical issues | X |
-| Warnings | X |
-| Suggestions | X |
+
+| Metric          | Count |
+| --------------- | ----- |
+| Files reviewed  | X     |
+| Critical issues | X     |
+| Warnings        | X     |
+| Suggestions     | X     |
 
 ### Top Recommendations
+
 1. Most impactful change to make
 2. Second most impactful
 3. Third most impactful
-```
+
+````
 
 ## Important Guidelines
 
@@ -184,8 +203,9 @@ Format your findings as:
 - `LoginForm.tsx:45` - [SECURITY] Password logged to console
   ```typescript
   console.log('Login attempt:', { username, password });
-  ```
-  **Fix:** Remove password from logging or use redaction
+````
+
+**Fix:** Remove password from logging or use redaction
 
 - `LoginForm.tsx:78` - [BUG] Missing error handling for API call
   ```typescript
@@ -206,17 +226,21 @@ Format your findings as:
 - `ui/LoginForm.tsx:1` - [FSD] Missing re-export in feature's public API (index.ts)
 
 ### Summary
-| Metric | Count |
-|--------|-------|
-| Files reviewed | 4 |
-| Critical issues | 2 |
-| Warnings | 3 |
-| Suggestions | 2 |
+
+| Metric          | Count |
+| --------------- | ----- |
+| Files reviewed  | 4     |
+| Critical issues | 2     |
+| Warnings        | 3     |
+| Suggestions     | 2     |
 
 ### Top Recommendations
+
 1. Remove sensitive data from console.log statements immediately
 2. Add proper error handling to async operations
 3. Replace `any` types with proper TypeScript interfaces
+
 ```
 
 </code-review>
+```

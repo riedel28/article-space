@@ -153,7 +153,7 @@ The project is migrating to Mantine v8. When working with Mantine components:
 1. **Use Native Mantine components wherever possible**
 
 2. **Don't use style attribute**
-    - Create *.module.css component instead
+   - Create \*.module.css component instead
 
 3. **Prefer Mantine style props over custom CSS**:
    - Use Mantine's style props (e.g., `pos="relative"`, `display="inline-block"`, `p="md"`, `m="lg"`)
@@ -167,9 +167,9 @@ The project is migrating to Mantine v8. When working with Mantine components:
    - Shadow: `shadow="sm"`, `shadow="md"`, `shadow="xl"`
 
 5. **Minimize CSS module usage**:
-    - Keep CSS modules minimal - only for animations, pseudo-states, or complex selectors
-    - Mantine components handle most styling needs through props
-    - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
+   - Keep CSS modules minimal - only for animations, pseudo-states, or complex selectors
+   - Mantine components handle most styling needs through props
+   - Example: For positioning, use `pos`, `top`, `right`, `bottom`, `left` props instead of CSS
 6. **Use Mantine variables in css files**
    - e.g. `border-radius: var(--mantine-radius-lg)`
 

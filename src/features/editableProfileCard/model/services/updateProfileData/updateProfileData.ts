@@ -35,10 +35,12 @@ export const updateProfileData = createAsyncThunk<
 
     // Sync avatar to global user state if user is editing their own profile
     if (authData && authData.id === formData?.id) {
-      dispatch(userActions.setAuthData({
-        ...authData,
-        avatar: response.data.avatar
-      }));
+      dispatch(
+        userActions.setAuthData({
+          ...authData,
+          avatar: response.data.avatar
+        })
+      );
 
       // Persist avatar to users table so it loads correctly on page refresh
       await extra.api.patch(`/users/${authData.id}`, {

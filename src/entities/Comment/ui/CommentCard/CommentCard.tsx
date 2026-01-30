@@ -58,12 +58,13 @@ export const CommentCard = memo((props: CommentCardProps) => {
       align="flex-start"
       className={className}
     >
-      <Box
-        component={Link}
-        to={getRouteProfile(comment.user.id)}
-        td="none"
-      >
-        <Avatar src={comment.user.avatar} alt={comment.user.username} size={48} radius="xl">
+      <Box component={Link} to={getRouteProfile(comment.user.id)} td="none">
+        <Avatar
+          src={comment.user.avatar}
+          alt={comment.user.username}
+          size={48}
+          radius="xl"
+        >
           {userInitial}
         </Avatar>
       </Box>

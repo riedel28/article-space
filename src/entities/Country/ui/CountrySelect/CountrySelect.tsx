@@ -29,9 +29,7 @@ export const CountrySelect = memo(
         label={t('Укажите страну')}
         placeholder={t('Укажите страну')}
         data={options}
-        onChange={(selectedValue) =>
-          onChange?.(selectedValue as Country)
-        }
+        onChange={(selectedValue) => onChange?.(selectedValue as Country)}
         readOnly={readonly}
         w="100%"
         size="md"

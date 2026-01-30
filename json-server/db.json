@@ -62,9 +62,7 @@
       "title": "ES2024: Новые возможности JavaScript - Updated",
       "subtitle": "Обзор ключевых нововведений стандарта ECMAScript 2024",
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -113,9 +111,7 @@
       "views": 8934,
       "createdAt": "10.12.2023",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -160,9 +156,7 @@
       "views": 6780,
       "createdAt": "20.10.2023",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -188,9 +182,7 @@
       "views": 9340,
       "createdAt": "15.09.2023",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -213,9 +205,7 @@
       "title": "Spring Boot 3: Новая эра Java-разработки",
       "subtitle": "Миграция на Java 17+ и нативная компиляция с GraalVM",
       "img": "https://andreyex.ru/wp-content/uploads/2018/05/Kak-ustanovit-Java-s-apt-na-Ubuntu-18.04.jpg",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "content": "<h3>Что нового в Spring Boot 3</h3><p>Spring Boot 3 требует минимум Java 17 и приносит полную поддержку Jakarta EE 10. Одно из главных нововведений — нативная компиляция с GraalVM, позволяющая создавать исполняемые файлы с мгновенным запуском.</p><p>Micrometer Observation API унифицирует работу с метриками и трассировкой, а новый HTTP-клиент на базе Java HttpClient заменяет устаревший RestTemplate.</p><pre><code>@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n    \n    private final RestClient restClient;\n    \n    public UserController(RestClient.Builder builder) {\n        this.restClient = builder\n            .baseUrl(\"https://api.example.com\")\n            .build();\n    }\n    \n    @GetMapping(\"/{id}\")\n    public User getUser(@PathVariable Long id) {\n        return restClient.get()\n            .uri(\"/users/{id}\", id)\n            .retrieve()\n            .body(User.class);\n    }\n}</code></pre>",
       "userId": "1",
       "views": 7820,
@@ -229,9 +219,7 @@
       "views": 9500,
       "createdAt": "10.09.2023",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -257,9 +245,7 @@
       "views": 18650,
       "createdAt": "25.06.2023",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -293,9 +279,7 @@
       "views": 22340,
       "createdAt": "01.06.2023",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -321,9 +305,7 @@
       "views": 11230,
       "createdAt": "15.05.2023",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -349,9 +331,7 @@
       "views": 5670,
       "createdAt": "20.04.2023",
       "userId": "1",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "blocks": [
         {
           "id": "1",
@@ -381,9 +361,7 @@
       "views": 8920,
       "createdAt": "10.03.2023",
       "userId": "2",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "blocks": [
         {
           "id": "1",
@@ -413,9 +391,7 @@
       "views": 14560,
       "createdAt": "01.02.2024",
       "userId": "1",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "blocks": [
         {
           "id": "1",
@@ -445,9 +421,7 @@
       "views": 9870,
       "createdAt": "15.12.2023",
       "userId": "1",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "blocks": [
         {
           "id": "1",
@@ -477,10 +451,7 @@
       "views": 25670,
       "createdAt": "05.01.2024",
       "userId": "2",
-      "type": [
-        "SCIENCE",
-        "IT"
-      ],
+      "type": ["SCIENCE", "IT"],
       "blocks": [
         {
           "id": "1",
@@ -512,9 +483,7 @@
       "title": "Глобальные цепочки поставок",
       "subtitle": "Уроки пандемии и новая география производства",
       "img": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "content": "<h3>Уязвимость глобализации</h3><p>Пандемия COVID-19 обнажила хрупкость глобальных цепочек поставок. Зависимость от единственных поставщиков, just-in-time логистика и концентрация производства в нескольких регионах создали системные риски.</p><p>Компании переосмысливают стратегии: friend-shoring (перенос производства в дружественные страны), near-shoring (приближение к рынкам сбыта) и увеличение запасов. Устойчивость становится важнее эффективности.</p><h3>Новая индустриализация</h3><p>США и Европа инвестируют в возвращение стратегических производств: полупроводников, аккумуляторов, фармацевтики. CHIPS Act и Inflation Reduction Act в США, European Chips Act в ЕС — примеры новой промышленной политики.</p><p>Однако полная автаркия невозможна и неэффективна. Оптимальная стратегия — диверсификация поставщиков и создание резервов для критических компонентов.</p>",
       "userId": "1",
       "views": 4230,
@@ -528,9 +497,7 @@
       "views": 13450,
       "createdAt": "20.09.2023",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -565,9 +532,7 @@
       "views": 7890,
       "createdAt": "10.10.2023",
       "userId": "1",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "blocks": [
         {
           "id": "1",
@@ -597,9 +562,7 @@
       "views": 15420,
       "createdAt": "20.01.2026",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -620,9 +583,7 @@
       "views": 8730,
       "createdAt": "18.01.2026",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -643,9 +604,7 @@
       "views": 23100,
       "createdAt": "15.01.2026",
       "userId": "1",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "blocks": [
         {
           "id": "1",
@@ -666,9 +625,7 @@
       "views": 45200,
       "createdAt": "22.01.2026",
       "userId": "1",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "blocks": [
         {
           "id": "1",
@@ -689,9 +646,7 @@
       "views": 31500,
       "createdAt": "10.01.2026",
       "userId": "2",
-      "type": [
-        "SCIENCE"
-      ],
+      "type": ["SCIENCE"],
       "blocks": [
         {
           "id": "1",
@@ -712,9 +667,7 @@
       "views": 19800,
       "createdAt": "08.01.2026",
       "userId": "1",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "blocks": [
         {
           "id": "1",
@@ -735,9 +688,7 @@
       "views": 28900,
       "createdAt": "25.01.2026",
       "userId": "2",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -758,9 +709,7 @@
       "views": 12400,
       "createdAt": "12.01.2026",
       "userId": "1",
-      "type": [
-        "IT"
-      ],
+      "type": ["IT"],
       "blocks": [
         {
           "id": "1",
@@ -781,9 +730,7 @@
       "views": 17600,
       "createdAt": "05.01.2026",
       "userId": "2",
-      "type": [
-        "ECONOMICS"
-      ],
+      "type": ["ECONOMICS"],
       "blocks": [
         {
           "id": "1",
@@ -990,9 +937,7 @@
       "id": "1",
       "username": "admin",
       "password": "123",
-      "roles": [
-        "ADMIN"
-      ],
+      "roles": ["ADMIN"],
       "features": {
         "isArticleRatingEnabled": true,
         "isCounterEnabled": true
@@ -1009,9 +954,7 @@
       "id": "2",
       "username": "user",
       "password": "123",
-      "roles": [
-        "USER"
-      ],
+      "roles": ["USER"],
       "features": {
         "isArticleRatingEnabled": false,
         "isCounterEnabled": false
@@ -1026,9 +969,7 @@
       "id": "3",
       "username": "manager",
       "password": "123",
-      "roles": [
-        "MANAGER"
-      ],
+      "roles": ["MANAGER"],
       "features": {
         "isArticleRatingEnabled": false,
         "isCounterEnabled": true
@@ -1042,9 +983,7 @@
       "id": "4",
       "username": "testuser",
       "password": "123",
-      "roles": [
-        "ADMIN"
-      ],
+      "roles": ["ADMIN"],
       "features": {
         "isArticleRatingEnabled": true,
         "isCounterEnabled": true

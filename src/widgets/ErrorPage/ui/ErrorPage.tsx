@@ -43,7 +43,9 @@ export const ErrorPage = ({ className }: ErrorPageProps) => {
               {t('Something went wrong')}
             </Title>
             <Text c="dimmed" size="lg" ta="center" maw={500}>
-              {t('An unexpected error occurred. Please try refreshing the page or go back to the homepage.')}
+              {t(
+                'An unexpected error occurred. Please try refreshing the page or go back to the homepage.'
+              )}
             </Text>
           </Stack>
 

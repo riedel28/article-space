@@ -3,16 +3,12 @@
     "context7": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "@upstash/context7-mcp@latest"
-      ],
+      "args": ["@upstash/context7-mcp@latest"],
       "env": {}
     },
     "playwright": {
       "command": "npx",
-      "args": [
-        "@playwright/mcp@latest"
-      ]
+      "args": ["@playwright/mcp@latest"]
     }
   }
 }

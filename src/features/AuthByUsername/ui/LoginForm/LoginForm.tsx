@@ -44,8 +44,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     validate: {
       username: (value) =>
         value.trim().length < 1 ? t('Username is required') : null,
-      password: (value) =>
-        value.length < 1 ? t('Password is required') : null
+      password: (value) => (value.length < 1 ? t('Password is required') : null)
     },
     validateInputOnBlur: true
   });
@@ -53,7 +52,10 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const handleSubmit = useCallback(
     async (values: LoginFormValues) => {
       const result = await dispatch(
-        loginByUsername({ username: values.username, password: values.password })
+        loginByUsername({
+          username: values.username,
+          password: values.password
+        })
       );
       if (result.meta.requestStatus === 'fulfilled') {
         onSuccess();

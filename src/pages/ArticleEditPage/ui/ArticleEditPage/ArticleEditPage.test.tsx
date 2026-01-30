@@ -23,7 +23,10 @@ const mockArticle: Article = {
       id: '1',
       type: ArticleBlockType.TEXT,
       title: 'Introduction',
-      paragraphs: ['This is the first paragraph.', 'This is the second paragraph.']
+      paragraphs: [
+        'This is the first paragraph.',
+        'This is the second paragraph.'
+      ]
     }
   ]
 };
@@ -149,6 +152,8 @@ describe('ArticleEditPage', () => {
       route: '/articles/1/edit'
     });
 
-    expect(screen.getByTestId('ArticleEditForm.CancelButton')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('ArticleEditForm.CancelButton')
+    ).toBeInTheDocument();
   });
 });
