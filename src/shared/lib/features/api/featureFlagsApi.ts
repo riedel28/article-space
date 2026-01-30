@@ -20,5 +20,4 @@ const featureFlagsApi = rtkApi.injectEndpoints({
   })
 });
 
-export const updateFeatureFlagsMutation =
-  featureFlagsApi.endpoints.updateFeatureFlags.initiate;
+export const updateFeatureFlagsMutation = featureFlagsApi.endpoints.updateFeatureFlags.initiate;

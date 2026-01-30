@@ -12,14 +12,7 @@ interface ModalProps {
 }
 
 export const Modal = (props: ModalProps) => {
-  const {
-    className,
-    children,
-    isOpen,
-    onClose,
-    lazy,
-    'data-testid': dataTestId
-  } = props;
+  const { className, children, isOpen, onClose, lazy, 'data-testid': dataTestId } = props;
 
   return (
     <MantineModal

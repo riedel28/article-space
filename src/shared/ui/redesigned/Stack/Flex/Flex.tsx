@@ -8,10 +8,7 @@ export type FlexDirection = 'row' | 'column';
 export type FlexWrap = 'nowrap' | 'wrap';
 export type FlexGap = '4' | '8' | '16' | '24' | '32';
 
-type DivProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
+type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export interface FlexProps extends DivProps {
   className?: string;

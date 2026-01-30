@@ -36,10 +36,7 @@ export function Dropdown(props: DropdownProps) {
   } = props;
 
   return (
-    <Menu
-      position={mapDirectionToPosition[direction] as any}
-      data-testid={dataTestId}
-    >
+    <Menu position={mapDirectionToPosition[direction] as any} data-testid={dataTestId}>
       <Menu.Target>
         <div className={classNames('', {}, [className])}>{trigger}</div>
       </Menu.Target>

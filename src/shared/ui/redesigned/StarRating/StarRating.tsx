@@ -40,23 +40,23 @@ export const StarRating = memo((props: StarRatingProps) => {
 
   return (
     <div className={classNames(cls.StarRatingRedesigned, {}, [className])}>
-      {stars.map((starNumber) => {
-        const commonProps = {
-          className: classNames(cls.starIcon, { [cls.selected]: isSelected }, [
+      {stars.map((starNumber) => (
+        <Icon
+          key={starNumber}
+          clickable={!isSelected}
+          className={classNames(cls.starIcon, { [cls.selected]: isSelected }, [
             currentStarsCount >= starNumber ? cls.hovered : cls.normal
-          ]),
-          Svg: StarIcon,
-          key: starNumber,
-          width: size,
-          height: size,
-          onMouseLeave: onLeave,
-          onMouseEnter: onHover(starNumber),
-          onClick: onClick(starNumber),
-          'data-testid': `StarRating.${starNumber}`,
-          'data-selected': currentStarsCount >= starNumber
-        };
-        return <Icon clickable={!isSelected} {...commonProps} />;
-      })}
+          ])}
+          Svg={StarIcon}
+          width={size}
+          height={size}
+          onMouseLeave={onLeave}
+          onMouseEnter={onHover(starNumber)}
+          onClick={onClick(starNumber)}
+          data-testid={`StarRating.${starNumber}`}
+          data-selected={currentStarsCount >= starNumber}
+        />
+      ))}
     </div>
   );
 });

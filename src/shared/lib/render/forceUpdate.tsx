@@ -29,9 +29,5 @@ export function ForceUpdateProvider({ children }: { children: ReactNode }) {
     return null;
   }
 
-  return (
-    <ForceUpdateContext.Provider value={valueContext}>
-      {children}
-    </ForceUpdateContext.Provider>
-  );
+  return <ForceUpdateContext.Provider value={valueContext}>{children}</ForceUpdateContext.Provider>;
 }

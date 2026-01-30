@@ -1,9 +1,4 @@
-import React, {
-  InputHTMLAttributes,
-  memo,
-  ReactNode,
-  useCallback
-} from 'react';
+import React, { InputHTMLAttributes, memo, ReactNode, useCallback } from 'react';
 import { TextInput } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
 

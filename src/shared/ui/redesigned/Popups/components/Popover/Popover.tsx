@@ -28,10 +28,7 @@ export function Popover(props: PopoverProps) {
   } = props;
 
   return (
-    <MantinePopover
-      position={mapDirectionToPosition[direction] as any}
-      data-testid={dataTestId}
-    >
+    <MantinePopover position={mapDirectionToPosition[direction] as any} data-testid={dataTestId}>
       <MantinePopover.Target>
         <div className={classNames('', {}, [className])}>{trigger}</div>
       </MantinePopover.Target>
