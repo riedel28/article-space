@@ -30,7 +30,7 @@ export const DetailsContainer = memo((props: DetailsContainerProps) => {
   const isLoading = useSelector(getArticleDetailsIsLoading);
 
   return (
-    <Card p={{ base: 0, sm: 'lg' }} radius="lg" className={className}>
+    <Card p={{ base: 0, sm: 'lg' }} radius="lg" className={className} data-testid="ArticleDetails.Info">
       <Stack gap="lg">
         {isLoading ? (
           <DetailsContainerSkeleton />

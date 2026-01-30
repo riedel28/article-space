@@ -29,8 +29,10 @@ export const Navbar = memo(({ opened, toggle }: NavbarProps) => {
   }, []);
 
   return (
-    <Group h="100%" px="md" justify="flex-end" className={classes.header}>
-      <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+    <Group h="100%" px="md" justify="flex-end" className={classes.header}
+data-testid="Navbar">
+      <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm"
+data-testid="sidebar-toggle" />
       <Group ml="auto">
         {authData ? (
           <>

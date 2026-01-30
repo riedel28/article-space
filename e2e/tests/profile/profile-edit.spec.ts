@@ -16,14 +16,14 @@ test.describe('User visits the profile page', () => {
   });
 
   test('And profile loads successfully', async ({ page }) => {
-    await expect(page.getByText('test')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'test user' })).toBeVisible();
   });
 
   test('And edits it', async ({ page }) => {
     const newName = 'new';
     const newLastname = 'lastname';
     await updateProfile(page, newName, newLastname);
-    await expect(page.getByTestId('ProfileCard.firstname')).toHaveValue(newName);
-    await expect(page.getByTestId('ProfileCard.lastname')).toHaveValue(newLastname);
+    // After save, the profile shows the updated name in view mode
+    await expect(page.getByRole('heading', { name: `${newName} ${newLastname}` })).toBeVisible();
   });
 });

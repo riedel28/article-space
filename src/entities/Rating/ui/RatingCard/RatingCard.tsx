@@ -72,7 +72,8 @@ export const RatingCard = memo((props: RatingCardProps) => {
   );
 
   return (
-    <Card className={className} p={{ base: 'md', sm: 'lg' }} radius="md" w="100%">
+    <Card className={className} p={{ base: 'md', sm: 'lg' }} radius="md" w="100%"
+data-testid="RatingCard">
       <Stack align="center" gap="sm">
         <Text size="lg" fw={500} ta="center">
           {displayTitle}
@@ -82,6 +83,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
           onChange={onSelectStars}
           size="xl"
           highlightSelectedOnly={false}
+          data-testid="RatingCard.Stars"
         />
       </Stack>
 

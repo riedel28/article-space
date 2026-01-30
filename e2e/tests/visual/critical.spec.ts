@@ -71,7 +71,7 @@ test.describe('Critical Visual Regression Tests', () => {
   });
 
   test.describe('UI Components', () => {
-    test('Sidebar collapsed and expanded', async ({ page, request }) => {
+    test('Sidebar collapsed and expanded', async ({ page, request, isMobile }) => {
       await page.goto('/');
       await login(request, page);
       await page.waitForLoadState('networkidle');
@@ -83,13 +83,15 @@ test.describe('Critical Visual Regression Tests', () => {
         maxDiffPixelRatio: 0.1
       });
 
-      // Toggle sidebar
-      await page.getByTestId('sidebar-toggle').click();
-      await page.waitForTimeout(300); // Wait for animation
+      // Toggle sidebar - only on mobile where the burger menu is visible
+      if (isMobile) {
+        await page.getByTestId('sidebar-toggle').click();
+        await page.waitForTimeout(300); // Wait for animation
 
-      await expect(sidebar).toHaveScreenshot('sidebar-collapsed.png', {
-        maxDiffPixelRatio: 0.1
-      });
+        await expect(sidebar).toHaveScreenshot('sidebar-collapsed.png', {
+          maxDiffPixelRatio: 0.1
+        });
+      }
     });
 
     test('Navbar', async ({ page, request }) => {

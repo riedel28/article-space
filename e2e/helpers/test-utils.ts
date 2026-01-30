@@ -34,12 +34,15 @@ export async function login(
   });
   const user = (await response.json()) as User;
 
+  // Store only the user ID as the app expects
   await page.evaluate(
     ([key, value]) => {
       window.localStorage.setItem(key, value);
     },
-    [USER_LOCALSTORAGE_KEY, JSON.stringify(user)]
+    [USER_LOCALSTORAGE_KEY, user.id]
   );
+
+  await page.reload();
 
   return user;
 }
@@ -119,7 +122,9 @@ export async function setRate(
   starsCount: number = 5,
   feedback: string = 'feedback'
 ): Promise<void> {
-  await page.getByTestId(`StarRating.${starsCount}`).click();
+  // Click the nth star in Mantine's Rating component
+  const stars = page.getByTestId('RatingCard.Stars').locator('label');
+  await stars.nth(starsCount - 1).click();
   await page.getByTestId('RatingCard.Input').fill(feedback);
   await page.getByTestId('RatingCard.Send').click();
 }

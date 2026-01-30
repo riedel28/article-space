@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import * as fs from 'fs';
+import * as path from 'path';
 import { login } from '../../helpers/test-utils';
 
 test.describe('User visits articles list page', () => {
@@ -17,8 +19,9 @@ test.describe('User visits articles list page', () => {
 
   test('Articles load with fixtures (mocked)', async ({ page }) => {
     await page.route('**/articles?*', async (route) => {
-      const json = await import('../../fixtures/articles.json');
-      await route.fulfill({ json: json.default });
+      const fixturePath = path.join(__dirname, '../../fixtures/articles.json');
+      const json = JSON.parse(fs.readFileSync(fixturePath, 'utf-8'));
+      await route.fulfill({ json });
     });
 
     await page.reload();
