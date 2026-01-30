@@ -1,7 +1,7 @@
-import { Theme } from '@/shared/const/theme';
+import { ColorScheme } from '@/shared/const/theme';
 
 export interface JsonSettings {
-  theme?: Theme;
+  theme?: ColorScheme;
   isFirstVisit?: boolean;
   isArticlesPageWasOpened?: boolean;
 }

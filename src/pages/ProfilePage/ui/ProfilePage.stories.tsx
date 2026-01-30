@@ -4,7 +4,6 @@ import { Country } from '@/entities/Country';
 import { Currency } from '@/entities/Currency';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from '@/shared/const/theme';
 
 import ProfilePage from './ProfilePage';
 
@@ -38,7 +37,7 @@ export const Normal: Story = {
 export const Dark: Story = {
   args: {},
   decorators: [
-    ThemeDecorator(Theme.DARK),
+    ThemeDecorator('dark'),
     StoreDecorator({
       profile: {
         form: {

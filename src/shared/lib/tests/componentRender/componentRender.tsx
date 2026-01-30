@@ -11,13 +11,13 @@ import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider';
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import i18nForTests from '@/shared/config/i18n/i18nForTests';
-import { Theme } from '@/shared/const/theme';
+import { ColorScheme } from '@/shared/const/theme';
 
 export interface componentRenderOptions {
   route?: string;
   initialState?: DeepPartial<StateSchema>;
   asyncReducers?: DeepPartial<ReducersMapObject<StateSchema>>;
-  theme?: Theme;
+  theme?: ColorScheme;
 }
 
 interface TestProviderProps {
@@ -27,17 +27,13 @@ interface TestProviderProps {
 
 export function TestProvider(props: TestProviderProps) {
   const { children, options = {} } = props;
-  const { route = '/', initialState, asyncReducers, theme = Theme.LIGHT } = options;
-
-  const colorScheme = theme === Theme.DARK ? 'dark' : 'light';
+  const { route = '/', initialState, asyncReducers, theme = 'light' } = options;
 
   return (
     <MemoryRouter initialEntries={[route]}>
       <StoreProvider asyncReducers={asyncReducers} initialState={initialState}>
         <I18nextProvider i18n={i18nForTests}>
-          <ThemeProvider initialTheme={colorScheme}>
-            <div className={`app ${theme}`}>{children}</div>
-          </ThemeProvider>
+          <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
         </I18nextProvider>
       </StoreProvider>
     </MemoryRouter>
