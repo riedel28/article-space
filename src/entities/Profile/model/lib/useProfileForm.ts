@@ -23,12 +23,9 @@ export function useProfileForm(options: UseProfileFormOptions = {}) {
       avatar: initialValues?.avatar ?? ''
     },
     validate: {
-      first: (value) =>
-        value.length < 2 ? 'First name must be at least 2 characters' : null,
-      lastname: (value) =>
-        value.length < 2 ? 'Last name must be at least 2 characters' : null,
-      username: (value) =>
-        value.length < 3 ? 'Username must be at least 3 characters' : null
+      first: (value) => (value.length < 2 ? 'First name must be at least 2 characters' : null),
+      lastname: (value) => (value.length < 2 ? 'Last name must be at least 2 characters' : null),
+      username: (value) => (value.length < 3 ? 'Username must be at least 3 characters' : null)
     }
   });
 

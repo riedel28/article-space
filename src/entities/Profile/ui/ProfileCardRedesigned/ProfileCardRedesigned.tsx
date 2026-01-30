@@ -16,10 +16,7 @@ import {
 import { IconDeviceFloppy, IconPencil } from '@tabler/icons-react';
 import { Profile } from '../../model/types/profile';
 import classes from './ProfileCardRedesigned.module.css';
-import {
-  useProfileForm,
-  ProfileFormValues
-} from '../../model/lib/useProfileForm';
+import { useProfileForm, ProfileFormValues } from '../../model/lib/useProfileForm';
 
 export interface ProfileCardProps {
   className?: string;
@@ -106,16 +103,7 @@ const InfoField = ({ label, value, truncate }: InfoFieldProps) => (
 );
 
 export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
-  const {
-    className,
-    data,
-    readonly,
-    isUpdating,
-    canEdit,
-    onSubmit,
-    onCancel,
-    onEdit
-  } = props;
+  const { className, data, readonly, isUpdating, canEdit, onSubmit, onCancel, onEdit } = props;
   const { t } = useTranslation('profile');
 
   const form = useProfileForm({
@@ -220,11 +208,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
         </SimpleGrid>
 
         <Group justify="flex-end" mt="md" wrap="wrap" gap="sm">
-          <Button
-            variant="default"
-            onClick={onCancel}
-            data-testid="ProfileCard.CancelButton"
-          >
+          <Button variant="default" onClick={onCancel} data-testid="ProfileCard.CancelButton">
             {t('Cancel')}
           </Button>
           <Button

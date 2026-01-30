@@ -20,13 +20,7 @@ const getSkeletons = (view: ArticleView) =>
     .map((_item, index) => <ArticleListItemSkeleton key={index} view={view} />);
 
 export const ArticleList = memo((props: ArticleListProps) => {
-  const {
-    className,
-    articles,
-    view = ArticleView.SMALL,
-    isLoading,
-    target
-  } = props;
+  const { className, articles, view = ArticleView.SMALL, isLoading, target } = props;
   const { t } = useTranslation();
 
   if (!isLoading && !articles.length) {
@@ -48,12 +42,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
         data-testid="ArticleList"
       >
         {articles.map((item) => (
-          <ArticleListItem
-            article={item}
-            view={view}
-            target={target}
-            key={item.id}
-          />
+          <ArticleListItem article={item} view={view} target={target} key={item.id} />
         ))}
         {isLoading && getSkeletons(view)}
       </SimpleGrid>
@@ -63,12 +52,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
   return (
     <Stack gap="lg" className={className} data-testid="ArticleList">
       {articles.map((item) => (
-        <ArticleListItem
-          article={item}
-          view={view}
-          target={target}
-          key={item.id}
-        />
+        <ArticleListItem article={item} view={view} target={target} key={item.id} />
       ))}
       {isLoading && getSkeletons(view)}
     </Stack>

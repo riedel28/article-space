@@ -18,10 +18,7 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
 
   const content = (
     <Group gap="sm" wrap="nowrap" align="flex-start">
-      <Box
-        className={classes.indicator}
-        data-unread={item.unread || undefined}
-      />
+      <Box className={classes.indicator} data-unread={item.unread || undefined} />
 
       <Box>
         <Text fw={600} size="sm" c="dark">

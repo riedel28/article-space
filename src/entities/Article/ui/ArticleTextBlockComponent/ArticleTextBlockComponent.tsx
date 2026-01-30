@@ -9,18 +9,16 @@ interface ArticleTextBlockComponentProps {
   block: ArticleTextBlock;
 }
 
-export const ArticleTextBlockComponent = memo(
-  (props: ArticleTextBlockComponentProps) => {
-    const { className, block } = props;
-    const { t } = useTranslation();
+export const ArticleTextBlockComponent = memo((props: ArticleTextBlockComponentProps) => {
+  const { className, block } = props;
+  const { t } = useTranslation();
 
-    return (
-      <Stack gap="xs" className={className}>
-        {block.title && <Text title={block.title} />}
-        {block.paragraphs.map((paragraph, index) => (
-          <Text key={paragraph} text={paragraph} />
-        ))}
-      </Stack>
-    );
-  }
-);
+  return (
+    <Stack gap="xs" className={className}>
+      {block.title && <Text title={block.title} />}
+      {block.paragraphs.map((paragraph, index) => (
+        <Text key={paragraph} text={paragraph} />
+      ))}
+    </Stack>
+  );
+});

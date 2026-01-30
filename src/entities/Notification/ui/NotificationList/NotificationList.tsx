@@ -34,12 +34,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
           <Skeleton width="100%" radius="md" height={80} />
         </Stack>
       ) : (
-        <ScrollArea.Autosize
-          mah={350}
-          p={fullWidth ? 0 : 4}
-          type="auto"
-          offsetScrollbars
-        >
+        <ScrollArea.Autosize mah={350} p={fullWidth ? 0 : 4} type="auto" offsetScrollbars>
           {data?.map((item) => (
             <NotificationItem key={item.id} item={item} />
           ))}

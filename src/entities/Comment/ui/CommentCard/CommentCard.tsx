@@ -59,24 +59,14 @@ export const CommentCard = memo((props: CommentCardProps) => {
       className={className}
     >
       <Box component={Link} to={getRouteProfile(comment.user.id)} td="none">
-        <Avatar
-          src={comment.user.avatar}
-          alt={comment.user.username}
-          size={48}
-          radius="xl"
-        >
+        <Avatar src={comment.user.avatar} alt={comment.user.username} size={48} radius="xl">
           {userInitial}
         </Avatar>
       </Box>
       <Stack gap={4} flex={1}>
         <Group gap="sm" align="baseline">
-          <Text
-            component={Link}
-            to={getRouteProfile(comment.user.id)}
-            fw={600}
-            td="none"
-            c="dark"
-          >
+          <Text component={Link} to={getRouteProfile(comment.user.id)} fw={600} td="none"
+c="dark">
             {comment.user.username}
           </Text>
           {comment.createdAt && (

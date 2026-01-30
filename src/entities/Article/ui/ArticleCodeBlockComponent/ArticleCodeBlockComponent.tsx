@@ -8,14 +8,12 @@ interface ArticleCodeBlockComponentProps {
   block: ArticleCodeBlock;
 }
 
-export const ArticleCodeBlockComponent = memo(
-  (props: ArticleCodeBlockComponentProps) => {
-    const { className, block } = props;
+export const ArticleCodeBlockComponent = memo((props: ArticleCodeBlockComponentProps) => {
+  const { className, block } = props;
 
-    return (
-      <Box w="100%" className={className}>
-        <CodeHighlight code={block.code} language="tsx" radius="md" />
-      </Box>
-    );
-  }
-);
+  return (
+    <Box w="100%" className={className}>
+      <CodeHighlight code={block.code} language="tsx" radius="md" />
+    </Box>
+  );
+});

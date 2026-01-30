@@ -6,10 +6,7 @@ import { ArticleListItemProps } from '../ArticleListItem';
 import { ArticleTextBlock } from '../../../model/types/article';
 import { AppLink } from '@/shared/ui/redesigned/AppLink';
 import { getRouteArticleDetails } from '@/shared/const/router';
-import {
-  ArticleBlockType,
-  ArticleView
-} from '../../../model/consts/articleConsts';
+import { ArticleBlockType, ArticleView } from '../../../model/consts/articleConsts';
 import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
 import classes from './ArticleListItemRedesigned.module.css';
 
@@ -26,9 +23,9 @@ function getArticlePreview(article: ArticleListItemProps['article']): string {
 
   // Fallback to blocks for backwards compatibility
   if (article.blocks) {
-    const textBlock = article.blocks.find(
-      (block) => block.type === ArticleBlockType.TEXT
-    ) as ArticleTextBlock | undefined;
+    const textBlock = article.blocks.find((block) => block.type === ArticleBlockType.TEXT) as
+      | ArticleTextBlock
+      | undefined;
     if (textBlock?.paragraphs) {
       return textBlock.paragraphs.slice(0, 2).join(' ');
     }
@@ -64,12 +61,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
 
           <div className={classes.contentStack}>
             <div>
-              <Text
-                fz="md"
-                fw={600}
-                lineClamp={2}
-                className={classes.articleTitle}
-              >
+              <Text fz="md" fw={600} lineClamp={2} className={classes.articleTitle}>
                 {article.title}
               </Text>
 
@@ -126,12 +118,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
       <Card radius="md" withBorder className={classes.card} h="100%">
         <Card.Section>
           <AspectRatio ratio={16 / 10}>
-            <Image
-              alt={article.title}
-              src={article.img}
-              h={180}
-              fallbackSrc={IMAGE_FALLBACK_URL}
-            />
+            <Image alt={article.title} src={article.img} h={180} fallbackSrc={IMAGE_FALLBACK_URL} />
           </AspectRatio>
         </Card.Section>
 

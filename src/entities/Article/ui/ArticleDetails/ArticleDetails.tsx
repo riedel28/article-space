@@ -66,9 +66,7 @@ function blocksToHtml(
       switch (block.type) {
         case ArticleBlockType.TEXT: {
           const title = block.title ? `<h3>${block.title}</h3>` : '';
-          const paragraphs = (block.paragraphs || [])
-            .map((p) => `<p>${p}</p>`)
-            .join('');
+          const paragraphs = (block.paragraphs || []).map((p) => `<p>${p}</p>`).join('');
           return title + paragraphs;
         }
         case ArticleBlockType.CODE:
