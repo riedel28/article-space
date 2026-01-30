@@ -1,19 +1,18 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticleViewSelector } from './ArticleViewSelector';
 
-export default {
+const meta: Meta<typeof ArticleViewSelector> = {
   title: 'features/ArticleViewSelector',
   component: ArticleViewSelector,
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof ArticleViewSelector>;
+};
 
-const Template: StoryFn<typeof ArticleViewSelector> = (args) => (
-  <ArticleViewSelector {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticleViewSelector>;
 
-export const Normal = Template.bind({});
-Normal.args = {};
+export const Normal: Story = {
+  args: {}
+};

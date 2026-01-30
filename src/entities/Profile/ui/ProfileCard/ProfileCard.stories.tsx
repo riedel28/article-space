@@ -1,20 +1,23 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import avatar from '@/shared/assets/tests/storybook.jpg';
 import { ProfileCard } from './ProfileCard';
 
-export default {
+const meta: Meta<typeof ProfileCard> = {
   title: 'entities/ProfileCard',
   component: ProfileCard,
   argTypes: {
     backgroundColor: { control: 'color' }
+  },
+  args: {
+    onEdit: fn(),
+    onSubmit: fn(),
+    onCancel: fn()
   }
-} as Meta<typeof ProfileCard>;
+};
 
-const Template: StoryFn<typeof ProfileCard> = (args) => (
-  <ProfileCard {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ProfileCard>;
 
 const profileData = {
   username: 'johndoe',
@@ -23,36 +26,38 @@ const profileData = {
   avatar
 };
 
-export const ViewMode = Template.bind({});
-ViewMode.args = {
-  data: profileData,
-  readonly: true,
-  canEdit: true,
-  onEdit: action('onEdit')
+export const ViewMode: Story = {
+  args: {
+    data: profileData,
+    readonly: true,
+    canEdit: true
+  }
 };
 
-export const ViewModeWithoutEditPermission = Template.bind({});
-ViewModeWithoutEditPermission.args = {
-  data: profileData,
-  readonly: true,
-  canEdit: false
+export const ViewModeWithoutEditPermission: Story = {
+  args: {
+    data: profileData,
+    readonly: true,
+    canEdit: false
+  }
 };
 
-export const EditMode = Template.bind({});
-EditMode.args = {
-  data: profileData,
-  readonly: false,
-  canEdit: true,
-  onSubmit: action('onSubmit'),
-  onCancel: action('onCancel')
+export const EditMode: Story = {
+  args: {
+    data: profileData,
+    readonly: false,
+    canEdit: true
+  }
 };
 
-export const WithError = Template.bind({});
-WithError.args = {
-  error: 'true'
+export const WithError: Story = {
+  args: {
+    error: 'true'
+  }
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
-  isLoading: true
+export const Loading: Story = {
+  args: {
+    isLoading: true
+  }
 };

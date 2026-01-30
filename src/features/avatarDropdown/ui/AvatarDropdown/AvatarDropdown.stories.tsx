@@ -1,45 +1,45 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { AvatarDropdown } from './AvatarDropdown';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 
-export default {
+const meta: Meta<typeof AvatarDropdown> = {
   title: 'features/AvatarDropdown',
   component: AvatarDropdown,
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof AvatarDropdown>;
+};
 
-const Template: StoryFn<typeof AvatarDropdown> = (args) => (
-  <AvatarDropdown {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof AvatarDropdown>;
 
-export const Normal = Template.bind({});
-Normal.args = {};
-Normal.decorators = [
-  StoreDecorator({
-    user: {
-      authData: {
-        id: '1',
-        username: 'admin',
-        avatar: 'https://i.pravatar.cc/150?img=3'
+export const Normal: Story = {
+  args: {},
+  decorators: [
+    StoreDecorator({
+      user: {
+        authData: {
+          id: '1',
+          username: 'admin',
+          avatar: 'https://i.pravatar.cc/150?img=3'
+        }
       }
-    }
-  })
-];
+    })
+  ]
+};
 
-export const AdminUser = Template.bind({});
-AdminUser.args = {};
-AdminUser.decorators = [
-  StoreDecorator({
-    user: {
-      authData: {
-        id: '1',
-        username: 'admin',
-        avatar: 'https://i.pravatar.cc/150?img=3',
-        roles: ['ADMIN']
+export const AdminUser: Story = {
+  args: {},
+  decorators: [
+    StoreDecorator({
+      user: {
+        authData: {
+          id: '1',
+          username: 'admin',
+          avatar: 'https://i.pravatar.cc/150?img=3',
+          roles: ['ADMIN']
+        }
       }
-    }
-  })
-];
+    })
+  ]
+};

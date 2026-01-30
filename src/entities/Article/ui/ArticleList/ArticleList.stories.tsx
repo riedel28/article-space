@@ -1,21 +1,19 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticleView } from '../../model/consts/articleConsts';
 import { ArticleList } from './ArticleList';
 import { Article } from '../../model/types/article';
 
-export default {
+const meta: Meta<typeof ArticleList> = {
   title: 'entities/Article/ArticleList',
   component: ArticleList,
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof ArticleList>;
+};
 
-const Template: StoryFn<typeof ArticleList> = (args) => (
-  <ArticleList {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticleList>;
 
 const article = {
   id: '1',
@@ -93,36 +91,40 @@ const article = {
   ]
 } as Article;
 
-export const LoadingBig = Template.bind({});
-LoadingBig.args = {
-  articles: [],
-  isLoading: true,
-  view: ArticleView.BIG
+export const LoadingBig: Story = {
+  args: {
+    articles: [],
+    isLoading: true,
+    view: ArticleView.BIG
+  }
 };
 
-export const LoadingSmall = Template.bind({});
-LoadingSmall.args = {
-  articles: [],
-  isLoading: true,
-  view: ArticleView.SMALL
+export const LoadingSmall: Story = {
+  args: {
+    articles: [],
+    isLoading: true,
+    view: ArticleView.SMALL
+  }
 };
 
-export const ListSmall = Template.bind({});
-ListSmall.args = {
-  articles: new Array(9).fill(0).map((item, index) => ({
-    ...article,
-    id: String(index)
-  })),
-  isLoading: false,
-  view: ArticleView.SMALL
+export const ListSmall: Story = {
+  args: {
+    articles: new Array(9).fill(0).map((item, index) => ({
+      ...article,
+      id: String(index)
+    })),
+    isLoading: false,
+    view: ArticleView.SMALL
+  }
 };
 
-export const ListBig = Template.bind({});
-ListBig.args = {
-  articles: new Array(9).fill(0).map((item, index) => ({
-    ...article,
-    id: String(index)
-  })),
-  isLoading: false,
-  view: ArticleView.BIG
+export const ListBig: Story = {
+  args: {
+    articles: new Array(9).fill(0).map((item, index) => ({
+      ...article,
+      id: String(index)
+    })),
+    isLoading: false,
+    view: ArticleView.BIG
+  }
 };

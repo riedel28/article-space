@@ -1,21 +1,19 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticleView } from '../../model/consts/articleConsts';
 import { ArticleListItem } from './ArticleListItem';
 import { Article } from '../../model/types/article';
 
-export default {
+const meta: Meta<typeof ArticleListItem> = {
   title: 'entities/Article/ArticleListItem',
   component: ArticleListItem,
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof ArticleListItem>;
+};
 
-const Template: StoryFn<typeof ArticleListItem> = (args) => (
-  <ArticleListItem {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticleListItem>;
 
 const article = {
   id: '1',
@@ -93,14 +91,16 @@ const article = {
   ]
 } as Article;
 
-export const Big = Template.bind({});
-Big.args = {
-  view: ArticleView.BIG,
-  article
+export const Big: Story = {
+  args: {
+    view: ArticleView.BIG,
+    article
+  }
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  view: ArticleView.SMALL,
-  article
+export const Small: Story = {
+  args: {
+    view: ArticleView.SMALL,
+    article
+  }
 };

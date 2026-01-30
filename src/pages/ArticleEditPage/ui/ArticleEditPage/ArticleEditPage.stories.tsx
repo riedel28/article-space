@@ -1,20 +1,18 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 import ArticleEditPage from './ArticleEditPage';
 
-export default {
+const meta: Meta<typeof ArticleEditPage> = {
   title: 'pages/ArticleEditPage/ArticleEditPage',
   component: ArticleEditPage,
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof ArticleEditPage>;
+};
 
-const Template: StoryFn<typeof ArticleEditPage> = (args) => (
-  <ArticleEditPage {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticleEditPage>;
 
 const article: Article = {
   id: '1',
@@ -46,51 +44,53 @@ const article: Article = {
   ]
 };
 
-export const Normal = Template.bind({});
-Normal.args = {};
-Normal.decorators = [
-  StoreDecorator({
-    user: {
-      authData: { id: '1', username: 'admin' }
-    }
-  })
-];
-Normal.parameters = {
-  reactRouter: {
-    routePath: '/articles/:id/edit',
-    routeParams: { id: '1' }
-  },
-  mockData: [
-    {
-      url: `${__API__}/articles/1`,
-      method: 'GET',
-      status: 200,
-      response: article
-    }
-  ]
+export const Normal: Story = {
+  args: {},
+  decorators: [
+    StoreDecorator({
+      user: {
+        authData: { id: '1', username: 'admin' }
+      }
+    })
+  ],
+  parameters: {
+    reactRouter: {
+      routePath: '/articles/:id/edit',
+      routeParams: { id: '1' }
+    },
+    mockData: [
+      {
+        url: `${__API__}/articles/1`,
+        method: 'GET',
+        status: 200,
+        response: article
+      }
+    ]
+  }
 };
 
-export const Loading = Template.bind({});
-Loading.args = {};
-Loading.decorators = [
-  StoreDecorator({
-    user: {
-      authData: { id: '1', username: 'admin' }
-    }
-  })
-];
-Loading.parameters = {
-  reactRouter: {
-    routePath: '/articles/:id/edit',
-    routeParams: { id: '1' }
-  },
-  mockData: [
-    {
-      url: `${__API__}/articles/1`,
-      method: 'GET',
-      status: 200,
-      response: article,
-      delay: 10000
-    }
-  ]
+export const Loading: Story = {
+  args: {},
+  decorators: [
+    StoreDecorator({
+      user: {
+        authData: { id: '1', username: 'admin' }
+      }
+    })
+  ],
+  parameters: {
+    reactRouter: {
+      routePath: '/articles/:id/edit',
+      routeParams: { id: '1' }
+    },
+    mockData: [
+      {
+        url: `${__API__}/articles/1`,
+        method: 'GET',
+        status: 200,
+        response: article,
+        delay: 10000
+      }
+    ]
+  }
 };
