@@ -15,12 +15,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static getDerivedStateFromError(_error: Error) {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  componentDidCatch(_error: Error, _errorInfo: ErrorInfo) {
     // TODO: Log to error reporting service (e.g., Sentry)
   }
 

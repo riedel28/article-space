@@ -5,20 +5,18 @@ jest.mock('axios');
 
 const mockedAxios = jest.mocked(axios);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 export class TestAsyncThunk<Return, Arg, RejectedValue> {
   dispatch: jest.MockedFn<any>;
 
   getState: () => StateSchema;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actionCreator: any;
 
   api: jest.MockedFunctionDeep<AxiosStatic>;
 
   navigate: jest.MockedFn<any>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(actionCreator: any, state?: DeepPartial<StateSchema>) {
     this.actionCreator = actionCreator;
     this.dispatch = jest.fn();

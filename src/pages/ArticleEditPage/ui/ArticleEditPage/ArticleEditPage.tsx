@@ -8,9 +8,7 @@ import { ArticleEditForm, useGetArticleForEdit } from '@/features/articleEditor'
 import { getRouteArticleDetails } from '@/shared/const/router';
 import classes from './ArticleEditPage.module.css';
 
-type ArticleEditPageProps = object;
-
-const ArticleEditPage = memo((_props: ArticleEditPageProps) => {
+const ArticleEditPage = memo(() => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

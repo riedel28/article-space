@@ -4,11 +4,7 @@ import { IconAlertTriangle, IconRefresh, IconHome } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import cls from './ErrorPage.module.css';
 
-interface ErrorPageProps {
-  className?: string;
-}
-
-export const ErrorPage = ({ className }: ErrorPageProps) => {
+export const ErrorPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

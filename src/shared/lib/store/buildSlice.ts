@@ -13,9 +13,7 @@ export function buildSlice<
   const useActions = (): typeof slice.actions => {
     const dispatch = useDispatch();
 
-    // @ts-ignore
     return useMemo(
-      // @ts-ignore
       () => bindActionCreators(slice.actions, dispatch),
       [dispatch]
     );

@@ -2,7 +2,7 @@ import { ReactNode, useMemo } from 'react';
 import { Select } from '@mantine/core';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-export interface ListBoxItem<T extends string> {
+export interface ListBoxItem {
   value: string;
   content: ReactNode;
   disabled?: boolean;
@@ -14,7 +14,7 @@ export interface SelectOption<T extends string> {
 }
 
 interface ListBoxProps<T extends string> {
-  items?: ListBoxItem<T>[];
+  items?: ListBoxItem[];
   className?: string;
   value?: T;
   defaultValue?: string;

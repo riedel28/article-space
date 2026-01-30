@@ -52,7 +52,7 @@ export const fetchArticlesList = createAsyncThunk<
     }
 
     return response.data;
-  } catch (e) {
+  } catch {
     return rejectWithValue('error');
   }
 });

@@ -45,9 +45,7 @@ export const Flex = (props: FlexProps) => {
     wrap = 'nowrap',
     gap,
     max,
-    'data-testid': dataTestId,
-    ref: _ref,
-    ...otherProps
+    'data-testid': dataTestId
   } = props;
 
   return (
@@ -61,7 +59,6 @@ export const Flex = (props: FlexProps) => {
       maw={max ? '100%' : undefined}
       w={max ? '100%' : undefined}
       data-testid={dataTestId}
-      {...otherProps}
     >
       {children}
     </MantineFlex>

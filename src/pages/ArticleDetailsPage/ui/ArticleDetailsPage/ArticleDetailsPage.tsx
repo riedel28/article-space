@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import {
   Container,
   Grid,
@@ -31,15 +30,12 @@ import { getArticleDetailsData, getArticleDetailsIsLoading } from '@/entities/Ar
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
 import { ScrollToTopButton } from '@/features/scrollToTopButton';
 
-type ArticleDetailsPageProps = object;
-
 const reducers: ReducersList = {
   articleDetailsPage: articleDetailsPageReducer
 };
 
-const ArticleDetailsPage = (_props: ArticleDetailsPageProps) => {
+const ArticleDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
   const article = useSelector(getArticleDetailsData);
   const isLoading = useSelector(getArticleDetailsIsLoading);
 

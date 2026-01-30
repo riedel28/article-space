@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { createTheme, DEFAULT_THEME, Select, TextInput, Chip, Modal } from '@mantine/core';
 
 export const theme = createTheme({
@@ -83,7 +84,7 @@ export const theme = createTheme({
         styles: {
           checkIcon: {
             stroke: 1.8
-          } as any
+          } as unknown as CSSProperties
         }
       }
     }),

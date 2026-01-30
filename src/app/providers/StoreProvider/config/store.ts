@@ -37,7 +37,7 @@ export function createReduxStore(
       }).concat(rtkApi.middleware)
   });
 
-  // @ts-ignore
+  // @ts-expect-error reducerManager is added dynamically
   store.reducerManager = reducerManager;
 
   return store;
