@@ -1,68 +1,124 @@
+import { Card, Group, Select, Stack, TextInput } from '@mantine/core';
+import { IconCheck, IconChevronDown, IconSearch } from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ArticlesFilters.module.scss';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { ArticleSortSelector } from '@/features/ArticleSortSelector';
-import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
-import { VStack } from '@/shared/ui/redesigned/Stack';
+
 import { ArticleSortField, ArticleType } from '@/entities/Article';
+import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
 import { SortOrder } from '@/shared/types/sort';
-import { Input } from '@/shared/ui/redesigned/Input';
-import SearchIcon from '@/shared/assets/icons/search.svg';
-import { Icon } from '@/shared/ui/redesigned/Icon';
 
 interface ArticlesFiltersProps {
-    className?: string;
-    sort: ArticleSortField;
-    order: SortOrder;
-    type: ArticleType;
-    search: string;
-    onChangeSearch: (value: string) => void;
-    onChangeOrder: (newOrder: SortOrder) => void;
-    onChangeSort: (newSort: ArticleSortField) => void;
-    onChangeType: (type: ArticleType) => void;
+  sort: ArticleSortField;
+  order: SortOrder;
+  type: ArticleType;
+  search: string;
+  onChangeSearch: (value: string) => void;
+  onChangeOrder: (newOrder: SortOrder) => void;
+  onChangeSort: (newSort: ArticleSortField) => void;
+  onChangeType: (type: ArticleType) => void;
 }
 
 export const ArticlesFilters = memo((props: ArticlesFiltersProps) => {
-    const {
-        className,
-        onChangeType,
-        onChangeSearch,
-        search,
-        onChangeSort,
-        sort,
-        onChangeOrder,
-        order,
-        type,
-    } = props;
-    const { t } = useTranslation();
+  const { onChangeType, onChangeSearch, search, onChangeSort, sort, onChangeOrder, order, type } =
+    props;
+  const { t } = useTranslation();
 
-    return (
-        <Card
-            className={classNames(cls.ArticlesFilters, {}, [className])}
-            padding="24"
-        >
-            <VStack gap="32">
-                <Input
-                    onChange={onChangeSearch}
-                    value={search}
-                    size="s"
-                    placeholder={t('Поиск')}
-                    addonLeft={<Icon Svg={SearchIcon} />}
+  return (
+    <Card w="100%" withBorder>
+      <Stack gap="md">
+        <TextInput
+          label={t('Поиск')}
+          placeholder={t('Поиск статей')}
+          leftSectionPointerEvents="none"
+          leftSection={<IconSearch size={16} />}
+          value={search}
+          onChange={(e) => onChangeSearch(e.currentTarget.value)}
+        />
+
+        <ArticleTypeTabs value={type} onChangeType={onChangeType} />
+
+        <Select
+          label={t('Сортировать по')}
+          placeholder={t('Выберите сортировку')}
+          data={[
+            { value: 'createdAt', label: t('Дата') },
+            { value: 'title', label: t('Название') },
+            { value: 'views', label: t('Просмотры') }
+          ]}
+          rightSectionPointerEvents="none"
+          rightSection={<IconChevronDown size={16} />}
+          renderOption={({ option, checked }) => (
+            <Group flex="1" gap="xs">
+              {option.label}
+              {checked && (
+                <IconCheck
+                  style={{
+                    marginInlineStart: 'auto',
+                    color: 'var(--mantine-color-brand-6)'
+                  }}
+                  stroke={1.8}
+                  size={18}
                 />
-                <ArticleTypeTabs
-                    value={type}
-                    onChangeType={onChangeType}
-                    className={cls.tabs}
+              )}
+            </Group>
+          )}
+          value={sort}
+          onChange={(value) => value && onChangeSort(value as ArticleSortField)}
+        />
+
+        <Select
+          label={t('Порядок')}
+          placeholder={t('Выберите порядок')}
+          data={[
+            { value: 'asc', label: t('По возрастанию') },
+            { value: 'desc', label: t('По убыванию') }
+          ]}
+          rightSectionPointerEvents="none"
+          rightSection={<IconChevronDown size={16} />}
+          renderOption={({ option, checked }) => (
+            <Group flex="1" gap="xs">
+              {option.label}
+              {checked && (
+                <IconCheck
+                  style={{
+                    marginInlineStart: 'auto',
+                    color: 'var(--mantine-color-brand-6)'
+                  }}
+                  stroke={1.8}
+                  size={18}
                 />
-                <ArticleSortSelector
-                    order={order}
-                    sort={sort}
-                    onChangeOrder={onChangeOrder}
-                    onChangeSort={onChangeSort}
-                />
-            </VStack>
-        </Card>
-    );
+              )}
+            </Group>
+          )}
+          value={order}
+          onChange={(value) => value && onChangeOrder(value as SortOrder)}
+        />
+      </Stack>
+    </Card>
+  );
+
+  // return (
+  //   <Stack gap="lg" className={className} style={{ width: 260 }}>
+  //     <Card shadow="sm" padding="md" radius="md" withBorder>
+  //       <TextInput
+  //         onChange={(e) => onChangeSearch(e.currentTarget.value)}
+  //         value={search}
+  //         placeholder={t('Поиск')}
+  //         leftSection={<IconSearch size={18} />}
+  //         size="md"
+  //       />
+  //     </Card>
+
+  //     <ArticleTypeTabs value={type} onChangeType={onChangeType} />
+
+  //     <Card shadow="sm" padding="md" radius="md" withBorder>
+  //       <ArticleSortSelector
+  //         order={order}
+  //         sort={sort}
+  //         onChangeOrder={onChangeOrder}
+  //         onChangeSort={onChangeSort}
+  //       />
+  //     </Card>
+  //   </Stack>
+  // );
 });

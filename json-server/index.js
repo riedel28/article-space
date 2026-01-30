@@ -4,10 +4,24 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 
-const options = {
-    key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
-    cert: fs.readFileSync(path.resolve(__dirname,'cert.pem')),
-};
+// Попытка загрузить SSL сертификаты (опционально)
+let httpsOptions = null;
+const keyPath = path.resolve(__dirname, 'key.pem');
+const certPath = path.resolve(__dirname, 'cert.pem');
+
+try {
+    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+        httpsOptions = {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath),
+        };
+        console.log('SSL certificates found. HTTPS server will be available.');
+    } else {
+        console.log('SSL certificates not found. HTTPS server will be skipped. Only HTTP server will run.');
+    }
+} catch (error) {
+    console.log('Error loading SSL certificates. HTTPS server will be skipped:', error.message);
+}
 
 const server = jsonServer.create();
 
@@ -46,9 +60,21 @@ server.post('/login', (req, res) => {
     }
 });
 
+// Public endpoints that don't require authorization
+const publicEndpoints = ['/articles', '/article-ratings'];
+
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 server.use((req, res, next) => {
+    // Allow public GET requests for certain endpoints
+    const isPublicEndpoint = publicEndpoints.some(
+        (endpoint) => req.path.startsWith(endpoint) && req.method === 'GET'
+    );
+
+    if (isPublicEndpoint) {
+        return next();
+    }
+
     if (!req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });
     }
@@ -62,13 +88,38 @@ server.use(router);
 const PORT = 8443;
 const HTTP_PORT = 8000;
 
-const httpsServer = https.createServer(options, server);
+// Запуск HTTP сервера (всегда доступен)
 const httpServer = http.createServer(server);
-
-httpsServer.listen(PORT, () => {
-    console.log(`server is running on ${PORT} port`);
-});
-
 httpServer.listen(HTTP_PORT, () => {
-    console.log(`server is running on ${HTTP_PORT} port`);
+    console.log(`HTTP server is running on port ${HTTP_PORT}`);
 });
+
+httpServer.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${HTTP_PORT} is already in use. Please stop the process using this port or use a different port.`);
+    } else {
+        console.error('Error starting HTTP server:', error.message);
+    }
+    process.exit(1);
+});
+
+// Запуск HTTPS сервера (только если доступны сертификаты)
+if (httpsOptions) {
+    try {
+        const httpsServer = https.createServer(httpsOptions, server);
+        httpsServer.listen(PORT, () => {
+            console.log(`HTTPS server is running on port ${PORT}`);
+        });
+        
+        httpsServer.on('error', (error) => {
+            if (error.code === 'EADDRINUSE') {
+                console.error(`Port ${PORT} is already in use. Please stop the process using this port or use a different port.`);
+            } else {
+                console.error('Error starting HTTPS server:', error.message);
+            }
+            process.exit(1);
+        });
+    } catch (error) {
+        console.error('Error starting HTTPS server:', error.message);
+    }
+}

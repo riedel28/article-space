@@ -1,25 +1,22 @@
-import React, { memo, useCallback } from 'react';
-import ThemeIcon from '@/shared/assets/icons/theme.svg';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
-import { saveJsonSettings } from '@/entities/User';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { ActionIcon, useMantineColorScheme } from '@mantine/core';
+import { IconMoon,IconSun } from '@tabler/icons-react';
+import { memo } from 'react';
 
-interface ThemeSwitcherProps {
-    className?: string;
-}
+import classes from './ThemeSwitcher.module.css';
 
-export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
-    const { theme, toggleTheme } = useTheme();
-    const dispatch = useAppDispatch();
+export const ThemeSwitcher = memo(() => {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
-    const onToggleHandler = useCallback(() => {
-        toggleTheme((newTheme) => {
-            dispatch(saveJsonSettings({ theme: newTheme }));
-        });
-    }, [dispatch, toggleTheme]);
-
-    return (
-        <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />
-    );
+  return (
+    <ActionIcon
+      variant="subtle"
+      size="lg"
+      onClick={() => toggleColorScheme()}
+      className={classes.icon}
+      aria-label="Toggle theme"
+    >
+      {dark ? <IconSun size={20} stroke={1.8} /> : <IconMoon size={20} stroke={1.8} />}
+    </ActionIcon>
+  );
 });

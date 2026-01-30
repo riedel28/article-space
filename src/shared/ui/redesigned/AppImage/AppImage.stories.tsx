@@ -1,19 +1,15 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AppImage } from './AppImage';
 
-export default {
-    title: 'shared/AppImage',
-    component: AppImage,
-    argTypes: {
-        backgroundColor: { control: 'color' },
-    },
-} as ComponentMeta<typeof AppImage>;
+const meta: Meta<typeof AppImage> = {
+  title: 'shared/AppImage',
+  component: AppImage,
+};
 
-const Template: ComponentStory<typeof AppImage> = (args) => (
-    <AppImage {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof AppImage>;
 
-export const Normal = Template.bind({});
-Normal.args = {};
+export const Normal: Story = {
+  args: {}
+};

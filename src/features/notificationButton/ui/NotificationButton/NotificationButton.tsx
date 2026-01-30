@@ -1,54 +1,67 @@
-import React, { memo, useCallback, useState } from 'react';
+import { ActionIcon, Drawer, Indicator,Popover, Text } from '@mantine/core';
+import { IconBell } from '@tabler/icons-react';
+import { useCallback, useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { useTranslation } from 'react-i18next';
 
-
-import NotificationIcon from '@/shared/assets/icons/notification.svg';
 import { NotificationList } from '@/entities/Notification';
-import { Drawer } from '@/shared/ui/redesigned/Drawer';
-import cls from './NotificationButton.module.scss';
-import { Icon } from '@/shared/ui/redesigned/Icon';
-import { Popover } from '@/shared/ui/redesigned/Popups';
 
-interface NotificationButtonProps {
-    className?: string;
-}
+import classes from './NotificationButton.module.css';
 
-export const NotificationButton = memo((props: NotificationButtonProps) => {
-    const { className } = props;
-    const [isOpen, setIsOpen] = useState(false);
+export const NotificationButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
-    const onOpenDrawer = useCallback(() => {
-        setIsOpen(true);
-    }, []);
+  const onOpenDrawer = useCallback(() => {
+    setIsOpen(true);
+  }, []);
 
-    const onCloseDrawer = useCallback(() => {
-        setIsOpen(false);
-    }, []);
+  const onCloseDrawer = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
-    const trigger = (
-        <Icon Svg={NotificationIcon} clickable onClick={onOpenDrawer} />
-    );
-
-    return (
-        <div>
-            <BrowserView>
-                <Popover
-                                            className={classNames(cls.NotificationButton, {}, [
-                                                className
-                                            ])}
-                                            direction="bottom left"
-                                            trigger={trigger}
-                                        >
-                                            <NotificationList className={cls.notifications} />
-                                        </Popover>
-            </BrowserView>
-            <MobileView>
-                {trigger}
-                <Drawer isOpen={isOpen} onClose={onCloseDrawer}>
-                    <NotificationList />
-                </Drawer>
-            </MobileView>
-        </div>
-    );
-});
+  return (
+    <>
+      <BrowserView>
+        <Popover width={300} position="bottom-end" shadow="sm" radius="md">
+          <Popover.Target>
+            <Indicator color="red" size={8} offset={4}>
+              <ActionIcon
+                variant="subtle"
+                size="lg"
+                className={classes.icon}
+                aria-label={t('Уведомления')}
+              >
+                <IconBell size={24} stroke={1.8} />
+              </ActionIcon>
+            </Indicator>
+          </Popover.Target>
+          <Popover.Dropdown p={0}>
+            <NotificationList />
+          </Popover.Dropdown>
+        </Popover>
+      </BrowserView>
+      <MobileView>
+        <Indicator color="red" size={8} offset={4}>
+          <ActionIcon
+            variant="subtle"
+            size="lg"
+            className={classes.icon}
+            onClick={onOpenDrawer}
+            aria-label={t('Уведомления')}
+          >
+            <IconBell size={24} stroke={1.8} />
+          </ActionIcon>
+        </Indicator>
+        <Drawer
+          opened={isOpen}
+          onClose={onCloseDrawer}
+          position="bottom"
+          title={<Text fw={600}>{t('Уведомления')}</Text>}
+        >
+          <NotificationList fullWidth showHeader={false} />
+        </Drawer>
+      </MobileView>
+    </>
+  );
+};

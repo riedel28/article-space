@@ -1,5 +1,6 @@
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import '@/app/styles/index.scss';
-import { Story } from '@storybook/react';
+import '@/app/styles/index.css';
 
-export const StyleDecorator = (story: () => Story) => story();
+import React from 'react';
+
+export const StyleDecorator = (story: () => React.ComponentType) => story();

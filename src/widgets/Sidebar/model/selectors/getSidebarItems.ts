@@ -1,50 +1,34 @@
+import { IconArticle,IconHome, IconUser } from '@tabler/icons-react';
 import { useSelector } from 'react-redux';
-import { getUserAuthData } from '@/entities/User';
 
-import MainIcon from '@/shared/assets/icons/home.svg';
-import ArticleIcon from '@/shared/assets/icons/article.svg';
-import AboutIcon from '@/shared/assets/icons/Info.svg';
-import ProfileIcon from '@/shared/assets/icons/avatar.svg';
+import { getUserAuthData } from '@/entities/User';
+import { getRouteArticles, getRouteMain, getRouteProfile } from '@/shared/const/router';
 
 import { SidebarItemType } from '../types/sidebar';
-import {
-    getRouteAbout,
-    getRouteArticles,
-    getRouteMain,
-    getRouteProfile
-} from '@/shared/const/router';
 
 export const useSidebarItems = () => {
-    const userData = useSelector(getUserAuthData);
-    const sidebarItemsList: SidebarItemType[] = [
-        {
-            path: getRouteMain(),
-            Icon: MainIcon,
-            text: 'Главная'
-        },
-        {
-            path: getRouteAbout(),
-            Icon: AboutIcon,
-            text: 'О сайте'
-        }
-    ];
-
-    if (userData) {
-        sidebarItemsList.push(
-            {
-                path: getRouteProfile(userData.id),
-                Icon: ProfileIcon,
-                text: 'Профиль',
-                authOnly: true
-            },
-            {
-                path: getRouteArticles(),
-                Icon: ArticleIcon,
-                text: 'Статьи',
-                authOnly: true
-            }
-        );
+  const userData = useSelector(getUserAuthData);
+  const sidebarItemsList: SidebarItemType[] = [
+    {
+      path: getRouteMain(),
+      Icon: IconHome,
+      text: 'Главная'
+    },
+    {
+      path: getRouteArticles(),
+      Icon: IconArticle,
+      text: 'Статьи'
     }
+  ];
 
-    return sidebarItemsList;
+  if (userData) {
+    sidebarItemsList.push({
+      path: getRouteProfile(userData.id),
+      Icon: IconUser,
+      text: 'Профиль',
+      authOnly: true
+    });
+  }
+
+  return sidebarItemsList;
 };

@@ -1,98 +1,85 @@
-#name: linting, testing, building
-#on:
-#  push:
-#    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
-#jobs:
-#  pipeline:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [ 17.x ]
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Staring Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#      - name: install modules
-#        run: npm ci --force
-#      - name: build production project
-#        run: npm run build:prod
-#        if: always()
-#      - name: linting typescript
-#        run: npm run lint:ts
-#        if: always()
-#      - name: linting css
-#        run: npm run lint:scss
-#      - name: unit testing
-#        if: always()
-#        run: npm run test:unit
-#      - name: build storybook
-#        run: npm run storybook:build
-#        if: always()
-#      - name: screenshot testing
-#        run: npm run test:ui:ci
-#        if: always()
-
 name: linting, testing, building
 on:
-    push:
-        branches: [master]
-    pull_request:
-        branches: [master]
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
 permissions:
-    contents: write
-    pages: write
-    id-token: write
+  contents: write
+  pages: write
+  id-token: write
 concurrency:
-    group: 'pages'
-    cancel-in-progress: true
+  group: 'pages'
+  cancel-in-progress: true
 jobs:
-    build-and-ui-testing:
-        runs-on: ubuntu-latest
-        concurrency: ci-${{ github.ref }}
-        # environment:
-        #     name: staging_environment
-        #     url: ${{ steps.deployment.outputs.page_url }}
-        strategy:
-            matrix:
-                node-version: [17.x]
-        steps:
-            - uses: actions/checkout@v2
-            - name: Staring Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: install modules
-              run: npm ci --force
-            - name: build production project
-              run: npm run build:prod
-              if: always()
-            - name: build storybook
-              run: npm run storybook:build
-              if: always()
-            - name: unit testing
-              if: always()
-              run: npm run test:unit
+  build-and-unit-testing:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install modules
+        run: npm ci --force
+      - name: Build production project
+        run: npm run build
+        if: always()
+      - name: Build storybook
+        run: npm run storybook:build
+        if: always()
+      - name: Unit testing
+        if: always()
+        run: npm run test:unit
 
-    checks:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [17.x]
-        steps:
-            - uses: actions/checkout@v2
-            - name: Staring Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: install modules
-              run: npm ci --force
-            - name: linting typescript
-              run: npm run lint:ts
-              if: always()
-            - name: linting css
-              run: npm run lint:scss
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install modules
+        run: npm ci --force
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        if: always()
+      - name: Linting typescript
+        run: npm run lint:ts
+        if: always()
+      - name: Linting css
+        run: npm run lint:css
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install modules
+        run: npm ci --force
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright tests
+        run: npm run test:e2e -- --project=chromium
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

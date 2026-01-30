@@ -1,58 +1,58 @@
-import { useTranslation } from 'react-i18next';
+import { Card,Stack, TextInput } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/deprecated/Input';
-import cls from './ArticlesPageFilters.module.scss';
+import { useTranslation } from 'react-i18next';
 
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';
-import { ArticleViewSelector } from '@/features/ArticleViewSelector';
 import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
+import { ArticleViewSelector } from '@/features/ArticleViewSelector';
+
 import { useArticleFilters } from '../../lib/hooks/useArticleFilters';
 
 interface ArticlesPageFiltersProps {
-    className?: string;
+  className?: string;
 }
 
 export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
-    const { className } = props;
-    const { t } = useTranslation();
-    const {
-        onChangeSort,
-        onChangeType,
-        sort,
-        type,
-        onChangeSearch,
-        search,
-        onChangeView,
-        view,
-        onChangeOrder,
-        order
-    } = useArticleFilters();
+  const { className } = props;
+  const { t } = useTranslation();
+  const {
+    onChangeSort,
+    onChangeType,
+    sort,
+    type,
+    onChangeSearch,
+    search,
+    onChangeView,
+    view,
+    onChangeOrder,
+    order
+  } = useArticleFilters();
 
-    return (
-        <div className={classNames(cls.ArticlesPageFilters, {}, [className])}>
-            <div className={cls.sortWrapper}>
-                <ArticleSortSelector
-                    order={order}
-                    sort={sort}
-                    onChangeOrder={onChangeOrder}
-                    onChangeSort={onChangeSort}
-                />
-                <ArticleViewSelector view={view} onViewClick={onChangeView} />
-            </div>
-            <Card className={cls.search}>
-                <Input
-                    onChange={onChangeSearch}
-                    value={search}
-                    placeholder={t('Поиск')}
-                />
-            </Card>
-            <ArticleTypeTabs
-                value={type}
-                onChangeType={onChangeType}
-                className={cls.tabs}
-            />
-        </div>
-    );
+  return (
+    <Stack gap="lg" className={className}>
+      <ArticleViewSelector view={view} onViewChange={onChangeView} />
+
+      <Card shadow="sm" padding="md" radius="md" withBorder>
+        <TextInput
+          onChange={(e) => onChangeSearch(e.currentTarget.value)}
+          value={search}
+          placeholder={t('Поиск')}
+          leftSection={<IconSearch size={18} />}
+          size="md"
+        />
+      </Card>
+
+      <Card shadow="sm" padding="md" radius="md" withBorder>
+        <ArticleSortSelector
+          order={order}
+          sort={sort}
+          onChangeOrder={onChangeOrder}
+          onChangeSort={onChangeSort}
+        />
+      </Card>
+
+      <ArticleTypeTabs value={type} onChangeType={onChangeType} />
+    </Stack>
+  );
 });

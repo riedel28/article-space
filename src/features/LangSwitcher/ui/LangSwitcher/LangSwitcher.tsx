@@ -1,24 +1,25 @@
+import { Button } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
-import React, { memo } from 'react';
 
-
-import { Button } from '@/shared/ui/redesigned/Button';
+import classes from './LangSwitcher.module.css';
 
 interface LangSwitcherProps {
-    className?: string;
-    short?: boolean;
+  short?: boolean;
 }
 
-export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
-    const { t, i18n } = useTranslation();
+export const LangSwitcher = ({ short }: LangSwitcherProps) => {
+  const { i18n } = useTranslation();
 
-    const toggle = async () => {
-        i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
-    };
+  const toggle = async () => {
+    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
+  };
 
-    return (
-        <Button variant="clear">
-                            {t(short ? 'Короткий язык' : 'Язык')}
-                        </Button>
-    );
-});
+  // Show the language we'll switch TO (next language)
+  const nextLang = i18n.language === 'ru' ? (short ? 'En' : 'English') : (short ? 'Ru' : 'Русский');
+
+  return (
+    <Button variant="subtle" onClick={toggle} className={classes.button}>
+      {nextLang}
+    </Button>
+  );
+};

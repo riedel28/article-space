@@ -1,0 +1,25 @@
+[data-mantine-color-scheme='dark'] {
+  /* Mantine aligned colors */
+  --dark-bg-redesigned: #090f11;
+  --bg-redesigned: #0c1214;
+  --light-bg-redesigned: #151c1f;
+  --text-redesigned: #dbdbdb;
+  --hint-redesigned: #74a2b2;
+  --cancel-redesigned: #d95757;
+  --save-redesigned: #4ad96f;
+  --icon-redesigned: #00c8ff;
+  --accent-redesigned: #007ea3;
+
+  /* skeleton */
+  --skeleton-color: #151c1f;
+  --skeleton-shadow: rgb(0 200 255 / 10%);
+
+  /* code */
+  --code-bg: #151c1f;
+
+  /* card */
+  --card-bg: #151c1f;
+
+  /* listbox */
+  --listbox-bg: #151c1f;
+}

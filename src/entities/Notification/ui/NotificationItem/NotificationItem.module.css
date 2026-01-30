@@ -1,0 +1,23 @@
+.NotificationItem {
+  display: block;
+  padding: var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-md);
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-7));
+  }
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  background-color: var(--mantine-color-brand-6);
+  visibility: hidden;
+
+  &[data-unread] {
+    visibility: visible;
+  }
+}

@@ -1,60 +1,53 @@
+import { Burger, Button, Group } from '@mantine/core';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import React, { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
 
-
-import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
-import { HStack } from '@/shared/ui/redesigned/Stack';
-import { NotificationButton } from '@/features/notificationButton';
+import { LoginModal } from '@/features/AuthByUsername';
 import { AvatarDropdown } from '@/features/avatarDropdown';
-import cls from './Navbar.module.scss';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { NotificationButton } from '@/features/notificationButton';
+
+import classes from './Navbar.module.css';
 
 interface NavbarProps {
-    className?: string;
+  opened?: boolean;
+  toggle?: () => void;
 }
 
-export const Navbar = memo(({ className }: NavbarProps) => {
-    const { t } = useTranslation();
-    const [isAuthModal, setIsAuthModal] = useState(false);
-    const authData = useSelector(getUserAuthData);
+export const Navbar = memo(({ opened, toggle }: NavbarProps) => {
+  const { t } = useTranslation();
+  const [isAuthModal, setIsAuthModal] = useState(false);
+  const authData = useSelector(getUserAuthData);
 
-    const onCloseModal = useCallback(() => {
-        setIsAuthModal(false);
-    }, []);
+  const onCloseModal = useCallback(() => {
+    setIsAuthModal(false);
+  }, []);
 
-    const onShowModal = useCallback(() => {
-        setIsAuthModal(true);
-    }, []);
+  const onShowModal = useCallback(() => {
+    setIsAuthModal(true);
+  }, []);
 
-    const mainClass = cls.NavbarRedesigned;
-
-    if (authData) {
-        return (
-            <header className={classNames(mainClass, {}, [className])}>
-                                    <HStack gap="16" className={cls.actions}>
-                                        <NotificationButton />
-                                        <AvatarDropdown />
-                                    </HStack>
-                                </header>
-        );
-    }
-
-    return (
-        <header className={classNames(mainClass, {}, [className])}>
-            <Button
-                                    variant="clear"
-                                    className={cls.links}
-                                    onClick={onShowModal}
-                                >
-                                    {t('Войти')}
-                                </Button>
-
-            {isAuthModal && (
-                <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
-            )}
-        </header>
-    );
+  return (
+    <Group h="100%" px="md" justify="flex-end" className={classes.header}
+data-testid="Navbar">
+      <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm"
+data-testid="sidebar-toggle" />
+      <Group ml="auto">
+        {authData ? (
+          <>
+            <NotificationButton />
+            <AvatarDropdown />
+          </>
+        ) : (
+          <>
+            <Button variant="subtle" onClick={onShowModal}>
+              {t('Войти')}
+            </Button>
+            {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />}
+          </>
+        )}
+      </Group>
+    </Group>
+  );
 });

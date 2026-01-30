@@ -1,46 +1,46 @@
+import { Box,ScrollArea, Skeleton, Stack, Text } from '@mantine/core';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { VStack } from '@/shared/ui/redesigned/Stack';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
+import { useTranslation } from 'react-i18next';
+
 import { useNotifications } from '../../api/notificationApi';
-import cls from './NotificationList.module.scss';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
+import classes from './NotificationList.module.css';
 
 interface NotificationListProps {
-    className?: string;
+  className?: string;
+  fullWidth?: boolean;
+  showHeader?: boolean;
 }
 
 export const NotificationList = memo((props: NotificationListProps) => {
-    const { className } = props;
-    const { data, isLoading } = useNotifications(null, {
-        pollingInterval: 10000
-    });
+  const { className, fullWidth, showHeader = true } = props;
+  const { t } = useTranslation();
+  const { data, isLoading } = useNotifications(null, {
+    pollingInterval: 10000
+  });
 
-    const Skeleton = SkeletonRedesigned;
-
-    if (isLoading) {
-        return (
-            <VStack
-                gap="16"
-                max
-                className={classNames(cls.NotificationList, {}, [className])}
-            >
-                <Skeleton width="100%" border="8px" height="80px" />
-                <Skeleton width="100%" border="8px" height="80px" />
-                <Skeleton width="100%" border="8px" height="80px" />
-            </VStack>
-        );
-    }
-
-    return (
-        <VStack
-            gap="16"
-            max
-            className={classNames(cls.NotificationList, {}, [className])}
-        >
-            {data?.map((item) => (
-                <NotificationItem key={item.id} item={item} />
-            ))}
-        </VStack>
-    );
+  return (
+    <Box maw={fullWidth ? undefined : 500} w={fullWidth ? '100%' : undefined}>
+      {showHeader && (
+        <Box component="header" className={classes.header}>
+          <Text fw={500} fz="sm">
+            {t('Уведомления')}
+          </Text>
+        </Box>
+      )}
+      {isLoading ? (
+        <Stack gap={4} p={fullWidth ? 0 : 4} w="100%" className={className}>
+          <Skeleton width="100%" radius="md" height={80} />
+          <Skeleton width="100%" radius="md" height={80} />
+          <Skeleton width="100%" radius="md" height={80} />
+        </Stack>
+      ) : (
+        <ScrollArea.Autosize mah={350} p={fullWidth ? 0 : 4} type="auto" offsetScrollbars>
+          {data?.map((item) => (
+            <NotificationItem key={item.id} item={item} />
+          ))}
+        </ScrollArea.Autosize>
+      )}
+    </Box>
+  );
 });

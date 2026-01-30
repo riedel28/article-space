@@ -1,40 +1,44 @@
+import { Box, Group,Text } from '@mantine/core';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text } from '@/shared/ui/redesigned/Text';
-import cls from './NotificationItem.module.scss';
+import { Link } from 'react-router-dom';
+
 import { Notification } from '../../model/types/notification';
-import { Card } from '@/shared/ui/redesigned/Card';
+import classes from './NotificationItem.module.css';
 
 interface NotificationItemProps {
-    className?: string;
-    item: Notification;
+  item: Notification;
 }
 
+const extractPath = (href: string): string => {
+  const match = href.match(/^https?:\/\/[^/]+(\/.*)/);
+  return match ? match[1] : href;
+};
+
 export const NotificationItem = memo((props: NotificationItemProps) => {
-    const { className, item } = props;
+  const { item } = props;
 
-    const content = (
-        <Card
-                            className={classNames(cls.NotificationItem, {}, [
-                                className
-                            ])}
-                        >
-                            <Text title={item.title} text={item.description} />
-                        </Card>
+  const content = (
+    <Group gap="sm" wrap="nowrap" align="flex-start">
+      <Box className={classes.indicator} data-unread={item.unread || undefined} />
+
+      <Box>
+        <Text fw={600} size="sm" c="dark">
+          {item.title}
+        </Text>
+        <Text size="xs" c="dimmed">
+          {item.description}
+        </Text>
+      </Box>
+    </Group>
+  );
+
+  if (item.href) {
+    return (
+      <Link to={extractPath(item.href)} className={classes.NotificationItem}>
+        {content}
+      </Link>
     );
+  }
 
-    if (item.href) {
-        return (
-            <a
-                className={cls.link}
-                target="_blank"
-                href={item.href}
-                rel="noreferrer"
-            >
-                {content}
-            </a>
-        );
-    }
-
-    return content;
+  return <Box className={classes.NotificationItem}>{content}</Box>;
 });

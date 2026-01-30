@@ -1,26 +1,30 @@
+import { ActionIcon } from '@mantine/core';
+import { IconArrowUp } from '@tabler/icons-react';
 import { memo } from 'react';
-import { Icon } from '@/shared/ui/redesigned/Icon';
-import CircleIcon from '@/shared/assets/icons/circle-up.svg';
+
+import classes from './ScrollToTopButton.module.css';
 
 interface ScrollToTopButtonProps {
-    className?: string;
+  className?: string;
 }
 
 export const ScrollToTopButton = memo((props: ScrollToTopButtonProps) => {
-    const { className } = props;
+  const { className } = props;
 
-    const onCLick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+  const onClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-    return (
-        <Icon
-            Svg={CircleIcon}
-            clickable
-            onClick={onCLick}
-            width={32}
-            height={32}
-            className={className}
-        />
-    );
+  return (
+    <ActionIcon
+      onClick={onClick}
+      variant="light"
+      size="xl"
+      radius="xl"
+      color="brand"
+      className={`${classes.button} ${className ?? ''}`}
+    >
+      <IconArrowUp size={24} />
+    </ActionIcon>
+  );
 });
