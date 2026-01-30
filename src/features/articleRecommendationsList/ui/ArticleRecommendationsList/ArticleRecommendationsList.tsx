@@ -9,42 +9,26 @@ interface ArticleRecommendationsListProps {
   className?: string;
 }
 
-export const ArticleRecommendationsList = memo(
-  (props: ArticleRecommendationsListProps) => {
-    const { className } = props;
-    const { t } = useTranslation();
-    const {
-      isLoading,
-      data: articles,
-      error
-    } = useArticleRecommendationsList(3);
+export const ArticleRecommendationsList = memo((props: ArticleRecommendationsListProps) => {
+  const { className } = props;
+  const { t } = useTranslation();
+  const { isLoading, data: articles, error } = useArticleRecommendationsList(3);
 
-    if (isLoading || error || !articles) {
-      return null;
-    }
-
-    return (
-      <Box
-        className={classNames('', {}, [className])}
-        data-testid="ArticleRecommendationsList"
-      >
-        <Title order={4} fz="xl" mb="md">
-          {t('Рекомендуем')}
-        </Title>
-
-        <SimpleGrid
-          cols={{ base: 2, md: 3 }}
-          spacing={{ base: 'sm', sm: 'md' }}
-        >
-          {articles.map((article) => (
-            <ArticleRecommendationCard
-              key={article.id}
-              article={article}
-              target="_blank"
-            />
-          ))}
-        </SimpleGrid>
-      </Box>
-    );
+  if (isLoading || error || !articles) {
+    return null;
   }
-);
+
+  return (
+    <Box className={classNames('', {}, [className])} data-testid="ArticleRecommendationsList">
+      <Title order={4} fz="xl" mb="md">
+        {t('Рекомендуем')}
+      </Title>
+
+      <SimpleGrid cols={{ base: 2, md: 3 }} spacing={{ base: 'sm', sm: 'md' }}>
+        {articles.map((article) => (
+          <ArticleRecommendationCard key={article.id} article={article} target="_blank" />
+        ))}
+      </SimpleGrid>
+    </Box>
+  );
+});

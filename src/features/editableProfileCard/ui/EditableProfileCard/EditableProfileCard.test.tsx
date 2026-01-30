@@ -75,9 +75,7 @@ describe('features/EditableProfileCard', () => {
 
     // Check for Mantine form validation error
     await waitFor(() => {
-      expect(
-        screen.getByText('First name must be at least 2 characters')
-      ).toBeInTheDocument();
+      expect(screen.getByText('First name must be at least 2 characters')).toBeInTheDocument();
     });
   });
 

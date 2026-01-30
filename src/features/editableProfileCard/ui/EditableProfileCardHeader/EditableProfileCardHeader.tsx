@@ -14,46 +14,39 @@ interface EditableProfileCardHeaderProps {
   className?: string;
 }
 
-export const EditableProfileCardHeader = memo(
-  (props: EditableProfileCardHeaderProps) => {
-    const { className } = props;
+export const EditableProfileCardHeader = memo((props: EditableProfileCardHeaderProps) => {
+  const { className } = props;
 
-    const { t } = useTranslation('profile');
-    const authData = useSelector(getUserAuthData);
-    const profileData = useSelector(getProfileData);
-    const canEdit = authData?.id === profileData?.id;
-    const readonly = useSelector(getProfileReadonly);
-    const dispatch = useAppDispatch();
+  const { t } = useTranslation('profile');
+  const authData = useSelector(getUserAuthData);
+  const profileData = useSelector(getProfileData);
+  const canEdit = authData?.id === profileData?.id;
+  const readonly = useSelector(getProfileReadonly);
+  const dispatch = useAppDispatch();
 
-    const onEdit = useCallback(() => {
-      dispatch(profileActions.setReadonly(false));
-    }, [dispatch]);
+  const onEdit = useCallback(() => {
+    dispatch(profileActions.setReadonly(false));
+  }, [dispatch]);
 
-    return (
-      <Card padding="24" fullWidth border="partial">
-        <Group
-          justify="space-between"
-          w="100%"
-          className={className}
-          wrap="wrap"
-          gap="md"
-        >
-          <Title order={2} size="h3" fw={600}>
-            {t('Profile')}
-          </Title>
-          {canEdit && readonly && (
-            <MantineButton
-              onClick={onEdit}
-              data-testid="EditableProfileCardHeader.EditButton"
-              leftSection={<IconEdit size={18} />}
-              variant="filled"
-              size="md"
-            >
-              {t('Edit')}
-            </MantineButton>
-          )}
-        </Group>
-      </Card>
-    );
-  }
-);
+  return (
+    <Card padding="24" fullWidth border="partial">
+      <Group justify="space-between" w="100%" className={className} wrap="wrap"
+gap="md">
+        <Title order={2} size="h3" fw={600}>
+          {t('Profile')}
+        </Title>
+        {canEdit && readonly && (
+          <MantineButton
+            onClick={onEdit}
+            data-testid="EditableProfileCardHeader.EditButton"
+            leftSection={<IconEdit size={18} />}
+            variant="filled"
+            size="md"
+          >
+            {t('Edit')}
+          </MantineButton>
+        )}
+      </Group>
+    </Card>
+  );
+});

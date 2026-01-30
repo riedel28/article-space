@@ -67,9 +67,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
               placeholder={t('Напишите комментарий...')}
               value={text}
               data-testid="AddCommentForm.Input"
-              onChange={(event) =>
-                onCommentTextChange(event.currentTarget.value)
-              }
+              onChange={(event) => onCommentTextChange(event.currentTarget.value)}
               onKeyDown={onKeyDown}
               autosize
               minRows={4}

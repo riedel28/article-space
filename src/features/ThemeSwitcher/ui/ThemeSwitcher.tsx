@@ -15,11 +15,7 @@ export const ThemeSwitcher = memo(() => {
       className={classes.icon}
       aria-label="Toggle theme"
     >
-      {dark ? (
-        <IconSun size={20} stroke={1.8} />
-      ) : (
-        <IconMoon size={20} stroke={1.8} />
-      )}
+      {dark ? <IconSun size={20} stroke={1.8} /> : <IconMoon size={20} stroke={1.8} />}
     </ActionIcon>
   );
 });

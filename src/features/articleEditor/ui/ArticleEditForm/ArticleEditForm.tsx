@@ -5,17 +5,10 @@ import { Stack, TextInput, Button, Group, Text, Select } from '@mantine/core';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Link, RichTextEditor } from '@mantine/tiptap';
-import {
-  IconCheck,
-  IconChevronDown,
-  IconDeviceFloppy
-} from '@tabler/icons-react';
+import { IconCheck, IconChevronDown, IconDeviceFloppy } from '@tabler/icons-react';
 import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
 import { getRouteArticleDetails } from '@/shared/const/router';
-import {
-  useArticleForm,
-  ArticleFormValues
-} from '../../model/lib/useArticleForm';
+import { useArticleForm, ArticleFormValues } from '../../model/lib/useArticleForm';
 import { useUpdateArticle } from '../../api/articleEditorApi';
 
 interface ArticleEditFormProps {
@@ -39,9 +32,7 @@ function blocksToHtml(blocks?: Article['blocks']): string {
       switch (block.type) {
         case ArticleBlockType.TEXT: {
           const title = block.title ? `<h3>${block.title}</h3>` : '';
-          const paragraphs = block.paragraphs
-            .map((p) => `<p>${p}</p>`)
-            .join('');
+          const paragraphs = block.paragraphs.map((p) => `<p>${p}</p>`).join('');
           return title + paragraphs;
         }
         case ArticleBlockType.CODE:
@@ -73,9 +64,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
 
   const initialContent = getArticleContent(article);
 
-  const initialType = Array.isArray(article.type)
-    ? article.type[0]
-    : article.type;
+  const initialType = Array.isArray(article.type) ? article.type[0] : article.type;
 
   const form = useArticleForm({
     initialValues: {
@@ -127,14 +116,7 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
         // Error is handled by RTK Query
       }
     },
-    [
-      article.id,
-      article.user.id,
-      article.views,
-      article.createdAt,
-      navigate,
-      updateArticle
-    ]
+    [article.id, article.user.id, article.views, article.createdAt, navigate, updateArticle]
   );
 
   return (

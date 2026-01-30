@@ -42,8 +42,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
       password: ''
     },
     validate: {
-      username: (value) =>
-        value.trim().length < 1 ? t('Username is required') : null,
+      username: (value) => (value.trim().length < 1 ? t('Username is required') : null),
       password: (value) => (value.length < 1 ? t('Password is required') : null)
     },
     validateInputOnBlur: true

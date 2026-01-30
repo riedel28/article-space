@@ -26,10 +26,8 @@ export function useArticleForm(options: UseArticleFormOptions = {}) {
       content: initialValues?.content ?? ''
     },
     validate: {
-      title: (value) =>
-        value.length < 3 ? 'Title must be at least 3 characters' : null,
-      subtitle: (value) =>
-        value.length < 3 ? 'Subtitle must be at least 3 characters' : null,
+      title: (value) => (value.length < 3 ? 'Title must be at least 3 characters' : null),
+      subtitle: (value) => (value.length < 3 ? 'Subtitle must be at least 3 characters' : null),
       type: (value) => (!value ? 'Select a topic' : null)
     }
   });

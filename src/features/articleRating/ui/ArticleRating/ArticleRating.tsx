@@ -2,10 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RatingCard } from '@/entities/Rating';
-import {
-  useGetArticleRating,
-  useRateArticle
-} from '../../api/articleRatingApi';
+import { useGetArticleRating, useRateArticle } from '../../api/articleRatingApi';
 import { getUserAuthData } from '@/entities/User';
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
 
@@ -68,9 +65,7 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
       rate={rating?.rate}
       className={className}
       title={t('Оцените статью')}
-      feedbackTitle={t(
-        'Оставьте свой отзыв о статье, это поможет улучшить качество'
-      )}
+      feedbackTitle={t('Оставьте свой отзыв о статье, это поможет улучшить качество')}
       hasFeedback
     />
   );
