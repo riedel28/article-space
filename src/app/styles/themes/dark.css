@@ -20,7 +20,7 @@
 
   /* skeleton */
   --skeleton-color: #151c1f;
-  --skeleton-shadow: rgba(0 200 255 / 10%);
+  --skeleton-shadow: rgb(0 200 255 / 10%);
 
   /* code */
   --code-bg: #151c1f;

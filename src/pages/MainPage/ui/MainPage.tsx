@@ -74,10 +74,12 @@ const MainPage = () => {
           >
             {t('hero.title')}
           </Title>
-          <Text size="lg" c="dimmed" ta="center" maw={600} px="xs">
+          <Text size="lg" c="dimmed" ta="center" maw={600}
+px="xs">
             {t('hero.subtitle')}
           </Text>
-          <Stack gap="sm" align="center" w="100%" mb="xl" hiddenFrom="xs">
+          <Stack gap="sm" align="center" w="100%" mb="xl"
+hiddenFrom="xs">
             <Button
               size="md"
               fullWidth
