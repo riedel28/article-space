@@ -1,31 +1,31 @@
-declare module '*.module.scss' {
-    interface IClassNames {
-        [className: string]: string;
-    }
-    const classNames: IClassNames;
-    export default classNames;
+declare module '*.module.css' {
+  interface IClassNames {
+    [className: string]: string;
+  }
+  const classNames: IClassNames;
+  export default classNames;
 }
 
-declare module '*.scss' {
-    const content: { [className: string]: string };
-    export default content;
+declare module '*.css' {
+  const content: { [className: string]: string };
+  export default content;
 }
 
 declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.svg' {
-    import React from 'react';
+  import React from 'react';
 
-    const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
-    export default SVG;
+  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
 }
 
 declare module '*.svg?react' {
-    import React from 'react';
+  import React from 'react';
 
-    const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
-    export default SVG;
+  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
 }
 
 declare const __IS_DEV__: boolean;
@@ -33,11 +33,11 @@ declare const __API__: string;
 declare const __PROJECT__: 'storybook' | 'frontend' | 'jest';
 
 type DeepPartial<T> = T extends object
-    ? {
-          [P in keyof T]?: DeepPartial<T[P]>;
-      }
-    : T;
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
 
-type OptionalRecord<K extends keyof any, T> = {
-    [P in K]?: T;
+type OptionalRecord<K extends PropertyKey, T> = {
+  [P in K]?: T;
 };

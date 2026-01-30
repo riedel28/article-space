@@ -1,66 +1,78 @@
-import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
+import type { StorybookConfig } from '@storybook/react-webpack5';
+import type { Configuration, RuleSetRule } from 'webpack';
+import webpack from 'webpack';
 import path from 'path';
-import { buildCSSLoader } from '../build/loaders/buildCSSLoader';
+import { fileURLToPath } from 'url';
 
-export default {
-    stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx)'],
-    addons: [
-        '@storybook/addon-links',
-        {
-            name: '@storybook/addon-essentials',
-            options: {
-                backgrounds: false
-            }
-        },
-        '@storybook/addon-interactions',
-        'storybook-addon-mock',
-        'storybook-addon-themes'
-    ],
-    framework: '@storybook/react',
-    core: {
-        builder: 'webpack5'
-    },
-    webpackFinal: async (config: Configuration) => {
-        const paths = {
-            build: '',
-            html: '',
-            entry: '',
-            src: path.resolve(__dirname, '..', '..', 'src'),
-            locales: '',
-            buildLocales: ''
-        };
-        config!.resolve!.modules!.push(paths.src);
-        config!.resolve!.extensions!.push('.ts', '.tsx');
-        config!.resolve!.alias = {
-            ...config!.resolve!.alias,
-            '@': paths.src
-        };
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-        config!.module!.rules = config!.module!.rules!.map(
-            // @ts-ignore
-            (rule: RuleSetRule) => {
-                if (/svg/.test(rule.test as string)) {
-                    return { ...rule, exclude: /\.svg$/i };
-                }
+const config: StorybookConfig = {
+  stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
 
-                return rule;
-            }
-        );
+  addons: ['@storybook/addon-webpack5-compiler-babel', '@storybook/addon-docs'],
 
-        config!.module!.rules.push({
-            test: /\.svg$/,
-            use: ['@svgr/webpack']
-        });
-        config!.module!.rules.push(buildCSSLoader(true));
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
+  },
 
-        config!.plugins!.push(
-            new DefinePlugin({
-                __IS_DEV__: JSON.stringify(true),
-                __API__: JSON.stringify('https://testapi.ru'),
-                __PROJECT__: JSON.stringify('storybook')
-            })
-        );
-        // Return the altered config
-        return config;
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true)
     }
+  },
+
+  docs: {},
+
+  webpackFinal: async (config: Configuration) => {
+    const paths = {
+      src: path.resolve(__dirname, '..', '..', 'src')
+    };
+
+    config.resolve = config.resolve || {};
+    config.resolve.modules = config.resolve.modules || [];
+    config.resolve.modules.push(paths.src);
+
+    config.resolve.extensions = config.resolve.extensions || [];
+    config.resolve.extensions.push('.ts', '.tsx');
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': paths.src
+    };
+
+    config.module = config.module || {};
+    config.module.rules = config.module.rules || [];
+
+    // Exclude SVG from default file loader
+    config.module.rules = config.module.rules.map((rule) => {
+      const ruleObj = rule as RuleSetRule;
+      if (ruleObj && ruleObj.test && /svg/.test(ruleObj.test.toString())) {
+        return { ...ruleObj, exclude: /\.svg$/i };
+      }
+      return rule;
+    });
+
+    // Add SVGR loader
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack']
+    });
+
+    config.plugins = config.plugins || [];
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __IS_DEV__: JSON.stringify(true),
+        __API__: JSON.stringify('https://testapi.ru'),
+        __PROJECT__: JSON.stringify('storybook')
+      })
+    );
+
+    return config;
+  }
 };
+
+export default config;

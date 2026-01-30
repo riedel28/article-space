@@ -2,8 +2,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export function buildCSSLoader(isDev: boolean) {
     return {
-        test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
+        test: /\.css$/i,
+        exclude: /node_modules\/(?!@mantine)/,
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
@@ -18,7 +18,7 @@ export function buildCSSLoader(isDev: boolean) {
                     },
                 },
             },
-            'sass-loader',
+            'postcss-loader',
         ],
     };
 }

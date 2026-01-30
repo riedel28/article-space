@@ -1,41 +1,38 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { CommentCard } from './CommentCard';
-import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
 
-export default {
-    title: 'entities/Comment/CommentCard',
-    component: CommentCard,
-    argTypes: {
-        backgroundColor: { control: 'color' }
-    }
-} as Meta<typeof CommentCard>;
-
-const Template: StoryFn<typeof CommentCard> = (args) => (
-    <CommentCard {...args} />
-);
-const normalArgs = {
-    comment: {
-        id: '1',
-        text: 'hello world',
-        user: { id: '1', username: 'Vasya' }
-    }
+const meta: Meta<typeof CommentCard> = {
+  title: 'entities/Comment/CommentCard',
+  component: CommentCard,
 };
 
-export const Normal = Template.bind({});
-Normal.args = normalArgs;
+export default meta;
+type Story = StoryObj<typeof CommentCard>;
 
-export const NormalRedesigned = Template.bind({});
-NormalRedesigned.args = normalArgs;
-NormalRedesigned.decorators = [NewDesignDecorator];
+const normalArgs = {
+  comment: {
+    id: '1',
+    text: 'hello world',
+    user: { id: '1', username: 'Vasya' }
+  }
+};
 
-export const Loading = Template.bind({});
-Loading.args = {
+export const Normal: Story = {
+  args: normalArgs
+};
+
+export const NormalRedesigned: Story = {
+  args: normalArgs
+};
+
+export const Loading: Story = {
+  args: {
     comment: {
-        id: '1',
-        text: 'hello world',
-        user: { id: '1', username: 'Vasya' }
+      id: '1',
+      text: 'hello world',
+      user: { id: '1', username: 'Vasya' }
     },
     isLoading: true
+  }
 };

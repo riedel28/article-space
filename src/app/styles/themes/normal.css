@@ -1,0 +1,25 @@
+:root {
+  /* Mantine aligned colors */
+  --dark-bg-redesigned: #fff;
+  --bg-redesigned: #f5f7f8;
+  --light-bg-redesigned: #e8eced;
+  --text-redesigned: #141c1f;
+  --hint-redesigned: #adbcc0;
+  --cancel-redesigned: #f77;
+  --save-redesigned: #62de85;
+  --icon-redesigned: #00a3d1;
+  --accent-redesigned: #00a3d1;
+
+  /* skeleton */
+  --skeleton-color: #fff;
+  --skeleton-shadow: rgb(0 0 0 / 20%);
+
+  /* code */
+  --code-bg: #fff;
+
+  /* card */
+  --card-bg: #e8eced;
+
+  /* listbox */
+  --listbox-bg: #e8eced;
+}

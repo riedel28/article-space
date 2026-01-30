@@ -1,38 +1,36 @@
-import { useTranslation } from 'react-i18next';
+import { Box, SimpleGrid,Title } from '@mantine/core';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { ArticleList } from '@/entities/Article';
-import { VStack } from '@/shared/ui/redesigned/Stack';
+
 import { useArticleRecommendationsList } from '../../api/aritcleRecommendationsApi';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { ArticleRecommendationCard } from './ArticleRecommendationCard/ArticleRecommendationCard';
 
 interface ArticleRecommendationsListProps {
-    className?: string;
+  className?: string;
 }
 
-export const ArticleRecommendationsList = memo(
-    (props: ArticleRecommendationsListProps) => {
-        const { className } = props;
-        const { t } = useTranslation();
-        const {
-            isLoading,
-            data: articles,
-            error
-        } = useArticleRecommendationsList(3);
+export const ArticleRecommendationsList = memo((props: ArticleRecommendationsListProps) => {
+  const { className } = props;
+  const { t } = useTranslation();
+  const { isLoading, data: articles, error } = useArticleRecommendationsList(3);
 
-        if (isLoading || error || !articles) {
-            return null;
-        }
+  if (isLoading || error || !articles) {
+    return null;
+  }
 
-        return (
-            <VStack
-                data-testid="ArticleRecommendationsList"
-                gap="8"
-                className={classNames('', {}, [className])}
-            >
-                <Text size="l" title={t('Рекомендуем')} />
-                <ArticleList articles={articles} target="_blank" />
-            </VStack>
-        );
-    }
-);
+  return (
+    <Box className={classNames('', {}, [className])} data-testid="ArticleRecommendationsList">
+      <Title order={4} fz="xl" mb="md">
+        {t('Рекомендуем')}
+      </Title>
+
+      <SimpleGrid cols={{ base: 2, md: 3 }} spacing={{ base: 'sm', sm: 'md' }}>
+        {articles.map((article) => (
+          <ArticleRecommendationCard key={article.id} article={article} target="_blank" />
+        ))}
+      </SimpleGrid>
+    </Box>
+  );
+});

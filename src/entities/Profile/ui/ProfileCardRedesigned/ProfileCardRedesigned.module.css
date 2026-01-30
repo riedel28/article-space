@@ -1,0 +1,6 @@
+.avatarBorder {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--mantine-color-brand-6);
+  padding: 3px;
+}

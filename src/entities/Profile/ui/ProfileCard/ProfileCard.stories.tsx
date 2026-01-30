@@ -1,49 +1,62 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { Country } from '@/entities/Country';
-import { Currency } from '@/entities/Currency';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
+
 import avatar from '@/shared/assets/tests/storybook.jpg';
+
 import { ProfileCard } from './ProfileCard';
-import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
 
-export default {
-    title: 'entities/ProfileCard',
-    component: ProfileCard,
-    argTypes: {
-        backgroundColor: { control: 'color' }
-    }
-} as Meta<typeof ProfileCard>;
-
-const Template: StoryFn<typeof ProfileCard> = (args) => (
-    <ProfileCard {...args} />
-);
-
-const primaryArgs = {
-    data: {
-        username: 'admin',
-        age: 22,
-        country: Country.Ukraine,
-        lastname: 'ulbi tv',
-        first: 'asd',
-        city: 'asf',
-        currency: Currency.USD,
-        avatar
-    }
+const meta: Meta<typeof ProfileCard> = {
+  title: 'entities/ProfileCard',
+  component: ProfileCard,
+  args: {
+    onEdit: fn(),
+    onSubmit: fn(),
+    onCancel: fn()
+  }
 };
 
-export const Primary = Template.bind({});
-Primary.args = primaryArgs;
+export default meta;
+type Story = StoryObj<typeof ProfileCard>;
 
-export const PrimaryRedesigned = Template.bind({});
-PrimaryRedesigned.args = primaryArgs;
-PrimaryRedesigned.decorators = [NewDesignDecorator];
+const profileData = {
+  username: 'johndoe',
+  lastname: 'Doe',
+  first: 'John',
+  avatar
+};
 
-export const WithError = Template.bind({});
-WithError.args = {
+export const ViewMode: Story = {
+  args: {
+    data: profileData,
+    readonly: true,
+    canEdit: true
+  }
+};
+
+export const ViewModeWithoutEditPermission: Story = {
+  args: {
+    data: profileData,
+    readonly: true,
+    canEdit: false
+  }
+};
+
+export const EditMode: Story = {
+  args: {
+    data: profileData,
+    readonly: false,
+    canEdit: true
+  }
+};
+
+export const WithError: Story = {
+  args: {
     error: 'true'
+  }
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
+export const Loading: Story = {
+  args: {
     isLoading: true
+  }
 };

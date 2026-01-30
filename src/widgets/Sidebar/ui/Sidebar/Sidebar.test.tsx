@@ -1,18 +1,32 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { AppShell } from '@mantine/core';
+
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
 import { Sidebar } from '../Sidebar/Sidebar';
 
-describe('Sidebar', () => {
-    test('with only first param', () => {
-        componentRender(<Sidebar />);
-        expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-    });
+// Wrapper to provide AppShell context required by Sidebar
+const SidebarWithAppShell = () => (
+  <AppShell navbar={{ width: 250, breakpoint: 'sm' }}>
+    <AppShell.Navbar>
+      <Sidebar />
+    </AppShell.Navbar>
+  </AppShell>
+);
 
-    test('test toggle', () => {
-        componentRender(<Sidebar />);
-        const toggleBtn = screen.getByTestId('sidebar-toggle');
-        expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-        fireEvent.click(toggleBtn);
-        expect(screen.getByTestId('sidebar')).toHaveClass('collapsed');
-    });
+describe('Sidebar', () => {
+  test('renders within AppShell context', () => {
+    componentRender(<SidebarWithAppShell />);
+    // The Sidebar is composed of AppShell.Section elements which render as divs
+    // Check that the navbar element exists and has content
+    const navbar = document.querySelector('.mantine-AppShell-navbar');
+    expect(navbar).toBeInTheDocument();
+    expect(navbar).not.toBeEmptyDOMElement();
+  });
+
+  test('renders navigation links', () => {
+    componentRender(<SidebarWithAppShell />);
+    // Check that links are rendered (sidebar items are NavLinks)
+    const links = document.querySelectorAll('a');
+    expect(links.length).toBeGreaterThan(0);
+  });
 });

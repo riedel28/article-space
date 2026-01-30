@@ -1,105 +1,111 @@
+import { Alert,Button, PasswordInput, Stack, TextInput } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { IconAlertCircle,IconLock, IconUser } from '@tabler/icons-react';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { memo, useCallback } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
 
-
-import { Text } from '@/shared/ui/redesigned/Text';
 import {
-    DynamicModuleLoader,
-    ReducersList
+  DynamicModuleLoader,
+  ReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
-import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
-import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
-import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
-import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
-import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import cls from './LoginForm.module.scss';
-import { Button } from '@/shared/ui/redesigned/Button';
-import { Input } from '@/shared/ui/redesigned/Input';
-import { VStack } from '@/shared/ui/redesigned/Stack';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
+import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
+import { loginReducer } from '../../model/slice/loginSlice';
+
 export interface LoginFormProps {
-    className?: string;
-    onSuccess: () => void;
+  className?: string;
+  onSuccess: () => void;
+}
+
+interface LoginFormValues {
+  username: string;
+  password: string;
 }
 
 const initialReducers: ReducersList = {
-    loginForm: loginReducer
+  loginForm: loginReducer
 };
 
 const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
-    const { t } = useTranslation();
-    const dispatch = useAppDispatch();
-    const username = useSelector(getLoginUsername);
-    const password = useSelector(getLoginPassword);
-    const isLoading = useSelector(getLoginIsLoading);
-    const error = useSelector(getLoginError);
-    const forceUpdate = useForceUpdate();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const isLoading = useSelector(getLoginIsLoading);
+  const error = useSelector(getLoginError);
+  const forceUpdate = useForceUpdate();
 
-    const onChangeUsername = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setUsername(value));
-        },
-        [dispatch]
-    );
+  const form = useForm<LoginFormValues>({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validate: {
+      username: (value) => (value.trim().length < 1 ? t('Имя пользователя обязательно') : null),
+      password: (value) => (value.length < 1 ? t('Пароль обязателен') : null)
+    },
+    validateInputOnBlur: true
+  });
 
-    const onChangePassword = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setPassword(value));
-        },
-        [dispatch]
-    );
+  const handleSubmit = useCallback(
+    async (values: LoginFormValues) => {
+      const result = await dispatch(
+        loginByUsername({
+          username: values.username,
+          password: values.password
+        })
+      );
+      if (result.meta.requestStatus === 'fulfilled') {
+        onSuccess();
+        forceUpdate();
+      }
+    },
+    [dispatch, onSuccess, forceUpdate]
+  );
 
-    const onLoginClick = useCallback(async () => {
-        const result = await dispatch(loginByUsername({ username, password }));
-        if (result.meta.requestStatus === 'fulfilled') {
-            onSuccess();
-            forceUpdate();
-        }
-    }, [dispatch, username, password, onSuccess, forceUpdate]);
+  return (
+    <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
+      <form onSubmit={form.onSubmit(handleSubmit)} className={className}>
+        <Stack gap="lg">
+          {error && (
+            <Alert
+              variant="light"
+              color="red"
+              icon={<IconAlertCircle size={16} />}
+              title={t('Ошибка при авторизации')}
+            >
+              {t('Вы ввели неверный логин или пароль')}
+            </Alert>
+          )}
 
-    return (
-        <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-            <VStack
-                                    gap="16"
-                                    className={classNames(cls.LoginForm, {}, [className])}
-                                >
-                                    <Text title={t('Форма авторизации')} />
-                                    {error && (
-                                        <Text
-                                            text={t('Вы ввели неверный логин или пароль')}
-                                            variant="error"
-                                        />
-                                    )}
-                                    <Input
-                                        autofocus
-                                        type="text"
-                                        className={cls.input}
-                                        placeholder={t('Введите username')}
-                                        onChange={onChangeUsername}
-                                        value={username}
-                                    />
-                                    <Input
-                                        type="text"
-                                        className={cls.input}
-                                        placeholder={t('Введите пароль')}
-                                        onChange={onChangePassword}
-                                        value={password}
-                                    />
-                                    <Button
-                                        className={cls.loginBtn}
-                                        onClick={onLoginClick}
-                                        disabled={isLoading}
-                                    >
-                                        {t('Войти')}
-                                    </Button>
-                                </VStack>
-        </DynamicModuleLoader>
-    );
+          <TextInput
+            data-autofocus
+            label={t('Имя пользователя')}
+            placeholder={t('Введите username')}
+            leftSection={<IconUser size={16} />}
+            {...form.getInputProps('username')}
+          />
+
+          <PasswordInput
+            label={t('Пароль')}
+            placeholder={t('Введите пароль')}
+            leftSection={<IconLock size={16} />}
+            visibilityToggleButtonProps={{
+              'aria-label': t('Переключить видимость пароля')
+            }}
+            {...form.getInputProps('password')}
+          />
+
+          <Button type="submit" fullWidth loading={isLoading} mt="xs">
+            {t('Войти')}
+          </Button>
+        </Stack>
+      </form>
+    </DynamicModuleLoader>
+  );
 });
 
 export default LoginForm;

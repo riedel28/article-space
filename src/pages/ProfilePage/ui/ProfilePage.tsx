@@ -1,26 +1,25 @@
+import { Container, Stack } from '@mantine/core';
 import { useParams } from 'react-router-dom';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Page } from '@/widgets/Page';
-import { VStack } from '@/shared/ui/redesigned/Stack';
+
 import { EditableProfileCard } from '@/features/editableProfileCard';
+import { Page } from '@/widgets/Page';
 
 interface ProfilePageProps {
-    className?: string;
+  className?: string;
 }
 
 const ProfilePage = ({ className }: ProfilePageProps) => {
-    const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
 
-    return (
-        <Page
-            data-testid="ProfilePage"
-            className={classNames('', {}, [className])}
-        >
-            <VStack gap="16" max>
-                <EditableProfileCard id={id} />
-            </VStack>
-        </Page>
-    );
+  return (
+    <Page data-testid="ProfilePage" className={className}>
+      <Container size="md" px={{ base: 'xs', sm: 'lg' }} py={{ base: 'md', sm: 'xl' }}>
+        <Stack gap={24} w="100%">
+          <EditableProfileCard id={id} />
+        </Stack>
+      </Container>
+    </Page>
+  );
 };
 
 export default ProfilePage;

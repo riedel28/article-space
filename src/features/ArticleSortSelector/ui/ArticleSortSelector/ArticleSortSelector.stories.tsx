@@ -1,19 +1,15 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticleSortSelector } from './ArticleSortSelector';
 
-export default {
-    title: 'features/ArticleSortSelector',
-    component: ArticleSortSelector,
-    argTypes: {
-        backgroundColor: { control: 'color' },
-    },
-} as Meta<typeof ArticleSortSelector>;
+const meta: Meta<typeof ArticleSortSelector> = {
+  title: 'features/ArticleSortSelector',
+  component: ArticleSortSelector,
+};
 
-const Template: StoryFn<typeof ArticleSortSelector> = (args) => (
-    <ArticleSortSelector {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticleSortSelector>;
 
-export const Normal = Template.bind({});
-Normal.args = {};
+export const Normal: Story = {
+  args: {}
+};

@@ -1,0 +1,8 @@
+@import url('reset');
+@import url('variables/global');
+@import url('themes/normal');
+@import url('themes/dark');
+
+.content-page {
+  display: flex;
+}

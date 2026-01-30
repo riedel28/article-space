@@ -1,0 +1,40 @@
+.page {
+  min-height: 100vh;
+}
+
+/* Hero image aspect ratio and effects */
+.heroImageWrapper {
+  aspect-ratio: 21 / 9;
+  border-radius: var(--mantine-radius-xl);
+  overflow: hidden;
+}
+
+/* More compact hero on mobile */
+@media (width <= 768px) {
+  .heroImageWrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--mantine-radius-lg);
+  }
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile article info bar */
+.mobileInfoBar {
+  flex-wrap: wrap;
+}
+
+/* Sticky sidebar behavior */
+.sidebarSticky {
+  position: sticky;
+  top: 76px;
+}
+
+/* Hide ArticleDetails internal title/subtitle/image */
+.articleDetailsWrapper > div > div > *:nth-child(-n + 3) {
+  display: none;
+}

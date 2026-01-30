@@ -1,81 +1,86 @@
+import { AspectRatio,Card, Group, Skeleton } from '@mantine/core';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card as CardRedesigned } from '@/shared/ui/redesigned/Card';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
+
 import { ArticleView } from '../../model/consts/articleConsts';
-import cls from './ArticleListItem.module.scss';
+import classes from './ArticleListItemRedesigned/ArticleListItemRedesigned.module.css';
 
 interface ArticleListItemSkeletonProps {
-    className?: string;
-    view: ArticleView;
+  className?: string;
+  view: ArticleView;
 }
 
-export const ArticleListItemSkeleton = memo(
-    (props: ArticleListItemSkeletonProps) => {
-        const { className, view } = props;
+export const ArticleListItemSkeleton = memo((props: ArticleListItemSkeletonProps) => {
+  const { className, view } = props;
 
-        const mainClass = cls.ArticleListItemRedesigned;
+  if (view === ArticleView.BIG) {
+    return (
+      <Card
+        data-testid="ArticleListItemSkeleton"
+        className={`${className} ${classes.cardBig}`}
+        w="100%"
+        radius="md"
+        withBorder
+      >
+        <div className={classes.cardBigContainer}>
+          <div className={classes.imageContainer}>
+            <Skeleton w="100%" h="100%" radius={0} />
+          </div>
 
-        const Skeleton = SkeletonRedesigned;
-
-        if (view === ArticleView.BIG) {
-            const cardContent = (
-                <>
-                    <div className={cls.header}>
-                        <Skeleton border="50%" height={30} width={30} />
-                        <Skeleton
-                            width={150}
-                            height={16}
-                            className={cls.username}
-                        />
-                        <Skeleton
-                            width={150}
-                            height={16}
-                            className={cls.date}
-                        />
-                    </div>
-                    <Skeleton width={250} height={24} className={cls.title} />
-                    <Skeleton height={200} className={cls.img} />
-                    <div className={cls.footer}>
-                        <Skeleton height={36} width={200} />
-                    </div>
-                </>
-            );
-            return (
-                <div
-                    className={classNames(mainClass, {}, [
-                        className,
-                        cls[view],
-                    ])}
-                >
-                    <CardRedesigned border="round" className={cls.card}>
-                                                    {cardContent}
-                                                </CardRedesigned>
-                </div>
-            );
-        }
-
-        const cardContent = (
-            <>
-                <Skeleton
-                                            width="100%"
-                                            height={150}
-                                            border="32px"
-                                            className={cls.img}
-                                        />
-                <div className={cls.infoWrapper}>
-                    <Skeleton width={130} height={16} />
-                </div>
-                <Skeleton width={150} height={16} className={cls.title} />
-            </>
-        );
-
-        return (
-            <div className={classNames(mainClass, {}, [className, cls[view]])}>
-                <CardRedesigned border="round" className={cls.card}>
-                                            {cardContent}
-                                        </CardRedesigned>
+          <div className={classes.contentStack}>
+            <div>
+              <Skeleton h={18} w="80%" mb="xs" />
+              <Skeleton h={14} w="100%" mb={4} />
+              <Skeleton h={14} w="90%" mb="xs" />
+              <Skeleton h={14} w={80} mt="xs" />
             </div>
-        );
-    },
-);
+
+            <Group gap="md" mt="md" wrap="wrap">
+              <Group gap={6}>
+                <Skeleton circle h={14} w={14} />
+                <Skeleton h={12} w={60} />
+              </Group>
+              <Group gap={6}>
+                <Skeleton circle h={14} w={14} />
+                <Skeleton h={12} w={80} />
+              </Group>
+              <Group gap={6}>
+                <Skeleton circle h={14} w={14} />
+                <Skeleton h={12} w={70} />
+              </Group>
+            </Group>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card radius="md" withBorder h="100%" className={`${className} ${classes.card}`}>
+      <Card.Section>
+        <AspectRatio ratio={16 / 10}>
+          <Skeleton h={180} />
+        </AspectRatio>
+      </Card.Section>
+
+      <Skeleton h={20} mb={8} w="90%" mt="md" />
+      <Skeleton h={20} w="70%" />
+
+      <Card.Section p="md" mt="auto">
+        <Group>
+          <Group gap={4}>
+            <Skeleton h={12} w={12} />
+            <Skeleton h={12} w={30} />
+          </Group>
+          <Group gap={4}>
+            <Skeleton h={12} w={12} />
+            <Skeleton h={12} w={60} />
+          </Group>
+          <Group gap={4}>
+            <Skeleton h={12} w={12} />
+            <Skeleton h={12} w={80} />
+          </Group>
+        </Group>
+      </Card.Section>
+    </Card>
+  );
+});

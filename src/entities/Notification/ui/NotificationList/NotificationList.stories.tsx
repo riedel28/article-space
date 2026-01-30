@@ -1,50 +1,45 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { NotificationList } from './NotificationList';
+import { MantineDecorator } from '@/shared/config/storybook/MantineDecorator/MantineDecorator';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 
-export default {
-    title: 'entities/Notification/NotificationList',
-    component: NotificationList,
-    argTypes: {
-        backgroundColor: { control: 'color' },
-    },
-} as Meta<typeof NotificationList>;
+import { NotificationList } from './NotificationList';
 
-const Template: StoryFn<typeof NotificationList> = (args) => (
-    <NotificationList {...args} />
-);
+const meta: Meta<typeof NotificationList> = {
+  title: 'entities/Notification/NotificationList',
+  component: NotificationList,
+  decorators: [MantineDecorator, StoreDecorator({})]
+};
 
-export const Normal = Template.bind({});
-Normal.args = {};
-Normal.decorators = [StoreDecorator({})];
-Normal.parameters = {
+export default meta;
+type Story = StoryObj<typeof NotificationList>;
+
+export const Normal: Story = {
+  args: {},
+  parameters: {
     mockData: [
-        {
-            url: `${__API__}/notifications`,
-            method: 'GET',
-            status: 200,
-            response: [
-                {
-                    id: '1',
-                    title: 'Уведомление',
-                    description:
-                        'Поставь лайк и оставь комментарий под Ulbi TV',
-                },
-                {
-                    id: '2',
-                    title: 'Уведомление 2',
-                    description:
-                        'Поставь лайк и оставь комментарий под Ulbi TV',
-                },
-                {
-                    id: '3',
-                    title: 'Уведомление 3',
-                    description:
-                        'Поставь лайк и оставь комментарий под Ulbi TV',
-                },
-            ],
-        },
-    ],
+      {
+        url: `${__API__}/notifications`,
+        method: 'GET',
+        status: 200,
+        response: [
+          {
+            id: '1',
+            title: 'Уведомление',
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
+          },
+          {
+            id: '2',
+            title: 'Уведомление 2',
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
+          },
+          {
+            id: '3',
+            title: 'Уведомление 3',
+            description: 'Поставь лайк и оставь комментарий под ArticleSpace'
+          }
+        ]
+      }
+    ]
+  }
 };

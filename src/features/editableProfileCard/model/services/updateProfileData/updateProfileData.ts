@@ -1,38 +1,54 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '@/entities/Profile';
+import { getUserAuthData,userActions } from '@/entities/User';
+
 import { ValidateProfileError } from '../../consts/consts';
 import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 import { validateProfileData } from '../validateProfileData/validateProfileData';
 
 export const updateProfileData = createAsyncThunk<
-    Profile,
-    void,
-    ThunkConfig<ValidateProfileError[]>
+  Profile,
+  void,
+  ThunkConfig<ValidateProfileError[]>
 >('profile/updateProfileData', async (_, thunkApi) => {
-    const { extra, rejectWithValue, getState } = thunkApi;
+  const { extra, rejectWithValue, getState, dispatch } = thunkApi;
 
-    const formData = getProfileForm(getState());
+  const formData = getProfileForm(getState());
 
-    const errors = validateProfileData(formData);
+  const errors = validateProfileData(formData);
 
-    if (errors.length) {
-        return rejectWithValue(errors);
+  if (errors.length) {
+    return rejectWithValue(errors);
+  }
+
+  try {
+    const response = await extra.api.put<Profile>(`/profile/${formData?.id}`, formData);
+
+    if (!response.data) {
+      throw new Error();
     }
 
-    try {
-        const response = await extra.api.put<Profile>(
-            `/profile/${formData?.id}`,
-            formData,
-        );
+    const authData = getUserAuthData(getState());
 
-        if (!response.data) {
-            throw new Error();
-        }
+    // Sync avatar to global user state if user is editing their own profile
+    if (authData && authData.id === formData?.id) {
+      dispatch(
+        userActions.setAuthData({
+          ...authData,
+          avatar: response.data.avatar
+        })
+      );
 
-        return response.data;
-    } catch (e) {
-        console.log(e);
-        return rejectWithValue([ValidateProfileError.SERVER_ERROR]);
+      // Persist avatar to users table so it loads correctly on page refresh
+      await extra.api.patch(`/users/${authData.id}`, {
+        avatar: response.data.avatar
+      });
     }
+
+    return response.data;
+  } catch {
+    return rejectWithValue([ValidateProfileError.SERVER_ERROR]);
+  }
 });

@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "title": "Share Knowledge, Inspire Others",
+    "subtitle": "A modern platform for creating, discovering, and engaging with articles on technology, science, and economics.",
+    "cta": "Explore Articles",
+    "github": "View on GitHub"
+  },
+  "features": {
+    "title": "Platform Features"
+  },
+  "feature": {
+    "articles": {
+      "title": "Rich Articles",
+      "description": "Create and read articles with code blocks, images, and rich text formatting."
+    },
+    "profiles": {
+      "title": "User Profiles",
+      "description": "Customize your profile, track your contributions, and connect with other users."
+    },
+    "ratings": {
+      "title": "Ratings & Comments",
+      "description": "Rate articles, leave feedback, and engage in meaningful discussions."
+    },
+    "i18n": {
+      "title": "Multi-language",
+      "description": "Full support for English and Russian languages throughout the platform."
+    }
+  },
+  "latestArticles": {
+    "title": "Latest Articles",
+    "viewAll": "View All"
+  }
+}

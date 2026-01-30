@@ -1,38 +1,41 @@
-import { useTranslation } from 'react-i18next';
+import { NavLink } from '@mantine/core';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { Link,useLocation } from 'react-router-dom';
 
-
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserAuthData } from '@/entities/User';
+
 import { SidebarItemType } from '../../model/types/sidebar';
-import cls from './SidebarItem.module.scss';
-import { AppLink } from '@/shared/ui/redesigned/AppLink';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import classes from './SidebarItem.module.css';
 
 interface SidebarItemProps {
-    item: SidebarItemType;
-    collapsed: boolean;
+  item: SidebarItemType;
+  onClick?: () => void;
 }
 
-export const SidebarItem = memo(({ item, collapsed }: SidebarItemProps) => {
-    const { t } = useTranslation();
-    const isAuth = useSelector(getUserAuthData);
+export const SidebarItem = memo(({ item, onClick }: SidebarItemProps) => {
+  const { t } = useTranslation();
+  const isAuth = useSelector(getUserAuthData);
+  const location = useLocation();
 
-    if (item.authOnly && !isAuth) {
-        return null;
-    }
+  if (item.authOnly && !isAuth) {
+    return null;
+  }
 
-    return (
-        <AppLink
-                            to={item.path}
-                            className={classNames(cls.itemRedesigned, {
-                                [cls.collapsedRedesigned]: collapsed,
-                            })}
-                            activeClassName={cls.active}
-                        >
-                            <Icon Svg={item.Icon} />
-                            <span className={cls.link}>{t(item.text)}</span>
-                        </AppLink>
-    );
+  const isActive =
+    item.path === '/' ? location.pathname === item.path : location.pathname.startsWith(item.path);
+
+  return (
+    <NavLink
+      component={Link}
+      to={item.path}
+      label={t(item.text)}
+      leftSection={<item.Icon size={20} />}
+      active={isActive}
+      color="brand"
+      className={classes.sidebarItem}
+      onClick={onClick}
+    />
+  );
 });

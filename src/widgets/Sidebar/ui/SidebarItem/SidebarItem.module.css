@@ -1,0 +1,4 @@
+.sidebarItem {
+  border-radius: var(--mantine-radius-md);
+  font-weight: 500;
+}

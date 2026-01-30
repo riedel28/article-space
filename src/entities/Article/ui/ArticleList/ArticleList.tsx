@@ -1,73 +1,61 @@
-import { useTranslation } from 'react-i18next';
+import { Center,SimpleGrid, Stack, Title } from '@mantine/core';
 import { HTMLAttributeAnchorTarget, memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text, TextSize } from '@/shared/ui/deprecated/Text';
+import { useTranslation } from 'react-i18next';
+
 import { ArticleView } from '../../model/consts/articleConsts';
-import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
-import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
-import cls from './ArticleList.module.scss';
 import { Article } from '../../model/types/article';
-import { HStack } from '@/shared/ui/redesigned/Stack';
+import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
+import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 
 interface ArticleListProps {
-    className?: string;
-    articles: Article[];
-    isLoading?: boolean;
-    target?: HTMLAttributeAnchorTarget;
-    view?: ArticleView;
+  className?: string;
+  articles: Article[];
+  isLoading?: boolean;
+  target?: HTMLAttributeAnchorTarget;
+  view?: ArticleView;
 }
 
 const getSkeletons = (view: ArticleView) =>
-    new Array(view === ArticleView.SMALL ? 9 : 3)
-        .fill(0)
-        .map((item, index) => (
-            <ArticleListItemSkeleton
-                className={cls.card}
-                key={index}
-                view={view}
-            />
-        ));
+  new Array(view === ArticleView.SMALL ? 9 : 3)
+    .fill(0)
+    .map((_item, index) => <ArticleListItemSkeleton key={index} view={view} />);
 
 export const ArticleList = memo((props: ArticleListProps) => {
-    const {
-        className,
-        articles,
-        view = ArticleView.SMALL,
-        isLoading,
-        target
-    } = props;
-    const { t } = useTranslation();
+  const { className, articles, view = ArticleView.SMALL, isLoading, target } = props;
+  const { t } = useTranslation();
 
-    if (!isLoading && !articles.length) {
-        return (
-            <div
-                className={classNames(cls.ArticleList, {}, [
-                    className,
-                    cls[view]
-                ])}
-            >
-                <Text size={TextSize.L} title={t('Статьи не найдены')} />
-            </div>
-        );
-    }
-
+  if (!isLoading && !articles.length) {
     return (
-        <HStack
-                            wrap="wrap"
-                            gap="16"
-                            className={classNames(cls.ArticleListRedesigned, {}, [])}
-                            data-testid="ArticleList"
-                        >
-                            {articles.map((item) => (
-                                <ArticleListItem
-                                    article={item}
-                                    view={view}
-                                    target={target}
-                                    key={item.id}
-                                    className={cls.card}
-                                />
-                            ))}
-                            {isLoading && getSkeletons(view)}
-                        </HStack>
+      <Center className={className} py="xl">
+        <Title order={3} c="dimmed">
+          {t('Статьи не найдены')}
+        </Title>
+      </Center>
     );
+  }
+
+  if (view === ArticleView.SMALL) {
+    return (
+      <SimpleGrid
+        cols={{ base: 1, md: 2, xl: 3 }}
+        spacing="lg"
+        className={className}
+        data-testid="ArticleList"
+      >
+        {articles.map((item) => (
+          <ArticleListItem article={item} view={view} target={target} key={item.id} />
+        ))}
+        {isLoading && getSkeletons(view)}
+      </SimpleGrid>
+    );
+  }
+
+  return (
+    <Stack gap="lg" className={className} data-testid="ArticleList">
+      {articles.map((item) => (
+        <ArticleListItem article={item} view={view} target={target} key={item.id} />
+      ))}
+      {isLoading && getSkeletons(view)}
+    </Stack>
+  );
 });

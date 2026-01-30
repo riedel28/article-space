@@ -1,19 +1,15 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticlesPageFilters } from './ArticlesPageFilters';
 
-export default {
-    title: 'pages/ArticlesPage/ArticlesPageFilters',
-    component: ArticlesPageFilters,
-    argTypes: {
-        backgroundColor: { control: 'color' },
-    },
-} as Meta<typeof ArticlesPageFilters>;
+const meta: Meta<typeof ArticlesPageFilters> = {
+  title: 'pages/ArticlesPage/ArticlesPageFilters',
+  component: ArticlesPageFilters,
+};
 
-const Template: StoryFn<typeof ArticlesPageFilters> = (args) => (
-    <ArticlesPageFilters {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof ArticlesPageFilters>;
 
-export const Normal = Template.bind({});
-Normal.args = {};
+export const Normal: Story = {
+  args: {}
+};
