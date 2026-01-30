@@ -1,10 +1,4 @@
-import {
-  AnyAction,
-  EnhancedStore,
-  Reducer,
-  ReducersMapObject
-} from '@reduxjs/toolkit';
-import { CombinedState } from 'redux';
+import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { LoginSchema } from '@/features/AuthByUsername';
 import { UserSchema } from '@/entities/User';
@@ -37,7 +31,7 @@ export type MountedReducers = OptionalRecord<StateSchemaKey, boolean>;
 
 export interface ReducerManager {
   getReducerMap: () => ReducersMapObject<StateSchema>;
-  reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>;
+  reduce: (state: StateSchema | undefined, action: UnknownAction) => StateSchema;
   add: (key: StateSchemaKey, reducer: Reducer) => void;
   remove: (key: StateSchemaKey) => void;
   // true - вмонтирован, false - демонтирован

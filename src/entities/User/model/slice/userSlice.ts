@@ -33,14 +33,11 @@ export const userSlice = createSlice({
         }
       }
     );
-    builder.addCase(
-      initAuthData.fulfilled,
-      (state, { payload }: PayloadAction<User>) => {
-        state.authData = payload;
-        setFeatureFlags(payload.features);
-        state._inited = true;
-      }
-    );
+    builder.addCase(initAuthData.fulfilled, (state, { payload }: PayloadAction<User>) => {
+      state.authData = payload;
+      setFeatureFlags(payload.features);
+      state._inited = true;
+    });
     builder.addCase(initAuthData.rejected, (state) => {
       state._inited = true;
     });

@@ -4,28 +4,20 @@ import { Article } from '@/entities/Article';
 import { fetchArticleRecommendations } from '../services/fetchArticleRecommendations/fetchArticleRecommendations';
 import { ArticleDetailsRecommendationsSchema } from '../types/ArticleDetailsRecommendationsSchema';
 
-const recommendationsAdapter = createEntityAdapter<Article>({
-  selectId: (article) => article.id
+const recommendationsAdapter = createEntityAdapter({
+  selectId: (article: Article) => article.id
 });
 
-export const getArticleRecommendations =
-  recommendationsAdapter.getSelectors<StateSchema>(
-    (state) =>
-      state.articleDetailsPage?.recommendations ||
-      recommendationsAdapter.getInitialState()
-  );
+export const getArticleRecommendations = recommendationsAdapter.getSelectors<StateSchema>(
+  (state) => state.articleDetailsPage?.recommendations || recommendationsAdapter.getInitialState()
+);
 
 const articleDetailsPageRecommendationsSlice = createSlice({
   name: 'articleDetailsPageRecommendationsSlice',
-  initialState:
-    recommendationsAdapter.getInitialState<ArticleDetailsRecommendationsSchema>(
-      {
-        isLoading: false,
-        error: undefined,
-        ids: [],
-        entities: {}
-      }
-    ),
+  initialState: recommendationsAdapter.getInitialState({
+    isLoading: false,
+    error: undefined
+  }) as ArticleDetailsRecommendationsSchema,
   reducers: {},
   extraReducers: (builder) => {
     builder
