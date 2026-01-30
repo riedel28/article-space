@@ -67,6 +67,7 @@ const ArticleEditPage = memo((_props: ArticleEditPageProps) => {
           onClick={onBackToArticle}
           className={classes.backButton}
           mb="md"
+          data-testid="ArticleEditPage.BackLink"
         >
           {t('Назад к статье')}
         </Button>
