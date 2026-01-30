@@ -26,6 +26,9 @@
 .articleDetailsWrapper pre code {
   font-family: var(--mantine-font-family-monospace);
   font-size: var(--mantine-font-size-sm);
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 .articleDetailsWrapper figure {
