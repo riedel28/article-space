@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Article } from '@/entities/Article';
+import { Article, ArticleType } from '@/entities/Article';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 
 import { ArticleRecommendationsList } from './ArticleRecommendationsList';
@@ -19,8 +19,7 @@ const article: Article = {
   createdAt: '',
   views: 123,
   user: { id: '1', username: '123' },
-  blocks: [],
-  type: [],
+  type: [ArticleType.IT],
   title: '123',
   subtitle: 'asfsa'
 };

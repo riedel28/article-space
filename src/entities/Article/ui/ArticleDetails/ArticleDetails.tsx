@@ -19,7 +19,6 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
-import { ArticleBlockType } from '../../model/consts/articleConsts';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
@@ -48,47 +47,8 @@ const ArticleImage = ({ src }: { src?: string }) => (
   />
 );
 
-/**
- * Converts legacy blocks format to HTML string for backwards compatibility
- */
-function blocksToHtml(
-  blocks?: {
-    id: string;
-    type: string;
-    title?: string;
-    paragraphs?: string[];
-    code?: string;
-    src?: string;
-  }[]
-): string {
-  if (!blocks || blocks.length === 0) return '';
-
-  return blocks
-    .map((block) => {
-      switch (block.type) {
-        case ArticleBlockType.TEXT: {
-          const title = block.title ? `<h3>${block.title}</h3>` : '';
-          const paragraphs = (block.paragraphs || []).map((p) => `<p>${p}</p>`).join('');
-          return title + paragraphs;
-        }
-        case ArticleBlockType.CODE:
-          return `<pre><code>${block.code || ''}</code></pre>`;
-        case ArticleBlockType.IMAGE: {
-          const src = block.src || '';
-          const alt = block.title || '';
-          return `<figure><img src="${src}" alt="${alt}" /><figcaption>${alt}</figcaption></figure>`;
-        }
-        default:
-          return '';
-      }
-    })
-    .join('');
-}
-
 const ArticleContent = () => {
   const article = useSelector(getArticleDetailsData);
-
-  const htmlContent = article?.content || blocksToHtml(article?.blocks);
 
   return (
     <>
@@ -99,9 +59,9 @@ const ArticleContent = () => {
         {article?.subtitle}
       </Text>
       <ArticleImage src={article?.img} />
-      {htmlContent && (
+      {article?.content && (
         <TypographyStylesProvider>
-          <Box dangerouslySetInnerHTML={{ __html: htmlContent }} />
+          <Box dangerouslySetInnerHTML={{ __html: article.content }} />
         </TypographyStylesProvider>
       )}
     </>

@@ -1,4 +1,4 @@
-import { Button, Group, Select,Stack, Text, TextInput } from '@mantine/core';
+import { Button, Group, Select, Stack, Text, TextInput } from '@mantine/core';
 import { Link, RichTextEditor } from '@mantine/tiptap';
 import { IconCheck, IconChevronDown, IconDeviceFloppy } from '@tabler/icons-react';
 import { useEditor } from '@tiptap/react';
@@ -7,11 +7,11 @@ import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
+import { Article, ArticleType } from '@/entities/Article';
 import { getRouteArticleDetails } from '@/shared/const/router';
 
 import { useUpdateArticle } from '../../api/articleEditorApi';
-import { ArticleFormValues,useArticleForm } from '../../model/lib/useArticleForm';
+import { ArticleFormValues, useArticleForm } from '../../model/lib/useArticleForm';
 
 interface ArticleEditFormProps {
   article: Article;
@@ -23,48 +23,13 @@ const ARTICLE_TYPE_OPTIONS = [
   { value: ArticleType.ECONOMICS, label: 'Economics' }
 ];
 
-/**
- * Converts legacy blocks format to HTML string for backwards compatibility
- */
-function blocksToHtml(blocks?: Article['blocks']): string {
-  if (!blocks || blocks.length === 0) return '';
-
-  return blocks
-    .map((block) => {
-      switch (block.type) {
-        case ArticleBlockType.TEXT: {
-          const title = block.title ? `<h3>${block.title}</h3>` : '';
-          const paragraphs = block.paragraphs.map((p) => `<p>${p}</p>`).join('');
-          return title + paragraphs;
-        }
-        case ArticleBlockType.CODE:
-          return `<pre><code>${block.code}</code></pre>`;
-        case ArticleBlockType.IMAGE:
-          return `<figure><img src="${block.src}" alt="${block.title}" /><figcaption>${block.title}</figcaption></figure>`;
-        default:
-          return '';
-      }
-    })
-    .join('');
-}
-
-/**
- * Gets content from article - prefers `content` field, falls back to converting blocks
- */
-function getArticleContent(article: Article): string {
-  if (article.content) {
-    return article.content;
-  }
-  return blocksToHtml(article.blocks);
-}
-
 export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
   const { article } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [updateArticle, { isLoading: isUpdating }] = useUpdateArticle();
 
-  const initialContent = getArticleContent(article);
+  const initialContent = article.content || '';
 
   const initialType = Array.isArray(article.type) ? article.type[0] : article.type;
 

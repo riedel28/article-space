@@ -1,8 +1,4 @@
-export {
-  ArticleBlockType,
-  ArticleSortField,
-  ArticleType,
-  ArticleView} from './model/consts/articleConsts';
+export { ArticleSortField, ArticleType, ArticleView } from './model/consts/articleConsts';
 export {
   getArticleDetailsData,
   getArticleDetailsIsLoading

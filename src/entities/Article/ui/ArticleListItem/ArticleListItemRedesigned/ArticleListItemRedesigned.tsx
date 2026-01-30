@@ -7,32 +7,19 @@ import { IMAGE_FALLBACK_URL } from '@/shared/const/common';
 import { getRouteArticleDetails } from '@/shared/const/router';
 import { AppLink } from '@/shared/ui/redesigned/AppLink';
 
-import { ArticleBlockType, ArticleView } from '../../../model/consts/articleConsts';
-import { ArticleTextBlock } from '../../../model/types/article';
+import { ArticleView } from '../../../model/consts/articleConsts';
 import { ArticleListItemProps } from '../ArticleListItem';
 import classes from './ArticleListItemRedesigned.module.css';
 
 /**
- * Extracts plain text preview from article content or blocks
+ * Extracts plain text preview from article content
  */
 function getArticlePreview(article: ArticleListItemProps['article']): string {
-  // Try to get preview from content (HTML)
   if (article.content) {
     // Strip HTML tags and get first 200 characters
     const text = article.content.replace(/<[^>]*>/g, ' ').trim();
     return text.slice(0, 200);
   }
-
-  // Fallback to blocks for backwards compatibility
-  if (article.blocks) {
-    const textBlock = article.blocks.find((block) => block.type === ArticleBlockType.TEXT) as
-      | ArticleTextBlock
-      | undefined;
-    if (textBlock?.paragraphs) {
-      return textBlock.paragraphs.slice(0, 2).join(' ');
-    }
-  }
-
   return '';
 }
 

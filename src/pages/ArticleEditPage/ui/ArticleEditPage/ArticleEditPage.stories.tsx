@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Article, ArticleBlockType, ArticleType } from '@/entities/Article';
+import { Article, ArticleType } from '@/entities/Article';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
 
 import ArticleEditPage from './ArticleEditPage';
@@ -25,22 +25,10 @@ const article: Article = {
     id: '1',
     username: 'admin'
   },
-  blocks: [
-    {
-      id: '1',
-      type: ArticleBlockType.TEXT,
-      title: 'Заголовок этого блока',
-      paragraphs: [
-        'Программа, которую по традиции называют «Hello, world!», очень проста.',
-        'JavaScript — это язык, программы на котором можно выполнять в разных средах.'
-      ]
-    },
-    {
-      id: '2',
-      type: ArticleBlockType.CODE,
-      code: 'console.log("Hello, world!");'
-    }
-  ]
+  content: `<h3>Заголовок этого блока</h3>
+<p>Программа, которую по традиции называют «Hello, world!», очень проста.</p>
+<p>JavaScript — это язык, программы на котором можно выполнять в разных средах.</p>
+<pre><code>console.log("Hello, world!");</code></pre>`
 };
 
 export const Normal: Story = {

@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Article, ArticleBlockType,ArticleType } from '@/entities/Article';
+import { Article, ArticleType } from '@/entities/Article';
 import { useGetArticleForEdit } from '@/features/articleEditor';
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
 
@@ -19,14 +19,7 @@ const mockArticle: Article = {
     id: '1',
     username: 'admin'
   },
-  blocks: [
-    {
-      id: '1',
-      type: ArticleBlockType.TEXT,
-      title: 'Introduction',
-      paragraphs: ['This is the first paragraph.', 'This is the second paragraph.']
-    }
-  ]
+  content: '<h3>Introduction</h3><p>This is the first paragraph.</p><p>This is the second paragraph.</p>'
 };
 
 const mockNavigate = jest.fn();
