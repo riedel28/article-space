@@ -22,10 +22,18 @@ export default defineConfig({
       use: { ...devices['iPhone 12'] }
     }
   ],
-  webServer: {
-    command: 'npm run start:dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000
-  }
+  webServer: [
+    {
+      command: 'npm run start:dev:server',
+      url: 'http://localhost:8000',
+      reuseExistingServer: !process.env.CI,
+      timeout: 30000
+    },
+    {
+      command: 'npm start',
+      url: 'http://localhost:3000',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120000
+    }
+  ]
 });
