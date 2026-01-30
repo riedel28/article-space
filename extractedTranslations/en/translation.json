@@ -1,5 +1,10 @@
 {
   "An error occurred while loading the profile": "",
+  "An unexpected error occurred": {
+    " Please try refreshing the page or go back to the homepage": {
+      "": ""
+    }
+  },
   "Article ID is required": "",
   "Ascending": "",
   "Back to article": "",
@@ -19,6 +24,7 @@
       "": ""
     }
   },
+  "Go to homepage": "",
   "Hide Filters": "",
   "Image URL": "",
   "Make changes to your article": "",
@@ -27,6 +33,7 @@
   "Password": "",
   "Password is required": "",
   "Please try refreshing the page": "",
+  "Refresh page": "",
   "Save": "",
   "Save changes": "",
   "Search": "",
@@ -36,6 +43,7 @@
   "Select sort": "",
   "Select topics": "",
   "Show Filters": "",
+  "Something went wrong": "",
   "Sort by": "",
   "Subtitle": "",
   "Title": "",

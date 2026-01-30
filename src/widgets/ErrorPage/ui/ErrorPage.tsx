@@ -40,12 +40,10 @@ export const ErrorPage = ({ className }: ErrorPageProps) => {
 
           <Stack align="center" gap="xs">
             <Title order={1} ta="center">
-              {t('Что-то пошло не так')}
+              {t('Something went wrong')}
             </Title>
             <Text c="dimmed" size="lg" ta="center" maw={500}>
-              {t(
-                'Произошла непредвиденная ошибка. Попробуйте обновить страницу или вернуться на главную.'
-              )}
+              {t('An unexpected error occurred. Please try refreshing the page or go back to the homepage.')}
             </Text>
           </Stack>
 
@@ -55,13 +53,13 @@ export const ErrorPage = ({ className }: ErrorPageProps) => {
               leftSection={<IconHome size={18} />}
               onClick={goHome}
             >
-              {t('На главную')}
+              {t('Go to homepage')}
             </Button>
             <Button
               leftSection={<IconRefresh size={18} />}
               onClick={reloadPage}
             >
-              {t('Обновить страницу')}
+              {t('Refresh page')}
             </Button>
           </Group>
         </Stack>
