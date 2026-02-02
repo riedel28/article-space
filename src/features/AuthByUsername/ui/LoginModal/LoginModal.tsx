@@ -1,8 +1,22 @@
-import { Loader, Modal, Stack,Text, Title } from '@mantine/core';
+import { Modal, Skeleton, Stack, Text, Title } from '@mantine/core';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
+
+const LoginFormSkeleton = () => (
+  <Stack gap="lg">
+    <Stack gap={4}>
+      <Skeleton height={16} width={120} />
+      <Skeleton height={36} />
+    </Stack>
+    <Stack gap={4}>
+      <Skeleton height={16} width={60} />
+      <Skeleton height={36} />
+    </Stack>
+    <Skeleton height={36} mt="xs" />
+  </Stack>
+);
 
 interface LoginModalProps {
   className?: string;
@@ -30,7 +44,7 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
       }
       centered
     >
-      <Suspense fallback={<Loader type="dots" />}>
+      <Suspense fallback={<LoginFormSkeleton />}>
         <LoginFormAsync onSuccess={onClose} />
       </Suspense>
     </Modal>
