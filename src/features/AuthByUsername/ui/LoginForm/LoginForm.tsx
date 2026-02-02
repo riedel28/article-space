@@ -1,6 +1,7 @@
-import { Alert,Button, PasswordInput, Stack, TextInput } from '@mantine/core';
+import { Alert, Button, em, PasswordInput, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAlertCircle,IconLock, IconUser } from '@tabler/icons-react';
+import { useMediaQuery } from '@mantine/hooks';
+import { IconAlertCircle, IconLock, IconUser } from '@tabler/icons-react';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -37,6 +38,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const isLoading = useSelector(getLoginIsLoading);
   const error = useSelector(getLoginError);
   const forceUpdate = useForceUpdate();
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
   const form = useForm<LoginFormValues>({
     initialValues: {
@@ -86,6 +88,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
             label={t('Имя пользователя')}
             placeholder={t('Введите username')}
             leftSection={<IconUser size={16} />}
+            size={isMobile ? 'md' : 'sm'}
             {...form.getInputProps('username')}
           />
 
@@ -96,10 +99,11 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
             visibilityToggleButtonProps={{
               'aria-label': t('Переключить видимость пароля')
             }}
+            size={isMobile ? 'md' : 'sm'}
             {...form.getInputProps('password')}
           />
 
-          <Button type="submit" fullWidth loading={isLoading} mt="xs">
+          <Button type="submit" fullWidth loading={isLoading} mt="xs" size={isMobile ? 'md' : 'sm'}>
             {t('Войти')}
           </Button>
         </Stack>
