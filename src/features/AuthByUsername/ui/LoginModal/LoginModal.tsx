@@ -57,8 +57,7 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
         styles={{
           content: {
             borderTopLeftRadius: 'var(--mantine-radius-lg)',
-            borderTopRightRadius: 'var(--mantine-radius-lg)',
-            height: 'auto'
+            borderTopRightRadius: 'var(--mantine-radius-lg)'
           }
         }}
       >
