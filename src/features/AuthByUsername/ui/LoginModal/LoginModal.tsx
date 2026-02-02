@@ -54,7 +54,13 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
         onClose={onClose}
         title={title}
         position="bottom"
-        size="auto"
+        styles={{
+          content: {
+            borderTopLeftRadius: 'var(--mantine-radius-lg)',
+            borderTopRightRadius: 'var(--mantine-radius-lg)',
+            height: 'auto'
+          }
+        }}
       >
         {content}
       </Drawer>
@@ -62,13 +68,7 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
   }
 
   return (
-    <Modal
-      className={className}
-      opened={isOpen}
-      onClose={onClose}
-      title={title}
-      centered
-    >
+    <Modal className={className} opened={isOpen} onClose={onClose} title={title} centered>
       {content}
     </Modal>
   );
