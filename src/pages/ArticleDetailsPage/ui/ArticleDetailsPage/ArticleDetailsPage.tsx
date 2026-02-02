@@ -10,7 +10,7 @@ import {
   Stack,
   Text
 } from '@mantine/core';
-import { IconCalendar,IconEye } from '@tabler/icons-react';
+import { IconCalendar, IconEye } from '@tabler/icons-react';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -48,7 +48,7 @@ const ArticleDetailsPage = () => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Box className={classes.page}>
-        <Container size="lg">
+        <Container size="lg" px="xs">
           <ArticleDetailsPageHeader />
 
           <Box className={classes.heroImageWrapper} my="md">

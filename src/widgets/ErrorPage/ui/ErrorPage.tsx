@@ -1,5 +1,5 @@
-import { Box,Button, Container, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core';
-import { IconAlertTriangle, IconHome,IconRefresh } from '@tabler/icons-react';
+import { Box, Button, Container, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import { IconAlertTriangle, IconHome, IconRefresh } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ export const ErrorPage = () => {
 
   return (
     <Box className={cls.ErrorPage}>
-      <Container size="sm">
+      <Container size="sm" px="xs">
         <Stack align="center" gap="xl">
           <ThemeIcon size={80} radius="xl" variant="light" color="red">
             <IconAlertTriangle size={48} />
@@ -31,9 +31,7 @@ export const ErrorPage = () => {
               {t('Произошла непредвиденная ошибка')}
             </Title>
             <Text c="dimmed" size="lg" ta="center" maw={500}>
-              {t(
-                'Произошла ошибка. Попробуйте обновить страницу или вернуться на главную.'
-              )}
+              {t('Произошла ошибка. Попробуйте обновить страницу или вернуться на главную.')}
             </Text>
           </Stack>
 

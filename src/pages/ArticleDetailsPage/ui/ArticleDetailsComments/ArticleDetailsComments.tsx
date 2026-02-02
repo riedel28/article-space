@@ -1,5 +1,5 @@
-import { Box,Group, Loader, Stack, Text, Title } from '@mantine/core';
-import { memo, Suspense,useCallback } from 'react';
+import { Box, Group, Skeleton, Stack, Text, Title } from '@mantine/core';
+import { memo, Suspense, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -13,6 +13,18 @@ import { addCommentForArticle } from '../../model/services/addCommentForArticle/
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { getArticleComments } from '../../model/slices/articleDetailsCommentsSlice';
 import classes from './ArticleDetailsComments.module.css';
+
+const AddCommentFormSkeleton = () => (
+  <Group gap="md" wrap="nowrap" align="flex-start">
+    <Skeleton height={38} circle />
+    <Stack gap="sm" flex={1}>
+      <Skeleton height={100} radius="lg" />
+      <Group justify="flex-end">
+        <Skeleton height={36} width={120} radius="md" />
+      </Group>
+    </Stack>
+  </Group>
+);
 
 interface ArticleDetailsCommentsProps {
   className?: string;
@@ -49,7 +61,7 @@ export const ArticleDetailsComments = memo((props: ArticleDetailsCommentsProps) 
           </Text>
         </Group>
 
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<AddCommentFormSkeleton />}>
           <AddCommentForm onSendComment={onSendComment} />
         </Suspense>
 
