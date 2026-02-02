@@ -85,7 +85,7 @@ hiddenFrom="xs">
               size="md"
               fullWidth
               maw={280}
-              variant="light"
+              variant="outline"
               component="a"
               href="https://github.com"
               target="_blank"
@@ -103,7 +103,7 @@ hiddenFrom="xs">
             </Button>
             <Button
               size="lg"
-              variant="light"
+              variant="outline"
               component="a"
               href="https://github.com/riedel28/production-project"
               target="_blank"

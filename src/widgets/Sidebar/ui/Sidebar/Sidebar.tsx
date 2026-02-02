@@ -1,5 +1,6 @@
 import { AppShell, Box, CloseButton, Group, Stack } from '@mantine/core';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { LangSwitcher } from '@/features/LangSwitcher';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
@@ -14,6 +15,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = memo(({ onClose }: SidebarProps) => {
+  const { t } = useTranslation();
   const sidebarItemsList = useSidebarItems();
 
   return (
@@ -28,7 +30,7 @@ export const Sidebar = memo(({ onClose }: SidebarProps) => {
           <Box>
             <AppLogo size={30} />
           </Box>
-          <CloseButton onClick={onClose} />
+          <CloseButton onClick={onClose} aria-label={t('Close menu')} />
         </Group>
       </AppShell.Section>
 

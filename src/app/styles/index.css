@@ -3,6 +3,11 @@
 @import url('themes/normal');
 @import url('themes/dark');
 
+/* Override Mantine's dimmed color for better contrast (WCAG AA compliant) */
+:root {
+  --mantine-color-dimmed: var(--mantine-color-gray-8);
+}
+
 .content-page {
   display: flex;
 }

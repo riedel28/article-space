@@ -17,6 +17,7 @@
     "build:dev": "vite build --mode development",
     "build:webpack": "webpack --env mode=production",
     "build:webpack:dev": "webpack --env mode=development",
+    "preview": "vite preview",
     "prettier": "npx prettier --write \"**/*.{ts,tsx,json,css,md,html}\"",
     "lint:ts": "eslint \"./src/**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
