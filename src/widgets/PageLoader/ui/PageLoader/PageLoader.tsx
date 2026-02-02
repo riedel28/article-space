@@ -1,4 +1,4 @@
-import { Card,Container, Group, Skeleton, Stack } from '@mantine/core';
+import { Card, Container, Group, Skeleton, Stack } from '@mantine/core';
 
 import { classNames } from '@/shared/lib/classNames/classNames';
 
@@ -10,7 +10,7 @@ interface PageLoaderProps {
 
 export const PageLoader = ({ className }: PageLoaderProps) => (
   <div className={classNames(cls.PageLoader, {}, [className])}>
-    <Container size="md" py="xl" w="100%">
+    <Container size="md" py="xl" w="100%" px="xs">
       <Stack gap="lg">
         <Group justify="space-between">
           <Skeleton height={32} width={200} radius="md" />

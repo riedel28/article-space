@@ -1,5 +1,5 @@
-import { Alert, Button, Card, Container, Skeleton, Stack,Text, Title } from '@mantine/core';
-import { IconAlertCircle,IconArrowLeft } from '@tabler/icons-react';
+import { Alert, Button, Card, Container, Skeleton, Stack, Text, Title } from '@mantine/core';
+import { IconAlertCircle, IconArrowLeft } from '@tabler/icons-react';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -32,7 +32,7 @@ const ArticleEditPage = memo(() => {
   if (!id) {
     return (
       <Page>
-        <Container size="md">
+        <Container size="md" px="xs">
           <Alert icon={<IconAlertCircle size={16} />} title={t('Ошибка')} color="red">
             {t('Требуется ID статьи')}
           </Alert>

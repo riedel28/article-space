@@ -9,13 +9,15 @@ import {
   Stack,
   Text,
   ThemeIcon,
-  Title} from '@mantine/core';
+  Title
+} from '@mantine/core';
 import {
   IconArrowRight,
   IconArticle,
   IconLanguage,
   IconStar,
-  IconUsers} from '@tabler/icons-react';
+  IconUsers
+} from '@tabler/icons-react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -60,18 +62,16 @@ const MainPage = () => {
 
   return (
     <Page data-testid="MainPage">
-      <Container size="lg" py={{ base: 'md', sm: 'xl' }} px={{ base: 'sm', sm: 'md' }}>
+      <Container size="lg" py={{ base: 'md', sm: 'xl' }} px={{ base: 'xs', sm: 'md' }}>
         {/* Hero Section */}
         <Stack align="center" gap="md" mb="xl">
           <Title order={1} ta="center" style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}>
             {t('hero.title')}
           </Title>
-          <Text size="lg" c="dimmed" ta="center" maw={600}
-px="xs">
+          <Text size="lg" c="dimmed" ta="center" maw={600} px="xs">
             {t('hero.subtitle')}
           </Text>
-          <Stack gap="sm" align="center" w="100%" mb="xl"
-hiddenFrom="xs">
+          <Stack gap="sm" align="center" w="100%" mb="xl" hiddenFrom="xs">
             <Button
               size="md"
               fullWidth
@@ -121,8 +121,7 @@ hiddenFrom="xs">
           <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
             {features.map((feature) => (
               <Card key={feature.titleKey} padding="md" radius="md" withBorder>
-                <ThemeIcon size={44} radius="md" variant="light" color="brand"
-mb="md">
+                <ThemeIcon size={44} radius="md" variant="light" color="brand" mb="md">
                   <feature.icon size={24} />
                 </ThemeIcon>
                 <Text fw={500} size="md" mb="xs">

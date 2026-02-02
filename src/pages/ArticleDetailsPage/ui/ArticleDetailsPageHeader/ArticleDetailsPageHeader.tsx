@@ -37,6 +37,7 @@ export const ArticleDetailsPageHeader = memo((props: ArticleDetailsPageHeaderPro
       <Button
         variant="transparent"
         size="sm"
+        px={0}
         leftSection={<IconArrowLeft size={16} />}
         onClick={onBackToList}
         className={classes.backButton}

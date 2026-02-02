@@ -25,7 +25,7 @@ export const NotFoundPage = ({ className }: NotFoundPageProps) => {
 
   return (
     <Box data-testid="NotFoundPage" className={`${cls.NotFoundPage} ${className ?? ''}`}>
-      <Container size="sm">
+      <Container size="sm" px="xs">
         <Stack align="center" gap="xl">
           <ThemeIcon radius="xl" size="xl" variant="light">
             <IconSearch size={24} className={cls.icon} />
