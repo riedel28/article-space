@@ -137,7 +137,8 @@ module.exports = {
 	},
 	globals: {
 		__IS_DEV__: true,
-		__API__: true,
+		__SUPABASE_URL__: true,
+		__SUPABASE_ANON_KEY__: true,
 		__PROJECT__: true,
 	},
 	overrides: [

@@ -9,7 +9,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { BuildOptions } from './types/config';
 
 export function buildPlugins({
-    paths, isDev, apiUrl, project,
+    paths, isDev, supabaseUrl, supabaseAnonKey, project,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
     const isProd = !isDev;
 
@@ -20,7 +20,8 @@ export function buildPlugins({
         new webpack.ProgressPlugin(),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev),
-            __API__: JSON.stringify(apiUrl),
+            __SUPABASE_URL__: JSON.stringify(supabaseUrl),
+            __SUPABASE_ANON_KEY__: JSON.stringify(supabaseAnonKey),
             __PROJECT__: JSON.stringify(project),
         }),
         new CircularDependencyPlugin({

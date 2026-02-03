@@ -8,7 +8,8 @@ import path from 'path';
 export default {
   globals: {
     __IS_DEV__: true,
-    __API__: '',
+    __SUPABASE_URL__: 'https://test.supabase.co',
+    __SUPABASE_ANON_KEY__: 'test-anon-key',
     __PROJECT__: 'jest'
   },
   clearMocks: true,
