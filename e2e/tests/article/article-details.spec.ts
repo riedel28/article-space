@@ -1,7 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { expect,test } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { login, createArticle, removeArticle, addComment, setRate } from '../../helpers/test-utils';
+
+import { addComment, createArticle, login, removeArticle, setRate } from '../../helpers/test-utils';
 
 let currentArticleId = '';
 
@@ -47,8 +48,8 @@ test.describe('User visits article details page', () => {
   });
 
   test('And leaves a rating (with fixture stub)', async ({ page }) => {
-    // Set up route interception for API requests only (port 8000)
-    await page.route('**/localhost:8000/articles/*', async (route) => {
+    // Set up route interception for Supabase REST API article requests
+    await page.route('**/rest/v1/articles?*', async (route) => {
       // Only intercept GET requests for article details API
       if (route.request().method() === 'GET') {
         const fixturePath = path.join(__dirname, '../../fixtures/article-details.json');

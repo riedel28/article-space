@@ -95,15 +95,6 @@ module.exports = {
 				],
 			},
 		],
-
-		// Code style
-		"max-len": [
-			"error",
-			{
-				ignoreComments: true,
-				code: 125,
-			},
-		],
 		"no-param-reassign": "off",
 		"no-undef": "off",
 		"arrow-body-style": "off",

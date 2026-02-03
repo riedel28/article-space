@@ -10,8 +10,8 @@
  *   3. Get the service role key from Settings > API
  */
 
-import { config } from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { config } from 'dotenv';
 import * as path from 'path';
 
 config({ path: path.resolve(__dirname, '..', '.env') });
@@ -74,7 +74,7 @@ const users = [
   }
 ];
 
-const profiles: Record<string, any> = {
+const profiles: Record<string, Record<string, unknown>> = {
   '1': {
     first: 'John',
     lastname: 'Doe',

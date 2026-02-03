@@ -1,8 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import type { Configuration, RuleSetRule } from 'webpack';
-import webpack from 'webpack';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import type { Configuration, RuleSetRule } from 'webpack';
+import webpack from 'webpack';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
