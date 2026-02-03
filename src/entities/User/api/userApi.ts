@@ -1,4 +1,6 @@
+import { mapProfileToUser } from '@/shared/api/mappers';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { supabase } from '@/shared/api/supabase';
 
 import { JsonSettings } from '../model/types/jsonSettings';
 import { User } from '../model/types/user';
@@ -11,19 +13,35 @@ interface SetJsonSettingsArg {
 const userApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     setJsonSettings: build.mutation<User, SetJsonSettingsArg>({
-      query: ({ userId, jsonSettings }) => ({
-        url: `/users/${userId}`,
-        method: 'PATCH',
-        body: {
-          jsonSettings
+      queryFn: async ({ userId, jsonSettings }) => {
+        const { data, error } = await supabase
+          .from('profiles')
+          .update({ json_settings: jsonSettings })
+          .eq('id', userId)
+          .select('*')
+          .single();
+
+        if (error || !data) {
+          return { error: { status: 'CUSTOM_ERROR', error: error?.message ?? 'Unknown error' } };
         }
-      })
+
+        return { data: mapProfileToUser(data) };
+      }
     }),
     getUserDataById: build.query<User, string>({
-      query: (userId) => ({
-        url: `/users/${userId}`,
-        method: 'GET'
-      })
+      queryFn: async (userId) => {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
+
+        if (error || !data) {
+          return { error: { status: 'CUSTOM_ERROR', error: error?.message ?? 'Unknown error' } };
+        }
+
+        return { data: mapProfileToUser(data) };
+      }
     })
   })
 });

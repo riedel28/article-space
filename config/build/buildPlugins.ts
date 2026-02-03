@@ -1,15 +1,16 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
 import { BuildOptions } from './types/config';
 
 export function buildPlugins({
-    paths, isDev, apiUrl, project,
+    paths, isDev, supabaseUrl, supabaseAnonKey, project,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
     const isProd = !isDev;
 
@@ -20,7 +21,8 @@ export function buildPlugins({
         new webpack.ProgressPlugin(),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev),
-            __API__: JSON.stringify(apiUrl),
+            __SUPABASE_URL__: JSON.stringify(supabaseUrl),
+            __SUPABASE_ANON_KEY__: JSON.stringify(supabaseAnonKey),
             __PROJECT__: JSON.stringify(project),
         }),
         new CircularDependencyPlugin({

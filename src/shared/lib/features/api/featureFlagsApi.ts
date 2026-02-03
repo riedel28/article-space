@@ -1,4 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
+import { supabase } from '@/shared/api/supabase';
 import { FeatureFlags } from '@/shared/types/featureFlags';
 
 interface UpdateFeatureFlagsOptions {
@@ -9,13 +10,18 @@ interface UpdateFeatureFlagsOptions {
 const featureFlagsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     updateFeatureFlags: build.mutation<void, UpdateFeatureFlagsOptions>({
-      query: ({ userId, features }) => ({
-        url: `/users/${userId}`,
-        method: 'PATCH',
-        body: {
-          features
+      queryFn: async ({ userId, features }) => {
+        const { error } = await supabase
+          .from('profiles')
+          .update({ features })
+          .eq('id', userId);
+
+        if (error) {
+          return { error: { status: 'CUSTOM_ERROR', error: error.message } };
         }
-      })
+
+        return { data: undefined };
+      }
     })
   })
 });

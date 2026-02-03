@@ -23,20 +23,7 @@ export const Normal: Story = {
       }
     })
   ],
-  parameters: {
-    mockData: [
-      {
-        url: `${__API__}/article-ratings?userId=1&articleId=1`,
-        method: 'GET',
-        status: 200,
-        response: [
-          {
-            rate: 4
-          }
-        ]
-      }
-    ]
-  }
+  parameters: {}
 };
 
 export const WithoutRate: Story = {
@@ -50,14 +37,5 @@ export const WithoutRate: Story = {
       }
     })
   ],
-  parameters: {
-    mockData: [
-      {
-        url: `${__API__}/article-ratings?userId=1&articleId=1`,
-        method: 'GET',
-        status: 200,
-        response: []
-      }
-    ]
-  }
+  parameters: {}
 };

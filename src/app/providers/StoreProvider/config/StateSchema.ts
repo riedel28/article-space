@@ -1,5 +1,5 @@
 import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { CounterSchema } from '@/entities/Counter';
@@ -18,7 +18,7 @@ export interface StateSchema {
   ui: UISchema;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
-  // Асинхронные редюсеры
+  // Async reducers
   loginForm?: LoginSchema;
   profile?: ProfileSchema;
   articleDetails?: ArticleDetailsSchema;
@@ -35,7 +35,6 @@ export interface ReducerManager {
   reduce: (state: StateSchema | undefined, action: UnknownAction) => StateSchema;
   add: (key: StateSchemaKey, reducer: Reducer) => void;
   remove: (key: StateSchemaKey) => void;
-  // true - вмонтирован, false - демонтирован
   getMountedReducers: () => MountedReducers;
 }
 
@@ -44,7 +43,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
 }
 
 export interface ThunkExtraArg {
-  api: AxiosInstance;
+  supabase: SupabaseClient;
 }
 
 export interface ThunkConfig<T> {

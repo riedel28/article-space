@@ -12,7 +12,8 @@ export interface BuildPaths {
 export interface BuildEnv {
     mode?: BuildMode;
     port?: number | string;
-    apiUrl?: string;
+    supabaseUrl?: string;
+    supabaseAnonKey?: string;
 }
 
 export interface BuildOptions {
@@ -20,6 +21,7 @@ export interface BuildOptions {
     paths: BuildPaths;
     isDev: boolean;
     port: number;
-    apiUrl: string;
+    supabaseUrl: string;
+    supabaseAnonKey: string;
     project: 'storybook' | 'frontend' | 'jest';
 }

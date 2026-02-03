@@ -1,10 +1,6 @@
-import axios, { AxiosStatic } from 'axios';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 import { StateSchema } from '@/app/providers/StoreProvider';
-
-jest.mock('axios');
-
-const mockedAxios = jest.mocked(axios);
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 export class TestAsyncThunk<Return, Arg, RejectedValue> {
@@ -14,7 +10,7 @@ export class TestAsyncThunk<Return, Arg, RejectedValue> {
 
   actionCreator: any;
 
-  api: jest.MockedFunctionDeep<AxiosStatic>;
+  supabase: jest.Mocked<SupabaseClient>;
 
   navigate: jest.MockedFn<any>;
 
@@ -23,14 +19,22 @@ export class TestAsyncThunk<Return, Arg, RejectedValue> {
     this.dispatch = jest.fn();
     this.getState = jest.fn(() => state as StateSchema);
 
-    this.api = mockedAxios;
+    this.supabase = {
+      from: jest.fn(),
+      auth: {
+        getSession: jest.fn(),
+        signInWithPassword: jest.fn(),
+        signOut: jest.fn(),
+        getUser: jest.fn()
+      }
+    } as any;
     this.navigate = jest.fn();
   }
 
   async callThunk(arg?: Arg) {
     const action = this.actionCreator(arg);
     const result = await action(this.dispatch, this.getState, {
-      api: this.api
+      supabase: this.supabase
     });
 
     return result;

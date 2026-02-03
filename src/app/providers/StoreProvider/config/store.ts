@@ -3,8 +3,8 @@ import { configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { counterReducer } from '@/entities/Counter';
 import { userReducer } from '@/entities/User';
 import { uiReducer } from '@/features/UI';
-import { $api } from '@/shared/api/api';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { supabase } from '@/shared/api/supabase';
 
 import { createReducerManager } from './reducerManager';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
@@ -24,7 +24,7 @@ export function createReduxStore(
   const reducerManager = createReducerManager(rootReducers);
 
   const extraArg: ThunkExtraArg = {
-    api: $api
+    supabase
   };
 
   const store = configureStore({
@@ -35,6 +35,9 @@ export function createReduxStore(
       getDefaultMiddleware({
         thunk: {
           extraArgument: extraArg
+        },
+        serializableCheck: {
+          ignoredActions: ['__rtkq/focused', '__rtkq/unfocused'],
         }
       }).concat(rtkApi.middleware)
   });

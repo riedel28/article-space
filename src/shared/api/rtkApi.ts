@@ -1,19 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const rtkApi = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: __API__,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
-      if (token) {
-        headers.set('Authorization', token);
-      }
-      return headers;
-    }
-  }),
+  baseQuery: fakeBaseQuery(),
+  tagTypes: ['ArticleForEdit', 'ArticleRating'],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endpoints: (_builder) => ({})
 });

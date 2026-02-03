@@ -4,6 +4,7 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { getArticleDetailsData } from '@/entities/Article';
 import { Comment } from '@/entities/Comment';
 import { getUserAuthData } from '@/entities/User';
+import { mapComment } from '@/shared/api/mappers';
 
 import { fetchCommentsByArticleId } from '../../services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 
@@ -20,19 +21,23 @@ export const addCommentForArticle = createAsyncThunk<Comment, string, ThunkConfi
     }
 
     try {
-      const response = await extra.api.post<Comment>('/comments', {
-        articleId: article.id,
-        userId: userData.id,
-        text
-      });
+      const { data, error } = await extra.supabase
+        .from('comments')
+        .insert({
+          article_id: article.id,
+          user_id: userData.id,
+          text
+        })
+        .select('*, user:profiles!user_id(id, username, avatar)')
+        .single();
 
-      if (!response.data) {
+      if (error || !data) {
         throw new Error();
       }
 
       dispatch(fetchCommentsByArticleId(article.id));
 
-      return response.data;
+      return mapComment(data);
     } catch {
       return rejectWithValue('error');
     }

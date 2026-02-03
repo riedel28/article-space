@@ -95,15 +95,6 @@ module.exports = {
 				],
 			},
 		],
-
-		// Code style
-		"max-len": [
-			"error",
-			{
-				ignoreComments: true,
-				code: 125,
-			},
-		],
 		"no-param-reassign": "off",
 		"no-undef": "off",
 		"arrow-body-style": "off",
@@ -137,7 +128,8 @@ module.exports = {
 	},
 	globals: {
 		__IS_DEV__: true,
-		__API__: true,
+		__SUPABASE_URL__: true,
+		__SUPABASE_ANON_KEY__: true,
 		__PROJECT__: true,
 	},
 	overrides: [

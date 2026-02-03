@@ -1,4 +1,4 @@
-import { Box,ScrollArea, Skeleton, Stack, Text } from '@mantine/core';
+import { Box, ScrollArea, Skeleton, Stack, Text } from '@mantine/core';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -34,12 +34,16 @@ export const NotificationList = memo((props: NotificationListProps) => {
           <Skeleton width="100%" radius="md" height={80} />
           <Skeleton width="100%" radius="md" height={80} />
         </Stack>
-      ) : (
+      ) : data && data.length > 0 ? (
         <ScrollArea.Autosize mah={350} p={fullWidth ? 0 : 4} type="auto" offsetScrollbars>
           {data?.map((item) => (
             <NotificationItem key={item.id} item={item} />
           ))}
         </ScrollArea.Autosize>
+      ) : (
+        <Text ta="center" c="dimmed" fz="sm" my="md" mx="auto">
+          {t('Уведомления отсутствуют')}
+        </Text>
       )}
     </Box>
   );

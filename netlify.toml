@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Allow Supabase publishable keys in build output - these are intentionally public client-side keys
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,SUPABASE_URL,SUPABASE_PUBLISHABLE_DEFAULT_KEY"
 
 [[redirects]]
   from = "/*"

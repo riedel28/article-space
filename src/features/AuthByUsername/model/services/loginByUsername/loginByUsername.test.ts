@@ -1,69 +1,58 @@
-import { userActions } from '@/entities/User';
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 
 import { loginByUsername } from './loginByUsername';
 
 describe('loginByUsername.test', () => {
-  // let dispatch: Dispatch;
-  // let getState: () => StateSchema;
-  //
-  // beforeEach(() => {
-  //     dispatch = jest.fn();
-  //     getState = jest.fn();
-  // });
-
-  // test('success login', async () => {
-  //     const userValue = { username: '123', id: '1' };
-  //     mockedAxios.post.mockReturnValue(Promise.resolve({ data: userValue }));
-  //     const action = loginByUsername({ username: '123', password: '123' });
-  //     const result = await action(dispatch, getState, undefined);
-  //
-  //     expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
-  //     expect(dispatch).toHaveBeenCalledTimes(3);
-  //     expect(mockedAxios.post).toHaveBeenCalled();
-  //     expect(result.meta.requestStatus).toBe('fulfilled');
-  //     expect(result.payload).toEqual(userValue);
-  // });
-  //
-  // test('error login', async () => {
-  //     mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }));
-  //     const action = loginByUsername({ username: '123', password: '123' });
-  //     const result = await action(dispatch, getState, undefined);
-  //
-  //     expect(dispatch).toHaveBeenCalledTimes(2);
-  //     expect(mockedAxios.post).toHaveBeenCalled();
-  //     expect(result.meta.requestStatus).toBe('rejected');
-  //     expect(result.payload).toBe('error');
-  // });
-
   test('success login', async () => {
-    const userValue = { username: '123', id: '1' };
-
     const thunk = new TestAsyncThunk(loginByUsername);
-    thunk.api.post.mockReturnValue(Promise.resolve({ data: userValue }));
+
+    const mockSelect = jest.fn().mockReturnValue({
+      eq: jest.fn().mockReturnValue({
+        single: jest.fn().mockResolvedValue({
+          data: {
+            id: 'uuid-1',
+            username: 'admin',
+            avatar: null,
+            roles: ['ADMIN'],
+            features: {},
+            json_settings: {}
+          },
+          error: null
+        })
+      })
+    });
+
+    (thunk.supabase.from as jest.Mock).mockReturnValue({ select: mockSelect });
+    (thunk.supabase.auth.signInWithPassword as jest.Mock).mockResolvedValue({
+      error: null
+    });
+    (thunk.supabase.auth.getUser as jest.Mock).mockResolvedValue({
+      data: { user: { id: 'uuid-1' } }
+    });
+
     const result = await thunk.callThunk({
-      username: '123',
+      username: 'admin',
       password: '123'
     });
 
-    expect(thunk.dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
-    expect(thunk.api.post).toHaveBeenCalled();
+    expect(thunk.supabase.auth.signInWithPassword).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
-    expect(result.payload).toEqual(userValue);
+    expect(result.payload).toEqual(
+      expect.objectContaining({ id: 'uuid-1', username: 'admin' })
+    );
   });
 
   test('error login', async () => {
     const thunk = new TestAsyncThunk(loginByUsername);
-    thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }));
-    const result = await thunk.callThunk({
-      username: '123',
-      password: '123'
+    (thunk.supabase.auth.signInWithPassword as jest.Mock).mockResolvedValue({
+      error: { message: 'Invalid credentials' }
     });
 
-    expect(thunk.dispatch).toHaveBeenCalledTimes(2);
-    expect(thunk.api.post).toHaveBeenCalled();
+    const result = await thunk.callThunk({
+      username: 'admin',
+      password: 'wrong'
+    });
+
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(result.payload).toBe('error');
   });
 });

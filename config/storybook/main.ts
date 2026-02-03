@@ -1,8 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import type { Configuration, RuleSetRule } from 'webpack';
-import webpack from 'webpack';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import type { Configuration, RuleSetRule } from 'webpack';
+import webpack from 'webpack';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -66,7 +66,8 @@ const config: StorybookConfig = {
     config.plugins.push(
       new webpack.DefinePlugin({
         __IS_DEV__: JSON.stringify(true),
-        __API__: JSON.stringify('https://testapi.ru'),
+        __SUPABASE_URL__: JSON.stringify('https://test.supabase.co'),
+        __SUPABASE_ANON_KEY__: JSON.stringify('test-anon-key'),
         __PROJECT__: JSON.stringify('storybook')
       })
     );
