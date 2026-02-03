@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { User, userActions } from '@/entities/User';
+import { User } from '@/entities/User';
+import { mapProfileToUser } from '@/shared/api/mappers';
 
 interface LoginByUsernameProps {
   username: string;
@@ -12,16 +13,39 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
   'login/loginByUsername',
   async (authData, thunkApi) => {
     const { extra, dispatch, rejectWithValue } = thunkApi;
+    const { userActions } = await import('@/entities/User');
 
     try {
-      const response = await extra.api.post<User>('/login', authData);
+      const { error: authError } = await extra.supabase.auth.signInWithPassword({
+        email: `${authData.username}@article-space.local`,
+        password: authData.password
+      });
 
-      if (!response.data) {
-        throw new Error();
+      if (authError) {
+        return rejectWithValue(authError.message);
       }
 
-      dispatch(userActions.setAuthData(response.data));
-      return response.data;
+      const {
+        data: { user: authUser }
+      } = await extra.supabase.auth.getUser();
+
+      if (!authUser) {
+        return rejectWithValue('error');
+      }
+
+      const { data: profile, error: profileError } = await extra.supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', authUser.id)
+        .single();
+
+      if (profileError || !profile) {
+        return rejectWithValue('error');
+      }
+
+      const user = mapProfileToUser(profile);
+      dispatch(userActions.setAuthData(user));
+      return user;
     } catch {
       return rejectWithValue('error');
     }

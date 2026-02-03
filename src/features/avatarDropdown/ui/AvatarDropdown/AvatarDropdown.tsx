@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { getUserAuthData, userActions } from '@/entities/User';
+import { supabase } from '@/shared/api/supabase';
 import { getRouteProfile } from '@/shared/const/router';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 
@@ -16,7 +17,8 @@ export const AvatarDropdown = memo(() => {
 
   const authData = useSelector(getUserAuthData);
 
-  const onLogout = useCallback(() => {
+  const onLogout = useCallback(async () => {
+    await supabase.auth.signOut();
     dispatch(userActions.logout());
   }, [dispatch]);
 

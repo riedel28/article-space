@@ -1,26 +1,35 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { mapProfileToUser } from '@/shared/api/mappers';
 
-import { getUserDataByIdQuery } from '../../api/userApi';
 import { User } from '../types/user';
 
 export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
   'user/initAuthData',
-  async (newJsonSettings, thunkApi) => {
-    const { rejectWithValue, dispatch } = thunkApi;
-
-    const userId = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-
-    if (!userId) {
-      return rejectWithValue('');
-    }
+  async (_, thunkApi) => {
+    const { extra, rejectWithValue } = thunkApi;
 
     try {
-      const response = await dispatch(getUserDataByIdQuery(userId)).unwrap();
+      const {
+        data: { session }
+      } = await extra.supabase.auth.getSession();
 
-      return response;
+      if (!session) {
+        return rejectWithValue('');
+      }
+
+      const { data: profile, error } = await extra.supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+
+      if (error || !profile) {
+        return rejectWithValue('');
+      }
+
+      return mapProfileToUser(profile);
     } catch {
       return rejectWithValue('');
     }
