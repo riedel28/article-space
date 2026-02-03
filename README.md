@@ -4,6 +4,8 @@ A modern, production-ready blogging platform built with React and TypeScript. Ar
 
 ![ArticleSpace Screenshot](./docs/screenshot.png)
 
+**Live Demo:** [https://sprightly-speculoos-995581.netlify.app/](https://sprightly-speculoos-995581.netlify.app/)
+
 ---
 
 ## Features
@@ -24,6 +26,7 @@ A modern, production-ready blogging platform built with React and TypeScript. Ar
 | Category | Technologies |
 |----------|-------------|
 | **Frontend** | React 18, TypeScript, Mantine v8 |
+| **Backend** | Supabase (PostgreSQL, Auth, REST API) |
 | **State Management** | Redux Toolkit, RTK Query |
 | **Routing** | React Router v6 |
 | **Rich Text Editor** | Tiptap |
@@ -55,14 +58,27 @@ A modern, production-ready blogging platform built with React and TypeScript. Ar
    npm install
    ```
 
-3. **Start the development server**
+3. **Configure Supabase**
+
+   Copy `.env.example` to `.env` and fill in your Supabase credentials:
    ```bash
-   npm run start:dev
+   cp .env.example .env
    ```
 
-   This starts both the frontend (Vite on port 3000) and the backend API server (port 8000).
+   Required variables:
+   ```
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your-publishable-key
+   ```
 
-4. **Open your browser**
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+   This starts the frontend on port 3000. The backend is powered by Supabase (hosted).
+
+5. **Open your browser**
 
    Navigate to [http://localhost:3000](http://localhost:3000)
 
@@ -85,9 +101,9 @@ All demo accounts use the password: `123`
 
 | Command | Description |
 |---------|-------------|
-| `npm run start:dev` | Start frontend (Vite) + backend server |
-| `npm run start:dev:webpack` | Start frontend (Webpack) + backend server |
-| `npm start` | Start frontend only (Vite) |
+| `npm start` | Start frontend (Vite) |
+| `npm run start:dev` | Start frontend (Vite) in dev mode |
+| `npm run start:dev:webpack` | Start frontend (Webpack) in dev mode |
 
 ### Build
 
@@ -196,8 +212,9 @@ app → pages → widgets → features → entities → shared
 | Port | Service |
 |------|---------|
 | 3000 | Frontend dev server |
-| 8000 | Backend API server |
 | 6006 | Storybook |
+
+The backend is powered by [Supabase](https://supabase.com/) (hosted PostgreSQL with Auth, REST API, and Row Level Security).
 
 ---
 
