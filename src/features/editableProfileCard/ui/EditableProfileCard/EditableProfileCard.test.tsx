@@ -2,8 +2,41 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Profile } from '@/entities/Profile';
-import { $api } from '@/shared/api/api';
+import { supabase } from '@/shared/api/supabase';
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
+
+jest.mock('@/shared/api/supabase', () => ({
+  supabase: {
+    from: jest.fn(() => ({
+      update: jest.fn(() => ({
+        eq: jest.fn(() => ({
+          select: jest.fn(() => ({
+            single: jest.fn(() =>
+              Promise.resolve({
+                data: {
+                  id: '1',
+                  username: 'admin213',
+                  avatar: 'https://example.com/avatar.jpg',
+                  first_name: 'adminuser',
+                  last_name: 'admin',
+                  roles: ['USER'],
+                  features: {},
+                  json_settings: {}
+                },
+                error: null
+              })
+            )
+          }))
+        }))
+      }))
+    })),
+    auth: {
+      getSession: jest.fn(() =>
+        Promise.resolve({ data: { session: { user: { id: '1' } } }, error: null })
+      )
+    }
+  }
+}));
 
 import { profileReducer } from '../../model/slice/profileSlice';
 import { EditableProfileCard } from './EditableProfileCard';
@@ -81,8 +114,8 @@ describe('features/EditableProfileCard', () => {
     });
   });
 
-  test('If no validation errors, PUT request should be sent', async () => {
-    const mockPutReq = jest.spyOn($api, 'put');
+  test('If no validation errors, update request should be sent', async () => {
+    const mockFrom = supabase.from as jest.Mock;
     componentRender(<EditableProfileCard id="1" />, options);
     await userEvent.click(screen.getByTestId('ProfileCard.EditButton'));
 
@@ -90,6 +123,6 @@ describe('features/EditableProfileCard', () => {
 
     await userEvent.click(screen.getByTestId('ProfileCard.SaveButton'));
 
-    expect(mockPutReq).toHaveBeenCalled();
+    expect(mockFrom).toHaveBeenCalledWith('profiles');
   });
 });
