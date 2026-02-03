@@ -24,8 +24,9 @@ function getArticlePreview(article: ArticleListItemProps['article']): string {
 }
 
 export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
-  const { className, article, view, target } = props;
+  const { className, article, view, target, index = 0 } = props;
   const { t } = useTranslation();
+  const isFirstImage = index === 0;
 
   if (view === ArticleView.BIG) {
     const preview = getArticlePreview(article);
@@ -45,6 +46,8 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
               alt={article.title}
               className={classes.articleImage}
               fallbackSrc={IMAGE_FALLBACK_URL}
+              loading={isFirstImage ? 'eager' : 'lazy'}
+              fetchPriority={isFirstImage ? 'high' : undefined}
             />
           </div>
 
@@ -107,7 +110,14 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
       <Card radius="md" withBorder className={classes.card} h="100%">
         <Card.Section>
           <AspectRatio ratio={16 / 10}>
-            <Image alt={article.title} src={article.img} h={180} fallbackSrc={IMAGE_FALLBACK_URL} />
+            <Image
+              alt={article.title}
+              src={article.img}
+              h={180}
+              fallbackSrc={IMAGE_FALLBACK_URL}
+              loading={isFirstImage ? 'eager' : 'lazy'}
+              fetchPriority={isFirstImage ? 'high' : undefined}
+            />
           </AspectRatio>
         </Card.Section>
 
