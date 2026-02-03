@@ -34,7 +34,10 @@ const articleRatingApi = rtkApi.injectEndpoints({
         }));
 
         return { data: ratings };
-      }
+      },
+      providesTags: (_result, _error, { articleId }) => [
+        { type: 'ArticleRating', id: articleId }
+      ]
     }),
     rateArticle: build.mutation<void, RateArticleArg>({
       queryFn: async ({ userId, articleId, rate, feedback }) => {
@@ -53,7 +56,10 @@ const articleRatingApi = rtkApi.injectEndpoints({
         }
 
         return { data: undefined };
-      }
+      },
+      invalidatesTags: (_result, _error, { articleId }) => [
+        { type: 'ArticleRating', id: articleId }
+      ]
     })
   })
 });
