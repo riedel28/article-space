@@ -42,8 +42,8 @@ export const ArticleList = memo((props: ArticleListProps) => {
         className={className}
         data-testid="ArticleList"
       >
-        {articles.map((item) => (
-          <ArticleListItem article={item} view={view} target={target} key={item.id} />
+        {articles.map((item, index) => (
+          <ArticleListItem article={item} view={view} target={target} key={item.id} index={index} />
         ))}
         {isLoading && getSkeletons(view)}
       </SimpleGrid>
@@ -52,8 +52,8 @@ export const ArticleList = memo((props: ArticleListProps) => {
 
   return (
     <Stack gap="lg" className={className} data-testid="ArticleList">
-      {articles.map((item) => (
-        <ArticleListItem article={item} view={view} target={target} key={item.id} />
+      {articles.map((item, index) => (
+        <ArticleListItem article={item} view={view} target={target} key={item.id} index={index} />
       ))}
       {isLoading && getSkeletons(view)}
     </Stack>

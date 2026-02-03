@@ -1,4 +1,4 @@
-import { ImgHTMLAttributes, memo, ReactElement, useLayoutEffect, useState } from 'react';
+import { ImgHTMLAttributes, memo, ReactElement, useEffect, useState } from 'react';
 
 interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   className?: string;
@@ -11,7 +11,7 @@ export const AppImage = memo((props: AppImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const img = new Image();
     img.src = src ?? '';
     img.onload = () => {
