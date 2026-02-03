@@ -75,7 +75,7 @@ const ArticleEditPage = memo(() => {
               </Stack>
             )}
 
-            {error && (
+            {!!error && (
               <Alert
                 icon={<IconAlertCircle size={16} />}
                 title={t('Ошибка')}

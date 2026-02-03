@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '@/entities/Profile';
+import { mapProfile } from '@/shared/api/mappers';
 
 export const fetchProfileData = createAsyncThunk<Profile, string, ThunkConfig<string>>(
   'profile/fetchProfileData',
@@ -9,13 +10,17 @@ export const fetchProfileData = createAsyncThunk<Profile, string, ThunkConfig<st
     const { extra, rejectWithValue } = thunkApi;
 
     try {
-      const response = await extra.api.get<Profile>(`/profile/${profileId}`);
+      const { data, error } = await extra.supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', profileId)
+        .single();
 
-      if (!response.data) {
+      if (error || !data) {
         throw new Error();
       }
 
-      return response.data;
+      return mapProfile(data);
     } catch {
       return rejectWithValue('error');
     }

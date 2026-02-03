@@ -2,24 +2,24 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Article } from '@/entities/Article';
+import { mapArticle } from '@/shared/api/mappers';
 
 export const fetchArticleRecommendations = createAsyncThunk<Article[], void, ThunkConfig<string>>(
   'articleDetailsPage/fetchArticleRecommendations',
-  async (props, thunkApi) => {
+  async (_, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;
 
     try {
-      const response = await extra.api.get<Article[]>('/articles', {
-        params: {
-          _limit: 4
-        }
-      });
+      const { data, error } = await extra.supabase
+        .from('articles')
+        .select('*, user:profiles!user_id(id, username, avatar)')
+        .limit(4);
 
-      if (!response.data) {
+      if (error || !data) {
         throw new Error();
       }
 
-      return response.data;
+      return data.map(mapArticle);
     } catch {
       return rejectWithValue('error');
     }

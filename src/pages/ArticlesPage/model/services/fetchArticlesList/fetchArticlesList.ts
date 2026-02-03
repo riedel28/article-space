@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Article, ArticleType } from '@/entities/Article';
+import { mapArticle } from '@/shared/api/mappers';
 import { addQueryParams } from '@/shared/lib/url/addQueryParams/addQueryParams';
 
 import {
@@ -37,23 +38,33 @@ export const fetchArticlesList = createAsyncThunk<
       search,
       type
     });
-    const response = await extra.api.get<Article[]>('/articles', {
-      params: {
-        _expand: 'user',
-        _limit: limit,
-        _page: page,
-        _sort: sort,
-        _order: order,
-        q: search,
-        type: type === ArticleType.ALL ? undefined : type
-      }
-    });
 
-    if (!response.data) {
+    let query = extra.supabase
+      .from('articles')
+      .select('*, user:profiles!user_id(id, username, avatar)');
+
+    if (type !== ArticleType.ALL) {
+      query = query.contains('type', [type]);
+    }
+
+    if (search) {
+      query = query.textSearch('fts', search, { type: 'websearch' });
+    }
+
+    const sortColumn = sort === 'createdAt' ? 'created_at' : sort;
+    query = query.order(sortColumn, { ascending: order === 'asc' });
+
+    const from = (page - 1) * limit;
+    const to = page * limit - 1;
+    query = query.range(from, to);
+
+    const { data, error } = await query;
+
+    if (error || !data) {
       throw new Error();
     }
 
-    return response.data;
+    return data.map(mapArticle);
   } catch {
     return rejectWithValue('error');
   }

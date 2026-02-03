@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
+import { mapArticle } from '@/shared/api/mappers';
 
 import { Article } from '../../types/article';
 
@@ -14,17 +15,17 @@ export const fetchArticleById = createAsyncThunk<Article, string | undefined, Th
     }
 
     try {
-      const response = await extra.api.get<Article>(`/articles/${articleId}`, {
-        params: {
-          _expand: 'user'
-        }
-      });
+      const { data, error } = await extra.supabase
+        .from('articles')
+        .select('*, user:profiles!user_id(id, username, avatar)')
+        .eq('id', articleId)
+        .single();
 
-      if (!response.data) {
+      if (error || !data) {
         throw new Error();
       }
 
-      return response.data;
+      return mapArticle(data);
     } catch {
       return rejectWithValue('error');
     }

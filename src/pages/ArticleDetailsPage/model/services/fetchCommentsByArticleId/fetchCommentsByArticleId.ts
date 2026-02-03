@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Comment } from '@/entities/Comment';
+import { mapComment } from '@/shared/api/mappers';
 
 export const fetchCommentsByArticleId = createAsyncThunk<
   Comment[],
@@ -15,18 +16,17 @@ export const fetchCommentsByArticleId = createAsyncThunk<
   }
 
   try {
-    const response = await extra.api.get<Comment[]>('/comments', {
-      params: {
-        articleId,
-        _expand: 'user'
-      }
-    });
+    const { data, error } = await extra.supabase
+      .from('comments')
+      .select('*, user:profiles!user_id(id, username, avatar)')
+      .eq('article_id', articleId)
+      .order('created_at', { ascending: true });
 
-    if (!response.data) {
+    if (error || !data) {
       throw new Error();
     }
 
-    return response.data;
+    return data.map(mapComment);
   } catch {
     return rejectWithValue('error');
   }

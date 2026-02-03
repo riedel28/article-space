@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '@/entities/Profile';
-import { getUserAuthData,userActions } from '@/entities/User';
+import { getUserAuthData, userActions } from '@/entities/User';
+import { mapProfile } from '@/shared/api/mappers';
 
 import { ValidateProfileError } from '../../consts/consts';
 import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
@@ -24,30 +25,40 @@ export const updateProfileData = createAsyncThunk<
   }
 
   try {
-    const response = await extra.api.put<Profile>(`/profile/${formData?.id}`, formData);
+    const { data, error } = await extra.supabase
+      .from('profiles')
+      .update({
+        first_name: formData?.first ?? null,
+        last_name: formData?.lastname ?? null,
+        age: formData?.age ?? null,
+        currency: formData?.currency ?? null,
+        country: formData?.country ?? null,
+        city: formData?.city ?? null,
+        username: formData?.username ?? null,
+        avatar: formData?.avatar ?? null
+      })
+      .eq('id', formData?.id)
+      .select('*')
+      .single();
 
-    if (!response.data) {
+    if (error || !data) {
       throw new Error();
     }
 
+    const profile = mapProfile(data);
+
     const authData = getUserAuthData(getState());
 
-    // Sync avatar to global user state if user is editing their own profile
     if (authData && authData.id === formData?.id) {
       dispatch(
         userActions.setAuthData({
           ...authData,
-          avatar: response.data.avatar
+          avatar: profile.avatar
         })
       );
-
-      // Persist avatar to users table so it loads correctly on page refresh
-      await extra.api.patch(`/users/${authData.id}`, {
-        avatar: response.data.avatar
-      });
     }
 
-    return response.data;
+    return profile;
   } catch {
     return rejectWithValue([ValidateProfileError.SERVER_ERROR]);
   }
