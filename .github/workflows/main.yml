@@ -65,6 +65,7 @@ jobs:
         run: npm run lint:css
 
   e2e-tests:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     strategy:
       matrix:
