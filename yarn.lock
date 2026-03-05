@@ -9427,10 +9427,10 @@ stop-iteration-iterator@^1.1.0:
     es-errors "^1.3.0"
     internal-slot "^1.1.0"
 
-storybook@^10.2.1:
-  version "10.2.1"
-  resolved "https://registry.npmjs.org/storybook/-/storybook-10.2.1.tgz"
-  integrity sha512-hgiiwT4ZWJ/yrRpoXnHpCzWOsUvLUwQqgM/ws6mCIDsKJ7Gc7irL6DjWpi8G7l1Uq5VXYsQjXQo5ydb8Pyajdg==
+storybook@^10.2.15:
+  version "10.2.15"
+  resolved "https://registry.yarnpkg.com/storybook/-/storybook-10.2.15.tgz#e4bbc4f41e5e174ffbcf71f32b88285b40a49506"
+  integrity sha512-PbBlrMHdkeV2SV2er5v3jvMp1eOosR6v+Dc4h/sJHKHbnnGmwhf01AHwISQp9edEGipyS8lopJPpnEnWeua0mw==
   dependencies:
     "@storybook/global" "^5.0.0"
     "@storybook/icons" "^2.0.1"
