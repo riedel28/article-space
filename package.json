@@ -116,7 +116,7 @@
     "webpack": "^5.104.1",
     "webpack-bundle-analyzer": "^5.3.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.4"
   },
   "dependencies": {
     "@mantine/code-highlight": "^8.3.13",
